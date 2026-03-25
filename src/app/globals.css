@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  /* Bastion Design System — Light theme, Cisco-inspired */
+  --color-primary: #0D6EFD;
+  --color-primary-light: #3B82F6;
+  --color-primary-dark: #1E40AF;
+  --color-primary-bg: #EFF6FF;
+  --color-bg: #FFFFFF;
+  --color-bg-alt: #F8FAFC;
+  --color-bg-deep: #F1F5F9;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F8FAFC;
+  --color-text: #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-muted: #475569;
+  --color-text-dim: #64748B;
+  --color-border: #E2E8F0;
+  --color-border-light: #F1F5F9;
+  --color-red: #DC2626;
+  --color-red-bg: #FEF2F2;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Gradient text — blue tones */
+.gradient-text {
+  background: linear-gradient(135deg, #0D6EFD 0%, #1E40AF 50%, #3B82F6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle dot pattern */
+.bg-dots {
+  background-image: radial-gradient(circle, #CBD5E1 0.8px, transparent 0.8px);
+  background-size: 24px 24px;
+}
+
+/* Soft radial glow */
+.bg-radial-soft {
+  background: radial-gradient(ellipse 70% 50% at 65% 40%, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+}

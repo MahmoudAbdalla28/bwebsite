@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 32" fill="none">
+  <!-- Shield icon -->
+  <path d="M16 2L5 7.5v7c0 6.3 4.5 12.2 11 14 6.5-1.8 11-7.7 11-14v-7L16 2z" fill="#EFF6FF" stroke="#0D6EFD" stroke-width="1.8"/>
+  <path d="M12 16l3 3 5-5.5" stroke="#0D6EFD" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Wordmark -->
+  <text x="36" y="22.5" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="600" fill="#0F172A" letter-spacing="-0.5">Bastion</text>
+</svg>
