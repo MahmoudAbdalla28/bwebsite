@@ -79,16 +79,41 @@ export default function BlueSection() {
                     <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <p className="text-sm font-semibold text-primary">Bastion Blue</p>
+                <p className="text-sm font-semibold text-primary">Bastion</p>
               </div>
               <h2 className="text-4xl font-semibold tracking-tight text-text sm:text-5xl">
-                Defend every agent in production
+                Secure every AI agent in production
               </h2>
               <p className="mt-4 text-base leading-relaxed text-text-secondary">
                 Reverse proxy between your agents and their LLM providers. Every request
                 and response flows through a check pipeline, gets logged to local SQLite,
                 and feeds into carrier-grade telemetry. The telematics box for AI liability.
               </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="mt-6 rounded-xl border border-primary/20 bg-primary-bg p-5"
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-primary">Frictionless Integration</p>
+              <p className="mt-2 text-sm leading-relaxed text-text-muted">
+                Bastion drops into your existing architecture without rebuilding agents. Teams usually start in monitor mode the same day and turn on enforcement once baseline confidence is established.
+              </p>
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                {[
+                  "Single binary deploy on your infrastructure",
+                  "One endpoint change for existing agents",
+                  "No SDK rewrite or model-provider lock-in",
+                  "Monitor first, enforce when ready",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2 rounded-lg bg-white/80 px-3 py-2">
+                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    <span className="text-xs text-text-muted">{item}</span>
+                  </div>
+                ))}
+              </div>
             </motion.div>
 
             {/* Check pipeline */}

@@ -14,8 +14,8 @@ export default function Navbar() {
   }, []);
 
   const links = [
-    { label: "Red", href: "/red" },
-    { label: "Blue", href: "/blue" },
+    { label: "Home", href: "/" },
+    { label: "Bastion", href: "/blue" },
     { label: "Deploy", href: "/deploy" },
     { label: "Contact", href: "#contact" },
   ];

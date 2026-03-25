@@ -18,7 +18,6 @@ export default function BluePage() {
         <BlueHeroSection />
         <BlueSection />
         <BlueKnowledgeGraphSection />
-        <BlueBlockedActionsSection />
 
         {/* Dashboard showcase wrapper */}
         <section id="dashboard" className="relative py-24 md:py-32 bg-bg">
@@ -37,6 +36,7 @@ export default function BluePage() {
         </section>
 
         <BlueTelemetrySection />
+        <BlueBlockedActionsSection />
         <BlueFleetSection />
         <CredibilitySection />
         <CTASection />

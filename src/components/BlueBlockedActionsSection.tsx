@@ -24,52 +24,7 @@ export default function BlueBlockedActionsSection() {
       <div className="pointer-events-none absolute inset-0 bg-dots opacity-15" />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr]">
-          {/* Left: narrative */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-            >
-              <p className="text-sm font-semibold text-primary">Human in the Loop</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-text sm:text-4xl">
-                Blocked actions surface for review, not silence
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-text-secondary">
-                When Blue blocks an action, it does not just drop it. The action is logged with full context and surfaced to the right person for review. Admins can override with a reason that becomes part of the audit trail.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-8 space-y-4"
-            >
-              <div className="rounded-xl border border-border bg-white p-5">
-                <p className="text-sm font-semibold text-text">Conservative baselines</p>
-                <p className="mt-2 text-xs leading-relaxed text-text-muted">
-                  Blue starts locked down based on your own policy documents. Each agent begins with only the permissions explicitly granted by your policies. Admins loosen constraints from there as they build confidence in each agent's behavior.
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-border bg-white p-5">
-                <p className="text-sm font-semibold text-text">Ambiguity gets escalated</p>
-                <p className="mt-2 text-xs leading-relaxed text-text-muted">
-                  Not every action is clearly allowed or clearly blocked. When Blue encounters an ambiguous case, it holds the action and surfaces it for human review. The human decision then trains the system for next time.
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-border bg-white p-5">
-                <p className="text-sm font-semibold text-text">Full audit trail</p>
-                <p className="mt-2 text-xs leading-relaxed text-text-muted">
-                  Every block, override, and escalation is logged with who, when, and why. Your compliance team gets a complete record of every decision, human or automated.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right: mock blocked action card */}
+          {/* Left: mock blocked action card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -147,6 +102,51 @@ export default function BlueBlockedActionsSection() {
               </div>
             </div>
           </motion.div>
+
+          {/* Right: narrative */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+            >
+              <p className="text-sm font-semibold text-primary">Human in the Loop</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-text sm:text-4xl">
+                Blocked actions surface for review, not silence
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-text-secondary">
+                When Blue blocks an action, it does not just drop it. The action is logged with full context and surfaced to the right person for review. Admins can override with a reason that becomes part of the audit trail.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-8 space-y-4"
+            >
+              <div className="rounded-xl border border-border bg-white p-5">
+                <p className="text-sm font-semibold text-text">Conservative baselines</p>
+                <p className="mt-2 text-xs leading-relaxed text-text-muted">
+                  Blue starts locked down based on your own policy documents. Each agent begins with only the permissions explicitly granted by your policies. Admins loosen constraints from there as they build confidence in each agent's behavior.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-border bg-white p-5">
+                <p className="text-sm font-semibold text-text">Ambiguity gets escalated</p>
+                <p className="mt-2 text-xs leading-relaxed text-text-muted">
+                  Not every action is clearly allowed or clearly blocked. When Blue encounters an ambiguous case, it holds the action and surfaces it for human review. The human decision then trains the system for next time.
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-border bg-white p-5">
+                <p className="text-sm font-semibold text-text">Full audit trail</p>
+                <p className="mt-2 text-xs leading-relaxed text-text-muted">
+                  Every block, override, and escalation is logged with who, when, and why. Your compliance team gets a complete record of every decision, human or automated.
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

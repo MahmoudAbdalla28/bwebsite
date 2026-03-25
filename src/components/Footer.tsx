@@ -12,7 +12,7 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-8">
-            {[{ label: "Red", href: "/red" }, { label: "Blue", href: "/blue" }, { label: "Deploy", href: "/deploy" }, { label: "Contact", href: "#contact" }].map((l) => (
+            {[{ label: "Home", href: "/" }, { label: "Bastion", href: "/blue" }, { label: "Deploy", href: "/deploy" }, { label: "Contact", href: "#contact" }].map((l) => (
               <a key={l.href} href={l.href} className="text-sm text-text-muted hover:text-text transition-colors cursor-pointer">{l.label}</a>
             ))}
           </div>

@@ -23,7 +23,7 @@ export default function BlueHeroSection() {
             >
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-bg px-4 py-1.5">
                 <span className="h-2 w-2 rounded-full bg-primary" />
-                <span className="text-xs font-semibold text-primary">Bastion Blue</span>
+                <span className="text-xs font-semibold text-primary">Bastion</span>
               </div>
               <h1 className="text-5xl font-semibold tracking-tight text-text sm:text-6xl">
                 Production defense for every AI agent
