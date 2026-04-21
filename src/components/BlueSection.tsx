@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 const checkPipeline = [
   {
     name: "PII Detection",
-    desc: "Compiled regex for SSNs, credit cards, emails, phones, health IDs. Pure deterministic matching, zero latency. In enforce mode, redacts before forwarding.",
+    desc: "Compiled regex for SSNs, credit cards, emails, phones, health IDs. Deterministic matching, zero latency. In enforce mode, redacts before forwarding.",
     metric: "PII exposure rate",
   },
   {
@@ -35,144 +35,161 @@ export default function BlueSection() {
     <section className="relative py-24 md:py-32 bg-bg-alt" ref={ref}>
       <div className="pointer-events-none absolute inset-0 bg-dots opacity-15" />
       <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.2fr]">
-          {/* Left column */}
-          <div>
-            {/* Architecture highlights */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-3"
-            >
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl mb-14"
+        >
+          <p className="text-sm font-semibold text-primary">How it works</p>
+          <h2 className="mt-3 text-4xl font-semibold tracking-tight text-text sm:text-5xl">
+            Secure every AI agent in production
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-text-secondary">
+            Reverse proxy between your agents and their LLM providers. Every request
+            and response flows through a check pipeline, gets logged locally, and
+            feeds into structured risk telemetry.
+          </p>
+        </motion.div>
+
+        {/* Architecture + Integration in a 2-col grid */}
+        <div className="grid gap-6 md:grid-cols-2 mb-14">
+          {/* Left: architecture diagram */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="rounded-2xl border border-border bg-white p-6"
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim mb-4">Architecture</p>
+            <svg viewBox="0 0 400 320" className="w-full" fill="none">
+              {/* Single binary */}
+              <rect x="100" y="10" width="200" height="50" rx="10" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="1.5" />
+              <text x="200" y="32" fill="#0D6EFD" fontSize="9" fontWeight="700" textAnchor="middle" letterSpacing="1.5">SINGLE BINARY</text>
+              <text x="200" y="48" fill="#64748B" fontSize="8" textAnchor="middle">No Python, no containers, no deps</text>
+
+              {/* Arrow down */}
+              <line x1="200" y1="60" x2="200" y2="85" stroke="#CBD5E1" strokeWidth="1.5" />
+              <polygon points="195,80 200,90 205,80" fill="#CBD5E1" />
+
+              {/* Config change */}
+              <rect x="60" y="90" width="280" height="45" rx="10" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
+              <text x="200" y="110" fill="#334155" fontSize="9" fontWeight="600" textAnchor="middle">One environment variable change</text>
+              <text x="200" y="125" fill="#94A3B8" fontSize="7.5" textAnchor="middle">OPENAI_API_BASE=http://bastion:8443</text>
+
+              {/* Arrow down */}
+              <line x1="200" y1="135" x2="200" y2="160" stroke="#CBD5E1" strokeWidth="1.5" />
+              <polygon points="195,155 200,165 205,155" fill="#CBD5E1" />
+
+              {/* Two modes side by side */}
+              <rect x="30" y="165" width="160" height="55" rx="10" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="1" />
+              <text x="110" y="187" fill="#0D6EFD" fontSize="9" fontWeight="600" textAnchor="middle">Monitor</text>
+              <text x="110" y="203" fill="#64748B" fontSize="7.5" textAnchor="middle">Log everything silently</text>
+
+              <rect x="210" y="165" width="160" height="55" rx="10" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="1" />
+              <text x="290" y="187" fill="#0D6EFD" fontSize="9" fontWeight="600" textAnchor="middle">Enforce</text>
+              <text x="290" y="203" fill="#64748B" fontSize="7.5" textAnchor="middle">Block and redact in real time</text>
+
+              {/* Arrow between modes */}
+              <line x1="190" y1="192" x2="210" y2="192" stroke="#CBD5E1" strokeWidth="1" />
+              <polygon points="206,188 214,192 206,196" fill="#CBD5E1" />
+
+              {/* Both arrow down to output */}
+              <line x1="110" y1="220" x2="110" y2="245" stroke="#CBD5E1" strokeWidth="1" />
+              <line x1="290" y1="220" x2="290" y2="245" stroke="#CBD5E1" strokeWidth="1" />
+              <line x1="110" y1="245" x2="290" y2="245" stroke="#CBD5E1" strokeWidth="1" />
+              <line x1="200" y1="245" x2="200" y2="265" stroke="#CBD5E1" strokeWidth="1.5" />
+              <polygon points="195,260 200,270 205,260" fill="#CBD5E1" />
+
+              {/* Output */}
+              <rect x="80" y="270" width="240" height="40" rx="10" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="1.5" strokeDasharray="4 3" />
+              <text x="200" y="293" fill="#0D6EFD" fontSize="9" fontWeight="600" textAnchor="middle">Underwriting Telemetry Report</text>
+            </svg>
+          </motion.div>
+
+          {/* Right: frictionless integration */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="rounded-2xl border border-primary/20 bg-primary-bg p-6"
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-primary mb-4">Frictionless Integration</p>
+            <p className="text-sm leading-relaxed text-text-muted">
+              Bastion drops into your existing architecture without rebuilding agents.
+            </p>
+            <div className="mt-4 space-y-2">
               {[
-                { label: "Single Rust binary", detail: "No Python, no pip, no containers. Memory safe, async on tokio." },
-                { label: "One config change", detail: "Swap your LLM base URL. Works with OpenAI, Anthropic, Groq, local models." },
-                { label: "Two modes", detail: "Monitor mode logs everything silently. Enforce mode actively blocks and redacts." },
-                { label: "Two ports", detail: "Primary for proxied LLM traffic. Secondary for dashboard API on internal network." },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.3 + i * 0.08 }}
-                  className="rounded-xl border border-border bg-white p-4"
-                >
-                  <p className="text-sm font-semibold text-text">{item.label}</p>
-                  <p className="mt-1 text-xs text-text-muted">{item.detail}</p>
-                </motion.div>
+                "Single binary deploy on your infrastructure",
+                "One endpoint change for existing agents",
+                "No SDK rewrite or model-provider lock-in",
+                "Monitor first, enforce when ready",
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                  <span className="text-xs text-text-muted">{item}</span>
+                </div>
               ))}
-            </motion.div>
-          </div>
-
-          {/* Right column */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-bg p-2.5">
-                  <svg viewBox="1 0 22 26" className="h-full w-full" fill="none" stroke="#0D6EFD" strokeWidth="1.5">
-                    <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" strokeLinecap="round" />
-                    <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-                <p className="text-sm font-semibold text-primary">Bastion</p>
-              </div>
-              <h2 className="text-4xl font-semibold tracking-tight text-text sm:text-5xl">
-                Secure every AI agent in production
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-text-secondary">
-                Reverse proxy between your agents and their LLM providers. Every request
-                and response flows through a check pipeline, gets logged to local SQLite,
-                and feeds into carrier-grade telemetry. The telematics box for AI liability.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mt-6 rounded-xl border border-primary/20 bg-primary-bg p-5"
-            >
-              <p className="text-[11px] font-semibold uppercase tracking-widest text-primary">Frictionless Integration</p>
-              <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                Bastion drops into your existing architecture without rebuilding agents. Teams usually start in monitor mode the same day and turn on enforcement once baseline confidence is established.
-              </p>
-              <div className="mt-4 grid gap-2 sm:grid-cols-2">
-                {[
-                  "Single binary deploy on your infrastructure",
-                  "One endpoint change for existing agents",
-                  "No SDK rewrite or model-provider lock-in",
-                  "Monitor first, enforce when ready",
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-2 rounded-lg bg-white/80 px-3 py-2">
-                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                    <span className="text-xs text-text-muted">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Check pipeline */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="mt-10"
-            >
-              <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim mb-4">Check Pipeline</p>
-
-              {/* Pipeline tabs */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {checkPipeline.map((check, i) => (
-                  <button
-                    key={check.name}
-                    onClick={() => setActiveCheck(i)}
-                    className={`cursor-pointer rounded-lg px-3 py-2 text-xs font-semibold transition-all duration-200 ${
-                      activeCheck === i
-                        ? "bg-primary-bg text-primary border border-primary/20"
-                        : "bg-white border border-border text-text-muted hover:border-primary/20"
-                    }`}
-                  >
-                    {check.name}
-                  </button>
-                ))}
-              </div>
-
-              <motion.div
-                key={activeCheck}
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2 }}
-                className="rounded-xl border border-border bg-white p-6"
-              >
-                <p className="text-base font-semibold text-text">{checkPipeline[activeCheck].name}</p>
-                <p className="mt-2 text-sm leading-relaxed text-text-muted">{checkPipeline[activeCheck].desc}</p>
-                <div className="mt-4 rounded-lg bg-primary-bg px-3 py-2 inline-block">
-                  <span className="text-xs font-medium text-primary">Feeds: {checkPipeline[activeCheck].metric}</span>
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Fleet monitoring callout */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.35 }}
-              className="mt-6 rounded-xl border border-primary/20 bg-primary-bg p-6"
-            >
-              <p className="text-sm font-semibold text-text">Fleet-wide correlation</p>
-              <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                Blue monitors the whole fleet, not just individual agents. If one agent starts calling tools
-                no other agent has ever used, that signal is much stronger than individual baseline deviation.
-                A compromised agent that looks normal in isolation but diverges from fleet behavior gets flagged and blocked.
-              </p>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
+
+        {/* Check Pipeline - full width */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim mb-4">Check Pipeline</p>
+
+          <div className="grid gap-3 sm:grid-cols-4 mb-4">
+            {checkPipeline.map((check, i) => (
+              <button
+                key={check.name}
+                onClick={() => setActiveCheck(i)}
+                className={`cursor-pointer rounded-xl px-4 py-3 text-left transition-all duration-200 ${
+                  activeCheck === i
+                    ? "bg-white border border-primary/20 shadow-sm"
+                    : "bg-white/50 border border-border hover:border-primary/20"
+                }`}
+              >
+                <p className={`text-sm font-semibold ${activeCheck === i ? "text-primary" : "text-text-muted"}`}>
+                  {check.name}
+                </p>
+              </button>
+            ))}
+          </div>
+
+          <motion.div
+            key={activeCheck}
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
+            className="rounded-xl border border-border bg-white p-6"
+          >
+            <p className="text-base font-semibold text-text">{checkPipeline[activeCheck].name}</p>
+            <p className="mt-2 text-sm leading-relaxed text-text-muted">{checkPipeline[activeCheck].desc}</p>
+            <div className="mt-3 rounded-lg bg-primary-bg px-3 py-1.5 inline-block">
+              <span className="text-xs font-medium text-primary">Feeds: {checkPipeline[activeCheck].metric}</span>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Fleet correlation - full width */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-6 rounded-xl border border-primary/20 bg-primary-bg p-6"
+        >
+          <p className="text-sm font-semibold text-text">Fleet-wide correlation</p>
+          <p className="mt-2 text-sm leading-relaxed text-text-muted">
+            Monitors the whole fleet, not just individual agents. If one agent starts calling tools
+            no other agent has ever used, that signal is much stronger than individual baseline deviation.
+            A compromised agent that looks normal in isolation but diverges from fleet behavior gets flagged and blocked.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

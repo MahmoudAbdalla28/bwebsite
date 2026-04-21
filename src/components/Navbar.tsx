@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -14,9 +13,8 @@ export default function Navbar() {
   }, []);
 
   const links = [
-    { label: "Home", href: "/" },
-    { label: "Bastion", href: "/blue" },
-    { label: "Deploy", href: "/deploy" },
+    { label: "Platform", href: "/bastion/blue" },
+    { label: "Deploy", href: "/bastion/deploy" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -32,19 +30,14 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="/" className="cursor-pointer">
-          <img src="/assets/bastion-logo.svg" alt="Bastion" className="h-8" />
+        <a href="/bastion" className="cursor-pointer">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/bastion/assets/bastion-logo.webp" alt="Bastion" className="h-8 w-auto" />
         </a>
 
         <div className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-text-muted transition-colors duration-200 hover:text-text cursor-pointer"
-            >
-              {link.label}
-            </a>
+            <a key={link.href} href={link.href} className="text-sm font-medium text-text-muted transition-colors duration-200 hover:text-text cursor-pointer">{link.label}</a>
           ))}
         </div>
 

@@ -2,8 +2,6 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import Lottie from "lottie-react";
-import networkData from "../../public/assets/lottie/network-nodes.json";
 
 export default function PlatformSection() {
   const ref = useRef(null);
@@ -18,64 +16,135 @@ export default function PlatformSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center"
+          className="text-center mb-16"
         >
-          <p className="text-sm font-semibold text-primary">The Platform</p>
+          <p className="text-sm font-semibold text-primary">How it works</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-text sm:text-5xl">
-            Unified Agent Defense
+            Drop in, don't rebuild
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-text-secondary">
-            Singular AI protection for every request. Bastion Blue sits between
-            your agents and model providers to observe, enforce, and report risk
-            with zero changes to agent code.
+          <p className="mx-auto mt-4 max-w-xl text-base text-text-secondary">
+            One environment variable change. Your agents keep running. Bastion
+            sits in between and handles the rest.
           </p>
         </motion.div>
 
+        {/* Architecture diagram */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-14"
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="rounded-2xl border border-border bg-white p-8 md:p-10 mb-14"
         >
-          <div className="rounded-2xl border border-primary/30 bg-white p-8 shadow-xl shadow-primary/5">
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-              <div>
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-bg p-2.5">
-                    <svg viewBox="1 0 22 26" className="h-full w-full" fill="none" stroke="#0D6EFD" strokeWidth="1.5">
-                      <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-text">Bastion Blue</h3>
-                    <p className="text-sm text-primary">Monitor, Enforce, Report</p>
-                  </div>
-                </div>
+          <svg viewBox="0 0 800 220" className="w-full" fill="none">
+            {/* Agents */}
+            <rect x="30" y="50" width="150" height="100" rx="12" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
+            <text x="105" y="88" fill="#334155" fontSize="12" fontWeight="600" textAnchor="middle">Your AI Agents</text>
+            <text x="105" y="108" fill="#64748B" fontSize="9" textAnchor="middle">LangChain, CrewAI,</text>
+            <text x="105" y="121" fill="#64748B" fontSize="9" textAnchor="middle">AutoGen, 35+ more</text>
 
-                <p className="text-sm leading-relaxed text-text-secondary">
-                  Reverse proxy that intercepts every LLM API call. It scans inputs,
-                  validates tool behavior, logs events, and produces carrier-ready
-                  telemetry while keeping all raw traffic on your infrastructure.
-                </p>
+            {/* Arrow bidirectional */}
+            <line x1="185" y1="100" x2="270" y2="100" stroke="#CBD5E1" strokeWidth="1.5" />
+            <polygon points="265,95 275,100 265,105" fill="#CBD5E1" />
+            <polygon points="195,95 185,100 195,105" fill="#CBD5E1" />
+            <text x="228" y="90" fill="#94A3B8" fontSize="8" textAnchor="middle">API calls</text>
 
-                <div className="mt-6 flex flex-wrap items-center gap-3 text-xs font-medium">
-                  <span className="rounded-full bg-primary-bg px-3 py-1 text-primary">Monitor</span>
-                  <svg viewBox="0 0 16 8" className="h-2 w-4 text-text-dim" fill="none"><path d="M0 4h12M9 1l3 3-3 3" stroke="currentColor" strokeWidth="1" /></svg>
-                  <span className="rounded-full bg-primary-bg px-3 py-1 text-primary">Enforce</span>
-                  <svg viewBox="0 0 16 8" className="h-2 w-4 text-text-dim" fill="none"><path d="M0 4h12M9 1l3 3-3 3" stroke="currentColor" strokeWidth="1" /></svg>
-                  <span className="rounded-full bg-primary-bg px-3 py-1 text-primary-light">Report</span>
-                </div>
-              </div>
+            {/* Bastion */}
+            <rect x="275" y="20" width="250" height="165" rx="14" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="2" />
+            <text x="400" y="48" fill="#0D6EFD" fontSize="11" fontWeight="700" textAnchor="middle" letterSpacing="2">BASTION</text>
 
-              <div>
-                <div className="rounded-xl bg-bg-alt p-4">
-                  <Lottie animationData={networkData} loop className="h-40 w-full" />
-                </div>
-              </div>
-            </div>
-          </div>
+            {[
+              { y: 60, label: "PII Monitoring", desc: "Track data exposure" },
+              { y: 88, label: "Action Risk Scoring", desc: "Evaluate tool call risk" },
+              { y: 116, label: "Behavioral Baselines", desc: "Detect drift from normal" },
+              { y: 144, label: "Consistency Analysis", desc: "Score output reliability" },
+            ].map((layer) => (
+              <g key={layer.label}>
+                <rect x="290" y={layer.y} width="220" height="22" rx="5" fill="white" stroke="#DBEAFE" strokeWidth="0.5" />
+                <circle cx="306" cy={layer.y + 11} r="3.5" fill="#0D6EFD" fillOpacity="0.6" />
+                <text x="316" y={layer.y + 15} fill="#334155" fontSize="9" fontWeight="500">{layer.label}</text>
+                <text x="502" y={layer.y + 15} fill="#94A3B8" fontSize="8" textAnchor="end">{layer.desc}</text>
+              </g>
+            ))}
+
+            {/* Arrow bidirectional */}
+            <line x1="530" y1="100" x2="615" y2="100" stroke="#CBD5E1" strokeWidth="1.5" />
+            <polygon points="610,95 620,100 610,105" fill="#CBD5E1" />
+            <polygon points="540,95 530,100 540,105" fill="#CBD5E1" />
+            <text x="573" y="90" fill="#94A3B8" fontSize="8" textAnchor="middle">Secured</text>
+
+            {/* LLM */}
+            <rect x="620" y="50" width="150" height="100" rx="12" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
+            <text x="695" y="88" fill="#334155" fontSize="12" fontWeight="600" textAnchor="middle">LLM Provider</text>
+            <text x="695" y="108" fill="#64748B" fontSize="9" textAnchor="middle">OpenAI, Anthropic,</text>
+            <text x="695" y="121" fill="#64748B" fontSize="9" textAnchor="middle">Groq, local</text>
+
+            {/* Report arrow */}
+            <line x1="400" y1="185" x2="400" y2="205" stroke="#0D6EFD" strokeWidth="1.5" strokeDasharray="3 3" />
+            <text x="400" y="218" fill="#0D6EFD" fontSize="9" fontWeight="600" textAnchor="middle">→ Underwriting Report</text>
+          </svg>
         </motion.div>
+
+        {/* What Bastion does — not tiers, just capabilities */}
+        <div className="flex flex-col sm:flex-row items-stretch gap-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.3 }}
+            className="flex-1 rounded-2xl sm:rounded-r-none border border-border bg-white p-6"
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim">Monitor</p>
+            <h3 className="mt-3 text-lg font-semibold text-text">See everything</h3>
+            <p className="mt-2 text-sm leading-relaxed text-text-muted">
+              Every request and response logged. PII detected, tool calls
+              tracked, confidence scored. Your agents don't know it's there.
+              Produces the telemetry report carriers use to underwrite.
+            </p>
+          </motion.div>
+
+          {/* Arrow */}
+          <div className="hidden sm:flex items-center -mx-px">
+            <svg viewBox="0 0 24 40" className="h-10 w-6 text-primary" fill="none">
+              <path d="M4 20h16M14 14l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.4 }}
+            className="flex-1 rounded-2xl sm:rounded-none border border-border bg-white p-6"
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim">Enforce</p>
+            <h3 className="mt-3 text-lg font-semibold text-text">Act on it</h3>
+            <p className="mt-2 text-sm leading-relaxed text-text-muted">
+              Turn on enforcement when ready. PII redacted before leaving your
+              network. Unauthorized tool calls stripped. Anomalies blocked.
+              Stronger data for your carrier.
+            </p>
+          </motion.div>
+
+          {/* Arrow */}
+          <div className="hidden sm:flex items-center -mx-px">
+            <svg viewBox="0 0 24 40" className="h-10 w-6 text-primary" fill="none">
+              <path d="M4 20h16M14 14l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.5 }}
+            className="flex-1 rounded-2xl sm:rounded-l-none border border-border bg-white p-6"
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim">Validate</p>
+            <h3 className="mt-3 text-lg font-semibold text-text">Prove it</h3>
+            <p className="mt-2 text-sm leading-relaxed text-text-muted">
+              Continuous compliance verification across your fleet.
+              Policy violations surfaced, scored, and documented.
+              Auditable proof of your security posture.
+            </p>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

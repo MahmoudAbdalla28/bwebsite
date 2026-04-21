@@ -8,7 +8,7 @@ import checklistData from "../../public/assets/lottie/checklist.json";
 const faqs = [
   {
     q: "Where does our data go?",
-    a: "Nowhere. Blue runs on-prem, all data lives in local SQLite on your infrastructure. Nothing goes to us or any third party. The underwriting report only contains sanitized aggregate metrics, no raw prompts or responses.",
+    a: "Nowhere. Bastion runs on-prem, all data lives in local SQLite on your infrastructure. Nothing goes to us or any third party. The underwriting report only contains sanitized aggregate metrics, no raw prompts or responses.",
   },
   {
     q: "What about PIPEDA and Quebec Law 25?",
@@ -23,7 +23,7 @@ const faqs = [
     a: "Single compiled Rust binary with no runtime dependencies. Rust memory safety eliminates buffer overflows and use-after-free. Two ports exposed, neither public-facing in standard deployment. No arbitrary code execution, no eval, no dynamic plugins.",
   },
   {
-    q: "What if Blue goes down?",
+    q: "What if Bastion goes down?",
     a: "Configurable. Monitor mode is passthrough, so if the proxy dies agents connect directly to their LLM providers. Enforce mode defaults to fail-closed, which is the right default for regulated environments. Fail-open is available if availability matters more.",
   },
   {

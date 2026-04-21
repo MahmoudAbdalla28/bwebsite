@@ -3,7 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Lottie from "lottie-react";
-import cloudData from "../../public/assets/lottie/cloud-security.json";
+import shieldData from "../../public/assets/lottie/shield-3d.json";
 
 export default function BlueHeroSection() {
   const ref = useRef(null);
@@ -45,25 +45,6 @@ export default function BlueHeroSection() {
               >
                 Get started
               </a>
-              <a
-                href="#dashboard"
-                className="group inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-primary-dark"
-              >
-                See the dashboard
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="transition-transform group-hover:translate-x-1"
-                >
-                  <path d="M3 8h10M9 4l4 4-4 4" />
-                </svg>
-              </a>
             </motion.div>
           </div>
 
@@ -74,7 +55,7 @@ export default function BlueHeroSection() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="flex justify-center"
           >
-            <Lottie animationData={cloudData} loop className="w-full max-w-md" />
+            <Lottie animationData={shieldData} loop className="w-full max-w-sm" />
           </motion.div>
         </div>
       </div>

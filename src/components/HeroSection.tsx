@@ -6,10 +6,11 @@ import dynamic from "next/dynamic";
 const ParticleNetwork = dynamic(() => import("./ParticleNetwork"), { ssr: false });
 
 export default function HeroSection() {
+
   return (
     <section className="relative overflow-hidden bg-bg-alt">
       {/* Particle Network — Cisco-style generative sphere */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 hidden md:block">
         <ParticleNetwork />
       </div>
 
@@ -29,19 +30,18 @@ export default function HeroSection() {
           transition={{ duration: 0.5 }}
           className="text-sm font-medium text-text-muted"
         >
-          AI Security
+          AI Liability Telematics
         </motion.p>
 
-        {/* Headline — left aligned, large, clean like Cisco */}
+        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mt-4 max-w-2xl text-5xl font-semibold leading-[1.1] tracking-tight text-text sm:text-6xl lg:text-7xl"
         >
-          The defense layer to deploy
-          <br />
-          <span className="gradient-text">your AI solutions</span>
+          Make AI agents{" "}
+          <span className="gradient-text">insurable</span>
         </motion.h1>
 
         {/* Subhead */}
@@ -51,8 +51,8 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.25 }}
           className="mt-6 max-w-lg text-lg leading-relaxed text-text-secondary"
         >
-          End-to-end monitoring and control for enterprises deploying AI agents.
-          Turn blackbox systems into glassbox with quantifiable, managed risks.
+          Runtime telemetry that gives carriers the data to underwrite AI
+          liability. Deploy on client infrastructure in minutes.
         </motion.p>
 
         {/* CTAs — clean, blue primary like Cisco */}
@@ -63,10 +63,10 @@ export default function HeroSection() {
           className="mt-8 flex flex-wrap items-center gap-4"
         >
           <a
-            href="#contact"
+            href="#brokerages"
             className="rounded-lg bg-primary px-7 py-3.5 text-base font-semibold text-white transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
           >
-            Request a demo
+            For Brokerages
           </a>
           <a
             href="#platform"

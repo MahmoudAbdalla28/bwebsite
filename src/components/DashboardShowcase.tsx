@@ -37,10 +37,10 @@ const timelineData = [
 ];
 
 const agents = [
-  { name: "Sera", status: "online", requests: 412, cost: 8.2, latency: "890ms", risk: 0.05 },
-  { name: "Operator", status: "online", requests: 387, cost: 11.5, latency: "2.1s", risk: 0.15 },
-  { name: "Recon", status: "online", requests: 298, cost: 3.9, latency: "1.4s", risk: 0.02 },
-  { name: "Bastion", status: "online", requests: 203, cost: 7.8, latency: "3.8s", risk: 0.45 },
+  { name: "Sera", role: "Customer support chat agent", requests: 412, cost: 8.2, latency: "890ms", risk: 0.05 },
+  { name: "Operator", role: "Internal ops automation", requests: 387, cost: 11.5, latency: "2.1s", risk: 0.15 },
+  { name: "Recon", role: "Research and data extraction", requests: 298, cost: 3.9, latency: "1.4s", risk: 0.02 },
+  { name: "Billing", role: "Invoice and payment processing", requests: 203, cost: 7.8, latency: "1.2s", risk: 0.08 },
 ];
 
 const events = [
@@ -179,7 +179,7 @@ export default function DashboardShowcase() {
             </div>
 
             <div className="grid gap-4 md:grid-cols-[1.4fr_1fr]">
-              {/* Left: chart + agents */}
+              {/* Left: chart */}
               <div className="space-y-4">
                 {/* Risk timeline chart */}
                 <motion.div
@@ -210,6 +210,7 @@ export default function DashboardShowcase() {
                         />
                         <span className="text-xs font-semibold text-text">{agent.name}</span>
                       </div>
+                      <p className="text-[9px] text-text-dim mb-1">{agent.role}</p>
                       <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[10px]">
                         <span className="text-text-dim">Requests</span>
                         <span className="text-text-muted text-right">{agent.requests}</span>

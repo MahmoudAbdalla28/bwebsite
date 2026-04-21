@@ -1,0 +1,83 @@
+"use client";
+
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+
+export default function ReportSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <section className="relative py-24 md:py-32 bg-bg-alt" ref={ref}>
+      <div className="pointer-events-none absolute inset-0 bg-dots opacity-15" />
+      <div className="relative mx-auto max-w-7xl px-6">
+        <div className="grid gap-12 lg:grid-cols-2 items-center">
+          {/* Left: the pitch */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-sm font-semibold text-primary">The Underwriting Report</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-text sm:text-4xl lg:text-5xl">
+              The data needed for carriers to say yes
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-text-secondary">
+              Bastion monitors AI agent fleets and produces a structured risk
+              assessment built for actuaries and brokers. Deploy on client
+              infrastructure, generate the report, deliver it to the carrier.
+              Every metric traces back to the events that generated it.
+            </p>
+
+            <div className="mt-8 space-y-3">
+              {[
+                "Fleet risk score with weighted breakdown",
+                "PII exposure rate with remediation stats",
+                "Consistency score across all agents",
+                "Incident summary by type and severity",
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-2">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                  <span className="text-sm text-text-muted">{item}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right: mini report preview */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="rounded-2xl border border-border bg-white shadow-lg shadow-black/5 overflow-hidden"
+          >
+            <div className="border-b border-border px-6 py-4 flex items-center justify-between">
+              <p className="text-sm font-semibold text-text">Underwriting Telemetry Report</p>
+              <span className="rounded-full bg-primary-bg px-2.5 py-0.5 text-[10px] font-semibold text-primary">30-day</span>
+            </div>
+            <div className="p-6 space-y-4">
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { label: "Fleet Risk", value: "12/100", sub: "Low" },
+                  { label: "PII Exposure", value: "0.3%", sub: "100% remediated" },
+                  { label: "Consistency", value: "99.7%", sub: "Stable" },
+                  { label: "Blocked", value: "1", sub: "Tool call" },
+                ].map((m) => (
+                  <div key={m.label} className="rounded-lg bg-bg-alt p-3">
+                    <p className="text-[10px] text-text-dim">{m.label}</p>
+                    <p className="text-lg font-bold text-primary">{m.value}</p>
+                    <p className="text-[10px] text-text-dim">{m.sub}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-lg bg-primary-bg border border-primary/10 p-3">
+                <p className="text-xs font-semibold text-primary">Recommendation: Eligible for standard AI liability coverage</p>
+                <p className="text-[10px] text-text-dim mt-1">4 agents · 1,847 interactions · 30-day monitoring period</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
