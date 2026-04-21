@@ -57,13 +57,12 @@ export default function DeploymentSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
           >
-            <p className="text-sm font-semibold tracking-wide text-primary">Deployment</p>
-            <h2 className="mt-4 text-4xl font-semibold tracking-tight text-text sm:text-6xl leading-[1.1]">
-              One config change.<br />Full visibility.
+            <span className="label-pill">Deployment</span>
+            <h2 className="mt-5 text-4xl font-bold tracking-tight text-text sm:text-6xl leading-[1.1]">
+              One config change.<br /><span className="gradient-text">Full visibility.</span>
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
-              Point your agents at Bastion instead of the provider. Your API keys
-              pass through. Everything else stays the same.
+              Point your agents at Bastion instead of the provider. Your API keys pass through. Everything else stays the same.
             </p>
           </motion.div>
 
@@ -287,18 +286,14 @@ export default function DeploymentSection() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-text-dim">On-prem</p>
                 <h4 className="mt-3 text-lg font-semibold text-text">Run on your infrastructure</h4>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">
-                  Single compiled Rust binary. Logs to local SQLite. Dashboard
-                  on your internal network. Designed for regulated and
-                  air-gapped environments.
+                  Single compiled Rust binary. Logs to local SQLite. Dashboard on your internal network. Designed for regulated and air-gapped environments.
                 </p>
               </div>
               <div className="bg-white p-8 md:p-10">
                 <p className="text-xs font-semibold uppercase tracking-widest text-text-dim">Managed</p>
                 <h4 className="mt-3 text-lg font-semibold text-text">Run in the cloud</h4>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">
-                  Hosted proxy fleet with telemetry pipeline and dashboards.
-                  Point your agents at our endpoint. Both options produce
-                  identical telemetry and reports.
+                  Hosted proxy fleet with telemetry pipeline and dashboards. Point your agents at our endpoint. Both options produce identical telemetry and reports.
                 </p>
               </div>
             </div>
@@ -312,7 +307,7 @@ export default function DeploymentSection() {
                 { value: "Minutes", label: "Time to deploy", detail: "Single binary, one config change" },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <p className="text-3xl font-semibold text-text">{stat.value}</p>
+                  <p className="text-3xl font-extrabold gradient-text">{stat.value}</p>
                   <p className="mt-1 text-sm font-medium text-text-secondary">{stat.label}</p>
                   <p className="mt-2 text-xs leading-relaxed text-text-dim">{stat.detail}</p>
                 </div>

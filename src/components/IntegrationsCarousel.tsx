@@ -2,32 +2,31 @@
 
 import { motion } from "framer-motion";
 
-// type: "wordmark" = logo has the name in it, show logo only
-// type: "icon" = logo is a small icon, show text only
-const integrations: { name: string; logo: string; type: "wordmark" | "icon" }[] = [
-  { name: "OpenAI", logo: "/bastion/assets/logos/openai.svg", type: "icon" },
-  { name: "Anthropic", logo: "/bastion/assets/logos/anthropic.svg", type: "icon" },
-  { name: "AWS", logo: "/bastion/assets/logos/aws.svg", type: "wordmark" },
-  { name: "Google Cloud", logo: "/bastion/assets/logos/google-cloud.svg", type: "wordmark" },
-  { name: "Azure", logo: "/bastion/assets/logos/azure.svg", type: "icon" },
-  { name: "Ollama", logo: "/bastion/assets/logos/ollama.svg", type: "icon" },
-  { name: "CrowdStrike", logo: "/bastion/assets/logos/crowdstrike.svg", type: "wordmark" },
-  { name: "Splunk", logo: "/bastion/assets/logos/splunk.svg", type: "icon" },
-  { name: "Datadog", logo: "/bastion/assets/logos/datadog.svg", type: "icon" },
-  { name: "Elastic", logo: "/bastion/assets/logos/elastic.svg", type: "icon" },
-  { name: "Microsoft Sentinel", logo: "/bastion/assets/logos/microsoft.svg", type: "icon" },
-  { name: "Netskope", logo: "/bastion/assets/logos/netskope.svg", type: "wordmark" },
-  { name: "Zscaler", logo: "/bastion/assets/logos/zscaler.svg", type: "wordmark" },
-  { name: "Palo Alto", logo: "/bastion/assets/logos/paloalto.svg", type: "icon" },
-  { name: "SentinelOne", logo: "/bastion/assets/logos/sentinelone.svg", type: "wordmark" },
-  { name: "Bitdefender", logo: "/bastion/assets/logos/bitdefender.svg", type: "icon" },
+const integrations: { name: string; logo: string; wordmark: boolean }[] = [
+  { name: "OpenAI", logo: "/bastion/assets/logos/openai.svg", wordmark: false },
+  { name: "Anthropic", logo: "/bastion/assets/logos/anthropic.svg", wordmark: false },
+  { name: "AWS", logo: "/bastion/assets/logos/aws.svg", wordmark: true },
+  { name: "Google Cloud", logo: "/bastion/assets/logos/google-cloud.svg", wordmark: true },
+  { name: "Azure", logo: "/bastion/assets/logos/azure.svg", wordmark: false },
+  { name: "Ollama", logo: "/bastion/assets/logos/ollama.svg", wordmark: false },
+  { name: "CrowdStrike", logo: "/bastion/assets/logos/crowdstrike.svg", wordmark: true },
+  { name: "Splunk", logo: "/bastion/assets/logos/splunk.svg", wordmark: false },
+  { name: "Datadog", logo: "/bastion/assets/logos/datadog.svg", wordmark: false },
+  { name: "Elastic", logo: "/bastion/assets/logos/elastic.svg", wordmark: false },
+  { name: "Microsoft Sentinel", logo: "/bastion/assets/logos/microsoft.svg", wordmark: false },
+  { name: "Netskope", logo: "/bastion/assets/logos/netskope.svg", wordmark: true },
+  { name: "Zscaler", logo: "/bastion/assets/logos/zscaler.svg", wordmark: true },
+  { name: "Palo Alto", logo: "/bastion/assets/logos/paloalto.svg", wordmark: false },
+  { name: "SentinelOne", logo: "/bastion/assets/logos/sentinelone.svg", wordmark: true },
+  { name: "Bitdefender", logo: "/bastion/assets/logos/bitdefender.svg", wordmark: false },
+  { name: "LiteLLM", logo: "/bastion/assets/logos/litellm.svg", wordmark: false },
 ];
 
 const doubled = [...integrations, ...integrations];
 
 export default function IntegrationsCarousel() {
   return (
-    <section className="py-20 md:py-28 bg-white border-t border-border-light">
+    <section className="pt-20 pb-10 md:pt-28 md:pb-12 bg-white border-t border-border-light">
       <div className="mx-auto max-w-5xl px-6 mb-10">
         <p className="text-sm font-semibold tracking-wide text-primary">Compatibility</p>
         <h3 className="mt-3 text-2xl font-semibold text-text sm:text-3xl">
@@ -44,28 +43,27 @@ export default function IntegrationsCarousel() {
         <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
 
         <motion.div
-          className="flex gap-14 items-center w-max"
+          className="flex gap-10 items-center w-max"
           animate={{ x: ["0%", "-50%"] }}
           transition={{
-            x: { duration: 40, repeat: Infinity, ease: "linear" },
+            x: { duration: 45, repeat: Infinity, ease: "linear" },
           }}
         >
           {doubled.map((item, i) => (
             <div
               key={`${item.name}-${i}`}
-              className="shrink-0"
+              className="shrink-0 flex flex-col items-center gap-2 group"
             >
-              {item.type === "wordmark" ? (
-                // Wordmark logos — show logo only, no text
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={item.logo}
-                  alt={item.name}
-                  className="h-7 w-auto grayscale opacity-50 hover:opacity-80 hover:grayscale-0 transition-all duration-300"
-                />
-              ) : (
-                // Icon-only logos — show text name
-                <span className="text-sm font-semibold text-text-dim/50 hover:text-text-dim transition-colors duration-300 whitespace-nowrap">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={item.logo}
+                alt={item.name}
+                className={`w-auto grayscale opacity-50 group-hover:opacity-80 group-hover:grayscale-0 transition-all duration-300 ${
+                  item.wordmark ? "h-7" : "h-8"
+                }`}
+              />
+              {!item.wordmark && (
+                <span className="text-[11px] font-medium text-text-dim/60 group-hover:text-text-dim transition-colors duration-300 whitespace-nowrap">
                   {item.name}
                 </span>
               )}

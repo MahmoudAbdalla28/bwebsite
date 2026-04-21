@@ -50,15 +50,12 @@ export default function BlueFleetSection() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mb-14"
         >
-          <p className="text-sm font-semibold text-primary">Fleet Intelligence</p>
-          <h2 className="mt-3 text-4xl font-semibold tracking-tight text-text sm:text-5xl">
-            One compromised agent looks normal alone
+          <span className="label-pill">Fleet Intelligence</span>
+          <h2 className="mt-4 text-4xl font-bold tracking-tight text-text sm:text-5xl">
+            One compromised agent <span className="gradient-text">looks normal alone</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
-            Your fleet has agents handling support, sales, data processing, and
-            internal ops. Each one builds a behavioral baseline over time. Bastion
-            watches all of them together, so when one starts doing something none
-            of the others have ever done, that signal is impossible to miss.
+            Each agent builds its own baseline. Bastion watches all of them together — when one starts doing something no other agent has ever done, that signal is impossible to miss.
           </p>
         </motion.div>
 
@@ -70,10 +67,10 @@ export default function BlueFleetSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.15 + i * 0.08 }}
-              className={`rounded-xl border p-5 ${
+              className={`rounded-xl border p-5 transition-all duration-300 ${
                 agent.status === "divergent"
-                  ? "border-red/30 bg-red-bg/30"
-                  : "border-border bg-white"
+                  ? "border-red/40 bg-red-bg/40 shadow-md shadow-red/10"
+                  : "border-border bg-white shadow-sm hover:shadow-md hover:border-primary/20"
               }`}
             >
               <div className="flex items-center justify-between mb-3">
@@ -118,34 +115,29 @@ export default function BlueFleetSection() {
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.5 }}
-          className="mt-10 rounded-xl border border-border bg-white p-6"
+          className="mt-10"
         >
           <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim mb-4">How drift happens</p>
           <div className="grid gap-4 sm:grid-cols-3">
-            <div>
-              <p className="text-sm font-semibold text-text">Model updates</p>
-              <p className="text-xs text-text-muted mt-1">
-                A provider ships a new model version. Your prompts still work, but
-                the safety boundaries shifted. Tool call patterns change in ways
-                nobody notices for weeks.
-              </p>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-text">Prompt drift</p>
-              <p className="text-xs text-text-muted mt-1">
-                Teams iterate on system prompts independently. Over time, agents
-                diverge from their original constraints. What was tested in staging
-                no longer matches production.
-              </p>
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-text">Fleet comparison catches it</p>
-              <p className="text-xs text-text-muted mt-1">
-                Operator starts calling delete_record. No other agent has ever used it.
-                Individual monitoring sees nothing wrong. Fleet correlation flags it
-                immediately.
-              </p>
-            </div>
+            {[
+              {
+                title: "Model updates",
+                desc: "A provider ships a new model version. Your prompts still work, but the safety boundaries shifted. Tool call patterns change in ways nobody notices for weeks.",
+              },
+              {
+                title: "Prompt drift",
+                desc: "Teams iterate on system prompts independently. Over time, agents diverge from their original constraints. What was tested in staging no longer matches production.",
+              },
+              {
+                title: "Fleet comparison catches it",
+                desc: "Operator starts calling delete_record. No other agent has ever used it. Individual monitoring sees nothing wrong. Fleet correlation flags it immediately.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-xl border border-border bg-white p-5">
+                <p className="text-sm font-semibold text-text">{item.title}</p>
+                <p className="text-xs text-text-muted mt-2 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

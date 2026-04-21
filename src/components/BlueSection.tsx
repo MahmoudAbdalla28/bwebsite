@@ -42,9 +42,9 @@ export default function BlueSection() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mb-14"
         >
-          <p className="text-sm font-semibold text-primary">How it works</p>
-          <h2 className="mt-3 text-4xl font-semibold tracking-tight text-text sm:text-5xl">
-            Secure every AI agent in production
+          <span className="label-pill">How it works</span>
+          <h2 className="mt-4 text-4xl font-bold tracking-tight text-text sm:text-5xl">
+            Secure every AI agent <span className="gradient-text">in production</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
             Reverse proxy between your agents and their LLM providers. Every request

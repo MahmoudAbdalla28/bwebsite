@@ -6,15 +6,15 @@ import { useRef } from "react";
 const cards = [
   {
     title: "Differentiate your offering",
-    body: "Your competitors can't underwrite AI liability because they don't have the data. You can. Bastion gives you the telemetry stack to offer AI coverage as a service.",
+    body: "Your competitors can't underwrite AI liability because they don't have the data. You can.",
   },
   {
     title: "Deploy on client infrastructure",
-    body: "Single binary, 30-day monitoring window. Your client changes one environment variable. You get a carrier-grade risk report without touching their code.",
+    body: "Single binary, 30-day monitoring window. One environment variable. A carrier-grade report — no code changes.",
   },
   {
     title: "Revenue per client",
-    body: "Every enterprise deploying AI agents needs coverage. Bastion turns that need into a recurring revenue stream for your brokerage.",
+    body: "Every enterprise deploying AI agents needs coverage. Bastion turns that need into recurring revenue.",
   },
 ];
 
@@ -32,13 +32,12 @@ export default function BrokerageSection() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mb-14"
         >
-          <p className="text-sm font-semibold text-primary">For Brokerages</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-text sm:text-5xl">
-            Add AI risk telemetry to your book of business
+          <span className="label-pill">For Brokerages</span>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-5xl">
+            Add AI risk telemetry to your <span className="gradient-text">book of business</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
-            Carriers need actuarial data to underwrite AI liability. Bastion
-            generates it. You deliver it.
+            Carriers need actuarial data to underwrite AI liability. Bastion generates it. <strong className="text-text font-semibold">You deliver it.</strong>
           </p>
         </motion.div>
 
@@ -49,12 +48,13 @@ export default function BrokerageSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
-              className="rounded-2xl border border-border bg-white p-8"
+              className={i === 0
+                ? "rounded-2xl border-2 border-primary bg-primary p-8 shadow-xl shadow-primary/20"
+                : "rounded-2xl border border-border bg-white p-8 shadow-sm"
+              }
             >
-              <h3 className="text-lg font-semibold text-text">{card.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-text-muted">
-                {card.body}
-              </p>
+              <h3 className={`text-lg font-bold ${i === 0 ? "text-white" : "text-text"}`}>{card.title}</h3>
+              <p className={`mt-3 text-sm leading-relaxed ${i === 0 ? "text-blue-100" : "text-text-muted"}`}>{card.body}</p>
             </motion.div>
           ))}
         </div>

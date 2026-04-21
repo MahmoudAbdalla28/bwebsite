@@ -18,15 +18,12 @@ export default function ReportSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-sm font-semibold text-primary">The Underwriting Report</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-text sm:text-4xl lg:text-5xl">
-              The data needed for carriers to say yes
+            <span className="label-pill">The Underwriting Report</span>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-5xl">
+              The data carriers need to <span className="gradient-text">say yes</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-text-secondary">
-              Bastion monitors AI agent fleets and produces a structured risk
-              assessment built for actuaries and brokers. Deploy on client
-              infrastructure, generate the report, deliver it to the carrier.
-              Every metric traces back to the events that generated it.
+              Bastion monitors AI agent fleets and produces a structured risk assessment built for actuaries and brokers. Every metric traces back to the events that generated it.
             </p>
 
             <div className="mt-8 space-y-3">
@@ -49,7 +46,7 @@ export default function ReportSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="rounded-2xl border border-border bg-white shadow-lg shadow-black/5 overflow-hidden"
+            className="rounded-2xl border border-border bg-white shadow-xl shadow-primary/8 overflow-hidden"
           >
             <div className="border-b border-border px-6 py-4 flex items-center justify-between">
               <p className="text-sm font-semibold text-text">Underwriting Telemetry Report</p>
@@ -65,7 +62,7 @@ export default function ReportSection() {
                 ].map((m) => (
                   <div key={m.label} className="rounded-lg bg-bg-alt p-3">
                     <p className="text-[10px] text-text-dim">{m.label}</p>
-                    <p className="text-lg font-bold text-primary">{m.value}</p>
+                    <p className="text-xl font-extrabold gradient-text">{m.value}</p>
                     <p className="text-[10px] text-text-dim">{m.sub}</p>
                   </div>
                 ))}

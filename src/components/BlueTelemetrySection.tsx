@@ -33,9 +33,9 @@ export default function BlueTelemetrySection() {
           <div className="flex justify-center mb-4">
             <Lottie animationData={shieldData} loop className="w-24 h-24" />
           </div>
-          <p className="text-sm font-semibold text-primary">Telemetry</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-text sm:text-5xl">
-            30 days of signal, one underwriting report
+          <span className="label-pill">Telemetry</span>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-5xl">
+            <span className="gradient-text">30 days</span> of signal, one underwriting report
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
             Blue collects six core metrics over a 30-day monitoring window. This is the data your insurance carrier needs to actually price AI liability coverage.
@@ -53,7 +53,7 @@ export default function BlueTelemetrySection() {
               className="rounded-xl border border-border bg-white p-5"
             >
               <p className="text-[10px] font-semibold uppercase tracking-wider text-text-dim">{m.label}</p>
-              <p className="mt-2 text-2xl font-bold text-text">{m.value}</p>
+              <p className="mt-2 text-2xl font-extrabold gradient-text">{m.value}</p>
               <p className="mt-1 text-[10px] text-text-dim">{m.sub}</p>
               {/* Progress bar */}
               <div className="mt-4 h-1.5 w-full rounded-full bg-bg-alt overflow-hidden">

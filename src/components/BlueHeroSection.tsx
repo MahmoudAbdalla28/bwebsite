@@ -25,11 +25,11 @@ export default function BlueHeroSection() {
                 <span className="h-2 w-2 rounded-full bg-primary" />
                 <span className="text-xs font-semibold text-primary">Bastion</span>
               </div>
-              <h1 className="text-5xl font-semibold tracking-tight text-text sm:text-6xl">
-                Production defense for every AI agent
+              <h1 className="text-5xl font-bold tracking-tight text-text sm:text-6xl">
+                Production <span className="gradient-text">defense</span> for every AI agent
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-text-secondary">
-                A reverse proxy that sits between your agents and their LLM providers. Every request and response is inspected, logged, and scored before it touches your systems.
+                A reverse proxy that sits between your agents and their LLM providers. <strong className="text-text font-semibold">Every request and response is inspected, logged, and scored</strong> before it touches your systems.
               </p>
             </motion.div>
 
@@ -41,7 +41,7 @@ export default function BlueHeroSection() {
             >
               <a
                 href="#contact"
-                className="inline-flex items-center rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
+                className="btn-glow inline-flex items-center rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
               >
                 Get started
               </a>

@@ -47,9 +47,9 @@ export default function ComplianceSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-sm font-semibold text-primary">Compliance & Data</p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-text sm:text-5xl">
-              Questions enterprise buyers ask
+            <span className="label-pill">Compliance &amp; Data</span>
+            <h2 className="mt-4 text-4xl font-bold tracking-tight text-text sm:text-5xl">
+              Questions enterprise <span className="gradient-text">buyers ask</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-text-secondary">
               Built for environments where data residency, regulatory alignment, and

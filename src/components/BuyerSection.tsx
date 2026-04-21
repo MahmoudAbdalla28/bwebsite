@@ -1,89 +1,104 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
-const scenarios = [
+const personas = [
   {
-    question: "A client asked if their AI agents are covered and we had no answer",
-    answer: "Bastion generates the risk telemetry your carrier needs to actually price AI liability. 30 days of monitoring, one structured report. You deliver the answer.",
+    role: "Insurance Broker",
+    scenario: "Carriers won't underwrite AI without data.",
+    answer: "Bastion generates the telemetry your carrier needs. 30 days, one report, coverage unlocked.",
   },
   {
-    question: "We want to offer AI coverage but carriers won't underwrite without data",
-    answer: "That's the gap Bastion fills. Deploy on your client's infrastructure, generate carrier-grade telemetry, and bring the underwriter a report they can work with.",
+    role: "Enterprise CTO",
+    scenario: "An AI agent processed health records — we found out three days later.",
+    answer: "PII is detected and redacted at the network layer before it hits the LLM. Real-time alerts.",
   },
   {
-    question: "We have agents in production but no one can tell the board what they actually did last quarter",
-    answer: "Bastion logs every API call, tool invocation, and PII detection across your fleet. Timestamped, categorized, and aggregated into a report the board reads in five minutes.",
+    role: "Chief Risk Officer",
+    scenario: "Legal sent back a 47-page risk assessment asking for controls we don't have.",
+    answer: "Continuous monitoring, configurable enforcement. Every metric Legal asked for, generated automatically.",
+  },
+];
+
+const highlights = [
+  {
+    stat: "30",
+    unit: "days",
+    label: "Monitoring window",
+    desc: "Learn your fleet baseline before enforcing anything.",
   },
   {
-    question: "Legal sent back a 47-page risk assessment asking for controls we don't have",
-    answer: "Continuous monitoring with configurable enforcement. PII never leaves the network. Every metric Legal asked for, generated automatically from real operational data.",
+    stat: "1",
+    unit: "binary",
+    label: "Zero dependencies",
+    desc: "Single Rust binary. No Python, no containers, no runtime.",
   },
   {
-    question: "An AI agent processed customer health records and we found out three days later from Slack",
-    answer: "PII is detected and redacted at the network layer before it reaches the LLM. Real-time alerts. Your carrier gets the report before you get the Slack message.",
-  },
-  {
-    question: "Our carrier dropped AI from our coverage after the ISO CG 40 47 endorsement",
-    answer: "Bastion generates the quantified risk telemetry your carrier needs to actually underwrite AI liability instead of just saying no. 30 days of monitoring, one structured report.",
+    stat: "0",
+    unit: "data",
+    label: "Nothing leaves",
+    desc: "All event data stays on your infrastructure. Always.",
   },
 ];
 
 export default function BuyerSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section id="solutions" className="relative py-24 md:py-32 bg-bg" ref={ref}>
-      <div className="mx-auto max-w-3xl px-6">
+      <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <p className="text-sm font-semibold text-primary">Common scenarios</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-text sm:text-4xl">
-            Sound familiar?
+          <span className="label-pill">Who it&apos;s for</span>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-4xl">
+            Sound <span className="gradient-text">familiar?</span>
           </h2>
         </motion.div>
 
-        <div className="space-y-3">
-          {scenarios.map((s, i) => (
+        {/* Persona cards */}
+        <div className="grid gap-5 md:grid-cols-3 mb-14">
+          {personas.map((p, i) => (
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
+              key={p.role}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1 + i * 0.06 }}
-              className="rounded-xl border border-border bg-white overflow-hidden"
+              transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
+              className="rounded-2xl border border-border bg-white p-7 flex flex-col gap-5 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300"
             >
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="flex w-full cursor-pointer items-start justify-between px-6 py-5 text-left gap-4"
-              >
-                <span className="text-sm font-semibold text-text leading-relaxed">{s.question}</span>
-                <svg
-                  viewBox="0 0 16 16"
-                  className={`h-4 w-4 shrink-0 mt-0.5 text-text-dim transition-transform duration-200 ${openIndex === i ? "rotate-180" : ""}`}
-                  fill="none"
-                >
-                  <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              {openIndex === i && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="px-6 pb-5"
-                >
-                  <p className="text-sm leading-relaxed text-text-muted">{s.answer}</p>
-                </motion.div>
-              )}
+              <div>
+                <span className="label-pill mb-3 inline-flex">{p.role}</span>
+                <p className="mt-3 text-base font-semibold text-text leading-snug italic">&ldquo;{p.scenario}&rdquo;</p>
+              </div>
+              <p className="text-sm leading-relaxed text-text-muted border-t border-border pt-4">{p.answer}</p>
             </motion.div>
           ))}
         </div>
+
+        {/* Stats strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="grid gap-px sm:grid-cols-3 rounded-2xl border border-border overflow-hidden bg-border"
+        >
+          {highlights.map((h) => (
+            <div key={h.stat} className="bg-white px-8 py-7 flex items-center gap-5">
+              <div className="shrink-0">
+                <p className="text-4xl font-extrabold gradient-text leading-none">{h.stat}<span className="text-base font-semibold text-text-dim ml-1">{h.unit}</span></p>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-text">{h.label}</p>
+                <p className="mt-1 text-xs text-text-muted">{h.desc}</p>
+              </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

@@ -25,6 +25,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 20px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -54,4 +55,37 @@ html {
 /* Soft radial glow */
 .bg-radial-soft {
   background: radial-gradient(ellipse 70% 50% at 65% 40%, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+}
+
+/* Section label pill */
+.label-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  background: #EFF6FF;
+  border: 1px solid rgba(13,110,253,0.2);
+  padding: 0.25rem 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0D6EFD;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Inline text highlight */
+.highlight {
+  background: linear-gradient(120deg, rgba(13,110,253,0.12) 0%, rgba(59,130,246,0.12) 100%);
+  border-radius: 4px;
+  padding: 0 3px;
+}
+
+/* Glowing primary button */
+.btn-glow {
+  box-shadow: 0 0 0 0 rgba(13,110,253,0.4);
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 4px 14px rgba(13,110,253,0.3); }
+  50%       { box-shadow: 0 4px 28px rgba(13,110,253,0.55); }
 }

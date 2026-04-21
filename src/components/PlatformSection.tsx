@@ -18,9 +18,9 @@ export default function PlatformSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-sm font-semibold text-primary">How it works</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-text sm:text-5xl">
-            Drop in, don't rebuild
+          <span className="label-pill">How it works</span>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-5xl">
+            Drop in, <span className="gradient-text">don't rebuild</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base text-text-secondary">
             One environment variable change. Your agents keep running. Bastion
@@ -33,7 +33,7 @@ export default function PlatformSection() {
           initial={{ opacity: 0, y: 25 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="rounded-2xl border border-border bg-white p-8 md:p-10 mb-14"
+          className="rounded-2xl border border-border bg-white p-8 md:p-10 mb-14 shadow-lg shadow-primary/5"
         >
           <svg viewBox="0 0 800 220" className="w-full" fill="none">
             {/* Agents */}
@@ -95,13 +95,10 @@ export default function PlatformSection() {
             <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim">Monitor</p>
             <h3 className="mt-3 text-lg font-semibold text-text">See everything</h3>
             <p className="mt-2 text-sm leading-relaxed text-text-muted">
-              Every request and response logged. PII detected, tool calls
-              tracked, confidence scored. Your agents don't know it's there.
-              Produces the telemetry report carriers use to underwrite.
+              Every request and response logged. PII detected, tool calls tracked, confidence scored. Your agents don't know it's there.
             </p>
           </motion.div>
 
-          {/* Arrow */}
           <div className="hidden sm:flex items-center -mx-px">
             <svg viewBox="0 0 24 40" className="h-10 w-6 text-primary" fill="none">
               <path d="M4 20h16M14 14l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -117,13 +114,10 @@ export default function PlatformSection() {
             <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim">Enforce</p>
             <h3 className="mt-3 text-lg font-semibold text-text">Act on it</h3>
             <p className="mt-2 text-sm leading-relaxed text-text-muted">
-              Turn on enforcement when ready. PII redacted before leaving your
-              network. Unauthorized tool calls stripped. Anomalies blocked.
-              Stronger data for your carrier.
+              PII redacted before leaving your network. Unauthorized tool calls stripped. Anomalies blocked. Stronger data for your carrier.
             </p>
           </motion.div>
 
-          {/* Arrow */}
           <div className="hidden sm:flex items-center -mx-px">
             <svg viewBox="0 0 24 40" className="h-10 w-6 text-primary" fill="none">
               <path d="M4 20h16M14 14l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -139,9 +133,7 @@ export default function PlatformSection() {
             <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim">Validate</p>
             <h3 className="mt-3 text-lg font-semibold text-text">Prove it</h3>
             <p className="mt-2 text-sm leading-relaxed text-text-muted">
-              Continuous compliance verification across your fleet.
-              Policy violations surfaced, scored, and documented.
-              Auditable proof of your security posture.
+              Continuous compliance verification across your fleet. Policy violations surfaced, scored, and documented.
             </p>
           </motion.div>
         </div>

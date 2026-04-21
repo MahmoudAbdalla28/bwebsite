@@ -1,11 +1,22 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
+import { useState, useEffect } from "react";
 
 const ParticleNetwork = dynamic(() => import("./ParticleNetwork"), { ssr: false });
 
+const cyclingWords = ["insurable", "auditable", "quantifiable"];
+
 export default function HeroSection() {
+  const [wordIndex, setWordIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setWordIndex((i) => (i + 1) % cyclingWords.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-bg-alt">
@@ -23,15 +34,14 @@ export default function HeroSection() {
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-bg-alt to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-6 pt-28 pb-16 md:pt-40 md:pb-20 min-h-[80vh] flex flex-col justify-center">
-        {/* Breadcrumb-style label */}
-        <motion.p
+        {/* Label pill */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="text-sm font-medium text-text-muted"
         >
-          AI Liability Telematics
-        </motion.p>
+          <span className="label-pill">AI Liability Telematics</span>
+        </motion.div>
 
         {/* Headline */}
         <motion.h1
@@ -41,7 +51,20 @@ export default function HeroSection() {
           className="mt-4 max-w-2xl text-5xl font-semibold leading-[1.1] tracking-tight text-text sm:text-6xl lg:text-7xl"
         >
           Make AI agents{" "}
-          <span className="gradient-text">insurable</span>
+          <span className="relative inline-block">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={cyclingWords[wordIndex]}
+                className="gradient-text"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.9, ease: "easeInOut" }}
+              >
+                {cyclingWords[wordIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
         </motion.h1>
 
         {/* Subhead */}
@@ -51,8 +74,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.25 }}
           className="mt-6 max-w-lg text-lg leading-relaxed text-text-secondary"
         >
-          Runtime telemetry that gives carriers the data to underwrite AI
-          liability. Deploy on client infrastructure in minutes.
+          <strong className="text-text font-semibold">Runtime telemetry</strong> that gives carriers the data to underwrite AI liability. Deploy on client infrastructure in minutes.
         </motion.p>
 
         {/* CTAs — clean, blue primary like Cisco */}
@@ -64,7 +86,7 @@ export default function HeroSection() {
         >
           <a
             href="#brokerages"
-            className="rounded-lg bg-primary px-7 py-3.5 text-base font-semibold text-white transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            className="btn-glow rounded-lg bg-primary px-7 py-3.5 text-base font-semibold text-white transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
           >
             For Brokerages
           </a>

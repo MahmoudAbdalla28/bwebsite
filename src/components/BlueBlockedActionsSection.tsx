@@ -19,9 +19,9 @@ export default function BlueBlockedActionsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <p className="text-sm font-semibold text-primary">Human in the Loop</p>
-          <h2 className="mt-3 text-4xl font-semibold tracking-tight text-text sm:text-5xl">
-            Blocked actions surface for review
+          <span className="label-pill">Human in the Loop</span>
+          <h2 className="mt-4 text-4xl font-bold tracking-tight text-text sm:text-5xl">
+            Blocked actions <span className="gradient-text">surface for review</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-text-secondary">
             When Bastion blocks an action, it doesn't just drop it. The full
