@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 type Category = "llm" | "siem" | "security";
 
 type Integration = { name: string; logo: string; wordmark: boolean; category: Category };
@@ -56,12 +54,12 @@ function LogoItem({ item }: { item: Integration }) {
       <img
         src={item.logo}
         alt={item.name}
-        className={`w-auto grayscale opacity-50 group-hover:opacity-80 group-hover:grayscale-0 transition-all duration-300 ${
+        className={`w-auto grayscale opacity-60 group-hover:opacity-90 group-hover:grayscale-0 transition-all duration-300 ${
           item.wordmark ? "h-7" : "h-8"
         }`}
       />
       {!item.wordmark && (
-        <span className="text-[11px] font-medium text-text-dim/60 group-hover:text-text-dim transition-colors duration-300 whitespace-nowrap">
+        <span className="text-[11px] font-medium text-text-dim/70 group-hover:text-text-dim transition-colors duration-300 whitespace-nowrap">
           {item.name}
         </span>
       )}
@@ -72,8 +70,6 @@ function LogoItem({ item }: { item: Integration }) {
 export default function IntegrationsCarousel({ category = "llm" }: { category?: Category }) {
   const filtered = integrations.filter((i) => i.category === category);
   const c = copy[category];
-  const scroll = filtered.length >= 6;
-  const doubled = [...filtered, ...filtered];
 
   return (
     <section className="pt-20 pb-8 md:pt-24 md:pb-10 bg-white border-t border-border-light">
@@ -87,30 +83,11 @@ export default function IntegrationsCarousel({ category = "llm" }: { category?: 
         </p>
       </div>
 
-      {scroll ? (
-        <div className="relative overflow-hidden">
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
-
-          <motion.div
-            className="flex gap-14 items-center w-max"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              x: { duration: Math.max(20, filtered.length * 4), repeat: Infinity, ease: "linear" },
-            }}
-          >
-            {doubled.map((item, i) => (
-              <LogoItem key={`${item.name}-${i}`} item={item} />
-            ))}
-          </motion.div>
-        </div>
-      ) : (
-        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 px-6 max-w-5xl mx-auto">
-          {filtered.map((item) => (
-            <LogoItem key={item.name} item={item} />
-          ))}
-        </div>
-      )}
+      <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 px-6 max-w-5xl mx-auto">
+        {filtered.map((item) => (
+          <LogoItem key={item.name} item={item} />
+        ))}
+      </div>
     </section>
   );
 }
