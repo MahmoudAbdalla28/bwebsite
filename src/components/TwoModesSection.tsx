@@ -18,8 +18,8 @@ export default function TwoModesSection() {
         >
           <span className="label-pill">Two Modes</span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-5xl">
-            Pre-bind assessment.<br />
-            <span className="gradient-text">Post-bind telemetry.</span>
+            Pre-bind stress testing.<br />
+            <span className="gradient-text">Post-bind runtime telemetry.</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
             Two modes sharing a signal stack. One attested file any carrier
@@ -33,7 +33,7 @@ export default function TwoModesSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="rounded-2xl border border-border bg-white p-8 shadow-sm"
+            className="rounded-2xl border-2 border-primary bg-white p-8 shadow-md shadow-primary/10"
           >
             <div className="flex items-center gap-3 mb-5">
               <div className="h-10 w-10 rounded-xl bg-primary-bg flex items-center justify-center">
@@ -47,7 +47,7 @@ export default function TwoModesSection() {
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary">Assessment</p>
-                <h3 className="mt-0.5 text-lg font-bold text-text">Pre-bind adversarial engagement</h3>
+                <h3 className="mt-0.5 text-lg font-bold text-text">Pre-bind adversarial testing</h3>
               </div>
             </div>
             <p className="text-sm leading-relaxed text-text-muted">
@@ -96,7 +96,7 @@ export default function TwoModesSection() {
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary">Telemetry · Our Moat</p>
-                <h3 className="mt-0.5 text-lg font-bold text-text">Knowledge graph framework</h3>
+                <h3 className="mt-0.5 text-lg font-bold text-text">Post-bind behavioral telemetry</h3>
               </div>
             </div>
             <p className="text-sm leading-relaxed text-text-muted">
