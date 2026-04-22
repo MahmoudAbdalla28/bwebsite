@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <a href="/bastion" className="flex items-center gap-2.5 cursor-pointer">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/bastion/assets/bastion-logo.webp" alt="Bastion" className="h-7 w-auto" />
+            <img src="/bastion/assets/bastion-logo.webp" alt="Bastion" className="h-10 w-auto" />
           </a>
 
           <div className="flex items-center gap-8">

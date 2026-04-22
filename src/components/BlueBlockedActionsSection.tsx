@@ -40,7 +40,7 @@ export default function BlueBlockedActionsSection() {
           {/* Card header */}
           <div className="flex items-center justify-between border-b border-border px-6 py-3 bg-bg-alt">
             <p className="text-sm font-semibold text-text">Blocked Action</p>
-            <span className="rounded-full bg-red-bg px-2.5 py-0.5 text-[10px] font-semibold text-red uppercase tracking-wider">Blocked</span>
+            <span className="rounded-full bg-primary-bg px-2.5 py-0.5 text-[10px] font-semibold text-primary uppercase tracking-wider">Blocked</span>
           </div>
 
           {/* Card body as a clean row */}
@@ -52,7 +52,7 @@ export default function BlueBlockedActionsSection() {
               </div>
               <div>
                 <p className="text-[10px] text-text-dim font-semibold uppercase tracking-wider">Action</p>
-                <p className="mt-1 text-sm font-mono text-red">delete_patient_record</p>
+                <p className="mt-1 text-sm font-mono text-primary">delete_patient_record</p>
               </div>
               <div>
                 <p className="text-[10px] text-text-dim font-semibold uppercase tracking-wider">Policy</p>
@@ -65,7 +65,7 @@ export default function BlueBlockedActionsSection() {
             </div>
 
             <div className="rounded-lg bg-bg-alt border border-border p-3 text-xs text-text-muted mb-4">
-              Agent attempted to call <span className="font-mono text-red">delete_patient_record</span> with record_id: MRN-4821.
+              Agent attempted to call <span className="font-mono text-primary">delete_patient_record</span> with record_id: MRN-4821.
               Destructive operations on patient records require explicit clinician authorization.
               No authorization reference was present in the request context.
             </div>

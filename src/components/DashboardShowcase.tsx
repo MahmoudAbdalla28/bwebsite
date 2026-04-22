@@ -219,7 +219,7 @@ export default function DashboardShowcase() {
                         <span className="text-text-dim">Latency</span>
                         <span className="text-text-muted text-right">{agent.latency}</span>
                         <span className="text-text-dim">Risk</span>
-                        <span className={`text-right font-medium ${agent.risk >= 0.3 ? "text-red" : "text-primary"}`}>
+                        <span className="text-right font-medium text-primary">
                           {agent.risk}
                         </span>
                       </div>
@@ -245,11 +245,7 @@ export default function DashboardShowcase() {
                       transition={{ duration: 0.3 }}
                       className="flex items-start gap-2 rounded-lg bg-bg-alt px-3 py-2"
                     >
-                      <span
-                        className={`mt-1 h-1.5 w-1.5 shrink-0 rounded-full ${
-                          ev.severity === "high" ? "bg-red" : "bg-primary"
-                        }`}
-                      />
+                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                       <div className="min-w-0">
                         <div className="flex items-center gap-2">
                           <span className="text-[10px] font-mono text-text-dim">{ev.time}</span>

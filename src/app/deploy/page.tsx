@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import DeploymentSection from "@/components/DeploymentSection";
 import DashboardShowcase from "@/components/DashboardShowcase";
 import ComplianceSection from "@/components/ComplianceSection";
+import IntegrationsCarousel from "@/components/IntegrationsCarousel";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
@@ -48,6 +49,7 @@ export default function DeployPage() {
         </section>
 
         <ComplianceSection />
+        <IntegrationsCarousel category="security" />
         <CTASection />
       </main>
       <Footer />

@@ -47,7 +47,7 @@ export default function BuyerSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="solutions" className="relative py-24 md:py-32 bg-bg" ref={ref}>
+    <section id="solutions" className="relative pt-12 pb-24 md:pt-16 md:pb-32 bg-bg" ref={ref}>
       <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

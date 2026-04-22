@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ProblemSection from "@/components/ProblemSection";
+import TwoModesSection from "@/components/TwoModesSection";
 import PlatformSection from "@/components/PlatformSection";
 import RiskExposuresSection from "@/components/RiskExposuresSection";
 import BrokerageSection from "@/components/BrokerageSection";
@@ -16,7 +16,7 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
-        <ProblemSection />
+        <TwoModesSection />
         <PlatformSection />
         <section className="py-24 md:py-32 bg-bg">
           <div className="mx-auto max-w-5xl px-6">
@@ -39,7 +39,7 @@ export default function Home() {
         <BrokerageSection />
         <ReportSection />
         <RiskExposuresSection />
-        <IntegrationsCarousel />
+        <IntegrationsCarousel category="llm" />
         <BuyerSection />
         <CTASection />
       </main>

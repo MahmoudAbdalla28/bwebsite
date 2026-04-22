@@ -1,23 +1,11 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import { useState, useEffect } from "react";
 
 const ParticleNetwork = dynamic(() => import("./ParticleNetwork"), { ssr: false });
 
-const cyclingWords = ["insurable", "auditable", "quantifiable"];
-
 export default function HeroSection() {
-  const [wordIndex, setWordIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setWordIndex((i) => (i + 1) % cyclingWords.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <section className="relative overflow-hidden bg-bg-alt">
       {/* Particle Network — Cisco-style generative sphere */}
@@ -50,21 +38,7 @@ export default function HeroSection() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mt-4 max-w-2xl text-5xl font-semibold leading-[1.1] tracking-tight text-text sm:text-6xl lg:text-7xl"
         >
-          Make AI agents{" "}
-          <span className="relative inline-block">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.span
-                key={cyclingWords[wordIndex]}
-                className="gradient-text"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.9, ease: "easeInOut" }}
-              >
-                {cyclingWords[wordIndex]}
-              </motion.span>
-            </AnimatePresence>
-          </span>
+          Make AI agents <span className="gradient-text">insurable</span>
         </motion.h1>
 
         {/* Subhead */}

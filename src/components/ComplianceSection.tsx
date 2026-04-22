@@ -11,12 +11,8 @@ const faqs = [
     a: "Nowhere. Bastion runs on-prem, all data lives in local SQLite on your infrastructure. Nothing goes to us or any third party. The underwriting report only contains sanitized aggregate metrics, no raw prompts or responses.",
   },
   {
-    q: "What about PIPEDA and Quebec Law 25?",
-    a: "PII detection and redaction at the proxy layer prevents personal information from reaching LLM providers in the first place. On-prem means everything stays on Canadian infrastructure with no cross-border transfer. The telemetry log provides the audit trail Law 25 requires for automated decision-making systems.",
-  },
-  {
-    q: "GDPR?",
-    a: "On-prem keeps data in your EU infrastructure. PII redaction prevents personal data from hitting third-party providers. The telemetry log works as the processing record for Article 30. The underwriting report has no personal data in it.",
+    q: "PIPEDA, Law 25, and GDPR?",
+    a: "On-prem keeps data in your jurisdiction with no cross-border transfer. PII detection and redaction at the proxy layer prevents personal data from reaching LLM providers. The telemetry log provides the audit trail regulators require, and the underwriting report has no personal data in it.",
   },
   {
     q: "Does the proxy itself introduce risk?",
@@ -25,10 +21,6 @@ const faqs = [
   {
     q: "What if Bastion goes down?",
     a: "Configurable. Monitor mode is passthrough, so if the proxy dies agents connect directly to their LLM providers. Enforce mode defaults to fail-closed, which is the right default for regulated environments. Fail-open is available if availability matters more.",
-  },
-  {
-    q: "Data retention?",
-    a: "Default is 90 days for detailed event logs, indefinite for aggregate metrics. Configurable per deployment. SQLite is on your infrastructure so your existing retention policies apply. Purge scripts included for automated cleanup.",
   },
 ];
 

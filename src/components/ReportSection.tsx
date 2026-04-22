@@ -23,19 +23,61 @@ export default function ReportSection() {
               The data carriers need to <span className="gradient-text">say yes</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-text-secondary">
-              Bastion monitors AI agent fleets and produces a structured risk assessment built for actuaries and brokers. Every metric traces back to the events that generated it.
+              Bastion monitors AI agent fleets and produces a structured risk
+              assessment built for actuaries and brokers. Every metric traces
+              back to the events that generated it.
             </p>
 
-            <div className="mt-8 space-y-3">
+            <div className="mt-8 grid grid-cols-2 gap-3">
               {[
-                "Fleet risk score with weighted breakdown",
-                "PII exposure rate with remediation stats",
-                "Consistency score across all agents",
-                "Incident summary by type and severity",
-              ].map((item) => (
-                <div key={item} className="flex items-start gap-2">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  <span className="text-sm text-text-muted">{item}</span>
+                {
+                  label: "Fleet risk score",
+                  desc: "Weighted breakdown",
+                  icon: (
+                    <svg viewBox="0 0 24 24" className="h-full w-full" fill="none" stroke="#0D6EFD" strokeWidth="1.5" strokeLinecap="round">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 6v6l4 2" />
+                    </svg>
+                  ),
+                },
+                {
+                  label: "PII exposure",
+                  desc: "Remediation stats",
+                  icon: (
+                    <svg viewBox="0 0 24 24" className="h-full w-full" fill="none" stroke="#0D6EFD" strokeWidth="1.5" strokeLinecap="round">
+                      <rect x="4" y="10" width="16" height="11" rx="2" />
+                      <path d="M8 10V7a4 4 0 118 0v3" />
+                    </svg>
+                  ),
+                },
+                {
+                  label: "Consistency score",
+                  desc: "Across all agents",
+                  icon: (
+                    <svg viewBox="0 0 24 24" className="h-full w-full" fill="none" stroke="#0D6EFD" strokeWidth="1.5" strokeLinecap="round">
+                      <path d="M4 19l4-6 4 3 8-10" />
+                      <circle cx="8" cy="13" r="1.2" fill="#0D6EFD" />
+                      <circle cx="12" cy="16" r="1.2" fill="#0D6EFD" />
+                    </svg>
+                  ),
+                },
+                {
+                  label: "Incident summary",
+                  desc: "By type and severity",
+                  icon: (
+                    <svg viewBox="0 0 24 24" className="h-full w-full" fill="none" stroke="#0D6EFD" strokeWidth="1.5" strokeLinecap="round">
+                      <path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z" />
+                      <path d="M14 3v6h6M8 13h8M8 17h5" />
+                    </svg>
+                  ),
+                },
+              ].map((tile) => (
+                <div key={tile.label} className="rounded-xl border border-border bg-white p-4 flex items-start gap-3">
+                  <div className="h-8 w-8 shrink-0 rounded-lg bg-primary-bg p-1.5">{tile.icon}</div>
+                  <div>
+                    <p className="text-sm font-semibold text-text leading-tight">{tile.label}</p>
+                    <p className="text-xs text-text-muted mt-0.5">{tile.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>

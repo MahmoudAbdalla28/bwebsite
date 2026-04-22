@@ -5,6 +5,7 @@ import BlueKnowledgeGraphSection from "@/components/BlueKnowledgeGraphSection";
 import BlueBlockedActionsSection from "@/components/BlueBlockedActionsSection";
 import BlueTelemetrySection from "@/components/BlueTelemetrySection";
 import BlueFleetSection from "@/components/BlueFleetSection";
+import IntegrationsCarousel from "@/components/IntegrationsCarousel";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
@@ -19,6 +20,7 @@ export default function BluePage() {
         <BlueBlockedActionsSection />
         <BlueFleetSection />
         <BlueTelemetrySection />
+        <IntegrationsCarousel category="siem" />
         <CTASection />
       </main>
       <Footer />

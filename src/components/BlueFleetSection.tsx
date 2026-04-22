@@ -69,15 +69,13 @@ export default function BlueFleetSection() {
               transition={{ delay: 0.15 + i * 0.08 }}
               className={`rounded-xl border p-5 transition-all duration-300 ${
                 agent.status === "divergent"
-                  ? "border-red/40 bg-red-bg/40 shadow-md shadow-red/10"
+                  ? "border-primary/50 bg-primary-bg shadow-md shadow-primary/10"
                   : "border-border bg-white shadow-sm hover:shadow-md hover:border-primary/20"
               }`}
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <span className={`h-2 w-2 rounded-full ${
-                    agent.status === "divergent" ? "bg-red" : "bg-primary"
-                  }`} />
+                  <span className="h-2 w-2 rounded-full bg-primary" />
                   <p className="text-sm font-semibold text-text">{agent.name}</p>
                 </div>
                 <span className="text-[10px] text-text-dim font-mono">{agent.requests}</span>
@@ -91,7 +89,7 @@ export default function BlueFleetSection() {
                     key={t}
                     className={`rounded px-2 py-0.5 text-[10px] font-mono ${
                       agent.status === "divergent" && t === "delete_record"
-                        ? "bg-red-bg text-red font-semibold"
+                        ? "bg-primary text-white font-semibold"
                         : "bg-bg-alt text-text-dim"
                     }`}
                   >
@@ -101,8 +99,8 @@ export default function BlueFleetSection() {
               </div>
 
               {agent.alert && (
-                <div className="mt-3 rounded-lg bg-red-bg border border-red/20 p-3">
-                  <p className="text-[10px] font-semibold text-red mb-1">Fleet anomaly detected</p>
+                <div className="mt-3 rounded-lg bg-white border border-primary/20 p-3">
+                  <p className="text-[10px] font-semibold text-primary mb-1">Fleet anomaly detected</p>
                   <p className="text-[10px] text-text-muted leading-relaxed">{agent.alert}</p>
                 </div>
               )}

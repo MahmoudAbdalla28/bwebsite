@@ -20,7 +20,7 @@ export default function PlatformSection() {
         >
           <span className="label-pill">How it works</span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-5xl">
-            Drop in, <span className="gradient-text">don't rebuild</span>
+            Drop in, <span className="gradient-text">don&apos;t rebuild</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base text-text-secondary">
             One environment variable change. Your agents keep running. Bastion
@@ -95,7 +95,7 @@ export default function PlatformSection() {
             <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim">Monitor</p>
             <h3 className="mt-3 text-lg font-semibold text-text">See everything</h3>
             <p className="mt-2 text-sm leading-relaxed text-text-muted">
-              Every request and response logged. PII detected, tool calls tracked, confidence scored. Your agents don't know it's there.
+              Every request and response logged. PII detected, tool calls tracked, confidence scored. Your agents don&apos;t know it&apos;s there.
             </p>
           </motion.div>
 
