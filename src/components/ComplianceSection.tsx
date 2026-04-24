@@ -26,7 +26,7 @@ const faqs = [
 
 export default function ComplianceSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (

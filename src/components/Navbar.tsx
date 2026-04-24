@@ -14,7 +14,6 @@ export default function Navbar() {
 
   const links = [
     { label: "Platform", href: "/bastion/blue" },
-    { label: "Deploy", href: "/bastion/deploy" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -32,7 +31,7 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <a href="/bastion" className="cursor-pointer flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/bastion/assets/bastion-logo.webp" alt="Bastion" className="h-12 w-auto object-contain" />
+          <img src="/bastion/assets/bastion-logo.webp" alt="Bastion" className="h-16 w-auto object-contain" />
         </a>
 
         <div className="hidden items-center gap-8 md:flex">

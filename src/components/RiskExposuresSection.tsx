@@ -62,7 +62,7 @@ const properties = [
 
 export default function RiskExposuresSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section className="relative py-24 md:py-32 bg-bg" ref={ref}>
@@ -74,13 +74,11 @@ export default function RiskExposuresSection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="label-pill">Attested Properties</span>
-          <h2 className="mt-5 text-3xl font-bold tracking-tight text-text sm:text-5xl">
-            Three attested properties,<br /><span className="gradient-text">one evidence file</span>
+          <h2 className="text-3xl font-bold tracking-tight text-text sm:text-5xl">
+            Every risk category. <span className="gradient-text">Fully documented.</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
-            Open methods behind a proprietary framework. One attestation file that
-            any carrier panel can consume.
+            Bastion maps your AI agent activity to the risk categories that matter most — giving every stakeholder the evidence they need to act with confidence.
           </p>
         </motion.div>
 

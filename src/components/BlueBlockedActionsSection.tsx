@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 
 export default function BlueBlockedActionsSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [overrideClicked, setOverrideClicked] = useState(false);
 
   return (

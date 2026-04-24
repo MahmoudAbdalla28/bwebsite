@@ -1,12 +1,15 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import TwoModesSection from "@/components/TwoModesSection";
+import DeployVP from "@/components/DeployVP";
 import PlatformSection from "@/components/PlatformSection";
 import RiskExposuresSection from "@/components/RiskExposuresSection";
 import BrokerageSection from "@/components/BrokerageSection";
 import ReportSection from "@/components/ReportSection";
 import BuyerSection from "@/components/BuyerSection";
 import IntegrationsCarousel from "@/components/IntegrationsCarousel";
+import WhyUsSection from "@/components/WhyUsSection";
+import FAQSection from "@/components/FAQSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
@@ -17,6 +20,7 @@ export default function Home() {
       <main>
         <HeroSection />
         <TwoModesSection />
+        <DeployVP />
         <PlatformSection />
         <section className="py-24 md:py-32 bg-bg">
           <div className="mx-auto max-w-5xl px-6">
@@ -41,6 +45,8 @@ export default function Home() {
         <RiskExposuresSection />
         <IntegrationsCarousel category="llm" />
         <BuyerSection />
+        <WhyUsSection />
+        <FAQSection />
         <CTASection />
       </main>
       <Footer />

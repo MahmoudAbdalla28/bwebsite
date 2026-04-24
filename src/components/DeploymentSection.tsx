@@ -45,7 +45,7 @@ function FlowConnection({ label, className = "" }: { label?: string; className?:
 
 export default function DeploymentSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section className="relative bg-white" ref={ref}>

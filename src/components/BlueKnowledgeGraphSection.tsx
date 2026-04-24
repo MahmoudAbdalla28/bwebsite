@@ -53,7 +53,7 @@ const pipelineSteps = [
 
 export default function BlueKnowledgeGraphSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section className="relative py-24 md:py-32 bg-bg" ref={ref}>

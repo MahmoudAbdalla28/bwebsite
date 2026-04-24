@@ -321,7 +321,7 @@ function DeployGraphic() {
 
 export default function BrokerageSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [active, setActive] = useState<number | null>(null);
 
   return (
@@ -334,12 +334,12 @@ export default function BrokerageSection() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mb-14"
         >
-          <span className="label-pill">For Brokerages</span>
+          <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-primary mb-4">For Brokerages</p>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-5xl">
-            Add AI risk telemetry to your <span className="gradient-text">book of business</span>
+            Grow your AI risk practice. <span className="gradient-text">Own the category.</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
-            Carriers need actuarial data to underwrite AI liability. Bastion generates it.{" "}
+            The market needs structured AI risk data before it can move. Bastion generates it.{" "}
             <strong className="text-text font-semibold">You deliver it.</strong>
           </p>
         </motion.div>
@@ -366,12 +366,19 @@ export default function BrokerageSection() {
               className={`cursor-pointer rounded-2xl border p-8 transition-all duration-300 ${
                 active === i
                   ? "border-primary bg-primary shadow-xl shadow-primary/20"
-                  : "border-border bg-white shadow-sm hover:border-primary/30 hover:shadow-md"
+                  : "border-border bg-white shadow-sm hover:border-primary/40 hover:shadow-md"
               }`}
             >
-              <h3 className={`text-lg font-bold ${active === i ? "text-white" : "text-text"}`}>
-                {card.title}
-              </h3>
+              <div className="flex items-start justify-between gap-4">
+                <h3 className={`text-lg font-bold ${active === i ? "text-white" : "text-text"}`}>
+                  {card.title}
+                </h3>
+                <span className={`shrink-0 text-2xl leading-none font-light transition-all duration-200 ${active === i ? "text-white rotate-45" : "text-primary"}`}
+                  style={{ display: "inline-block", transform: active === i ? "rotate(45deg)" : "rotate(0deg)" }}
+                >
+                  +
+                </span>
+              </div>
               <p className={`mt-3 text-sm leading-relaxed ${active === i ? "text-blue-100" : "text-text-muted"}`}>
                 {card.body}
               </p>

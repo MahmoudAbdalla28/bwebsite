@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 export default function CredibilitySection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section className="relative py-24 md:py-32 bg-bg-alt" ref={ref}>
@@ -19,7 +19,7 @@ export default function CredibilitySection() {
         >
           <p className="text-sm font-semibold text-primary">Output</p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-text sm:text-5xl">
-            What your carrier sees
+            What your risk stakeholders see
           </h2>
         </motion.div>
 

@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 export default function PlatformSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section id="platform" className="relative py-24 md:py-32 bg-bg-alt" ref={ref}>

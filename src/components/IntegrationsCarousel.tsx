@@ -74,8 +74,8 @@ export default function IntegrationsCarousel({ category = "llm" }: { category?: 
   return (
     <section className="pt-20 pb-8 md:pt-24 md:pb-10 bg-white border-t border-border-light">
       <div className="mx-auto max-w-5xl px-6 mb-10 text-center">
-        <span className="label-pill">{c.label}</span>
-        <h3 className="mt-4 text-2xl font-bold text-text sm:text-3xl">
+        <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-primary mb-4">{c.label}</p>
+        <h3 className="text-2xl font-bold text-text sm:text-3xl">
           {c.title}
         </h3>
         <p className="mt-3 mx-auto max-w-xl text-sm leading-relaxed text-text-muted">

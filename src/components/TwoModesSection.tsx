@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 export default function TwoModesSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section className="relative py-24 md:py-32 bg-bg" ref={ref}>
@@ -16,14 +16,13 @@ export default function TwoModesSection() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mb-14"
         >
-          <span className="label-pill">Two Modes</span>
+          <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-primary mb-4">How it works</p>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-5xl">
-            Pre-bind stress testing.<br />
-            <span className="gradient-text">Post-bind runtime telemetry.</span>
+            Test before you deploy.<br />
+            <span className="gradient-text">Monitor once you do.</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
-            Two modes sharing a signal stack. One attested file any carrier
-            panel can consume.
+            Two stages that together produce a complete, documented risk picture of your AI — ready for whoever needs to evaluate it.
           </p>
         </motion.div>
 
@@ -46,22 +45,19 @@ export default function TwoModesSection() {
                 </svg>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary">Assessment</p>
-                <h3 className="mt-0.5 text-lg font-bold text-text">Pre-bind adversarial testing</h3>
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary">Stage 1</p>
+                <h3 className="mt-0.5 text-lg font-bold text-text">Test your agents before deployment</h3>
               </div>
             </div>
             <p className="text-sm leading-relaxed text-text-muted">
-              Adversarial engagements run across the underwriting cycle. Baseline,
-              quarterly passes, renewal window, and a pass on every model, prompt,
-              corpus, or tool change. Our offensive team extends the attack
-              library against every deployment we see.
+              Before going live, we stress-test your agents to surface what could go wrong — unauthorized actions, data exposure, instruction override. You get a written assessment your legal and compliance teams can sign off on.
             </p>
 
             <div className="mt-6 space-y-4">
               {[
-                { k: "Coverage", v: "Prompt injection · tool-chain composition · data exfiltration · jailbreaks" },
-                { k: "Methods", v: "Crescendo · TAP · PAIR · Evolutionary · PyRIT / Garak" },
-                { k: "Cadence", v: "Baseline · quarterly · renewal · change-triggered" },
+                { k: "What we test", v: "Unauthorized actions · data exposure · instruction override · behavioral reliability" },
+                { k: "When we test", v: "Before launch · every major update · quarterly · at renewal" },
+                { k: "What you get", v: "A written risk assessment ready for legal, compliance, and any risk stakeholder" },
               ].map((row) => (
                 <div key={row.k}>
                   <p className="text-[10px] font-semibold uppercase tracking-widest text-text-dim">{row.k}</p>
@@ -71,7 +67,7 @@ export default function TwoModesSection() {
             </div>
 
             <p className="mt-6 pt-5 border-t border-border text-[11px] text-text-dim">
-              OWASP ASI-aligned · MAESTRO-intersection coverage
+              Aligned with emerging AI security standards
             </p>
           </motion.div>
 
@@ -95,32 +91,29 @@ export default function TwoModesSection() {
                 </svg>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary">Telemetry · Our Moat</p>
-                <h3 className="mt-0.5 text-lg font-bold text-text">Post-bind behavioral telemetry</h3>
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary">Stage 2</p>
+                <h3 className="mt-0.5 text-lg font-bold text-text">Monitor what happens in production</h3>
               </div>
             </div>
             <p className="text-sm leading-relaxed text-text-muted">
-              The methods we use are published. The difficult artifact is the
-              knowledge graph framework that turns a carrier&apos;s systems of
-              record into an attestation surface. That&apos;s the load-bearing
-              piece — and the work.
+              Once deployed, Bastion watches every interaction your agents have — what they were asked, what they did, what data they touched. All of it logged locally on your infrastructure, nothing shared externally.
             </p>
 
             <div className="mt-6 space-y-4">
               {[
-                { k: "Groundedness", v: "KG entailment · FActScore-style" },
-                { k: "Authorization", v: "Hoare-triple composition" },
-                { k: "Drift", v: "Online Kernel CUSUM" },
+                { k: "What we track", v: "Data handling · action compliance · behavioral consistency · incident classification" },
+                { k: "Where it lives", v: "On your infrastructure only — no data leaves your environment" },
+                { k: "What you get", v: "A structured risk report your teams, partners, and insurers can act on" },
               ].map((row) => (
                 <div key={row.k}>
                   <p className="text-[10px] font-bold uppercase tracking-widest text-primary">{row.k}</p>
-                  <p className="mt-1 text-xs text-text-muted font-mono leading-relaxed">{row.v}</p>
+                  <p className="mt-1 text-xs text-text-muted leading-relaxed">{row.v}</p>
                 </div>
               ))}
             </div>
 
             <p className="mt-6 pt-5 border-t border-border text-[11px] text-text-dim">
-              On-premise · sub-10ms overhead · tamper-evident log
+              On-premise · no code changes required · audit-ready output
             </p>
           </motion.div>
         </div>

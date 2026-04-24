@@ -5,46 +5,46 @@ import { useRef } from "react";
 
 const personas = [
   {
-    role: "Insurance Broker",
-    scenario: "Carriers won't underwrite AI without data.",
-    answer: "Bastion generates the telemetry your carrier needs. 30 days, one report, coverage unlocked.",
+    role: "Procurement",
+    scenario: "We had the technology. Legal had the concerns. We needed a way to demonstrate controlled, documented AI deployment — and we needed it fast.",
+    answer: "Bastion generates the audit trail and policy controls legal needs to sign off. Documented evidence that your agents operate within defined boundaries — no new frameworks, no red-team engagements.",
   },
   {
-    role: "Enterprise CTO",
-    scenario: "An AI agent processed health records — we found out three days later.",
-    answer: "PII is detected and redacted at the network layer before it hits the LLM. Real-time alerts.",
+    role: "Engineering",
+    scenario: "We don't want another security dashboard to maintain. The team is already stretched. We need visibility that fits into how we actually ship.",
+    answer: "Bastion integrates where your team already works — Slack alerts on policy violations, SDK hooks in your dev environment, structured logs into your existing SIEM. No new tooling to own.",
   },
   {
-    role: "Chief Risk Officer",
-    scenario: "Legal sent back a 47-page risk assessment asking for controls we don't have.",
-    answer: "Continuous monitoring, configurable enforcement. Every metric Legal asked for, generated automatically.",
+    role: "Insurance",
+    scenario: "AI submissions with no behavioral data attached. No baseline, no incident history, nothing to evaluate against.",
+    answer: "Behavioral monitoring produces a structured telemetry report — fleet risk scores, PII exposure rates, consistency metrics, incident logs. The documented evidence your risk stakeholders need to make a decision.",
   },
 ];
 
 const highlights = [
   {
-    stat: "30",
-    unit: "days",
-    label: "Monitoring window",
-    desc: "Learn your fleet baseline before enforcing anything.",
+    stat: "0",
+    unit: "data exits",
+    label: "On-prem only",
+    desc: "All event data stays on your infrastructure. Nothing reaches us or any third party.",
+  },
+  {
+    stat: "4",
+    unit: "checks per call",
+    label: "Every interaction audited",
+    desc: "PII detection, action validation, drift scoring, and consistency check — on every call.",
   },
   {
     stat: "1",
-    unit: "binary",
-    label: "Zero dependencies",
-    desc: "Single Rust binary. No Python, no containers, no runtime.",
-  },
-  {
-    stat: "0",
-    unit: "data",
-    label: "Nothing leaves",
-    desc: "All event data stays on your infrastructure. Always.",
+    unit: "report",
+    label: "Audit-ready output",
+    desc: "A single structured file with every metric your risk stakeholders need to make a decision.",
   },
 ];
 
 export default function BuyerSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section id="solutions" className="relative pt-12 pb-24 md:pt-16 md:pb-32 bg-bg" ref={ref}>
@@ -55,8 +55,7 @@ export default function BuyerSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <span className="label-pill">Who it&apos;s for</span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-text sm:text-4xl">
             Sound <span className="gradient-text">familiar?</span>
           </h2>
         </motion.div>
@@ -72,8 +71,8 @@ export default function BuyerSection() {
               className="rounded-2xl border border-border bg-white p-7 flex flex-col gap-5 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300"
             >
               <div>
-                <span className="label-pill mb-3 inline-flex">{p.role}</span>
-                <p className="mt-3 text-base font-semibold text-text leading-snug italic">&ldquo;{p.scenario}&rdquo;</p>
+                <p className="text-xs font-medium text-text-dim uppercase tracking-widest">{p.role}</p>
+                <p className="mt-3 text-base font-semibold text-text leading-snug">&ldquo;{p.scenario}&rdquo;</p>
               </div>
               <p className="text-sm leading-relaxed text-text-muted border-t border-border pt-4">{p.answer}</p>
             </motion.div>

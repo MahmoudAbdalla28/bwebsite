@@ -14,7 +14,7 @@ const timelineData = [
 
 export default function RedPracticeTargetsSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [selectedVersion, setSelectedVersion] = useState(5);
 
   const selected = timelineData[selectedVersion];

@@ -41,7 +41,7 @@ const deploymentSteps = [
 
 export default function SolutionSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [activeMode, setActiveMode] = useState("monitor");
   const currentMode = modes.find((m) => m.id === activeMode)!;
 
@@ -59,12 +59,12 @@ export default function SolutionSection() {
         >
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">The Solution</p>
           <h2 className="mt-4 max-w-3xl text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
-            A security layer that
-            <span className="gradient-text"> carriers trust</span>
+            A security layer your
+            <span className="gradient-text"> organization can stand behind</span>
           </h2>
           <p className="mt-4 max-w-2xl text-lg text-text-muted">
             One binary between your agents and their LLM calls. Every interaction intercepted,
-            scanned, and logged — generating the actuarial data that makes coverage possible.
+            scanned, and logged — generating the documented evidence that makes AI governable.
           </p>
         </motion.div>
 

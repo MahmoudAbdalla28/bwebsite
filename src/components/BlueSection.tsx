@@ -28,7 +28,7 @@ const checkPipeline = [
 
 export default function BlueSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [activeCheck, setActiveCheck] = useState(0);
 
   return (

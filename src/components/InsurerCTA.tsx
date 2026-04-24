@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 export default function InsurerCTA() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
     <section className="relative py-20 md:py-28 bg-bg" ref={ref}>

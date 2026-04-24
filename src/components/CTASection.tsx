@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 
 export default function CTASection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [form, setForm] = useState({ name: "", email: "", organization: "", type: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
