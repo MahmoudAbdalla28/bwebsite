@@ -42,14 +42,16 @@ export default function BlueSection() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mb-14"
         >
-          <span className="label-pill">How it works</span>
+          <span className="label-pill">How It Works</span>
           <h2 className="mt-4 text-4xl font-bold tracking-tight text-text sm:text-5xl">
-            Secure every AI agent <span className="gradient-text">in production</span>
+            Secure Every AI Agent <span className="gradient-text">in Production</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
-            Reverse proxy between your agents and their LLM providers. Every request
-            and response flows through a check pipeline, gets logged locally, and
-            feeds into structured risk telemetry.
+            Webhook ingest by default. Your agents push request/response events
+            to Bastion out-of-band. Each event flows through a check pipeline,
+            is logged locally, and feeds into structured risk telemetry. Inline
+            enforcement is available as an opt-in layer when you need real-time
+            policy actions.
           </p>
         </motion.div>
 
@@ -70,37 +72,37 @@ export default function BlueSection() {
               <text x="200" y="48" fill="#64748B" fontSize="8" textAnchor="middle">No Python, no containers, no deps</text>
 
               {/* Arrow down */}
-              <line x1="200" y1="60" x2="200" y2="85" stroke="#CBD5E1" strokeWidth="1.5" />
-              <polygon points="195,80 200,90 205,80" fill="#CBD5E1" />
+              <line x1="200" y1="60" x2="200" y2="78" stroke="#CBD5E1" strokeWidth="1.5" />
+              <polygon points="195,78 200,88 205,78" fill="#CBD5E1" />
 
               {/* Config change */}
               <rect x="60" y="90" width="280" height="45" rx="10" fill="#F8FAFC" stroke="#E2E8F0" strokeWidth="1.5" />
-              <text x="200" y="110" fill="#334155" fontSize="9" fontWeight="600" textAnchor="middle">One environment variable change</text>
+              <text x="200" y="110" fill="#334155" fontSize="9" fontWeight="600" textAnchor="middle">One Environment Variable Change</text>
               <text x="200" y="125" fill="#94A3B8" fontSize="7.5" textAnchor="middle">OPENAI_API_BASE=http://bastion:8443</text>
 
               {/* Arrow down */}
-              <line x1="200" y1="135" x2="200" y2="160" stroke="#CBD5E1" strokeWidth="1.5" />
-              <polygon points="195,155 200,165 205,155" fill="#CBD5E1" />
+              <line x1="200" y1="135" x2="200" y2="153" stroke="#CBD5E1" strokeWidth="1.5" />
+              <polygon points="195,153 200,163 205,153" fill="#CBD5E1" />
 
               {/* Two modes side by side */}
               <rect x="30" y="165" width="160" height="55" rx="10" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="1" />
               <text x="110" y="187" fill="#0D6EFD" fontSize="9" fontWeight="600" textAnchor="middle">Monitor</text>
-              <text x="110" y="203" fill="#64748B" fontSize="7.5" textAnchor="middle">Log everything silently</text>
+              <text x="110" y="203" fill="#64748B" fontSize="7.5" textAnchor="middle">Log Everything Silently</text>
 
               <rect x="210" y="165" width="160" height="55" rx="10" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="1" />
               <text x="290" y="187" fill="#0D6EFD" fontSize="9" fontWeight="600" textAnchor="middle">Enforce</text>
-              <text x="290" y="203" fill="#64748B" fontSize="7.5" textAnchor="middle">Block and redact in real time</text>
+              <text x="290" y="203" fill="#64748B" fontSize="7.5" textAnchor="middle">Block and Redact in Real Time</text>
 
               {/* Arrow between modes */}
-              <line x1="190" y1="192" x2="210" y2="192" stroke="#CBD5E1" strokeWidth="1" />
-              <polygon points="206,188 214,192 206,196" fill="#CBD5E1" />
+              <line x1="190" y1="192" x2="198" y2="192" stroke="#CBD5E1" strokeWidth="1" />
+              <polygon points="198,188 208,192 198,196" fill="#CBD5E1" />
 
               {/* Both arrow down to output */}
               <line x1="110" y1="220" x2="110" y2="245" stroke="#CBD5E1" strokeWidth="1" />
               <line x1="290" y1="220" x2="290" y2="245" stroke="#CBD5E1" strokeWidth="1" />
               <line x1="110" y1="245" x2="290" y2="245" stroke="#CBD5E1" strokeWidth="1" />
-              <line x1="200" y1="245" x2="200" y2="265" stroke="#CBD5E1" strokeWidth="1.5" />
-              <polygon points="195,260 200,270 205,260" fill="#CBD5E1" />
+              <line x1="200" y1="245" x2="200" y2="258" stroke="#CBD5E1" strokeWidth="1.5" />
+              <polygon points="195,258 200,268 205,258" fill="#CBD5E1" />
 
               {/* Output */}
               <rect x="80" y="270" width="240" height="40" rx="10" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="1.5" strokeDasharray="4 3" />
@@ -113,22 +115,22 @@ export default function BlueSection() {
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="rounded-2xl border border-primary/20 bg-primary-bg p-6"
+            className="self-center rounded-2xl border border-primary/20 bg-primary-bg p-6"
           >
-            <p className="text-[11px] font-semibold uppercase tracking-widest text-primary mb-4">Frictionless Integration</p>
-            <p className="text-sm leading-relaxed text-text-muted">
+            <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-5">Frictionless Integration</p>
+            <p className="text-lg leading-relaxed text-text-muted">
               Bastion drops into your existing architecture without rebuilding agents.
             </p>
-            <div className="mt-4 space-y-2">
+            <div className="mt-6 space-y-3">
               {[
-                "Single binary deploy on your infrastructure",
-                "One endpoint change for existing agents",
-                "No SDK rewrite or model-provider lock-in",
-                "Monitor first, enforce when ready",
+                "Single Binary Deploy on Your Infrastructure",
+                "One Endpoint Change for Existing Agents",
+                "No SDK Rewrite or Model-Provider Lock-In",
+                "Monitor First, Enforce When Ready",
               ].map((item) => (
-                <div key={item} className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  <span className="text-xs text-text-muted">{item}</span>
+                <div key={item} className="flex items-start gap-3">
+                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <span className="text-base text-text-muted">{item}</span>
                 </div>
               ))}
             </div>
@@ -183,7 +185,7 @@ export default function BlueSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-6 rounded-xl border border-primary/20 bg-primary-bg p-6"
         >
-          <p className="text-sm font-semibold text-text">Fleet-wide correlation</p>
+          <p className="text-sm font-semibold text-text">Fleet-Wide Correlation</p>
           <p className="mt-2 text-sm leading-relaxed text-text-muted">
             Monitors the whole fleet, not just individual agents. If one agent starts calling tools
             no other agent has ever used, that signal is much stronger than individual baseline deviation.

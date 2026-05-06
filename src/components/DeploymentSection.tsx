@@ -59,7 +59,7 @@ export default function DeploymentSection() {
           >
             <span className="label-pill">Deployment</span>
             <h2 className="mt-5 text-4xl font-bold tracking-tight text-text sm:text-6xl leading-[1.1]">
-              One config change.<br /><span className="gradient-text">Full visibility.</span>
+              One Config Change.<br /><span className="gradient-text">Full Visibility.</span>
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-muted">
               Point your agents at Bastion instead of the provider. Your API keys pass through. Everything else stays the same.
@@ -98,11 +98,11 @@ export default function DeploymentSection() {
         <div className="mx-auto max-w-5xl px-6">
           <p className="text-sm font-semibold tracking-wide text-primary mb-2">Architecture</p>
           <h3 className="text-2xl font-semibold text-text sm:text-3xl">
-            Where your data flows
+            Where Your Data Flows
           </h3>
           <p className="mt-3 max-w-lg text-sm leading-relaxed text-text-muted">
             Everything inside the boundary runs on your infrastructure.
-            The underwriting report is the only output — aggregate risk
+            The underwriting report is the only output: aggregate risk
             metrics for your carrier.
           </p>
 
@@ -111,7 +111,7 @@ export default function DeploymentSection() {
             {/* Boundary label */}
             <div className="absolute -top-3.5 left-6 md:left-10 bg-bg-alt px-4">
               <span className="text-[11px] font-semibold uppercase tracking-widest text-primary/60">
-                Your infrastructure
+                Your Infrastructure
               </span>
             </div>
 
@@ -135,7 +135,7 @@ export default function DeploymentSection() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-text">Your AI Agents</p>
-                    <p className="text-xs text-text-dim">35+ frameworks</p>
+                    <p className="text-xs text-text-dim">35+ Frameworks</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-1.5 mt-auto">
@@ -146,7 +146,7 @@ export default function DeploymentSection() {
               </motion.div>
 
               {/* Connection: Agents → Bastion */}
-              <FlowConnection label="Requests & responses" className="md:w-16 md:min-w-[64px] shrink-0" />
+              <FlowConnection label="Requests & Responses" className="md:w-16 md:min-w-[64px] shrink-0" />
 
               {/* Bastion node — primary, larger */}
               <motion.div
@@ -163,10 +163,10 @@ export default function DeploymentSection() {
 
                   <div className="space-y-3">
                     {[
-                      { check: "PII detection & redaction", desc: "Scans requests and responses" },
-                      { check: "Tool call validation", desc: "Verifies against policy" },
-                      { check: "Behavioral analysis", desc: "Baselines and drift detection" },
-                      { check: "Policy enforcement", desc: "Block, redact, or flag" },
+                      { check: "PII Detection & Redaction", desc: "Scans requests and responses" },
+                      { check: "Tool Call Validation", desc: "Verifies against policy" },
+                      { check: "Behavioral Analysis", desc: "Baselines and drift detection" },
+                      { check: "Policy Enforcement", desc: "Block, redact, or flag" },
                     ].map((layer) => (
                       <div key={layer.check} className="flex items-start gap-3">
                         <div className="mt-1 h-2 w-2 rounded-full bg-primary/50 shrink-0" />
@@ -181,7 +181,7 @@ export default function DeploymentSection() {
               </motion.div>
 
               {/* Connection: Bastion → LLM */}
-              <FlowConnection label="Secured traffic" className="md:w-16 md:min-w-[64px] shrink-0" />
+              <FlowConnection label="Secured Traffic" className="md:w-16 md:min-w-[64px] shrink-0" />
 
               {/* LLM node */}
               <motion.div
@@ -199,7 +199,7 @@ export default function DeploymentSection() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-text">LLM Provider</p>
-                    <p className="text-xs text-text-dim">API passthrough</p>
+                    <p className="text-xs text-text-dim">API Passthrough</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-1.5 mt-auto">
@@ -222,17 +222,17 @@ export default function DeploymentSection() {
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D6EFD" strokeWidth="1.5" strokeLinecap="round">
                     <ellipse cx="12" cy="6" rx="8" ry="3" /><path d="M4 6v6c0 1.657 3.582 3 8 3s8-1.343 8-3V6" /><path d="M4 12v6c0 1.657 3.582 3 8 3s8-1.343 8-3v-6" />
                   </svg>
-                ), label: "Local SQLite", sub: "All event data" },
+                ), label: "Local SQLite", sub: "All Event Data" },
                 { icon: (
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D6EFD" strokeWidth="1.5" strokeLinecap="round">
                     <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M14 2v6h6" />
                   </svg>
-                ), label: "Audit log", sub: "Append-only" },
+                ), label: "Audit Log", sub: "Append-Only" },
                 { icon: (
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D6EFD" strokeWidth="1.5" strokeLinecap="round">
                     <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /><path d="M9 3v18" />
                   </svg>
-                ), label: "Dashboard", sub: "Internal network" },
+                ), label: "Dashboard", sub: "Internal Network" },
               ].map((item) => (
                 <div key={item.label} className="rounded-xl border border-border bg-white px-4 py-3 flex items-center gap-3">
                   <div className="shrink-0">{item.icon}</div>
@@ -283,15 +283,15 @@ export default function DeploymentSection() {
             {/* Deployment paths */}
             <div className="grid gap-px md:grid-cols-2 rounded-2xl border border-border overflow-hidden bg-border">
               <div className="bg-white p-8 md:p-10">
-                <p className="text-xs font-semibold uppercase tracking-widest text-text-dim">On-prem</p>
-                <h4 className="mt-3 text-lg font-semibold text-text">Run on your infrastructure</h4>
+                <p className="text-xs font-semibold uppercase tracking-widest text-text-dim">On-Prem</p>
+                <h4 className="mt-3 text-lg font-semibold text-text">Run on Your Infrastructure</h4>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">
                   Single compiled Rust binary. Logs to local SQLite. Dashboard on your internal network. Designed for regulated and air-gapped environments.
                 </p>
               </div>
               <div className="bg-white p-8 md:p-10">
                 <p className="text-xs font-semibold uppercase tracking-widest text-text-dim">Managed</p>
-                <h4 className="mt-3 text-lg font-semibold text-text">Run in the cloud</h4>
+                <h4 className="mt-3 text-lg font-semibold text-text">Run in the Cloud</h4>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">
                   Hosted proxy fleet with telemetry pipeline and dashboards. Point your agents at our endpoint. Both options produce identical telemetry and reports.
                 </p>
@@ -301,10 +301,10 @@ export default function DeploymentSection() {
             {/* Performance metrics */}
             <div className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                { value: "<10ms", label: "Added latency", detail: "Compiled heuristics, no LLM in the hot path" },
-                { value: "35+", label: "Frameworks supported", detail: "LangChain, CrewAI, AutoGen, Semantic Kernel, and more" },
-                { value: "PIPEDA", label: "Compliance ready", detail: "On-prem data residency, PII redaction, append-only audit" },
-                { value: "Minutes", label: "Time to deploy", detail: "Single binary, one config change" },
+                { value: "<10ms", label: "Added Latency", detail: "Compiled heuristics, no LLM in the hot path" },
+                { value: "35+", label: "Frameworks Supported", detail: "LangChain, CrewAI, AutoGen, Semantic Kernel, and more" },
+                { value: "PIPEDA", label: "Compliance Ready", detail: "On-prem data residency, PII redaction, append-only audit" },
+                { value: "Minutes", label: "Time to Deploy", detail: "Single binary, one config change" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <p className="text-3xl font-extrabold gradient-text">{stat.value}</p>

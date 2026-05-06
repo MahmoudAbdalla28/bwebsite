@@ -2,8 +2,6 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import Lottie from "lottie-react";
-import checklistData from "../../public/assets/lottie/checklist.json";
 
 const faqs = [
   {
@@ -41,16 +39,12 @@ export default function ComplianceSection() {
           >
             <span className="label-pill">Compliance &amp; Data</span>
             <h2 className="mt-4 text-4xl font-bold tracking-tight text-text sm:text-5xl">
-              Questions enterprise <span className="gradient-text">buyers ask</span>
+              Questions Enterprise <span className="gradient-text">Buyers Ask</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-text-secondary">
               Built for environments where data residency, regulatory alignment, and
               proxy security are not optional.
             </p>
-
-            <div className="mt-8">
-              <Lottie animationData={checklistData} loop className="w-full max-w-[200px]" />
-            </div>
 
             {/* Compliance badges */}
             <div className="mt-8 flex flex-wrap gap-2">

@@ -38,8 +38,8 @@ export default function RedHeroSection() {
             </p>
             <div className="mt-8 flex items-center gap-6">
               <a
-                href="#contact"
-                className="inline-flex items-center rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
+                href="/bastion/contact/"
+                className="btn-glow inline-flex items-center rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
               >
                 Run a probe
               </a>

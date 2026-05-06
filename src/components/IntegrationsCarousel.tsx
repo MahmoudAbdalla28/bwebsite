@@ -32,17 +32,17 @@ const integrations: Integration[] = [
 const copy: Record<Category, { label: string; title: string; body: string }> = {
   llm: {
     label: "LLM Compatibility",
-    title: "Works with every model provider",
-    body: "Point your agents at any major provider. Bastion sits in between, framework-agnostic, no SDK changes required.",
+    title: "Works With Every Model Provider",
+    body: "Works with every major provider. Bastion ingests agent traffic via webhook (or sits inline when enforcement is enabled), framework-agnostic, no SDK changes required.",
   },
   siem: {
     label: "Telemetry Pipeline",
-    title: "Exports into your observability stack",
+    title: "Exports Into Your Observability Stack",
     body: "Structured telemetry streams directly into your existing SIEM. Bastion writes into the tools your security team already runs.",
   },
   security: {
     label: "Security Stack",
-    title: "Sits alongside your existing controls",
+    title: "Sits Alongside Your Existing Controls",
     body: "Endpoint security, CASB, and network controls stay in place. Bastion adds the AI-specific layer they don't cover.",
   },
 };

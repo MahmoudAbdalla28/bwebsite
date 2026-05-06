@@ -2,8 +2,6 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import Lottie from "lottie-react";
-import shieldData from "../../public/assets/lottie/shield-protection.json";
 
 const metrics = [
   { label: "PII Blocked", value: "0.3%", sub: "Across 4 agents, 30 days", progress: 3 },
@@ -30,12 +28,9 @@ export default function BlueTelemetrySection() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto"
         >
-          <div className="flex justify-center mb-4">
-            <Lottie animationData={shieldData} loop className="w-24 h-24" />
-          </div>
           <span className="label-pill">Telemetry</span>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-5xl">
-            <span className="gradient-text">30 days</span> of signal, one underwriting report
+            <span className="gradient-text">30 Days</span> of Signal, One Underwriting Report
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
             Blue collects six core metrics over a 30-day monitoring window. This is the data your insurance carrier needs to actually price AI liability coverage.
@@ -77,7 +72,7 @@ export default function BlueTelemetrySection() {
         >
           <div className="flex flex-wrap items-start gap-6">
             <div className="flex-1 min-w-[200px]">
-              <p className="text-sm font-semibold text-text">The 30-day monitoring window</p>
+              <p className="text-sm font-semibold text-text">The 30-Day Monitoring Window</p>
               <p className="mt-2 text-sm leading-relaxed text-text-muted">
                 Blue runs in monitor mode first, learning your fleet's baseline behavior without interfering with operations. After 30 days, it generates a carrier-grade telemetry report with enough actuarial data for your insurance provider to price coverage confidently.
               </p>
@@ -86,7 +81,7 @@ export default function BlueTelemetrySection() {
               {["Week 1", "Week 2", "Week 3", "Week 4"].map((w, i) => (
                 <div key={w} className="text-center">
                   <div className={`h-8 w-8 rounded-lg flex items-center justify-center text-xs font-bold ${
-                    i < 3 ? "bg-primary text-white" : "border-2 border-primary/30 text-primary"
+                    i < 3 ? "border-2 border-primary/30 text-primary" : "bg-primary text-white"
                   }`}>
                     {i + 1}
                   </div>

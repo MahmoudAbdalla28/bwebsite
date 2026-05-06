@@ -21,15 +21,11 @@ export default function BlueHeroSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
             >
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-bg px-4 py-1.5">
-                <span className="h-2 w-2 rounded-full bg-primary" />
-                <span className="text-xs font-semibold text-primary">Bastion</span>
-              </div>
               <h1 className="text-5xl font-bold tracking-tight text-text sm:text-6xl">
-                Production <span className="gradient-text">defense</span> for every AI agent
+                Production <span className="gradient-text">Defense</span> for Every AI Agent
               </h1>
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-text-secondary">
-                A reverse proxy that sits between your agents and their LLM providers. <strong className="text-text font-semibold">Every request and response is inspected, logged, and scored</strong> before it touches your systems.
+                Continuous runtime visibility into every AI agent in your fleet. <strong className="text-text font-semibold">Every request and response is captured, scored, and made auditable.</strong> Out-of-band by default, with optional inline enforcement when you need it.
               </p>
             </motion.div>
 
@@ -40,7 +36,7 @@ export default function BlueHeroSection() {
               className="mt-8 flex flex-wrap items-center gap-4"
             >
               <a
-                href="#contact"
+                href="/bastion/contact/"
                 className="btn-glow inline-flex items-center rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
               >
                 Get started

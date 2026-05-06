@@ -5,40 +5,19 @@ import { useRef } from "react";
 
 const personas = [
   {
-    role: "Procurement",
-    scenario: "We had the technology. Legal had the concerns. We needed a way to demonstrate controlled, documented AI deployment — and we needed it fast.",
-    answer: "Bastion generates the audit trail and policy controls legal needs to sign off. Documented evidence that your agents operate within defined boundaries — no new frameworks, no red-team engagements.",
+    role: "Risk / Compliance Lead",
+    scenario: "Legal won't let us ship AI agents without provable controls. Annual audits aren't enough; we need re-validation every time a model or prompt changes.",
+    answer: "Bastion runs continuous attestation against your declared safeguards. Every model swap, prompt edit, or tool-chain change triggers re-validation. Tamper-evident logs your legal and risk teams can sign off on, mapped to the frameworks regulators actually ask for.",
   },
   {
     role: "Engineering",
-    scenario: "We don't want another security dashboard to maintain. The team is already stretched. We need visibility that fits into how we actually ship.",
-    answer: "Bastion integrates where your team already works — Slack alerts on policy violations, SDK hooks in your dev environment, structured logs into your existing SIEM. No new tooling to own.",
+    scenario: "We don't want another security dashboard to maintain. The team is stretched and we need visibility that fits how we actually ship.",
+    answer: "Bastion is one config change. Drop the proxy in, point your agents at it, and your fleet inherits enforcement and telemetry. No SDK rewrite, no rebuilds, no new tooling to own.",
   },
   {
-    role: "Insurance",
-    scenario: "AI submissions with no behavioral data attached. No baseline, no incident history, nothing to evaluate against.",
-    answer: "Behavioral monitoring produces a structured telemetry report — fleet risk scores, PII exposure rates, consistency metrics, incident logs. The documented evidence your risk stakeholders need to make a decision.",
-  },
-];
-
-const highlights = [
-  {
-    stat: "0",
-    unit: "data exits",
-    label: "On-prem only",
-    desc: "All event data stays on your infrastructure. Nothing reaches us or any third party.",
-  },
-  {
-    stat: "4",
-    unit: "checks per call",
-    label: "Every interaction audited",
-    desc: "PII detection, action validation, drift scoring, and consistency check — on every call.",
-  },
-  {
-    stat: "1",
-    unit: "report",
-    label: "Audit-ready output",
-    desc: "A single structured file with every metric your risk stakeholders need to make a decision.",
+    role: "Carrier / MGA Underwriter",
+    scenario: "We're being asked to write affirmative AI coverage with no actuarial baseline. Point-in-time questionnaires don't survive contact with a real agent fleet.",
+    answer: "Bastion delivers continuous, actuarial-grade telemetry across six structural dimensions of agent behavior. One attested file, consumable across your entire carrier panel. The Evidence of Control to convert silent AI exposure into affirmatively-priced coverage.",
   },
 ];
 
@@ -56,7 +35,7 @@ export default function BuyerSection() {
           className="text-center mb-14"
         >
           <h2 className="text-3xl font-bold tracking-tight text-text sm:text-4xl">
-            Sound <span className="gradient-text">familiar?</span>
+            Three Conversations. <span className="gradient-text">Same Friction.</span>
           </h2>
         </motion.div>
 
@@ -78,26 +57,6 @@ export default function BuyerSection() {
             </motion.div>
           ))}
         </div>
-
-        {/* Stats strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="grid gap-px sm:grid-cols-3 rounded-2xl border border-border overflow-hidden bg-border"
-        >
-          {highlights.map((h) => (
-            <div key={h.stat} className="bg-white px-8 py-7 flex items-center gap-5">
-              <div className="shrink-0">
-                <p className="text-4xl font-extrabold gradient-text leading-none">{h.stat}<span className="text-base font-semibold text-text-dim ml-1">{h.unit}</span></p>
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-text">{h.label}</p>
-                <p className="mt-1 text-xs text-text-muted">{h.desc}</p>
-              </div>
-            </div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

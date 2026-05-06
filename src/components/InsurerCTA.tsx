@@ -16,15 +16,15 @@ export default function InsurerCTA() {
           transition={{ duration: 0.6 }}
           className="rounded-2xl border border-primary/20 bg-primary-bg p-8 md:p-12 text-center"
         >
-          <p className="text-sm font-semibold text-primary">For Carriers and Brokers</p>
+          <p className="text-sm font-semibold text-primary">For Carriers &amp; MGAs</p>
           <h2 className="mt-3 text-2xl font-semibold tracking-tight text-text sm:text-3xl">
-            Want to shape the standard?
+            Underwrite the AI era. Affirmatively.
           </h2>
           <p className="mt-4 mx-auto max-w-xl text-base leading-relaxed text-text-secondary">
-            We're working with carriers and brokers to define what AI risk
-            telemetry should look like. If our report format becomes the one
-            underwriters accept, everyone benefits. We're looking for partners
-            who want to build this together.
+            Embed continuous AI risk telemetry into your underwriting flow.
+            Active monitoring of agentic risk across your insureds, mapped to
+            CG 40 47 / CG 40 48 buybacks, Tech E&amp;O, and Cyber lines.
+            Co-define the underwriting standard for the AI era.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a

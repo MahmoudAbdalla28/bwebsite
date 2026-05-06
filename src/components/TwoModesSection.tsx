@@ -18,11 +18,11 @@ export default function TwoModesSection() {
         >
           <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-primary mb-4">How it works</p>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-5xl">
-            Test before you deploy.<br />
-            <span className="gradient-text">Monitor once you do.</span>
+            Assess Before You Deploy.<br />
+            <span className="gradient-text">Monitor Once You Do.</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
-            Two stages that together produce a complete, documented risk picture of your AI — ready for whoever needs to evaluate it.
+            Two stages that together produce a complete, documented risk picture of your AI, ready for whoever needs to evaluate it.
           </p>
         </motion.div>
 
@@ -35,32 +35,31 @@ export default function TwoModesSection() {
             className="rounded-2xl border-2 border-primary bg-white p-8 shadow-md shadow-primary/10"
           >
             <div className="flex items-center gap-3 mb-5">
-              <div className="h-10 w-10 rounded-xl bg-primary-bg flex items-center justify-center">
-                {/* Target / probe icon */}
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D6EFD" strokeWidth="1.5" strokeLinecap="round">
+              <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round">
                   <circle cx="12" cy="12" r="9" />
                   <circle cx="12" cy="12" r="5" />
-                  <circle cx="12" cy="12" r="1.5" fill="#0D6EFD" />
+                  <circle cx="12" cy="12" r="1.5" fill="white" />
                   <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
                 </svg>
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary">Stage 1</p>
-                <h3 className="mt-0.5 text-lg font-bold text-text">Test your agents before deployment</h3>
+                <h3 className="mt-0.5 text-lg font-bold text-text">Assess Your Agents Before Deployment</h3>
               </div>
             </div>
             <p className="text-sm leading-relaxed text-text-muted">
-              Before going live, we stress-test your agents to surface what could go wrong — unauthorized actions, data exposure, instruction override. You get a written assessment your legal and compliance teams can sign off on.
+              Before going live, we stress-test your agents to surface what could go wrong: unauthorized actions, data exposure, instruction override. You get a written assessment your legal and compliance teams can sign off on.
             </p>
 
             <div className="mt-6 space-y-4">
               {[
-                { k: "What we test", v: "Unauthorized actions · data exposure · instruction override · behavioral reliability" },
-                { k: "When we test", v: "Before launch · every major update · quarterly · at renewal" },
+                { k: "What we assess", v: "Unauthorized actions · data exposure · instruction override · behavioral reliability" },
+                { k: "When we assess", v: "Before launch · every major update · quarterly · at renewal" },
                 { k: "What you get", v: "A written risk assessment ready for legal, compliance, and any risk stakeholder" },
               ].map((row) => (
                 <div key={row.k}>
-                  <p className="text-[10px] font-semibold uppercase tracking-widest text-text-dim">{row.k}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-primary">{row.k}</p>
                   <p className="mt-1 text-xs text-text-muted leading-relaxed">{row.v}</p>
                 </div>
               ))}
@@ -80,7 +79,6 @@ export default function TwoModesSection() {
           >
             <div className="flex items-center gap-3 mb-5">
               <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
-                {/* KG / constellation icon */}
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round">
                   <circle cx="6" cy="6" r="2" fill="white" />
                   <circle cx="18" cy="6" r="2" fill="white" />
@@ -92,17 +90,17 @@ export default function TwoModesSection() {
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary">Stage 2</p>
-                <h3 className="mt-0.5 text-lg font-bold text-text">Monitor what happens in production</h3>
+                <h3 className="mt-0.5 text-lg font-bold text-text">Monitor What Happens in Production</h3>
               </div>
             </div>
             <p className="text-sm leading-relaxed text-text-muted">
-              Once deployed, Bastion watches every interaction your agents have — what they were asked, what they did, what data they touched. All of it logged locally on your infrastructure, nothing shared externally.
+              Once deployed, Bastion watches every interaction your agents have: what they were asked, what they did, what data they touched. All of it logged locally on your infrastructure, nothing shared externally.
             </p>
 
             <div className="mt-6 space-y-4">
               {[
                 { k: "What we track", v: "Data handling · action compliance · behavioral consistency · incident classification" },
-                { k: "Where it lives", v: "On your infrastructure only — no data leaves your environment" },
+                { k: "Where it lives", v: "On your infrastructure only. No data leaves your environment" },
                 { k: "What you get", v: "A structured risk report your teams, partners, and insurers can act on" },
               ].map((row) => (
                 <div key={row.k}>

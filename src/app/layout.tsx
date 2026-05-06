@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Bastion | AI Liability Telematics",
+  title: "Bastion | Agentic Risk Infrastructure",
   description:
-    "The telematics layer for AI liability. Real-time risk telemetry that gets your AI deployments insured.",
+    "Bastion is Agentic Risk Infrastructure (ARI). Continuous visibility, evidence, and enforcement for production AI agents.",
   icons: {
     icon: "/favicon.png",
   },

@@ -3,58 +3,82 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const properties = [
+interface Signal {
+  title: string;
+  body: string;
+  icon: React.ReactNode;
+}
+
+const SIGNALS: Signal[] = [
   {
-    title: "Groundedness",
-    method: "KG entailment · FActScore-style",
-    insurance: "Tech E&O · Consumer Protection",
-    description: "Every claim an agent makes is checked against a knowledge graph of its actual sources. If the agent asserts something the graph doesn't contain, it fails.",
+    title: "Behavioral Baselines",
+    body: "Every agent gets a personalized fingerprint built from its operational history. Deviations from that established pattern surface continuously, well before they become visible incidents. Catches the agent that gradually starts touching tools it never used or drifting in response style. These are signals a generic threshold can't catch because every agent's normal looks different.",
     icon: (
-      <svg viewBox="0 0 64 64" className="h-full w-full" fill="none">
-        <circle cx="32" cy="16" r="5" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="1.5" />
-        <circle cx="14" cy="40" r="5" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="1.5" />
-        <circle cx="50" cy="40" r="5" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="1.5" />
-        <circle cx="32" cy="52" r="4" fill="#0D6EFD" />
-        <line x1="32" y1="21" x2="15" y2="36" stroke="#CBD5E1" strokeWidth="1.2" />
-        <line x1="32" y1="21" x2="49" y2="36" stroke="#CBD5E1" strokeWidth="1.2" />
-        <line x1="18" y1="43" x2="28" y2="49" stroke="#CBD5E1" strokeWidth="1.2" />
-        <line x1="46" y1="43" x2="36" y2="49" stroke="#CBD5E1" strokeWidth="1.2" />
-        <path d="M28 52l3 3 5-5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <svg viewBox="0 0 32 32" className="h-6 w-6 text-primary" fill="none">
+        <path d="M4 24 L10 18 L15 22 L21 12 L28 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="4" y1="24" x2="28" y2="24" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" opacity="0.5" />
+        <circle cx="21" cy="12" r="2" fill="currentColor" />
       </svg>
     ),
   },
   {
-    title: "Authorization",
-    method: "Hoare-triple composition",
-    insurance: "Privacy · Fraud",
-    description: "Tool calls are verified against policy constraints before they execute. Composed actions get checked as a whole — not just per-step — so escalation paths are caught.",
+    title: "Action Accountability",
+    body: "Every tool call validated against composed policy constraints, not just single-step checks. The read followed by a write, then a transfer, that compose into something no individual call would trip. Bastion sees the chain, not just the link.",
     icon: (
-      <svg viewBox="0 0 64 64" className="h-full w-full" fill="none">
-        <rect x="10" y="16" width="44" height="8" rx="2" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="1.5" />
-        <rect x="10" y="28" width="44" height="8" rx="2" fill="#EFF6FF" stroke="#0D6EFD" strokeWidth="1.5" />
-        <rect x="10" y="40" width="44" height="8" rx="2" fill="#0D6EFD" stroke="#0D6EFD" strokeWidth="1.5" />
-        <circle cx="16" cy="20" r="1.5" fill="#0D6EFD" />
-        <circle cx="16" cy="32" r="1.5" fill="#0D6EFD" />
-        <circle cx="16" cy="44" r="1.5" fill="white" />
-        <rect x="42" y="42" width="8" height="5" rx="1" fill="white" />
-        <path d="M44 42v-1.5a2 2 0 014 0V42" stroke="white" strokeWidth="1" fill="none" />
+      <svg viewBox="0 0 32 32" className="h-6 w-6 text-primary" fill="none">
+        <rect x="6" y="10" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="1.8" />
+        <path d="M11 10 V7 a5 5 0 0 1 10 0 V10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M12 18 L15 21 L20 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
   {
-    title: "Drift",
-    method: "Online Kernel CUSUM",
-    insurance: "Operational Technology",
-    description: "Statistical detection flags when an agent's behavior deviates from baseline — before a model update, prompt change, or slow drift produces a visible failure.",
+    title: "Data Flow Visibility",
+    body: "Sensitive data passing through any agent is identified, classified, and traced from input to output. Every redaction or block event is captured as evidence: not just 'PII detected,' but the specific field, the specific agent, the specific reason. The chain of custody underwriters and regulators ask for.",
     icon: (
-      <svg viewBox="0 0 64 64" className="h-full w-full" fill="none">
-        <path d="M6 42 L24 42 L30 42 L38 28 L46 34 L58 18" stroke="#0D6EFD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-        <line x1="6" y1="42" x2="58" y2="42" stroke="#CBD5E1" strokeWidth="1" strokeDasharray="2 2" />
-        <circle cx="38" cy="28" r="3.5" fill="#0D6EFD" />
-        <circle cx="38" cy="28" r="6" fill="#0D6EFD" fillOpacity="0.2" />
-        <circle cx="12" cy="42" r="1" fill="#CBD5E1" />
-        <circle cx="22" cy="42" r="1" fill="#CBD5E1" />
-        <circle cx="52" cy="18" r="1" fill="#CBD5E1" />
+      <svg viewBox="0 0 32 32" className="h-6 w-6 text-primary" fill="none">
+        <path d="M3 8 H29" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M3 16 H29" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M3 24 H29" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <circle cx="11" cy="8" r="2" fill="currentColor" />
+        <circle cx="20" cy="16" r="2" fill="currentColor" />
+        <circle cx="13" cy="24" r="2" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    title: "Output Groundedness",
+    body: "Each agent assertion is checked against the knowledge base it was authorized to use. Claims with no source backing are flagged as ungrounded; claims that contradict the source are flagged as hallucinated. Hallucination becomes measurable as a rate per thousand calls, not a vibe.",
+    icon: (
+      <svg viewBox="0 0 32 32" className="h-6 w-6 text-primary" fill="none">
+        <circle cx="14" cy="14" r="8" stroke="currentColor" strokeWidth="1.8" />
+        <path d="M20 20 L26 26" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M11 14 L13 16 L17 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    title: "Drift & Regression",
+    body: "Model swaps, prompt edits, vendor updates, and slow seasonal drift surface as measurable shifts long before downstream metrics decay. Catches the silent regression: the prompt change that quietly raised the hallucination rate, the model upgrade that broke a tool-call pattern, the corpus update that reshaped output distribution.",
+    icon: (
+      <svg viewBox="0 0 32 32" className="h-6 w-6 text-primary" fill="none">
+        <path d="M4 16 L12 16 L16 8 L20 24 L24 16 L28 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="4" y1="22" x2="28" y2="22" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" opacity="0.5" />
+      </svg>
+    ),
+  },
+  {
+    title: "Fleet-Wide Correlation",
+    body: "Patterns no single agent can reveal: coordinated misuse, emergent escalation chains, systemic drift across the whole fleet, visible only at scale. One agent calling a new tool is noise. Three agents in the same hour, after the same prompt update, is a signal that only a cross-agent layer can surface.",
+    icon: (
+      <svg viewBox="0 0 32 32" className="h-6 w-6 text-primary" fill="none">
+        <circle cx="16" cy="8" r="2.5" stroke="currentColor" strokeWidth="1.8" />
+        <circle cx="7" cy="22" r="2.5" stroke="currentColor" strokeWidth="1.8" />
+        <circle cx="25" cy="22" r="2.5" stroke="currentColor" strokeWidth="1.8" />
+        <circle cx="16" cy="18" r="2" fill="currentColor" />
+        <line x1="16" y1="10" x2="16" y2="16" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="9" y1="20" x2="14" y2="19" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="23" y1="20" x2="18" y2="19" stroke="currentColor" strokeWidth="1.5" />
       </svg>
     ),
   },
@@ -65,45 +89,63 @@ export default function RiskExposuresSection() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="relative py-24 md:py-32 bg-bg" ref={ref}>
-      <div className="pointer-events-none absolute inset-0 bg-dots opacity-10" />
+    <section className="relative py-28 md:py-36 bg-bg-alt overflow-hidden" ref={ref}>
+      <div className="pointer-events-none absolute inset-0 bg-dots opacity-15" />
+      <div className="pointer-events-none absolute inset-0 bg-radial-soft opacity-60" />
       <div className="relative mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-3xl font-bold tracking-tight text-text sm:text-5xl">
-            Every risk category. <span className="gradient-text">Fully documented.</span>
+          <span className="inline-block rounded-full border border-primary/20 bg-primary-bg px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-primary mb-6">
+            The Core of What Bastion Does
+          </span>
+          <h2 className="text-4xl font-extrabold tracking-tight text-text sm:text-6xl lg:text-7xl leading-[1.05]">
+            Six Signals.{" "}
+            <span className="gradient-text">One Picture of Agent Risk.</span>
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-text-secondary">
-            Bastion maps your AI agent activity to the risk categories that matter most — giving every stakeholder the evidence they need to act with confidence.
+          <p className="mt-6 text-lg leading-relaxed text-text-secondary max-w-2xl mx-auto">
+            Most AI monitoring tools see surface events. Bastion is built around <strong className="text-text font-semibold">six structural dimensions</strong> of agent behavior, mapped directly to coverage triggers and regulatory requirements.
           </p>
         </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {properties.map((p, i) => (
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {SIGNALS.map((signal, i) => (
             <motion.div
-              key={p.title}
-              initial={{ opacity: 0, y: 20 }}
+              key={signal.title}
+              initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
-              className="rounded-2xl border border-border bg-white p-8 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300"
+              transition={{ duration: 0.5, delay: 0.1 + i * 0.06 }}
+              className="group rounded-2xl border border-border bg-white p-8 shadow-sm hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-0.5 transition-all duration-300"
             >
-              <div className="h-16 w-16 mb-5">{p.icon}</div>
-              <h3 className="text-xl font-bold text-text">{p.title}</h3>
-              <p className="mt-1 text-xs font-mono text-primary">{p.method}</p>
-              <p className="mt-4 text-sm leading-relaxed text-text-muted">
-                {p.description}
-              </p>
-              <div className="mt-6 pt-4 border-t border-border">
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-text-dim">Insurance Line</p>
-                <p className="mt-1 text-sm font-medium text-text">{p.insurance}</p>
+              <div className="h-12 w-12 rounded-xl bg-primary-bg flex items-center justify-center mb-6 group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
+                <div className="h-7 w-7 flex items-center justify-center [&_svg]:h-7 [&_svg]:w-7">
+                  {signal.icon}
+                </div>
               </div>
+              <h3 className="text-lg font-bold text-text mb-3">{signal.title}</h3>
+              <p className="text-sm leading-relaxed text-text-muted">{signal.body}</p>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-14 max-w-3xl mx-auto"
+        >
+          <div className="border-t border-border pt-8 text-center">
+            <p className="text-base leading-relaxed text-text-secondary">
+              These six dimensions are not arbitrary. Each maps to a specific category of AI failure that traditional security and observability tools miss: behavioral drift, agentic action chains, data leakage paths, ungrounded outputs, model regression, and fleet-level emergence.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-text font-semibold">
+              It is the evidence layer Bastion is built around, and the layer carriers, regulators, and risk teams now require.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

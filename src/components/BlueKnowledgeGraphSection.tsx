@@ -2,8 +2,6 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import Lottie from "lottie-react";
-import shieldData from "../../public/assets/lottie/shield-protection.json";
 
 const pipelineSteps = [
   {
@@ -66,14 +64,9 @@ export default function BlueKnowledgeGraphSection() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-8 w-8">
-              <Lottie animationData={shieldData} loop className="h-8 w-8" />
-            </div>
-            <p className="text-sm font-semibold text-primary">Knowledge Graph</p>
-          </div>
-          <h2 className="text-3xl font-semibold tracking-tight text-text sm:text-5xl">
-            From policy docs to real-time enforcement
+          <span className="label-pill">Knowledge Graph</span>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-text sm:text-5xl">
+            From Policy Docs to Real-Time Enforcement
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
             Your compliance policies are not static PDFs anymore. Blue parses them into a knowledge graph and generates machine-readable constraints that get enforced on every single request.

@@ -21,7 +21,7 @@ export default function BlueBlockedActionsSection() {
         >
           <span className="label-pill">Human in the Loop</span>
           <h2 className="mt-4 text-4xl font-bold tracking-tight text-text sm:text-5xl">
-            Blocked actions <span className="gradient-text">surface for review</span>
+            Blocked Actions <span className="gradient-text">Surface for Review</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-text-secondary">
             When Bastion blocks an action, it doesn't just drop it. The full

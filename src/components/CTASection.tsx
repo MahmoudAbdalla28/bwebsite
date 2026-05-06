@@ -1,13 +1,34 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const PERSONA_PRESETS: Record<string, { type: string; message: string }> = {
+  risk: {
+    type: "Enterprise deploying AI",
+    message: "I'm on the security and compliance side, looking at continuous AI attestation that drops into our agent fleet without adding new tooling overhead.",
+  },
+  carrier: {
+    type: "Insurance carrier",
+    message: "I'm an underwriter exploring continuous, carrier-panel-ready AI risk telemetry.",
+  },
+};
 
 export default function CTASection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [form, setForm] = useState({ name: "", email: "", organization: "", type: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const persona = params.get("persona");
+    if (persona && PERSONA_PRESETS[persona]) {
+      const preset = PERSONA_PRESETS[persona];
+      setForm((prev) => ({ ...prev, type: preset.type, message: preset.message }));
+    }
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -48,7 +69,7 @@ export default function CTASection() {
             {/* Left copy */}
             <div className="p-8 md:p-12 flex flex-col justify-center">
               <h2 className="text-3xl font-semibold tracking-tight text-text sm:text-4xl">
-                Get in touch
+                Get in Touch
               </h2>
               <p className="mt-4 text-base leading-relaxed text-text-secondary">
                 AI agents need telemetry to be insurable. We build it.
@@ -63,10 +84,12 @@ export default function CTASection() {
                   </p>
                 </div>
                 <div className="rounded-xl border border-border bg-bg-alt p-4">
-                  <p className="text-sm font-semibold text-text">For carriers and brokers</p>
+                  <p className="text-sm font-semibold text-text">For carriers &amp; MGAs</p>
                   <p className="mt-1 text-xs text-text-muted">
-                    Co-define what AI risk telemetry should look like.
-                    Shape the underwriting standard for insurable AI.
+                    Continuous, actuarial-grade telemetry for AI lines. Map
+                    agentic-risk signals to affirmative policy buybacks,
+                    quantify exposure across your book, and write AI coverage
+                    with Evidence of Control, not point-in-time questionnaires.
                   </p>
                 </div>
               </div>
@@ -84,22 +107,22 @@ export default function CTASection() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="name" className="block text-xs font-medium text-text-secondary mb-1.5">Name</label>
-                      <input id="name" name="name" type="text" required value={form.name} onChange={handleChange} placeholder="Jane Smith"
+                      <input id="name" name="name" type="text" required value={form.name} onChange={handleChange} placeholder="Full Name"
                         className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-text placeholder:text-text-dim focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20" />
                     </div>
                     <div>
                       <label htmlFor="organization" className="block text-xs font-medium text-text-secondary mb-1.5">Organization</label>
-                      <input id="organization" name="organization" type="text" required value={form.organization} onChange={handleChange} placeholder="Acme Corp"
+                      <input id="organization" name="organization" type="text" required value={form.organization} onChange={handleChange} placeholder="Company Name"
                         className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-text placeholder:text-text-dim focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20" />
                     </div>
                   </div>
 
                   <div>
                     <label htmlFor="email" className="block text-xs font-medium text-text-secondary mb-1.5">Work email</label>
-                    <input id="email" name="email" type="email" required value={form.email} onChange={handleChange} placeholder="jane@company.com"
+                    <input id="email" name="email" type="email" required value={form.email} onChange={handleChange} placeholder="name@company.com"
                       className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-text placeholder:text-text-dim focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20" />
                   </div>
 
@@ -110,7 +133,8 @@ export default function CTASection() {
                       <option value="" disabled>Select</option>
                       <option value="Enterprise deploying AI">Enterprise deploying AI agents</option>
                       <option value="Insurance carrier">Insurance carrier</option>
-                      <option value="Insurance broker">Insurance broker</option>
+                      <option value="MGA">MGA</option>
+                      <option value="Risk / compliance leader">Risk / compliance leader</option>
                       <option value="Other">Other</option>
                     </select>
                   </div>

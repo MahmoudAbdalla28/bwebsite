@@ -3,46 +3,61 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 
-const faqs = [
+interface FAQItem {
+  category: string;
+  q: string;
+  a: string | string[];
+  list?: { label?: string; body: string }[];
+}
+
+const faqs: FAQItem[] = [
   {
-    category: "Deployment",
-    q: "How long does deployment take?",
-    a: "Most teams are up and running in under an hour. Bastion deploys as a single binary on your infrastructure. Point your agents at it with one environment variable — no code changes, no rebuilds, no new SDK dependencies.",
+    category: "Governance",
+    q: 'How does Bastion define "acceptable" behavior for my agents?',
+    a: "We use a Policy-as-Code engine that aligns with global standards (NIST AI RMF, ISO 42001) and your specific business logic. Bastion automatically builds a Knowledge Graph of your LLM's tool calls and API signatures.",
+    list: [
+      { label: "Cold Start", body: "Onboarding is instant." },
+      { label: "Learning Phase", body: "Bastion observes traffic for 10–14 days to baseline normal behavior before enforcement begins." },
+    ],
   },
   {
     category: "Deployment",
-    q: "Do we need to modify our AI agents?",
-    a: "No. Bastion operates as a transparent proxy. Your agents continue calling their existing LLM endpoints — you update one environment variable to route traffic through Bastion. No SDK changes, no application-layer modifications.",
+    q: "Is Bastion invasive?",
+    a: [
+      "No. By default, Bastion shadows your agentic systems with zero impact on latency or privacy. Telemetry is sent to a Bastion webhook endpoint: your application (or a lightweight sidecar) pushes agent traffic to Bastion asynchronously. Bastion never sits in the request path. Zero changes to your API data path.",
+      "For customers who require active enforcement, Bastion can additionally operate as an inline gateway: a sovereign proxy with light latency overhead, typically 5 to 250ms depending on the layers of security applied. This is the kill switch carriers require for high-stakes agents, available as an opt-in layer on top of the shadow mode.",
+    ],
   },
   {
-    category: "Data & Privacy",
-    q: "Does any data leave our infrastructure?",
-    a: "Zero. Bastion is entirely on-premise. All event data, telemetry, and reports are generated and stored within your environment. Nothing is transmitted to Bastion or any third party — by architecture, not policy.",
+    category: "Deployment",
+    q: "How long does it actually take to onboard?",
+    a: "Minutes for inline gateway: point your traffic at the Bastion endpoint and you're enforced. Shadow mode adds host agent rollout for full payload visibility.",
   },
   {
-    category: "Coverage",
-    q: "Which AI providers and frameworks does Bastion support?",
-    a: "Bastion works with every major LLM provider — OpenAI, Anthropic, AWS Bedrock, Google Vertex AI, Azure OpenAI, Ollama, and LiteLLM. It is framework-agnostic and compatible with LangChain, LlamaIndex, and any custom agent implementation that makes standard HTTP API calls.",
+    category: "Insurance",
+    q: "What insurance lines does Bastion help unlock?",
+    a: "Bastion's telemetry maps to five coverage lines, with different impact in each. The Insurance Nexus page details the cell-by-cell mapping; the summary:",
+    list: [
+      { label: "Cyber", body: "Primary lever. Satisfies 2026 AI Security Rider testing mandates, blocks PII exfiltration in real time, and supplies the continuous-underwriting telemetry feeding modern cyber-risk pricing." },
+      { label: "Tech E&O", body: "Densest column. Continuous attestation against declared safeguards, hallucination-class loss reduction, and admissible evidence for E&O claims defense." },
+      { label: "Professional Indemnity", body: "Bias and fairness testing, guideline-grounded outputs, and decision audit logs that support duty-of-care defense in disparate-impact and negligent-advice claims." },
+      { label: "Product Liability", body: "Cryptographic chain-of-custody for AI decisions on physical systems, supplementing functional-safety stacks for industrial and med-tech AI." },
+      { label: "CGL", body: "Buy-back support for the new generative AI exclusions on Coverage B (defamation, advertising injury, output-side privacy violations)." },
+    ],
   },
   {
-    category: "The Report",
-    q: "What does the telemetry report contain?",
-    a: "The report includes a fleet risk score, PII exposure rates with full remediation history, behavioral consistency metrics over a rolling 30-day window, a classified incident log, and a summary recommendation for risk stakeholders. Every metric is traceable to its source events.",
+    category: "Insurance",
+    q: "What is the ROI?",
+    a: "Bastion turns uninsurable agents into standard risk assets.",
+    list: [
+      { label: "For Founders", body: 'Shorter sales cycles with enterprise clients who demand "sovereign governance."' },
+      { label: "For Risk Managers", body: "Lower premiums through verifiable, real-time loss-prevention data." },
+    ],
   },
   {
-    category: "Data & Privacy",
-    q: "How does Bastion handle sensitive and regulated data?",
-    a: "Bastion scans every agent interaction for PII and sensitive data before it reaches the LLM. Detected content is redacted or blocked based on your policy configuration. All detections are logged with full remediation records — every flagged event is documented.",
-  },
-  {
-    category: "The Report",
-    q: "What compliance frameworks does the output support?",
-    a: "The telemetry report is structured to support AI risk frameworks including NIST AI RMF, EU AI Act documentation requirements, and standard enterprise information security audit processes. It provides the documented evidence that risk, legal, and compliance teams need to act.",
-  },
-  {
-    category: "Coverage",
-    q: "How is Bastion different from prompt guardrails?",
-    a: "Prompt guardrails filter content at the application layer and must be integrated into each agent individually. Bastion operates at the infrastructure layer — across your entire fleet, without touching any agent. It adds behavioral drift detection, tool call validation, cross-agent correlation, and structured audit reporting that guardrail libraries do not provide.",
+    category: "Data Sovereignty",
+    q: "Does my data stay sovereign?",
+    a: "Always. Bastion stores telemetry in AES-256 encrypted vaults. We do not use your data to train models, and we do not have visibility into the raw payload unless specifically configured for forensic auditing. Your data remains your moat.",
   },
 ];
 
@@ -52,7 +67,7 @@ export default function FAQSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="relative py-24 md:py-32 bg-bg-alt border-t border-border-light" ref={ref}>
+    <section id="faq" className="relative py-24 md:py-32 bg-bg-alt border-t border-border-light scroll-mt-20" ref={ref}>
       <div className="relative mx-auto max-w-3xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,11 +77,11 @@ export default function FAQSection() {
         >
           <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-primary mb-5">FAQ</p>
           <h2 className="text-3xl font-bold tracking-tight text-text sm:text-5xl">
-            Questions we get{" "}
-            <span className="gradient-text">every time.</span>
+            Common Questions.{" "}
+            <span className="gradient-text">Direct Answers.</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
-            If yours isn&apos;t here, reach out — we respond within 24 hours.
+            For questions not addressed here, contact our team directly.
           </p>
         </motion.div>
 
@@ -109,9 +124,26 @@ export default function FAQSection() {
                     transition={{ duration: 0.25, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <p className="pb-6 text-sm leading-relaxed text-text-muted">
-                      {faq.a}
-                    </p>
+                    <div className="pb-6 space-y-3">
+                      {(Array.isArray(faq.a) ? faq.a : [faq.a]).map((para, pi) => (
+                        <p key={pi} className="text-sm leading-relaxed text-text-muted">{para}</p>
+                      ))}
+                      {faq.list && (
+                        <ul className="space-y-2.5 pl-1">
+                          {faq.list.map((item, idx) => (
+                            <li key={idx} className="flex gap-3 text-sm leading-relaxed text-text-muted">
+                              <span className="mt-2 h-1 w-1 rounded-full bg-primary shrink-0" />
+                              <p>
+                                {item.label && (
+                                  <span className="font-semibold text-text">{item.label}: </span>
+                                )}
+                                {item.body}
+                              </p>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>

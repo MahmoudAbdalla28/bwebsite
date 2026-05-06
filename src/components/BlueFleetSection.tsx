@@ -52,10 +52,10 @@ export default function BlueFleetSection() {
         >
           <span className="label-pill">Fleet Intelligence</span>
           <h2 className="mt-4 text-4xl font-bold tracking-tight text-text sm:text-5xl">
-            One compromised agent <span className="gradient-text">looks normal alone</span>
+            One Compromised Agent <span className="gradient-text">Looks Normal Alone</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-text-secondary">
-            Each agent builds its own baseline. Bastion watches all of them together — when one starts doing something no other agent has ever done, that signal is impossible to miss.
+            Each agent builds its own baseline. Bastion watches all of them together. When one starts doing something no other agent has ever done, that signal is impossible to miss.
           </p>
         </motion.div>
 
@@ -70,7 +70,7 @@ export default function BlueFleetSection() {
               className={`rounded-xl border p-5 transition-all duration-300 ${
                 agent.status === "divergent"
                   ? "border-primary/50 bg-primary-bg shadow-md shadow-primary/10"
-                  : "border-border bg-white shadow-sm hover:shadow-md hover:border-primary/20"
+                  : "border-primary/50 bg-primary-bg shadow-md shadow-primary/10"
               }`}
             >
               <div className="flex items-center justify-between mb-3">
@@ -87,11 +87,7 @@ export default function BlueFleetSection() {
                 {agent.tools.map((t) => (
                   <span
                     key={t}
-                    className={`rounded px-2 py-0.5 text-[10px] font-mono ${
-                      agent.status === "divergent" && t === "delete_record"
-                        ? "bg-primary text-white font-semibold"
-                        : "bg-bg-alt text-text-dim"
-                    }`}
+                    className="rounded px-2 py-0.5 text-[10px] font-mono bg-bg-alt text-text-dim"
                   >
                     {t}
                   </span>
