@@ -1825,7 +1825,7 @@ function AttestationReport() {
         {/* Document — scrollable */}
         <div
           ref={contentRef}
-          className="md:col-span-9 max-h-[640px] md:max-h-[680px] overflow-y-auto"
+          className="md:col-span-9 max-h-[640px] md:max-h-[680px] overflow-y-auto relative"
         >
           {SECTIONS.map((s) => (
             <article
