@@ -20,7 +20,7 @@ export default function RedHeroSection() {
             transition={{ duration: 0.6 }}
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-bg p-2.5">
+              <div className="flex h-12 w-12 items-center justify-center rounded-sm bg-red-bg p-2.5">
                 <svg viewBox="1 0 22 26" className="h-full w-full" fill="none" stroke="#DC2626" strokeWidth="1.5">
                   <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" strokeLinecap="round" />
                   <path d="M12 8v4M12 16h.01" strokeLinecap="round" />
@@ -39,7 +39,7 @@ export default function RedHeroSection() {
             <div className="mt-8 flex items-center gap-6">
               <a
                 href="/bastion/contact/"
-                className="btn-glow inline-flex items-center rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
+                className="btn-glow inline-flex items-center rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
               >
                 Run a probe
               </a>

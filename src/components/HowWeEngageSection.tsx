@@ -74,7 +74,7 @@ export default function HowWeEngageSection() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="relative py-24 md:py-32 bg-white border-t border-border-light" ref={ref}>
+    <section className="relative py-24 md:py-32 bg-surface border-t border-border-light" ref={ref}>
       <div className="mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -111,13 +111,13 @@ export default function HowWeEngageSection() {
                 className="relative flex flex-col items-center text-center"
               >
                 {/* Number circle */}
-                <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white border-2 border-primary shadow-sm">
+                <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-surface border-2 border-primary shadow-sm">
                   <span className="text-sm font-bold text-primary">{step.number}</span>
                 </div>
 
                 {/* Card */}
-                <div className="mt-6 rounded-2xl border border-border bg-bg p-6 w-full h-full">
-                  <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-primary-bg text-primary mx-auto mb-4">
+                <div className="mt-6 rounded-sm border border-border bg-bg p-6 w-full h-full">
+                  <div className="flex items-center justify-center h-10 w-10 rounded-sm bg-primary-bg text-primary mx-auto mb-4">
                     {step.icon}
                   </div>
                   <h3 className="text-base font-bold text-text mb-3">

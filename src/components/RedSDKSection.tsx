@@ -73,9 +73,9 @@ export default function RedSDKSection() {
                   initial={{ opacity: 0, x: -15 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                  className="flex gap-4 rounded-xl border border-border bg-white p-5"
+                  className="flex gap-4 rounded-sm border border-border bg-surface p-5"
                 >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-bg">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-primary-bg">
                     <span className="text-sm font-bold text-primary">{step.num}</span>
                   </div>
                   <div>
@@ -93,7 +93,7 @@ export default function RedSDKSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="rounded-xl border border-border bg-white overflow-hidden">
+            <div className="rounded-sm border border-border bg-surface overflow-hidden">
               <div className="flex items-center gap-2 border-b border-border px-4 py-3 bg-bg-alt">
                 <span className="h-3 w-3 rounded-full bg-border" />
                 <span className="h-3 w-3 rounded-full bg-border" />
@@ -111,7 +111,7 @@ export default function RedSDKSection() {
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="mt-6 rounded-xl border border-border bg-white p-5"
+              className="mt-6 rounded-sm border border-border bg-surface p-5"
             >
               <p className="text-sm font-semibold text-text">Findings accumulate</p>
               <p className="mt-2 text-sm leading-relaxed text-text-muted">
@@ -126,7 +126,7 @@ export default function RedSDKSection() {
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="mt-3 rounded-xl border border-red/15 bg-red-bg p-5"
+              className="mt-3 rounded-sm border border-red/15 bg-red-bg p-5"
             >
               <p className="text-sm font-semibold text-red">Switching tools means starting from zero</p>
               <p className="mt-2 text-sm leading-relaxed text-text-muted">

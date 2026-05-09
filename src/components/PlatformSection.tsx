@@ -41,7 +41,7 @@ export default function PlatformSection() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="flex justify-center mb-8"
         >
-          <div className="relative inline-flex items-center rounded-full border border-border bg-white p-1 shadow-sm">
+          <div className="relative inline-flex items-center rounded-full border border-border bg-surface p-1 shadow-sm">
             <motion.span
               className="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-full bg-primary"
               initial={false}
@@ -88,7 +88,7 @@ export default function PlatformSection() {
           initial={{ opacity: 0, y: 25 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="rounded-2xl border border-border bg-white p-8 md:p-10 mb-14 shadow-lg shadow-primary/5"
+          className="rounded-sm border border-border bg-surface p-8 md:p-10 mb-14 shadow-lg shadow-primary/5"
         >
           {mode === "observe" ? <ObserveDiagram /> : <EnforceDiagram />}
         </motion.div>
@@ -99,7 +99,7 @@ export default function PlatformSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3 }}
-            className="flex-1 rounded-2xl sm:rounded-r-none border border-border bg-white p-6"
+            className="flex-1 rounded-sm sm:rounded-r-none border border-border bg-surface p-6"
           >
             <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim">Monitor</p>
             <h3 className="mt-3 text-lg font-semibold text-text">See Everything</h3>
@@ -118,7 +118,7 @@ export default function PlatformSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4 }}
-            className="flex-1 rounded-2xl sm:rounded-none border border-border bg-white p-6"
+            className="flex-1 rounded-sm sm:rounded-none border border-border bg-surface p-6"
           >
             <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim">Enforce</p>
             <h3 className="mt-3 text-lg font-semibold text-text">Act On It</h3>
@@ -137,7 +137,7 @@ export default function PlatformSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.5 }}
-            className="flex-1 rounded-2xl sm:rounded-l-none border border-border bg-white p-6"
+            className="flex-1 rounded-sm sm:rounded-l-none border border-border bg-surface p-6"
           >
             <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim">Validate</p>
             <h3 className="mt-3 text-lg font-semibold text-text">Prove It</h3>

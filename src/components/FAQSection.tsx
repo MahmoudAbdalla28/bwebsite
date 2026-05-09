@@ -59,6 +59,20 @@ const faqs: FAQItem[] = [
     q: "Does my data stay sovereign?",
     a: "Always. Bastion stores telemetry in AES-256 encrypted vaults. We do not use your data to train models, and we do not have visibility into the raw payload unless specifically configured for forensic auditing. Your data remains your moat.",
   },
+  {
+    category: "Data Sovereignty",
+    q: "Do you train on my data, or sell it to anyone?",
+    a: [
+      "No. Bastion does not train AI models on your data, does not sell your data, and does not share or syndicate it to third parties. Period.",
+      "Our \"Aggregated Risk Telemetry\" and the Knowledge Graph that produces Day-Zero protection are built from anonymized, structural failure classes — adversarial probe results and policy-violation taxonomies — never from customer payloads, prompts, or model outputs. Your raw data never leaves your environment unless you specifically configure it to for forensic auditing.",
+    ],
+    list: [
+      { label: "No model training", body: "We do not use your traffic, prompts, outputs, or telemetry to train, fine-tune, or evaluate any AI model — ours or anyone else's." },
+      { label: "No data sale", body: "Customer data is not a product. We don't sell or syndicate it under any branding, partnership, or research arrangement." },
+      { label: "Ecosystem learning is structural", body: "When we identify an emerging \"Agentic Failure Class,\" we share the failure pattern (e.g., \"voice-agent tool-chain composition attack\") — not the customer who surfaced it, and not their data." },
+      { label: "Your environment, your keys", body: "Telemetry stays in AES-256 encrypted vaults under your tenancy boundary. Forensic visibility is contract-bound and opt-in." },
+    ],
+  },
 ];
 
 export default function FAQSection() {

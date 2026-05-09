@@ -76,12 +76,12 @@ export default function SolutionSection() {
           className="mt-16"
         >
           {/* Mode Toggle */}
-          <div className="inline-flex rounded-xl border border-border bg-white p-1">
+          <div className="inline-flex rounded-sm border border-border bg-surface p-1">
             {modes.map((mode) => (
               <button
                 key={mode.id}
                 onClick={() => setActiveMode(mode.id)}
-                className={`cursor-pointer rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-200 ${
+                className={`cursor-pointer rounded-sm px-6 py-3 text-sm font-semibold transition-all duration-200 ${
                   activeMode === mode.id
                     ? "bg-bg text-text shadow-lg"
                     : "text-text-muted hover:text-text"
@@ -110,7 +110,7 @@ export default function SolutionSection() {
             className="mt-8 grid gap-6 md:grid-cols-2"
           >
             {/* Description */}
-            <div className="rounded-2xl border border-border/50 bg-white p-8">
+            <div className="rounded-sm border border-border/50 bg-surface p-8">
               <p className="text-lg leading-relaxed text-text-muted">
                 {currentMode.description}
               </p>
@@ -128,7 +128,7 @@ export default function SolutionSection() {
             </div>
 
             {/* Visual */}
-            <div className="rounded-2xl border border-border/50 bg-white p-6">
+            <div className="rounded-sm border border-border/50 bg-surface p-6">
               <svg viewBox="0 0 400 280" className="w-full" fill="none">
                 {/* Terminal-style header */}
                 <rect x="0" y="0" width="400" height="280" rx="12" fill="#0F172A" />
@@ -212,7 +212,7 @@ export default function SolutionSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
-                className="group relative rounded-2xl border border-border/50 bg-white p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+                className="group relative rounded-sm border border-border/50 bg-surface p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
               >
                 <span className="text-4xl font-extrabold text-surface-light group-hover:text-primary/20 transition-colors duration-300">
                   {step.step}

@@ -297,10 +297,10 @@ export default function ComplianceAlignmentSection() {
               <button
                 key={f.id}
                 onClick={() => selectFramework(f.id)}
-                className={`flex flex-col items-start gap-1 rounded-xl border p-4 text-left transition-all duration-200 cursor-pointer ${
+                className={`flex flex-col items-start gap-1 rounded-sm border p-4 text-left transition-all duration-200 cursor-pointer ${
                   isActive
                     ? "border-primary bg-primary-bg shadow-md shadow-primary/10"
-                    : "border-border bg-white hover:border-primary/30 hover:shadow-sm"
+                    : "border-border bg-surface hover:border-primary/30 hover:shadow-sm"
                 }`}
               >
                 <span
@@ -326,7 +326,7 @@ export default function ComplianceAlignmentSection() {
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="rounded-2xl border border-border bg-white p-8 md:p-10 shadow-sm overflow-hidden"
+          className="rounded-sm border border-border bg-surface p-8 md:p-10 shadow-sm overflow-hidden"
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -364,10 +364,10 @@ export default function ComplianceAlignmentSection() {
                   return (
                     <div
                       key={idx}
-                      className={`rounded-xl border transition-all duration-200 ${
+                      className={`rounded-sm border transition-all duration-200 ${
                         isOpen
                           ? "border-primary/40 bg-primary-bg/30"
-                          : "border-border bg-white hover:border-primary/20"
+                          : "border-border bg-surface hover:border-primary/20"
                       }`}
                     >
                       <button
@@ -460,7 +460,7 @@ export default function ComplianceAlignmentSection() {
         >
           <a
             href="/bastion/contact/"
-            className="btn-glow inline-flex items-center gap-2 rounded-xl bg-primary px-7 py-4 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
+            className="btn-glow inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-4 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
           >
             Talk to us about your compliance posture
             <svg viewBox="0 0 16 12" className="h-3 w-4" fill="none">

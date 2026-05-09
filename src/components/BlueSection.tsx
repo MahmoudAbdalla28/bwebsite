@@ -62,7 +62,7 @@ export default function BlueSection() {
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-2xl border border-border bg-white p-6"
+            className="rounded-sm border border-border bg-surface p-6"
           >
             <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim mb-4">Architecture</p>
             <svg viewBox="0 0 400 320" className="w-full" fill="none">
@@ -115,7 +115,7 @@ export default function BlueSection() {
             initial={{ opacity: 0, y: 15 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="self-center rounded-2xl border border-primary/20 bg-primary-bg p-6"
+            className="self-center rounded-sm border border-primary/20 bg-primary-bg p-6"
           >
             <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-5">Frictionless Integration</p>
             <p className="text-lg leading-relaxed text-text-muted">
@@ -150,10 +150,10 @@ export default function BlueSection() {
               <button
                 key={check.name}
                 onClick={() => setActiveCheck(i)}
-                className={`cursor-pointer rounded-xl px-4 py-3 text-left transition-all duration-200 ${
+                className={`cursor-pointer rounded-sm px-4 py-3 text-left transition-all duration-200 ${
                   activeCheck === i
-                    ? "bg-white border border-primary/20 shadow-sm"
-                    : "bg-white/50 border border-border hover:border-primary/20"
+                    ? "bg-surface border border-primary/20 shadow-sm"
+                    : "bg-surface/50 border border-border hover:border-primary/20"
                 }`}
               >
                 <p className={`text-sm font-semibold ${activeCheck === i ? "text-primary" : "text-text-muted"}`}>
@@ -168,11 +168,11 @@ export default function BlueSection() {
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}
-            className="rounded-xl border border-border bg-white p-6"
+            className="rounded-sm border border-border bg-surface p-6"
           >
             <p className="text-base font-semibold text-text">{checkPipeline[activeCheck].name}</p>
             <p className="mt-2 text-sm leading-relaxed text-text-muted">{checkPipeline[activeCheck].desc}</p>
-            <div className="mt-3 rounded-lg bg-primary-bg px-3 py-1.5 inline-block">
+            <div className="mt-3 rounded-sm bg-primary-bg px-3 py-1.5 inline-block">
               <span className="text-xs font-medium text-primary">Feeds: {checkPipeline[activeCheck].metric}</span>
             </div>
           </motion.div>
@@ -183,7 +183,7 @@ export default function BlueSection() {
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-6 rounded-xl border border-primary/20 bg-primary-bg p-6"
+          className="mt-6 rounded-sm border border-primary/20 bg-primary-bg p-6"
         >
           <p className="text-sm font-semibold text-text">Fleet-Wide Correlation</p>
           <p className="mt-2 text-sm leading-relaxed text-text-muted">

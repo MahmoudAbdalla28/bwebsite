@@ -75,7 +75,7 @@ export default function WhatThisMeansSection() {
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6 rounded-2xl border border-border bg-white p-2"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6 rounded-sm border border-border bg-surface p-2"
         >
           {PERSONAS.map((p) => {
             const isActive = active === p.id;
@@ -83,7 +83,7 @@ export default function WhatThisMeansSection() {
               <button
                 key={p.id}
                 onClick={() => setActive(p.id)}
-                className={`relative flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                className={`relative flex items-center justify-center gap-2.5 px-4 py-3 rounded-sm text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   isActive
                     ? "bg-primary-bg text-primary shadow-sm"
                     : "text-text-muted hover:text-text hover:bg-bg-alt"
@@ -103,7 +103,7 @@ export default function WhatThisMeansSection() {
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="rounded-2xl border border-border bg-white p-8 md:p-10 shadow-sm overflow-hidden md:h-[26rem]"
+          className="rounded-sm border border-border bg-surface p-8 md:p-10 shadow-sm overflow-hidden md:h-[26rem]"
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -159,7 +159,7 @@ export default function WhatThisMeansSection() {
         >
           <a
             href={`/bastion/contact/?persona=${persona.id}`}
-            className="btn-glow inline-flex items-center gap-2 rounded-xl bg-primary px-7 py-4 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
+            className="btn-glow inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-4 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
           >
             Continue this conversation
             <svg viewBox="0 0 16 12" className="h-3 w-4" fill="none">

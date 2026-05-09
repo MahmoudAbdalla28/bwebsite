@@ -30,7 +30,12 @@ const QUESTIONS: Question[] = [
   {
     id: "human-in-loop",
     type: "choice",
-    prompt: "Does your agent operate with a human in the loop, or does it have direct write access to external APIs and databases?",
+    prompt: "Does your agent operate with a human in the loop?",
+  },
+  {
+    id: "direct-write-access",
+    type: "choice",
+    prompt: "Does your agent have direct write access to external APIs and databases?",
   },
   {
     id: "ai-endorsement",
@@ -165,17 +170,26 @@ export default function FreeAssessmentSection() {
   const canAdvance = currentAnswer !== undefined && currentAnswer !== "";
   const isLast = step === QUESTIONS.length - 1;
 
+  const advanceFrom = (questionStep: number) => {
+    if (questionStep === QUESTIONS.length - 1) {
+      setSubmitted(true);
+    } else {
+      setStep(questionStep + 1);
+    }
+  };
+
   const setAnswer = (value: AnswerValue) => {
+    const currentStep = step;
     setAnswers((prev) => ({ ...prev, [current.id]: value }));
+    if (current.type === "choice") {
+      // Auto-advance after a brief pause so the selection is visible
+      setTimeout(() => advanceFrom(currentStep), 220);
+    }
   };
 
   const next = () => {
     if (!canAdvance) return;
-    if (isLast) {
-      setSubmitted(true);
-    } else {
-      setStep((s) => s + 1);
-    }
+    advanceFrom(step);
   };
 
   const back = () => {
@@ -192,7 +206,7 @@ export default function FreeAssessmentSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="rounded-3xl border border-border bg-white p-10 md:p-14 shadow-lg shadow-primary/5 text-center"
+            className="rounded-sm border border-border bg-surface p-10 md:p-14 shadow-lg shadow-primary/5 text-center"
           >
             <p className="text-xs font-mono uppercase tracking-[0.18em] text-primary mb-4">
               Free Assessment
@@ -201,11 +215,11 @@ export default function FreeAssessmentSection() {
               See Where You <span className="gradient-text">Stand</span>
             </h2>
             <p className="mt-5 text-base md:text-lg leading-relaxed text-text-secondary max-w-2xl mx-auto">
-              Six questions. Two minutes. Get a snapshot of your AI coverage posture and where the gaps your carrier cares about actually are.
+              Seven questions. Two minutes. Get a snapshot of your AI coverage posture and where the gaps your carrier cares about actually are.
             </p>
             <button
               onClick={startAssessment}
-              className="btn-glow mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-7 py-4 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
+              className="btn-glow mt-8 inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-4 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
             >
               Start free assessment
               <svg viewBox="0 0 16 12" className="h-3 w-4" fill="none">
@@ -246,7 +260,7 @@ export default function FreeAssessmentSection() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 10 }}
               transition={{ duration: 0.22, ease: "easeOut" }}
-              className="relative z-10 w-full max-w-xl rounded-3xl border border-border bg-white shadow-2xl shadow-primary/10"
+              className="relative z-10 w-full max-w-xl rounded-sm border border-border bg-surface shadow-2xl shadow-primary/10"
               role="dialog"
               aria-modal="true"
               aria-labelledby="assessment-title"
@@ -270,7 +284,6 @@ export default function FreeAssessmentSection() {
                       <span>
                         Question {step + 1} of {QUESTIONS.length}
                       </span>
-                      <span className="text-primary">Free Assessment</span>
                     </div>
                     <div className="h-1.5 w-full bg-bg-alt rounded-full overflow-hidden">
                       <motion.div
@@ -306,10 +319,10 @@ export default function FreeAssessmentSection() {
                               <button
                                 key={choice}
                                 onClick={() => setAnswer(choice)}
-                                className={`w-full flex items-center justify-between rounded-xl border px-5 py-4 text-left text-sm font-medium transition-all cursor-pointer ${
+                                className={`w-full flex items-center justify-between rounded-sm border px-5 py-4 text-left text-sm font-medium transition-all cursor-pointer ${
                                   selected
                                     ? "border-primary bg-primary-bg text-primary shadow-sm"
-                                    : "border-border bg-white text-text hover:border-primary/40 hover:bg-bg-alt/60"
+                                    : "border-border bg-surface text-text hover:border-primary/40 hover:bg-bg-alt/60"
                                 }`}
                               >
                                 <span>{CHOICE_LABELS[choice]}</span>
@@ -340,12 +353,12 @@ export default function FreeAssessmentSection() {
                               onClick={() => setDropdownOpen((v) => !v)}
                               aria-haspopup="listbox"
                               aria-expanded={dropdownOpen}
-                              className={`w-full flex items-center justify-between rounded-xl border px-5 py-4 text-left text-sm font-medium transition-all cursor-pointer ${
+                              className={`w-full flex items-center justify-between rounded-sm border px-5 py-4 text-left text-sm font-medium transition-all cursor-pointer ${
                                 dropdownOpen
-                                  ? "border-primary bg-white shadow-sm"
+                                  ? "border-primary bg-surface shadow-sm"
                                   : currentAnswer
                                     ? "border-primary bg-primary-bg text-primary shadow-sm"
-                                    : "border-border bg-white text-text-muted hover:border-primary/40 hover:bg-bg-alt/60"
+                                    : "border-border bg-surface text-text-muted hover:border-primary/40 hover:bg-bg-alt/60"
                               }`}
                             >
                               <span className={currentAnswer ? "" : "text-text-dim"}>
@@ -373,7 +386,7 @@ export default function FreeAssessmentSection() {
                                   animate={{ opacity: 1, y: 0 }}
                                   exit={{ opacity: 0, y: -6 }}
                                   transition={{ duration: 0.15 }}
-                                  className="absolute left-0 right-0 top-full mt-2 z-20 rounded-xl border border-border bg-white shadow-lg max-h-[16rem] overflow-y-auto py-1.5"
+                                  className="absolute left-0 right-0 top-full mt-2 z-20 rounded-sm border border-border bg-surface shadow-lg max-h-[16rem] overflow-y-auto py-1.5"
                                   role="listbox"
                                 >
                                   {current.options.map((opt) => {
@@ -434,7 +447,7 @@ export default function FreeAssessmentSection() {
                     <button
                       onClick={next}
                       disabled={!canAdvance}
-                      className={`inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition-all ${
+                      className={`inline-flex items-center gap-2 rounded-sm px-6 py-3 text-sm font-semibold transition-all ${
                         canAdvance
                           ? "bg-primary text-white hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99] cursor-pointer"
                           : "bg-bg-alt text-text-dim cursor-not-allowed"
@@ -469,7 +482,7 @@ export default function FreeAssessmentSection() {
                   </p>
                   <button
                     onClick={closeModal}
-                    className="mt-7 rounded-xl border border-border bg-white px-7 py-3 text-sm font-semibold text-text-muted hover:bg-bg-alt hover:text-text transition-colors cursor-pointer"
+                    className="mt-7 rounded-sm border border-border bg-surface px-7 py-3 text-sm font-semibold text-text-muted hover:bg-bg-alt hover:text-text transition-colors cursor-pointer"
                   >
                     Close
                   </button>
@@ -499,7 +512,7 @@ export default function FreeAssessmentSection() {
                           value={form.name}
                           onChange={handleFormChange}
                           placeholder="Full Name"
-                          className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-text placeholder:text-text-dim focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                          className="w-full rounded-sm border border-border bg-surface px-4 py-3 text-sm text-text placeholder:text-text-dim focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                         />
                       </div>
                       <div>
@@ -512,7 +525,7 @@ export default function FreeAssessmentSection() {
                           value={form.organization}
                           onChange={handleFormChange}
                           placeholder="Company Name"
-                          className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-text placeholder:text-text-dim focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                          className="w-full rounded-sm border border-border bg-surface px-4 py-3 text-sm text-text placeholder:text-text-dim focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                         />
                       </div>
                     </div>
@@ -527,7 +540,7 @@ export default function FreeAssessmentSection() {
                         value={form.email}
                         onChange={handleFormChange}
                         placeholder="name@company.com"
-                        className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-text placeholder:text-text-dim focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                        className="w-full rounded-sm border border-border bg-surface px-4 py-3 text-sm text-text placeholder:text-text-dim focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                       />
                     </div>
 
@@ -540,14 +553,14 @@ export default function FreeAssessmentSection() {
                         onChange={handleFormChange}
                         rows={3}
                         placeholder="Anything you'd like us to know..."
-                        className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm text-text placeholder:text-text-dim focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none"
+                        className="w-full rounded-sm border border-border bg-surface px-4 py-3 text-sm text-text placeholder:text-text-dim focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none"
                       />
                     </div>
 
                     <button
                       type="submit"
                       disabled={status === "sending"}
-                      className="w-full cursor-pointer rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white hover:bg-primary-dark transition-all disabled:opacity-50"
+                      className="w-full cursor-pointer rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-white hover:bg-primary-dark transition-all disabled:opacity-50"
                     >
                       {status === "sending" ? "Sending..." : status === "error" ? "Try again" : "Request a briefing"}
                     </button>

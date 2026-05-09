@@ -56,7 +56,7 @@ export default function WhyUsSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.08 }}
-              className="rounded-xl border border-border bg-white p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300 group"
+              className="rounded-sm border border-border bg-surface p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300 group"
             >
               <p className="text-3xl font-extrabold gradient-text leading-none mb-4">{p.number}</p>
               <h3 className="text-base font-bold text-text mb-2 group-hover:text-primary transition-colors duration-300">

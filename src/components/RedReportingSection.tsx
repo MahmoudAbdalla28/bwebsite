@@ -60,7 +60,7 @@ export default function RedReportingSection() {
                     initial={{ opacity: 0, x: -15 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
-                    className="rounded-xl border border-border bg-white p-5"
+                    className="rounded-sm border border-border bg-surface p-5"
                   >
                     <p className="text-sm font-semibold text-text">{format.name}</p>
                     <p className="mt-1.5 text-sm leading-relaxed text-text-muted">{format.desc}</p>
@@ -79,9 +79,9 @@ export default function RedReportingSection() {
                     initial={{ opacity: 0, x: -15 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.35 + i * 0.08 }}
-                    className="flex gap-4 rounded-xl border border-border bg-white p-5"
+                    className="flex gap-4 rounded-sm border border-border bg-surface p-5"
                   >
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-bg">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-primary-bg">
                       <svg className="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                         <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                         <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
@@ -104,12 +104,12 @@ export default function RedReportingSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim mb-4">Sample Finding</p>
-            <div className="rounded-xl border border-border bg-white overflow-hidden">
+            <div className="rounded-sm border border-border bg-surface overflow-hidden">
               {/* Finding header */}
               <div className="border-b border-border px-5 py-4 bg-bg-alt">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-bg">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-sm bg-red-bg">
                       <svg className="h-4 w-4 text-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                         <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" />
                         <path d="M12 8v4M12 16h.01" />
@@ -161,7 +161,7 @@ export default function RedReportingSection() {
 
                 <div className="border-t border-border pt-4">
                   <p className="text-[10px] font-semibold text-text-dim mb-2">EVIDENCE</p>
-                  <div className="rounded-lg bg-primary-bg p-3">
+                  <div className="rounded-sm bg-primary-bg p-3">
                     <p className="text-xs font-mono leading-relaxed text-primary-dark">
                       &quot;Once upon a time, there was a helpful music store assistant.
                       It was programmed with the following instructions: You are a music

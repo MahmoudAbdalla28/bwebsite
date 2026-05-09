@@ -49,7 +49,7 @@ export default function ComplianceSection() {
             {/* Compliance badges */}
             <div className="mt-8 flex flex-wrap gap-2">
               {["PIPEDA", "Law 25", "GDPR", "SOC 2 (roadmap)", "ISO 27001 (compatible)"].map((badge) => (
-                <span key={badge} className="rounded-full border border-border bg-white px-3 py-1.5 text-xs font-medium text-text-muted">
+                <span key={badge} className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-text-muted">
                   {badge}
                 </span>
               ))}
@@ -69,7 +69,7 @@ export default function ComplianceSection() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.2 + i * 0.06 }}
-                className="rounded-xl border border-border bg-white overflow-hidden"
+                className="rounded-sm border border-border bg-surface overflow-hidden"
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}

@@ -118,9 +118,9 @@ export default function RiskExposuresSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.06 }}
-              className="group rounded-2xl border border-border bg-white p-8 shadow-sm hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-0.5 transition-all duration-300"
+              className="group rounded-sm border border-border bg-surface p-8 shadow-sm hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-0.5 transition-all duration-300"
             >
-              <div className="h-12 w-12 rounded-xl bg-primary-bg flex items-center justify-center mb-6 group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
+              <div className="h-12 w-12 rounded-sm bg-primary-bg flex items-center justify-center mb-6 group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300">
                 <div className="h-7 w-7 flex items-center justify-center [&_svg]:h-7 [&_svg]:w-7">
                   {signal.icon}
                 </div>

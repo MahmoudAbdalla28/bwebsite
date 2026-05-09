@@ -35,7 +35,7 @@ export default function BlueBlockedActionsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="rounded-2xl border border-border bg-white shadow-lg shadow-black/5 overflow-hidden mb-10"
+          className="rounded-sm border border-border bg-surface shadow-lg shadow-black/5 overflow-hidden mb-10"
         >
           {/* Card header */}
           <div className="flex items-center justify-between border-b border-border px-6 py-3 bg-bg-alt">
@@ -64,21 +64,21 @@ export default function BlueBlockedActionsSection() {
               </div>
             </div>
 
-            <div className="rounded-lg bg-bg-alt border border-border p-3 text-xs text-text-muted mb-4">
+            <div className="rounded-sm bg-bg-alt border border-border p-3 text-xs text-text-muted mb-4">
               Agent attempted to call <span className="font-mono text-primary">delete_patient_record</span> with record_id: MRN-4821.
               Destructive operations on patient records require explicit clinician authorization.
               No authorization reference was present in the request context.
             </div>
 
             {overrideClicked ? (
-              <div className="rounded-lg bg-primary-bg border border-primary/10 p-3 flex items-center gap-2">
+              <div className="rounded-sm bg-primary-bg border border-primary/10 p-3 flex items-center gap-2">
                 <svg viewBox="0 0 24 24" className="h-4 w-4 text-primary shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M20 6L9 17l-5-5" /></svg>
                 <p className="text-xs font-semibold text-primary">Override logged with admin identity and timestamp. Action released.</p>
               </div>
             ) : (
               <button
                 onClick={() => setOverrideClicked(true)}
-                className="cursor-pointer rounded-lg border border-border px-4 py-2 text-xs font-semibold text-text-muted transition-all hover:border-primary/20 hover:text-primary"
+                className="cursor-pointer rounded-sm border border-border px-4 py-2 text-xs font-semibold text-text-muted transition-all hover:border-primary/20 hover:text-primary"
               >
                 Admin Override
               </button>
@@ -112,7 +112,7 @@ export default function BlueBlockedActionsSection() {
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.4 + i * 0.08 }}
-              className="rounded-xl border border-border bg-white p-5 text-center"
+              className="rounded-sm border border-border bg-surface p-5 text-center"
             >
               <p className="text-sm font-semibold text-text">{item.title}</p>
               <p className="mt-2 text-xs leading-relaxed text-text-muted">{item.desc}</p>

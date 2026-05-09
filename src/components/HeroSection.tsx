@@ -7,7 +7,7 @@ const ParticleNetwork = dynamic(() => import("./ParticleNetwork"), { ssr: false 
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-white">
+    <section className="relative overflow-hidden bg-surface">
       <div className="absolute inset-0 hidden md:block">
         <ParticleNetwork />
       </div>
@@ -45,7 +45,7 @@ export default function HeroSection() {
         >
           <a
             href="#brokerages"
-            className="btn-glow rounded-lg bg-primary px-7 py-3.5 text-base font-semibold text-white transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            className="btn-glow rounded-sm bg-primary px-7 py-3.5 text-base font-semibold text-white transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
           >
             For Brokerages
           </a>

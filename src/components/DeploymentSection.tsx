@@ -48,7 +48,7 @@ export default function DeploymentSection() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="relative bg-white" ref={ref}>
+    <section className="relative bg-surface" ref={ref}>
       {/* Header */}
       <div className="pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="mx-auto max-w-4xl px-6">
@@ -78,7 +78,7 @@ export default function DeploymentSection() {
               { label: "Anthropic", env: "ANTHROPIC_BASE_URL", val: "http://bastion:8443" },
               { label: "LangChain", env: "base_url", val: '"http://bastion:8443"' },
             ].map((ex) => (
-              <div key={ex.label} className="rounded-xl border border-border bg-bg-alt p-5">
+              <div key={ex.label} className="rounded-sm border border-border bg-bg-alt p-5">
                 <p className="text-[10px] font-semibold uppercase tracking-widest text-text-dim mb-3">{ex.label}</p>
                 <p className="font-mono text-xs text-text-secondary">{ex.env}<span className="text-text-dim">=</span></p>
                 <p className="font-mono text-xs text-primary-dark mt-0.5">{ex.val}</p>
@@ -107,7 +107,7 @@ export default function DeploymentSection() {
           </p>
 
           {/* ── Infrastructure boundary ── */}
-          <div className="mt-14 relative rounded-2xl border-2 border-dashed border-primary/20 p-6 md:p-10">
+          <div className="mt-14 relative rounded-sm border-2 border-dashed border-primary/20 p-6 md:p-10">
             {/* Boundary label */}
             <div className="absolute -top-3.5 left-6 md:left-10 bg-bg-alt px-4">
               <span className="text-[11px] font-semibold uppercase tracking-widest text-primary/60">
@@ -123,10 +123,10 @@ export default function DeploymentSection() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.3 }}
-                className="flex-1 rounded-2xl border border-border bg-white p-6 md:p-8 flex flex-col justify-center"
+                className="flex-1 rounded-sm border border-border bg-surface p-6 md:p-8 flex flex-col justify-center"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="h-10 w-10 rounded-xl bg-bg-alt flex items-center justify-center">
+                  <div className="h-10 w-10 rounded-sm bg-bg-alt flex items-center justify-center">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round">
                       <rect x="4" y="4" width="16" height="16" rx="4" />
                       <circle cx="9" cy="11" r="1" /><circle cx="15" cy="11" r="1" />
@@ -153,7 +153,7 @@ export default function DeploymentSection() {
                 initial={{ opacity: 0, scale: 0.97 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.4 }}
-                className="flex-[1.4] rounded-2xl border-2 border-primary bg-white p-6 md:p-8 relative overflow-hidden"
+                className="flex-[1.4] rounded-sm border-2 border-primary bg-surface p-6 md:p-8 relative overflow-hidden"
               >
                 {/* Subtle radial glow */}
                 <div className="pointer-events-none absolute inset-0 bg-radial-soft opacity-60" />
@@ -188,10 +188,10 @@ export default function DeploymentSection() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.5 }}
-                className="flex-1 rounded-2xl border border-border bg-white p-6 md:p-8 flex flex-col justify-center"
+                className="flex-1 rounded-sm border border-border bg-surface p-6 md:p-8 flex flex-col justify-center"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="h-10 w-10 rounded-xl bg-bg-alt flex items-center justify-center">
+                  <div className="h-10 w-10 rounded-sm bg-bg-alt flex items-center justify-center">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round">
                       <circle cx="12" cy="12" r="8" />
                       <path d="M12 8v4l2 2" />
@@ -234,7 +234,7 @@ export default function DeploymentSection() {
                   </svg>
                 ), label: "Dashboard", sub: "Internal Network" },
               ].map((item) => (
-                <div key={item.label} className="rounded-xl border border-border bg-white px-4 py-3 flex items-center gap-3">
+                <div key={item.label} className="rounded-sm border border-border bg-surface px-4 py-3 flex items-center gap-3">
                   <div className="shrink-0">{item.icon}</div>
                   <div>
                     <p className="text-xs font-medium text-text">{item.label}</p>
@@ -257,7 +257,7 @@ export default function DeploymentSection() {
               <FlowDot direction="down" />
             </div>
 
-            <div className="rounded-2xl border border-primary/20 bg-white p-6 md:p-8 w-full max-w-md text-center">
+            <div className="rounded-sm border border-primary/20 bg-surface p-6 md:p-8 w-full max-w-md text-center">
               <div className="inline-flex items-center gap-2 mb-2">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D6EFD" strokeWidth="1.5" strokeLinecap="round">
                   <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M14 2v6h6" /><path d="M9 15l2 2 4-4" />
@@ -281,15 +281,15 @@ export default function DeploymentSection() {
             transition={{ duration: 0.6, delay: 0.35 }}
           >
             {/* Deployment paths */}
-            <div className="grid gap-px md:grid-cols-2 rounded-2xl border border-border overflow-hidden bg-border">
-              <div className="bg-white p-8 md:p-10">
+            <div className="grid gap-px md:grid-cols-2 rounded-sm border border-border overflow-hidden bg-border">
+              <div className="bg-surface p-8 md:p-10">
                 <p className="text-xs font-semibold uppercase tracking-widest text-text-dim">On-Prem</p>
                 <h4 className="mt-3 text-lg font-semibold text-text">Run on Your Infrastructure</h4>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">
                   Single compiled Rust binary. Logs to local SQLite. Dashboard on your internal network. Designed for regulated and air-gapped environments.
                 </p>
               </div>
-              <div className="bg-white p-8 md:p-10">
+              <div className="bg-surface p-8 md:p-10">
                 <p className="text-xs font-semibold uppercase tracking-widest text-text-dim">Managed</p>
                 <h4 className="mt-3 text-lg font-semibold text-text">Run in the Cloud</h4>
                 <p className="mt-3 text-sm leading-relaxed text-text-muted">

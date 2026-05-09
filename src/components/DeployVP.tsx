@@ -70,7 +70,7 @@ export default function DeployVP() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.25 + i * 0.08 }}
-                className="rounded-xl border border-border bg-white p-5"
+                className="rounded-sm border border-border bg-surface p-5"
               >
                 <p className="text-[10px] font-semibold uppercase tracking-widest text-text-dim mb-3">{s.label}</p>
                 <p className="font-mono text-xs text-text-secondary">{s.env}<span className="text-text-dim">=</span></p>

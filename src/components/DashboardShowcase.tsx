@@ -123,7 +123,7 @@ export default function DashboardShowcase() {
   return (
     <div ref={ref} className="relative">
       {/* Browser chrome */}
-      <div className="rounded-2xl border border-border bg-white shadow-2xl shadow-black/10 overflow-hidden">
+      <div className="rounded-sm border border-border bg-surface shadow-2xl shadow-black/10 overflow-hidden">
         {/* Title bar */}
         <div className="flex items-center gap-2 border-b border-border px-4 py-3 bg-bg-alt">
           <div className="flex gap-1.5">
@@ -132,7 +132,7 @@ export default function DashboardShowcase() {
             <span className="h-3 w-3 rounded-full bg-border" />
           </div>
           <div className="flex-1 mx-8">
-            <div className="mx-auto max-w-sm rounded-md bg-white border border-border px-3 py-1 text-[11px] text-text-dim text-center font-mono">
+            <div className="mx-auto max-w-sm rounded-md bg-surface border border-border px-3 py-1 text-[11px] text-text-dim text-center font-mono">
               demo.pistonsolutions.ai/bastion-blue
             </div>
           </div>
@@ -145,7 +145,7 @@ export default function DashboardShowcase() {
             {["Fleet Overview", "Live Telemetry", "Safety Metrics", "Event Log", "Policy Config"].map((item, i) => (
               <div
                 key={item}
-                className={`rounded-lg px-3 py-2 text-xs font-medium ${
+                className={`rounded-sm px-3 py-2 text-xs font-medium ${
                   i === 0 ? "bg-primary-bg text-primary" : "text-text-muted"
                 }`}
               >
@@ -169,7 +169,7 @@ export default function DashboardShowcase() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.1 + i * 0.1 }}
-                  className="rounded-xl border border-border bg-white p-3"
+                  className="rounded-sm border border-border bg-surface p-3"
                 >
                   <p className="text-[10px] font-medium text-text-dim">{m.label}</p>
                   <p className="mt-1 text-xl font-bold text-text">{m.value}</p>
@@ -186,7 +186,7 @@ export default function DashboardShowcase() {
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : {}}
                   transition={{ delay: 0.5 }}
-                  className="rounded-xl border border-border bg-white p-4"
+                  className="rounded-sm border border-border bg-surface p-4"
                 >
                   <p className="text-[10px] font-semibold text-text-dim mb-2">RISK SCORE (14D)</p>
                   <MiniChart data={timelineData} active={isInView} />
@@ -200,7 +200,7 @@ export default function DashboardShowcase() {
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={isInView ? { opacity: 1, scale: 1 } : {}}
                       transition={{ delay: 0.8 + i * 0.12 }}
-                      className="rounded-xl border border-border bg-white p-3"
+                      className="rounded-sm border border-border bg-surface p-3"
                     >
                       <div className="flex items-center gap-2 mb-2">
                         <motion.span
@@ -233,7 +233,7 @@ export default function DashboardShowcase() {
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ delay: 0.6 }}
-                className="rounded-xl border border-border bg-white p-4 overflow-hidden"
+                className="rounded-sm border border-border bg-surface p-4 overflow-hidden"
               >
                 <p className="text-[10px] font-semibold text-text-dim mb-3">LIVE EVENT FEED</p>
                 <div className="space-y-2">
@@ -243,7 +243,7 @@ export default function DashboardShowcase() {
                       initial={{ opacity: 0, x: 10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="flex items-start gap-2 rounded-lg bg-bg-alt px-3 py-2"
+                      className="flex items-start gap-2 rounded-sm bg-bg-alt px-3 py-2"
                     >
                       <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                       <div className="min-w-0">

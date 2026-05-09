@@ -45,7 +45,7 @@ export default function BlueTelemetrySection() {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.15 + i * 0.08 }}
-              className="rounded-xl border border-border bg-white p-5"
+              className="rounded-sm border border-border bg-surface p-5"
             >
               <p className="text-[10px] font-semibold uppercase tracking-wider text-text-dim">{m.label}</p>
               <p className="mt-2 text-2xl font-extrabold gradient-text">{m.value}</p>
@@ -68,7 +68,7 @@ export default function BlueTelemetrySection() {
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-8 rounded-xl border border-primary/20 bg-primary-bg p-6"
+          className="mt-8 rounded-sm border border-primary/20 bg-primary-bg p-6"
         >
           <div className="flex flex-wrap items-start gap-6">
             <div className="flex-1 min-w-[200px]">
@@ -80,7 +80,7 @@ export default function BlueTelemetrySection() {
             <div className="flex items-center gap-3 shrink-0">
               {["Week 1", "Week 2", "Week 3", "Week 4"].map((w, i) => (
                 <div key={w} className="text-center">
-                  <div className={`h-8 w-8 rounded-lg flex items-center justify-center text-xs font-bold ${
+                  <div className={`h-8 w-8 rounded-sm flex items-center justify-center text-xs font-bold ${
                     i < 3 ? "border-2 border-primary/30 text-primary" : "bg-primary text-white"
                   }`}>
                     {i + 1}

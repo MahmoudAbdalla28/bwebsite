@@ -14,7 +14,7 @@ export default function InsurerCTA() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="rounded-2xl border border-primary/20 bg-primary-bg p-8 md:p-12 text-center"
+          className="rounded-sm border border-primary/20 bg-primary-bg p-8 md:p-12 text-center"
         >
           <p className="text-sm font-semibold text-primary">For Carriers &amp; MGAs</p>
           <h2 className="mt-3 text-2xl font-semibold tracking-tight text-text sm:text-3xl">
@@ -29,7 +29,7 @@ export default function InsurerCTA() {
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="mailto:info@pistonsolutions.ai"
-              className="rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-dark transition-all cursor-pointer"
+              className="rounded-sm bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary-dark transition-all cursor-pointer"
             >
               info@pistonsolutions.ai
             </a>

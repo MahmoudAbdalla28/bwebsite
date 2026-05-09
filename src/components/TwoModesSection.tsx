@@ -32,10 +32,10 @@ export default function TwoModesSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="rounded-2xl border-2 border-primary bg-white p-8 shadow-md shadow-primary/10"
+            className="rounded-sm border-2 border-primary bg-surface p-8 shadow-md shadow-primary/10"
           >
             <div className="flex items-center gap-3 mb-5">
-              <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
+              <div className="h-10 w-10 rounded-sm bg-primary flex items-center justify-center">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round">
                   <circle cx="12" cy="12" r="9" />
                   <circle cx="12" cy="12" r="5" />
@@ -75,10 +75,10 @@ export default function TwoModesSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="rounded-2xl border-2 border-primary bg-white p-8 shadow-md shadow-primary/10"
+            className="rounded-sm border-2 border-primary bg-surface p-8 shadow-md shadow-primary/10"
           >
             <div className="flex items-center gap-3 mb-5">
-              <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
+              <div className="h-10 w-10 rounded-sm bg-primary flex items-center justify-center">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round">
                   <circle cx="6" cy="6" r="2" fill="white" />
                   <circle cx="18" cy="6" r="2" fill="white" />

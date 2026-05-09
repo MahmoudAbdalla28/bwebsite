@@ -61,14 +61,14 @@ export default function RedStrategySection() {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
-              className="rounded-xl border border-border bg-white overflow-hidden"
+              className="rounded-sm border border-border bg-surface overflow-hidden"
             >
               <button
                 onClick={() => setExpanded(expanded === i ? null : i)}
                 className="flex w-full items-center justify-between p-5 text-left cursor-pointer"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-bg">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-red-bg">
                     <span className="text-sm font-bold text-red">{i + 1}</span>
                   </div>
                   <div>

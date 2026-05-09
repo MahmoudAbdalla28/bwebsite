@@ -1,251 +1,317 @@
 "use client";
 
-import { useState, useRef, Fragment } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
+import {
+  motion,
+  useInView,
+  useMotionValue,
+  useTransform,
+  animate,
+} from "framer-motion";
 
-/* Bold numbers (and adjacent units like "30 days") inside a string */
-function boldNumbers(text: string) {
-  const splitRegex = /(\d+(?:[.,]\d+)?(?:\s*(?:days?|hours?|ms|%|x))?)/g;
-  return text.split(splitRegex).map((part, i) =>
-    /^\d/.test(part)
-      ? <strong key={i} className="font-bold text-text">{part}</strong>
-      : <Fragment key={i}>{part}</Fragment>
-  );
+const SANS = "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif";
+const MONO = "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif";
+
+type MetricValue = number | "endorsed";
+
+interface Metric {
+  value: MetricValue;
+  label: string;
 }
 
 interface CaseStudy {
   id: string;
   title: string;
   client: string;
-  briefing: string;
-  results: string[];
+  sector: string;
+  metrics: [Metric, Metric, Metric];
   tags: string[];
-  images?: { src: string; alt: string }[];
-  href?: string;
+  href: string;
 }
 
 const studies: CaseStudy[] = [
   {
     id: "01",
-    title: "Solving the AI Coverage Cliff in Industrial Production",
-    client: "MEBA (Advanced Manufacturing)",
-    briefing:
-      "As MEBA moved toward an AI-augmented production model, new generative AI exclusions threatened to void their CGL policy for any agentic error. Bastion was deployed as the technical underwriting layer covering runtime enforcement, knowledge graph governance, and continuous adversarial assessment, providing the structured evidence MEBA's insurer required to issue an affirmative AI endorsement.",
-    results: [
-      "42 governance policies converted into enforced technical rules",
-      "14 agentic-drift incidents intercepted and contained over 30 days",
-      "Affirmative AI endorsement issued; exclusions bought back at renewal",
+    title: "Solving the AI coverage cliff in industrial production.",
+    client: "MEBA",
+    sector: "Advanced Manufacturing",
+    metrics: [
+      {
+        value: 42,
+        label: "governance policies converted into enforced technical rules",
+      },
+      {
+        value: 14,
+        label: "agentic-drift incidents intercepted in 30 days",
+      },
+      {
+        value: "endorsed",
+        label:
+          "Affirmative AI endorsement issued; exclusions bought back at renewal",
+      },
     ],
     tags: ["Industrial AI", "Insurtech", "CGL Continuity", "Runtime Enforcement"],
     href: "/bastion/case-studies/meba/",
   },
 ];
 
+function CountUp({
+  to,
+  inView,
+  delay = 0,
+}: {
+  to: number;
+  inView: boolean;
+  delay?: number;
+}) {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (v) => Math.floor(v));
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(count, to, {
+      duration: 1.6,
+      delay,
+      ease: [0.22, 1, 0.36, 1],
+    });
+    return () => controls.stop();
+  }, [inView, to, delay, count]);
+
+  return <motion.span>{rounded}</motion.span>;
+}
+
 export default function CaseStudiesSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [open, setOpen] = useState<CaseStudy | null>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <>
-      <section id="case-studies" className="relative py-24 md:py-32 bg-bg border-t border-border-light scroll-mt-20" ref={ref}>
-        <div className="mx-auto max-w-7xl px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-6"
-          >
-            <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-primary mb-4">Case Studies</p>
-              <h2 className="text-3xl font-bold tracking-tight text-text sm:text-5xl max-w-2xl">
-                Documented Outcomes.{" "}
-                <span className="gradient-text">In the Field.</span>
-              </h2>
-            </div>
-            <a
-              href="/bastion/contact/"
-              className="hidden md:inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-text-dim hover:text-primary transition-colors"
+    <section
+      id="case-studies"
+      className="relative py-24 md:py-32 scroll-mt-20"
+      ref={ref}
+      style={{ fontFamily: SANS }}
+    >
+      <div className="mx-auto max-w-7xl px-6">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 gap-6"
+        >
+          <div className="max-w-3xl">
+            <p
+              className="text-[11px] font-semibold uppercase tracking-[0.28em] text-blue-700 mb-5"
+              style={{ fontFamily: MONO }}
             >
-              Request full archive
-              <svg viewBox="0 0 16 12" className="h-3 w-4" fill="none">
-                <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
-          </motion.div>
-
-          <div className="grid gap-6">
-            {studies.map((study, i) => (
-              <motion.div
-                key={study.id}
-                initial={{ opacity: 0, y: 12 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.1 + i * 0.06 }}
-                onClick={() => {
-                  if (study.href) window.location.href = study.href;
-                  else setOpen(study);
-                }}
-                className="group cursor-pointer rounded-2xl border border-border bg-white p-8 md:p-10 hover:border-primary/40 hover:shadow-lg hover:-translate-y-0.5 transition-all"
-              >
-                {/* Top: Ref + tags */}
-                <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-                  <span className="text-xs font-bold uppercase tracking-[0.15em] text-text-dim">
-                    Case · {study.id}
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {study.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-text-muted bg-bg-alt border border-border group-hover:border-primary/30 group-hover:text-primary transition-colors"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Client */}
-                <p className="text-xs font-bold uppercase tracking-[0.15em] text-primary mb-4">
-                  {study.client}
-                </p>
-
-                {/* Title */}
-                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-text group-hover:text-primary transition-colors leading-[1.15] mb-8 max-w-3xl">
-                  {study.title}
-                </h3>
-
-                {/* Outcomes grid */}
-                <div className="grid sm:grid-cols-3 gap-6 pt-6 border-t border-border">
-                  {study.results.slice(0, 3).map((res, idx) => (
-                    <div key={idx} className="flex items-start gap-3">
-                      <span className="text-sm font-bold text-primary shrink-0 mt-0.5">
-                        0{idx + 1}
-                      </span>
-                      <p className="text-base text-text-secondary leading-relaxed">
-                        {boldNumbers(res)}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* CTA */}
-                <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
-                  <span className="text-sm font-bold uppercase tracking-[0.15em] text-text-dim group-hover:text-primary transition-colors">
-                    Read Full Study
-                  </span>
-                  <span className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-text-muted group-hover:bg-primary group-hover:border-primary group-hover:text-white transition-all">
-                    <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none">
-                      <path d="M5 11L11 5M11 5H6M11 5V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+              Case Studies
+            </p>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-[-0.025em] leading-[1.04] text-gray-900">
+              Documented outcomes.{" "}
+              <span className="text-blue-600 italic font-medium">In the field.</span>
+            </h2>
           </div>
-        </div>
-      </section>
-
-      {/* Detail Modal */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={() => setOpen(null)}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+          <a
+            href="/bastion/contact/"
+            className="group inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-gray-500 hover:text-blue-600 transition-colors"
+            style={{ fontFamily: MONO }}
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.97, y: 10 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-white border border-border rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-y-auto shadow-2xl shadow-primary/10"
+            Request full archive
+            <svg
+              viewBox="0 0 16 12"
+              className="h-3 w-4 transition-transform group-hover:translate-x-1"
+              fill="none"
             >
-              {/* Header band */}
-              <div className="relative px-8 pt-8 pb-6 border-b border-border bg-bg-alt">
-                <div className="flex items-start justify-between gap-6">
-                  <div className="min-w-0">
-                    <span className="inline-block px-2 py-1 text-[10px] font-mono bg-primary text-white uppercase tracking-widest">
-                      Case File · {open.client}
-                    </span>
-                    <h3 className="mt-3 text-2xl md:text-3xl font-bold text-text tracking-tight uppercase leading-tight">
-                      {open.title}
-                    </h3>
-                  </div>
-                  <button
-                    onClick={() => setOpen(null)}
-                    className="shrink-0 h-9 w-9 rounded-full border border-border bg-white flex items-center justify-center text-text-muted hover:text-text hover:border-text transition-colors"
-                    aria-label="Close"
+              <path
+                d="M0 6h13M9 1l5 5-5 5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
+          </a>
+        </motion.div>
+
+        {/* Studies */}
+        <div className="space-y-10 md:space-y-14">
+          {studies.map((study, i) => (
+            <motion.a
+              key={study.id}
+              href={study.href}
+              initial={{ opacity: 0, y: 60, scale: 0.96, rotate: -0.4 }}
+              animate={
+                inView ? { opacity: 1, y: 0, scale: 1, rotate: 0 } : {}
+              }
+              transition={{
+                duration: 1,
+                delay: 0.2 + i * 0.15,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              whileHover={{
+                y: -8,
+                transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+              }}
+              className="group relative block overflow-hidden rounded-3xl border border-gray-200/60 bg-white/70 backdrop-blur-xl shadow-xl shadow-blue-500/5 hover:shadow-blue-500/20 hover:bg-white p-10 md:p-16 lg:p-20 transition-all duration-500"
+            >
+              {/* Top row: tags */}
+              <div className="relative flex flex-wrap gap-1.5 justify-end mb-14 md:mb-20">
+                {study.tags.map((tag, idx) => (
+                  <motion.span
+                    key={tag}
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    transition={{
+                      duration: 0.55,
+                      delay: 0.75 + idx * 0.08,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-700 bg-blue-50/80 border border-blue-100 px-3 py-1.5 rounded-full"
+                    style={{ fontFamily: MONO }}
                   >
-                    <svg viewBox="0 0 16 16" className="h-4 w-4" fill="none">
-                      <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                    </svg>
-                  </button>
-                </div>
+                    {tag}
+                  </motion.span>
+                ))}
               </div>
 
-              <div className="p-8 space-y-8">
-                {open.images && open.images.length > 0 && (
-                  <div className={`grid gap-3 ${open.images.length > 1 ? "sm:grid-cols-2" : "grid-cols-1"}`}>
-                    {open.images.map((img) => (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        key={img.src}
-                        src={img.src}
-                        alt={img.alt}
-                        className="w-full rounded-lg border border-border bg-bg-alt object-cover"
-                        loading="lazy"
-                      />
-                    ))}
-                  </div>
-                )}
-                <div className="grid md:grid-cols-3 gap-8">
-                  <div className="md:col-span-2 space-y-3">
-                    <h4 className="font-mono text-[10px] uppercase text-primary tracking-widest border-b border-border pb-2">
-                      Briefing
-                    </h4>
-                    <p className="text-sm text-text-secondary leading-relaxed">
-                      {open.briefing}
-                    </p>
-                  </div>
-                  <div className="space-y-3">
-                    <h4 className="font-mono text-[10px] uppercase text-primary tracking-widest border-b border-border pb-2">
-                      Impact Metrics
-                    </h4>
-                    <ul className="space-y-3">
-                      {open.results.map((r, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-xs text-text-secondary leading-relaxed">
-                          <span className="font-mono text-primary font-bold shrink-0">0{idx + 1}</span>
-                          <span>{r}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+              {/* Client eyebrow */}
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.45,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="relative text-[12px] md:text-sm font-semibold uppercase tracking-[0.24em] text-blue-700 mb-7"
+                style={{ fontFamily: MONO }}
+              >
+                {study.client}
+                <span className="text-gray-300 mx-3">·</span>
+                <span className="text-gray-500">{study.sector}</span>
+              </motion.p>
 
-                <div className="pt-6 border-t border-border flex justify-between items-center">
-                  <div className="flex flex-wrap gap-3">
-                    {open.tags.map((tag) => (
-                      <span key={tag} className="text-[10px] font-mono text-text-dim uppercase tracking-wider">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                  <button
-                    onClick={() => setOpen(null)}
-                    className="text-xs font-mono uppercase tracking-widest text-text-dim hover:text-primary transition-colors"
-                  >
-                    Close File
-                  </button>
-                </div>
+              {/* Editorial title */}
+              <motion.h3
+                initial={{ opacity: 0, y: 28 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 0.95,
+                  delay: 0.55,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.06] text-gray-900 max-w-4xl"
+              >
+                {study.title}
+              </motion.h3>
+
+              {/* Metrics — the stars of the show */}
+              <div className="relative mt-16 md:mt-24 grid md:grid-cols-3 gap-12 md:gap-8 pt-12 border-t border-gray-200/60">
+                {study.metrics.map((m, idx) => {
+                  const isNumber = typeof m.value === "number";
+                  return (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 28 }}
+                      animate={inView ? { opacity: 1, y: 0 } : {}}
+                      transition={{
+                        duration: 0.7,
+                        delay: 0.9 + idx * 0.12,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                      className="flex flex-col"
+                    >
+                      {isNumber ? (
+                        <span
+                          className="text-6xl md:text-7xl lg:text-8xl font-semibold tracking-[-0.04em] text-blue-600 leading-none mb-5"
+                          style={{
+                            fontFamily: SANS,
+                            fontVariantNumeric: "tabular-nums",
+                          }}
+                        >
+                          <CountUp
+                            to={m.value as number}
+                            inView={inView}
+                            delay={0.95 + idx * 0.12}
+                          />
+                        </span>
+                      ) : (
+                        <motion.div
+                          initial={{ scale: 0, rotate: -18 }}
+                          animate={
+                            inView ? { scale: 1, rotate: -6 } : {}
+                          }
+                          transition={{
+                            type: "spring",
+                            stiffness: 110,
+                            damping: 12,
+                            mass: 0.7,
+                            delay: 1.15,
+                          }}
+                          className="inline-flex items-center gap-3 self-start border-2 border-blue-600 px-4 py-2.5 rounded-md mb-5 bg-blue-50/40"
+                          style={{ fontFamily: MONO }}
+                        >
+                          <svg
+                            className="h-5 w-5 text-blue-600"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                          >
+                            <motion.path
+                              d="M3 8.5l3.5 3.5L13 4"
+                              stroke="currentColor"
+                              strokeWidth="2.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              initial={{ pathLength: 0 }}
+                              animate={inView ? { pathLength: 1 } : {}}
+                              transition={{
+                                duration: 0.65,
+                                delay: 1.5,
+                                ease: "easeInOut",
+                              }}
+                            />
+                          </svg>
+                          <span className="text-sm font-bold uppercase tracking-[0.22em] text-blue-700">
+                            Endorsed
+                          </span>
+                        </motion.div>
+                      )}
+
+                      <p className="text-sm md:text-base leading-relaxed text-gray-600 max-w-[26ch]">
+                        {m.label}
+                      </p>
+                    </motion.div>
+                  );
+                })}
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+
+              {/* CTA */}
+              <div className="relative mt-14 md:mt-20 pt-8 border-t border-gray-200/60 flex items-center justify-between">
+                <span
+                  className="text-[12px] font-semibold uppercase tracking-[0.22em] text-gray-900 group-hover:text-blue-600 transition-colors"
+                  style={{ fontFamily: MONO }}
+                >
+                  Read full study
+                </span>
+                <span className="h-12 w-12 rounded-full bg-gray-900 group-hover:bg-blue-600 flex items-center justify-center text-white transition-all duration-500 group-hover:rotate-45">
+                  <svg
+                    viewBox="0 0 16 16"
+                    className="h-4 w-4"
+                    fill="none"
+                  >
+                    <path
+                      d="M5 11L11 5M11 5H6M11 5V10"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </motion.a>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

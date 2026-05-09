@@ -47,7 +47,7 @@ export default function BuyerSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-              className="rounded-2xl border border-border bg-white p-7 flex flex-col gap-5 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300"
+              className="rounded-sm border border-border bg-surface p-7 flex flex-col gap-5 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300"
             >
               <div>
                 <p className="text-xs font-medium text-text-dim uppercase tracking-widest">{p.role}</p>

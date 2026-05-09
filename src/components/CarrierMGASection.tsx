@@ -47,7 +47,7 @@ export default function CarrierMGASection() {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
-              className="rounded-2xl border border-border bg-white p-8 shadow-sm hover:border-primary/40 hover:shadow-md transition-all duration-300"
+              className="rounded-sm border border-border bg-surface p-8 shadow-sm hover:border-primary/40 hover:shadow-md transition-all duration-300"
             >
               <h3 className="text-lg font-bold text-text">{card.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-text-muted">{card.body}</p>
@@ -63,7 +63,7 @@ export default function CarrierMGASection() {
         >
           <a
             href="/bastion/contact/"
-            className="btn-glow inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-semibold text-white transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            className="btn-glow inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-3.5 text-base font-semibold text-white transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
           >
             Partner with us
             <svg viewBox="0 0 20 12" className="h-3 w-5" fill="none">

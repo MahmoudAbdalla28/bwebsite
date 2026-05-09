@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  /* Bastion Design System — Light theme, Cisco-inspired */
-  --color-primary: #0D6EFD;
+  /* Bastion Design System — Glassmorphism on soft mesh */
+  --color-primary: #2563EB;
   --color-primary-light: #3B82F6;
-  --color-primary-dark: #1E40AF;
-  --color-primary-bg: #EFF6FF;
-  --color-bg: #FFFFFF;
-  --color-bg-alt: #F8FAFC;
-  --color-bg-deep: #F1F5F9;
-  --color-surface: #FFFFFF;
-  --color-surface-alt: #F8FAFC;
+  --color-primary-dark: #1D4ED8;
+  --color-primary-bg: rgba(219, 234, 254, 0.6);
+  /* Every section bg is fully transparent — mesh is the single canvas across the site */
+  --color-bg: transparent;
+  --color-bg-alt: transparent;
+  --color-bg-deep: transparent;
+  /* Cards and surfaces are translucent frosted glass */
+  --color-surface: rgba(255, 255, 255, 0.7);
+  --color-surface-alt: rgba(255, 255, 255, 0.55);
   --color-text: #0F172A;
   --color-text-secondary: #334155;
   --color-text-muted: #475569;
@@ -31,6 +33,12 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+/* Heading typography — Inter, tight tracking */
+h1, h2, h3 {
+  font-family: "Inter", "SF Pro Display", system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
 * {
   -webkit-overflow-scrolling: touch;
 }
@@ -49,12 +57,13 @@ body {
   }
 }
 
-/* Gradient text — blue tones */
+/* Gradient text — editorial navy tones (with italic for serif emphasis) */
 .gradient-text {
-  background: linear-gradient(135deg, #0D6EFD 0%, #1E40AF 50%, #3B82F6 100%);
+  background: linear-gradient(135deg, #0A2540 0%, #1E3A8A 60%, #0A2540 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-style: italic;
 }
 
 /* Subtle dot pattern */
@@ -63,34 +72,323 @@ body {
   background-size: 24px 24px;
 }
 
-/* Soft radial glow */
+/* Soft radial glow — editorial subtle */
 .bg-radial-soft {
-  background: radial-gradient(ellipse 70% 50% at 65% 40%, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
+  background: radial-gradient(ellipse 70% 50% at 65% 40%, rgba(10,37,64,0.04) 0%, transparent 70%);
 }
 
-/* Section eyebrow label */
+/* Section eyebrow label — mono caps */
 .label-pill {
   display: inline-block;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.6875rem;
-  font-weight: 700;
-  color: #0D6EFD;
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: #0A2540;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
 /* Inline text highlight */
 .highlight {
-  background: linear-gradient(120deg, rgba(13,110,253,0.12) 0%, rgba(59,130,246,0.12) 100%);
-  border-radius: 4px;
+  background: linear-gradient(120deg, rgba(10,37,64,0.10) 0%, rgba(30,58,138,0.10) 100%);
   padding: 0 3px;
 }
 
-/* Glowing primary button */
+/* Primary button (no pulse — editorial restraint) */
 .btn-glow {
-  box-shadow: 0 0 0 0 rgba(13,110,253,0.4);
-  animation: pulse-glow 2.5s ease-in-out infinite;
+  box-shadow: 0 1px 0 rgba(10,37,64,0.05), 0 8px 20px -8px rgba(10,37,64,0.25);
+  transition: all 0.2s ease-out;
 }
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 4px 14px rgba(13,110,253,0.3); }
-  50%       { box-shadow: 0 4px 28px rgba(13,110,253,0.55); }
+.btn-glow:hover {
+  box-shadow: 0 1px 0 rgba(10,37,64,0.05), 0 12px 28px -10px rgba(10,37,64,0.4);
+}
+
+/* ─────────────── Bastion Aurora — recolored from a NicolasHoubion concept ─────────────── */
+.bastion-aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.9;
+  will-change: transform, filter, background-position;
+  background:
+    radial-gradient(circle at 25% 25%, rgba(37, 99, 235, 0.28) 0%, transparent 50%),
+    radial-gradient(circle at 75% 25%, rgba(6, 182, 212, 0.22) 0%, transparent 50%),
+    radial-gradient(circle at 25% 75%, rgba(99, 102, 241, 0.22) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(56, 189, 248, 0.26) 0%, transparent 50%),
+    repeating-conic-gradient(
+      from 0deg at 50% 50%,
+      #2563EB 0deg 30deg,
+      #3B82F6 30deg 60deg,
+      #60A5FA 60deg 90deg,
+      #38BDF8 90deg 120deg,
+      #818CF8 120deg 150deg,
+      #93C5FD 150deg 180deg
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent 0px,
+      rgba(255, 255, 255, 0.16) 1px,
+      rgba(255, 255, 255, 0.16) 2px,
+      transparent 3px,
+      transparent 22px
+    ),
+    conic-gradient(
+      from 180deg at 50% 50%,
+      #2563EB,
+      #3B82F6,
+      #60A5FA,
+      #38BDF8,
+      #818CF8,
+      #93C5FD,
+      #2563EB
+    );
+  background-size:
+    240px 240px,
+    240px 240px,
+    240px 240px,
+    240px 240px,
+    480px 480px,
+    60px 60px,
+    100% 100%;
+  animation:
+    bastion-aurora-rotate 32s linear infinite,
+    bastion-aurora-pulse 9s ease-in-out infinite alternate,
+    bastion-aurora-shift 24s ease-in-out infinite;
+}
+.bastion-aurora::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-radial-gradient(circle at 30% 40%, transparent 0px, rgba(255, 255, 255, 0.18) 60px, transparent 120px),
+    repeating-radial-gradient(circle at 70% 60%, transparent 0px, rgba(37, 99, 235, 0.10) 40px, transparent 80px);
+  animation: bastion-aurora-counter-rotate 38s linear infinite;
+}
+.bastion-aurora::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-conic-gradient(
+      from 90deg at 20% 80%,
+      transparent 0deg,
+      rgba(255, 255, 255, 0.22) 12deg,
+      transparent 24deg,
+      transparent 48deg
+    ),
+    repeating-conic-gradient(
+      from 270deg at 80% 20%,
+      transparent 0deg,
+      rgba(37, 99, 235, 0.16) 18deg,
+      transparent 36deg,
+      transparent 72deg
+    );
+  background-size: 320px 320px, 280px 280px;
+  animation: bastion-aurora-spin 42s linear infinite reverse;
+}
+
+/* Soft white mask — edges show colour, headline stays readable */
+.bastion-aurora-mask {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 55% 45% at 50% 50%,
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0.18) 80%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+@keyframes bastion-aurora-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes bastion-aurora-counter-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+@keyframes bastion-aurora-spin {
+  from { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.08); }
+  to { transform: rotate(360deg) scale(1); }
+}
+@keyframes bastion-aurora-pulse {
+  from { filter: brightness(1) saturate(0.85) hue-rotate(0deg); }
+  to { filter: brightness(1.12) saturate(1.05) hue-rotate(8deg); }
+}
+@keyframes bastion-aurora-shift {
+  0%   { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  33%  { background-position: 100% 0%, 50% 50%, 25% 75%, 75% 25%, 50% 0%, 25% 25%, 0% 0%; }
+  66%  { background-position: 0% 100%, 75% 25%, 50% 50%, 25% 75%, 0% 50%, 50% 50%, 0% 0%; }
+  100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+}
+
+/* ─────────────── Bastion Logo Ring — 3D rotating compliance carousel ─────────────── */
+.bastion-logo-ring-wrap {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1300px;
+}
+.bastion-logo-ring {
+  --card-w: 160px;
+  --card-h: 120px;
+  --quantity: 7;
+  --translate-z: 360px;
+  position: relative;
+  width: var(--card-w);
+  height: var(--card-h);
+  transform-style: preserve-3d;
+  animation: bastion-logo-rotate 32s linear infinite;
+}
+.bastion-logo-ring-wrap:hover .bastion-logo-ring {
+  animation-play-state: paused;
+}
+@keyframes bastion-logo-rotate {
+  from { transform: rotateX(-8deg) rotateY(0deg); }
+  to   { transform: rotateX(-8deg) rotateY(360deg); }
+}
+.bastion-logo-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 232, 240, 0.75);
+  box-shadow: 0 6px 28px -10px rgba(37, 99, 235, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 22px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translate-z));
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.bastion-logo-card:hover {
+  border-color: rgba(147, 197, 253, 0.85);
+  box-shadow: 0 8px 32px -8px rgba(37, 99, 235, 0.32);
+}
+.bastion-logo-card img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(15%);
+  transition: filter 0.3s ease;
+}
+.bastion-logo-card:hover img {
+  filter: grayscale(0%);
+}
+
+
+/* ─────────────── Bastion Starfield — Bastion-blue tinted, deterministic stars ─────────────── */
+.bastion-stars-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(59, 130, 246, 0.35) 0%, transparent 70%),
+    linear-gradient(180deg, #1E293B 0%, #312E81 45%, #1D4ED8 100%);
+}
+.bastion-stars-bg .stars-1,
+.bastion-stars-bg .stars-2,
+.bastion-stars-bg .stars-3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  will-change: transform;
+}
+
+.bastion-stars-bg .stars-1 {
+  width: 1px;
+  height: 1px;
+  box-shadow: 1309px 228px #fff, 51px 1518px #fff, 563px 501px #fff, 457px 285px #fff, 1508px 209px #fff, 1385px 1516px #fff, 1827px 1116px #fff, 178px 1209px #fff, 864px 65px #fff, 61px 191px #fff, 447px 476px #fff, 1034px 1232px #fff, 54px 1149px #fff, 407px 1466px #fff, 1330px 1436px #fff, 1116px 859px #fff, 451px 919px #fff, 1206px 569px #fff, 1657px 1780px #fff, 13px 1554px #fff, 1650px 326px #fff, 1429px 865px #fff, 696px 569px #fff, 318px 440px #fff, 1563px 689px #fff, 209px 189px #fff, 778px 198px #fff, 735px 1735px #fff, 704px 1236px #fff, 541px 1652px #fff, 88px 1494px #fff, 940px 1098px #fff, 255px 1888px #fff, 775px 161px #fff, 1130px 600px #fff, 1698px 1287px #fff, 1266px 1813px #fff, 1764px 740px #fff, 1182px 393px #fff, 1442px 142px #fff, 93px 1354px #fff, 466px 1583px #fff, 592px 163px #fff, 1751px 476px #fff, 1774px 206px #fff, 778px 569px #fff, 928px 1301px #fff, 1708px 747px #fff, 333px 758px #fff, 727px 429px #fff, 1372px 546px #fff, 1437px 1399px #fff, 1327px 146px #fff, 1247px 1300px #fff, 350px 1093px #fff, 1493px 501px #fff, 334px 946px #fff, 777px 552px #fff, 1895px 1310px #fff, 1409px 1140px #fff, 449px 1402px #fff, 664px 1726px #fff, 1573px 1589px #fff, 114px 469px #fff, 1683px 65px #fff, 1648px 646px #fff, 821px 548px #fff, 135px 432px #fff, 1870px 1161px #fff, 1794px 1470px #fff, 644px 435px #fff, 1342px 1022px #fff, 810px 1811px #fff, 1872px 1316px #fff, 939px 292px #fff, 542px 285px #fff, 505px 1525px #fff, 1149px 1103px #fff, 538px 1529px #fff, 1197px 877px #fff, 1838px 1195px #fff, 817px 741px #fff, 449px 283px #fff, 1043px 1010px #fff, 186px 1547px #fff, 96px 1763px #fff, 224px 313px #fff, 1285px 327px #fff, 1622px 1393px #fff, 864px 1221px #fff, 130px 788px #fff, 781px 1220px #fff, 958px 1083px #fff, 514px 1133px #fff, 1762px 23px #fff, 1393px 1476px #fff, 234px 1396px #fff, 1812px 1099px #fff, 1537px 546px #fff, 1574px 1312px #fff, 696px 228px #fff, 601px 890px #fff, 323px 929px #fff, 6px 1478px #fff, 1793px 1473px #fff, 539px 1025px #fff, 1560px 365px #fff, 1039px 1869px #fff, 217px 1782px #fff, 1280px 611px #fff, 1723px 1308px #fff, 1039px 1247px #fff, 407px 313px #fff, 765px 1561px #fff, 330px 1104px #fff, 1594px 1889px #fff, 1086px 1881px #fff, 1px 1226px #fff, 663px 1000px #fff, 39px 229px #fff, 743px 1799px #fff, 1703px 1652px #fff, 629px 490px #fff, 118px 493px #fff, 1798px 1161px #fff, 161px 175px #fff, 1498px 995px #fff, 1671px 141px #fff, 1557px 1090px #fff, 1568px 257px #fff, 262px 1351px #fff, 973px 1125px #fff, 338px 542px #fff, 1080px 1786px #fff, 1242px 866px #fff, 433px 1104px #fff, 1546px 1494px #fff, 1412px 411px #fff, 1460px 638px #fff, 817px 1375px #fff, 1330px 764px #fff, 897px 1842px #fff, 1059px 924px #fff, 247px 507px #fff, 460px 131px #fff, 692px 43px #fff, 1204px 1134px #fff, 471px 1205px #fff, 451px 14px #fff, 145px 1449px #fff, 1292px 120px #fff, 468px 138px #fff, 1854px 64px #fff, 1760px 676px #fff, 145px 1052px #fff, 487px 570px #fff, 1370px 994px #fff, 438px 1104px #fff, 270px 1481px #fff, 1807px 1169px #fff, 1180px 968px #fff, 497px 1606px #fff, 968px 1653px #fff, 833px 389px #fff, 193px 198px #fff, 1349px 882px #fff, 725px 867px #fff, 841px 956px #fff, 1769px 1493px #fff, 110px 1379px #fff, 1338px 1323px #fff, 201px 124px #fff, 824px 1491px #fff, 694px 1639px #fff, 1764px 223px #fff, 509px 392px #fff, 389px 1098px #fff, 918px 287px #fff, 864px 375px #fff, 570px 947px #fff;
+  animation: bastion-star-float 80s linear infinite;
+}
+.bastion-stars-bg .stars-1::after {
+  content: " ";
+  position: absolute;
+  top: 1900px;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 1309px 228px #fff, 51px 1518px #fff, 563px 501px #fff, 457px 285px #fff, 1508px 209px #fff, 1385px 1516px #fff, 1827px 1116px #fff, 178px 1209px #fff, 864px 65px #fff, 61px 191px #fff, 447px 476px #fff, 1034px 1232px #fff, 54px 1149px #fff, 407px 1466px #fff, 1330px 1436px #fff, 1116px 859px #fff, 451px 919px #fff, 1206px 569px #fff, 1657px 1780px #fff, 13px 1554px #fff, 1650px 326px #fff, 1429px 865px #fff, 696px 569px #fff, 318px 440px #fff, 1563px 689px #fff, 209px 189px #fff, 778px 198px #fff, 735px 1735px #fff, 704px 1236px #fff, 541px 1652px #fff, 88px 1494px #fff, 940px 1098px #fff, 255px 1888px #fff, 775px 161px #fff, 1130px 600px #fff, 1698px 1287px #fff, 1266px 1813px #fff, 1764px 740px #fff, 1182px 393px #fff, 1442px 142px #fff, 93px 1354px #fff, 466px 1583px #fff, 592px 163px #fff, 1751px 476px #fff, 1774px 206px #fff, 778px 569px #fff, 928px 1301px #fff, 1708px 747px #fff, 333px 758px #fff, 727px 429px #fff, 1372px 546px #fff, 1437px 1399px #fff, 1327px 146px #fff, 1247px 1300px #fff, 350px 1093px #fff, 1493px 501px #fff, 334px 946px #fff, 777px 552px #fff, 1895px 1310px #fff, 1409px 1140px #fff, 449px 1402px #fff, 664px 1726px #fff, 1573px 1589px #fff, 114px 469px #fff, 1683px 65px #fff, 1648px 646px #fff, 821px 548px #fff, 135px 432px #fff, 1870px 1161px #fff, 1794px 1470px #fff, 644px 435px #fff, 1342px 1022px #fff, 810px 1811px #fff, 1872px 1316px #fff, 939px 292px #fff, 542px 285px #fff, 505px 1525px #fff, 1149px 1103px #fff, 538px 1529px #fff, 1197px 877px #fff, 1838px 1195px #fff, 817px 741px #fff, 449px 283px #fff, 1043px 1010px #fff, 186px 1547px #fff, 96px 1763px #fff, 224px 313px #fff, 1285px 327px #fff, 1622px 1393px #fff, 864px 1221px #fff, 130px 788px #fff, 781px 1220px #fff, 958px 1083px #fff, 514px 1133px #fff, 1762px 23px #fff, 1393px 1476px #fff, 234px 1396px #fff, 1812px 1099px #fff, 1537px 546px #fff, 1574px 1312px #fff, 696px 228px #fff, 601px 890px #fff, 323px 929px #fff, 6px 1478px #fff, 1793px 1473px #fff, 539px 1025px #fff, 1560px 365px #fff, 1039px 1869px #fff, 217px 1782px #fff, 1280px 611px #fff, 1723px 1308px #fff, 1039px 1247px #fff, 407px 313px #fff, 765px 1561px #fff, 330px 1104px #fff, 1594px 1889px #fff, 1086px 1881px #fff, 1px 1226px #fff, 663px 1000px #fff, 39px 229px #fff, 743px 1799px #fff, 1703px 1652px #fff, 629px 490px #fff, 118px 493px #fff, 1798px 1161px #fff, 161px 175px #fff, 1498px 995px #fff, 1671px 141px #fff, 1557px 1090px #fff, 1568px 257px #fff, 262px 1351px #fff, 973px 1125px #fff, 338px 542px #fff, 1080px 1786px #fff, 1242px 866px #fff, 433px 1104px #fff, 1546px 1494px #fff, 1412px 411px #fff, 1460px 638px #fff, 817px 1375px #fff, 1330px 764px #fff, 897px 1842px #fff, 1059px 924px #fff, 247px 507px #fff, 460px 131px #fff, 692px 43px #fff, 1204px 1134px #fff, 471px 1205px #fff, 451px 14px #fff, 145px 1449px #fff, 1292px 120px #fff, 468px 138px #fff, 1854px 64px #fff, 1760px 676px #fff, 145px 1052px #fff, 487px 570px #fff, 1370px 994px #fff, 438px 1104px #fff, 270px 1481px #fff, 1807px 1169px #fff, 1180px 968px #fff, 497px 1606px #fff, 968px 1653px #fff, 833px 389px #fff, 193px 198px #fff, 1349px 882px #fff, 725px 867px #fff, 841px 956px #fff, 1769px 1493px #fff, 110px 1379px #fff, 1338px 1323px #fff, 201px 124px #fff, 824px 1491px #fff, 694px 1639px #fff, 1764px 223px #fff, 509px 392px #fff, 389px 1098px #fff, 918px 287px #fff, 864px 375px #fff, 570px 947px #fff;
+}
+
+.bastion-stars-bg .stars-2 {
+  width: 2px;
+  height: 2px;
+  box-shadow: 511px 1790px #fff, 1890px 154px #fff, 907px 1654px #fff, 1764px 1753px #fff, 1127px 200px #fff, 103px 1335px #fff, 1107px 1712px #fff, 30px 191px #fff, 1897px 1543px #fff, 1738px 484px #fff, 340px 832px #fff, 994px 985px #fff, 437px 1770px #fff, 821px 1848px #fff, 120px 337px #fff, 776px 4px #fff, 799px 543px #fff, 1897px 1605px #fff, 1607px 931px #fff, 584px 866px #fff, 1426px 1496px #fff, 1604px 1138px #fff, 1355px 1471px #fff, 996px 317px #fff, 388px 607px #fff, 445px 119px #fff, 1186px 1506px #fff, 1110px 124px #fff, 1531px 642px #fff, 117px 102px #fff, 1196px 976px #fff, 1029px 1882px #fff, 1746px 1087px #fff, 322px 116px #fff, 1040px 164px #fff, 1743px 380px #fff, 140px 1218px #fff, 139px 1382px #fff, 1765px 481px #fff, 826px 245px #fff, 1823px 1166px #fff, 504px 1185px #fff, 1217px 81px #fff, 1268px 167px #fff, 858px 1346px #fff, 1195px 1157px #fff, 1070px 647px #fff, 534px 418px #fff, 1371px 1466px #fff, 643px 488px #fff, 543px 810px #fff, 268px 1375px #fff, 1321px 614px #fff, 936px 647px #fff, 1539px 148px #fff, 19px 938px #fff, 1272px 1153px #fff, 204px 150px #fff, 1101px 436px #fff, 1036px 543px #fff, 271px 714px #fff, 1804px 140px #fff, 1800px 500px #fff, 756px 583px #fff, 323px 897px #fff, 1707px 1112px #fff, 1440px 619px #fff, 1252px 1652px #fff, 1339px 1083px #fff, 16px 1367px #fff, 1673px 1135px #fff, 613px 1358px #fff, 212px 1798px #fff, 275px 541px #fff, 236px 1822px #fff, 219px 1520px #fff, 1133px 318px #fff, 557px 577px #fff, 1238px 431px #fff, 1469px 702px #fff, 416px 1407px #fff, 1298px 1746px #fff, 540px 1035px #fff, 1000px 514px #fff, 1854px 1859px #fff, 1732px 104px #fff, 189px 1299px #fff, 867px 1698px #fff, 566px 90px #fff, 7px 683px #fff;
+  animation: bastion-star-float 130s linear infinite;
+}
+.bastion-stars-bg .stars-2::after {
+  content: " ";
+  position: absolute;
+  top: 1900px;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 511px 1790px #fff, 1890px 154px #fff, 907px 1654px #fff, 1764px 1753px #fff, 1127px 200px #fff, 103px 1335px #fff, 1107px 1712px #fff, 30px 191px #fff, 1897px 1543px #fff, 1738px 484px #fff, 340px 832px #fff, 994px 985px #fff, 437px 1770px #fff, 821px 1848px #fff, 120px 337px #fff, 776px 4px #fff, 799px 543px #fff, 1897px 1605px #fff, 1607px 931px #fff, 584px 866px #fff, 1426px 1496px #fff, 1604px 1138px #fff, 1355px 1471px #fff, 996px 317px #fff, 388px 607px #fff, 445px 119px #fff, 1186px 1506px #fff, 1110px 124px #fff, 1531px 642px #fff, 117px 102px #fff, 1196px 976px #fff, 1029px 1882px #fff, 1746px 1087px #fff, 322px 116px #fff, 1040px 164px #fff, 1743px 380px #fff, 140px 1218px #fff, 139px 1382px #fff, 1765px 481px #fff, 826px 245px #fff, 1823px 1166px #fff, 504px 1185px #fff, 1217px 81px #fff, 1268px 167px #fff, 858px 1346px #fff, 1195px 1157px #fff, 1070px 647px #fff, 534px 418px #fff, 1371px 1466px #fff, 643px 488px #fff, 543px 810px #fff, 268px 1375px #fff, 1321px 614px #fff, 936px 647px #fff, 1539px 148px #fff, 19px 938px #fff, 1272px 1153px #fff, 204px 150px #fff, 1101px 436px #fff, 1036px 543px #fff, 271px 714px #fff, 1804px 140px #fff, 1800px 500px #fff, 756px 583px #fff, 323px 897px #fff, 1707px 1112px #fff, 1440px 619px #fff, 1252px 1652px #fff, 1339px 1083px #fff, 16px 1367px #fff, 1673px 1135px #fff, 613px 1358px #fff, 212px 1798px #fff, 275px 541px #fff, 236px 1822px #fff, 219px 1520px #fff, 1133px 318px #fff, 557px 577px #fff, 1238px 431px #fff, 1469px 702px #fff, 416px 1407px #fff, 1298px 1746px #fff, 540px 1035px #fff, 1000px 514px #fff, 1854px 1859px #fff, 1732px 104px #fff, 189px 1299px #fff, 867px 1698px #fff, 566px 90px #fff, 7px 683px #fff;
+}
+
+.bastion-stars-bg .stars-3 {
+  width: 3px;
+  height: 3px;
+  box-shadow: 1579px 267px #fff, 1304px 536px #fff, 330px 1518px #fff, 904px 1129px #fff, 1445px 875px #fff, 1148px 19px #fff, 229px 154px #fff, 1808px 1415px #fff, 1851px 305px #fff, 1117px 73px #fff, 1709px 756px #fff, 1192px 1131px #fff, 303px 880px #fff, 261px 85px #fff, 631px 746px #fff, 1841px 1630px #fff, 1762px 81px #fff, 1840px 732px #fff, 430px 1396px #fff, 511px 1365px #fff, 210px 724px #fff, 1597px 1146px #fff, 1810px 1791px #fff, 832px 1271px #fff, 1534px 316px #fff, 1895px 484px #fff, 1770px 332px #fff, 1638px 1660px #fff, 362px 1805px #fff, 844px 50px #fff, 367px 1508px #fff, 1893px 680px #fff, 1602px 843px #fff, 1642px 1371px #fff, 1769px 1505px #fff, 1660px 508px #fff, 546px 326px #fff, 1612px 1436px #fff, 221px 783px #fff, 1786px 79px #fff;
+  animation: bastion-star-float 180s linear infinite;
+}
+.bastion-stars-bg .stars-3::after {
+  content: " ";
+  position: absolute;
+  top: 1900px;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 1579px 267px #fff, 1304px 536px #fff, 330px 1518px #fff, 904px 1129px #fff, 1445px 875px #fff, 1148px 19px #fff, 229px 154px #fff, 1808px 1415px #fff, 1851px 305px #fff, 1117px 73px #fff, 1709px 756px #fff, 1192px 1131px #fff, 303px 880px #fff, 261px 85px #fff, 631px 746px #fff, 1841px 1630px #fff, 1762px 81px #fff, 1840px 732px #fff, 430px 1396px #fff, 511px 1365px #fff, 210px 724px #fff, 1597px 1146px #fff, 1810px 1791px #fff, 832px 1271px #fff, 1534px 316px #fff, 1895px 484px #fff, 1770px 332px #fff, 1638px 1660px #fff, 362px 1805px #fff, 844px 50px #fff, 367px 1508px #fff, 1893px 680px #fff, 1602px 843px #fff, 1642px 1371px #fff, 1769px 1505px #fff, 1660px 508px #fff, 546px 326px #fff, 1612px 1436px #fff, 221px 783px #fff, 1786px 79px #fff;
+}
+
+@keyframes bastion-star-float {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-1900px); }
+}
+
+
+/* ─────────────── Bastion Futuristic Hero — recolored from a 3pple10 concept ─────────────── */
+.bastion-futuristic-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 60% 55% at 18% 22%, rgba(37, 99, 235, 0.32) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 50% at 85% 78%, rgba(59, 130, 246, 0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 50% 110%, rgba(96, 165, 250, 0.22) 0%, transparent 70%),
+    linear-gradient(145deg, #000000 0%, #060B1F 30%, #0A1A4D 65%, #1D4ED8 100%);
+  filter: url(#bastion-advanced-texture);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+}
+
+/* ─────────────── Aceternity Spotlight animation ─────────────── */
+@theme inline {
+  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
+}
+
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
+  }
 }

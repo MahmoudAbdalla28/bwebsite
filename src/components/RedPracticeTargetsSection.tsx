@@ -54,10 +54,10 @@ export default function RedPracticeTargetsSection() {
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.2 + i * 0.06 }}
                   onClick={() => setSelectedVersion(i)}
-                  className={`w-full cursor-pointer rounded-xl border p-4 text-left transition-all duration-200 ${
+                  className={`w-full cursor-pointer rounded-sm border p-4 text-left transition-all duration-200 ${
                     selectedVersion === i
-                      ? "border-primary/30 bg-white shadow-md"
-                      : "border-border bg-white hover:border-primary/20"
+                      ? "border-primary/30 bg-surface shadow-md"
+                      : "border-border bg-surface hover:border-primary/20"
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -89,7 +89,7 @@ export default function RedPracticeTargetsSection() {
             className="space-y-6"
           >
             {/* Current selection detail */}
-            <div className="rounded-xl border border-border bg-white p-6">
+            <div className="rounded-sm border border-border bg-surface p-6">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <p className="text-lg font-bold text-text">{selected.version}</p>
@@ -126,7 +126,7 @@ export default function RedPracticeTargetsSection() {
             </div>
 
             {/* Regression test count */}
-            <div className="rounded-xl border border-border bg-white p-6">
+            <div className="rounded-sm border border-border bg-surface p-6">
               <p className="text-[11px] font-semibold uppercase tracking-widest text-text-dim mb-3">Accumulated Coverage</p>
               <div className="grid grid-cols-3 gap-4">
                 <div>
@@ -145,7 +145,7 @@ export default function RedPracticeTargetsSection() {
             </div>
 
             {/* Key insight */}
-            <div className="rounded-xl border border-primary/20 bg-primary-bg p-5">
+            <div className="rounded-sm border border-primary/20 bg-primary-bg p-5">
               <p className="text-sm leading-relaxed text-primary-dark">
                 Every vulnerability ever found becomes a regression test that runs on every
                 deployment. The longer you use it, the more comprehensive your coverage gets.

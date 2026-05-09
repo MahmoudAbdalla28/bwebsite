@@ -43,9 +43,9 @@ export default function FeedbackLoopSection() {
                 initial={{ opacity: 0, x: 15 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                className="flex gap-4 rounded-xl border border-border bg-white p-5"
+                className="flex gap-4 rounded-sm border border-border bg-surface p-5"
               >
-                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${step.bg}`}>
+                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-sm ${step.bg}`}>
                   <span className={`text-sm font-bold ${step.color}`}>{step.num}</span>
                 </div>
                 <div>

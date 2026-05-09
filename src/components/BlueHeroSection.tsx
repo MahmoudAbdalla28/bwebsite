@@ -37,7 +37,7 @@ export default function BlueHeroSection() {
             >
               <a
                 href="/bastion/contact/"
-                className="btn-glow inline-flex items-center rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
+                className="btn-glow inline-flex items-center rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
               >
                 Get started
               </a>

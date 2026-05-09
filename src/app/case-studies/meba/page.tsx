@@ -29,17 +29,24 @@ export default function MebaCaseStudyPage() {
           <h1 className="mt-8 text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-text leading-[1.05]">
             Solving the AI Coverage Cliff in Industrial Production
           </h1>
-          <p className="mt-6 text-sm font-mono uppercase tracking-[0.18em] text-text-dim">
-            MEBA (Advanced Manufacturing) <span className="text-text-dim/50 mx-2">·</span> Industrial AI / Insurtech <span className="text-text-dim/50 mx-2">·</span> CGL Continuity &amp; Governance
-          </p>
-          <p className="mt-3 inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.18em] text-primary">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+          <div className="mt-7 flex flex-wrap gap-2">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-700 bg-blue-50/80 border border-blue-100 px-3.5 py-1.5 rounded-full">
+              MEBA · Advanced Manufacturing
+            </span>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-700 bg-blue-50/80 border border-blue-100 px-3.5 py-1.5 rounded-full">
+              Industrial AI / Insurtech
+            </span>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-700 bg-blue-50/80 border border-blue-100 px-3.5 py-1.5 rounded-full">
+              CGL Continuity &amp; Governance
+            </span>
+          </div>
+          <p className="mt-4 text-xs font-mono uppercase tracking-[0.18em] text-gray-600">
             Implementation done by Piston Solutions
           </p>
 
           {/* Lead / Executive Summary */}
           <div className="mt-10 max-w-4xl space-y-5">
-            <p className="text-xs font-mono uppercase tracking-[0.18em] text-primary">
+            <p className="text-xs font-mono uppercase tracking-[0.18em] text-gray-900 font-semibold">
               Executive Summary: Securing the Agentic Frontier
             </p>
             <p className="text-xl leading-relaxed text-text-secondary">
@@ -87,7 +94,7 @@ export default function MebaCaseStudyPage() {
             </section>
 
             {/* Image 1: Knowledge Graph */}
-            <figure className="overflow-hidden rounded-xl border border-border bg-bg-alt shadow-lg shadow-primary/5 lg:-mx-12 xl:-mx-24">
+            <figure className="overflow-hidden rounded-sm border border-border bg-bg-alt shadow-lg shadow-primary/5 lg:-mx-12 xl:-mx-24">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/bastion/assets/case-studies/meba-knowledge-graph-v2.png"
@@ -110,7 +117,7 @@ export default function MebaCaseStudyPage() {
               </div>
 
               {/* Metrics table */}
-              <div className="mt-8 overflow-hidden rounded-xl border border-border bg-white">
+              <div className="mt-8 overflow-hidden rounded-sm border border-border bg-white">
                 <div className="grid grid-cols-12 px-6 py-3 border-b border-border bg-bg-alt text-[11px] font-mono uppercase tracking-widest text-text-dim">
                   <div className="col-span-5">Metric</div>
                   <div className="col-span-7">Measured Impact</div>
@@ -161,7 +168,7 @@ export default function MebaCaseStudyPage() {
             </p>
             <a
               href="/bastion/contact/"
-              className="btn-glow mt-6 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98]"
+              className="btn-glow mt-6 inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98]"
             >
               Request a briefing
               <svg viewBox="0 0 16 12" className="h-3 w-4" fill="none">

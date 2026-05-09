@@ -89,9 +89,9 @@ export default function BlueKnowledgeGraphSection() {
                 transition={{ delay: 0.2 + i * 0.1 }}
                 className="relative"
               >
-                <div className="rounded-xl border border-border bg-white p-5 h-full">
+                <div className="rounded-sm border border-border bg-surface p-5 h-full">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-bg text-primary">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-sm bg-primary-bg text-primary">
                       {step.icon}
                     </div>
                     <span className="text-[10px] font-bold text-text-dim uppercase tracking-wider">Step {i + 1}</span>
@@ -119,12 +119,12 @@ export default function BlueKnowledgeGraphSection() {
           transition={{ duration: 0.7, delay: 0.4 }}
           className="mt-12"
         >
-          <div className="rounded-xl border border-border bg-white overflow-hidden">
+          <div className="rounded-sm border border-border bg-surface overflow-hidden">
             <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border">
               {/* Left: policy source */}
               <div className="p-6">
                 <p className="text-[10px] font-semibold uppercase tracking-widest text-text-dim mb-3">Policy Document</p>
-                <div className="rounded-lg bg-bg-alt border border-border p-4">
+                <div className="rounded-sm bg-bg-alt border border-border p-4">
                   <p className="text-sm leading-relaxed text-text italic">
                     &ldquo;No agent shall access patient records without explicit authorization from the requesting clinician. All access attempts must be logged with the agent identity, timestamp, and authorization reference.&rdquo;
                   </p>
@@ -135,21 +135,21 @@ export default function BlueKnowledgeGraphSection() {
               {/* Right: generated enforcement rule */}
               <div className="p-6">
                 <p className="text-[10px] font-semibold uppercase tracking-widest text-text-dim mb-3">Generated Enforcement Rule</p>
-                <div className="rounded-lg bg-primary-bg border border-primary/10 p-4 space-y-2">
+                <div className="rounded-sm bg-primary-bg border border-primary/10 p-4 space-y-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-primary bg-white rounded px-1.5 py-0.5 border border-primary/10">scope</span>
+                    <span className="text-[10px] font-mono text-primary bg-surface rounded px-1.5 py-0.5 border border-primary/10">scope</span>
                     <span className="text-xs text-text-muted">tool_call:patient_records.*</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-primary bg-white rounded px-1.5 py-0.5 border border-primary/10">require</span>
+                    <span className="text-[10px] font-mono text-primary bg-surface rounded px-1.5 py-0.5 border border-primary/10">require</span>
                     <span className="text-xs text-text-muted">auth_ref in request context</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-primary bg-white rounded px-1.5 py-0.5 border border-primary/10">action</span>
+                    <span className="text-[10px] font-mono text-primary bg-surface rounded px-1.5 py-0.5 border border-primary/10">action</span>
                     <span className="text-xs text-text-muted">block + surface for human review</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-primary bg-white rounded px-1.5 py-0.5 border border-primary/10">log</span>
+                    <span className="text-[10px] font-mono text-primary bg-surface rounded px-1.5 py-0.5 border border-primary/10">log</span>
                     <span className="text-xs text-text-muted">agent_id, timestamp, auth_ref, outcome</span>
                   </div>
                 </div>
@@ -158,7 +158,7 @@ export default function BlueKnowledgeGraphSection() {
           </div>
 
           {/* Auto-update callout */}
-          <div className="mt-4 rounded-xl border border-primary/20 bg-primary-bg px-5 py-4 flex flex-wrap items-center gap-3">
+          <div className="mt-4 rounded-sm border border-primary/20 bg-primary-bg px-5 py-4 flex flex-wrap items-center gap-3">
             <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0 text-primary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
             </svg>

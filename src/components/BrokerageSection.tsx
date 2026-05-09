@@ -44,14 +44,14 @@ function DifferentiateGraphic() {
         <p className="text-[8px] font-bold uppercase tracking-widest text-white/65 text-center pb-2">
           Competitor Submission
         </p>
-        <div className="bg-white/10" />
+        <div className="bg-surface/10" />
         <p className="text-[8px] font-bold uppercase tracking-widest text-white text-center pb-2">
           Your Submission (Bastion)
         </p>
       </div>
 
       {/* Comparison table */}
-      <div className="rounded-xl border border-white/20 overflow-hidden">
+      <div className="rounded-sm border border-white/20 overflow-hidden">
         {ROWS.map((row, i) => (
           <div
             key={row.label}
@@ -65,16 +65,16 @@ function DifferentiateGraphic() {
             </div>
 
             {/* Divider */}
-            <div className="bg-white/10" />
+            <div className="bg-surface/10" />
 
             {/* With */}
-            <div className="px-3 py-2.5 bg-white/5">
+            <div className="px-3 py-2.5 bg-surface/5">
               <p className="text-[7px] font-bold uppercase tracking-widest text-white/50 mb-1">{row.label}</p>
               <div className="flex items-center gap-2">
                 <p className="text-[10px] font-bold text-white leading-none shrink-0">{row.with.value}</p>
-                <div className="flex-1 h-1 rounded-full bg-white/15 overflow-hidden">
+                <div className="flex-1 h-1 rounded-full bg-surface/15 overflow-hidden">
                   <motion.div
-                    className={`h-full rounded-full ${row.with.green ? "bg-emerald-400" : "bg-white"}`}
+                    className={`h-full rounded-full ${row.with.green ? "bg-emerald-400" : "bg-surface"}`}
                     initial={{ width: "0%" }}
                     animate={{ width: `${row.with.fill}%` }}
                     transition={{ delay: 0.1 + i * 0.08, duration: 0.65, ease: "easeOut" }}
@@ -89,7 +89,7 @@ function DifferentiateGraphic() {
 
       {/* Outcomes */}
       <div className="grid grid-cols-2 gap-2.5 mt-3">
-        <div className="rounded-xl border border-red-400/25 bg-red-950/20 px-3 py-2 text-center">
+        <div className="rounded-sm border border-red-400/25 bg-red-950/20 px-3 py-2 text-center">
           <svg viewBox="0 0 12 12" className="h-3 w-3 text-red-400 mx-auto mb-1" fill="none">
             <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1.2" />
             <path d="M3.5 3.5l5 5M8.5 3.5l-5 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
@@ -97,7 +97,7 @@ function DifferentiateGraphic() {
           <p className="text-[9px] font-bold text-red-300">DECLINED</p>
           <p className="text-[7px] text-red-300/50 mt-0.5">CG 40 47 exclusion · 400%+ spike</p>
         </div>
-        <div className="rounded-xl border border-emerald-400/25 bg-emerald-950/20 px-3 py-2 text-center">
+        <div className="rounded-sm border border-emerald-400/25 bg-emerald-950/20 px-3 py-2 text-center">
           <svg viewBox="0 0 12 12" className="h-3 w-3 text-emerald-400 mx-auto mb-1" fill="none">
             <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1.2" />
             <path d="M3.5 6l2 2L8.5 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -133,7 +133,7 @@ function DeployGraphic() {
       className="mt-6 pt-5 border-t border-white/20 space-y-3"
     >
       {/* Client environment */}
-      <div className="relative rounded-xl border border-dashed border-white/25 px-4 pt-6 pb-4">
+      <div className="relative rounded-sm border border-dashed border-white/25 px-4 pt-6 pb-4">
         <span className="absolute -top-2.5 left-4 bg-primary text-[7px] font-bold uppercase tracking-widest text-white/50 px-2">
           Client Environment — nothing leaves this boundary
         </span>
@@ -144,7 +144,7 @@ function DeployGraphic() {
           <div className="flex flex-col items-center shrink-0 gap-1">
             <div className="flex gap-1">
               {[0, 1, 2].map((j) => (
-                <div key={j} className="h-6 w-6 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center">
+                <div key={j} className="h-6 w-6 rounded-sm bg-surface/10 border border-white/15 flex items-center justify-center">
                   <svg viewBox="0 0 10 10" className="h-3.5 w-3.5 text-white/50" fill="none">
                     <circle cx="5" cy="3.5" r="1.5" stroke="currentColor" strokeWidth="0.9" />
                     <path d="M1.5 9.5c0-1.9 1.5-3 3.5-3s3.5 1.1 3.5 3" stroke="currentColor" strokeWidth="0.9" strokeLinecap="round" />
@@ -157,11 +157,11 @@ function DeployGraphic() {
 
           {/* Animated connector */}
           <div className="flex-1 relative h-3 flex items-center overflow-hidden">
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-white/15" />
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-surface/15" />
             {[0, 0.6].map((delay, i) => (
               <motion.div
                 key={i}
-                className="absolute top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-white/70"
+                className="absolute top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-surface/70"
                 animate={{ left: ["0%", "100%"] }}
                 transition={{ duration: 1.1, repeat: Infinity, ease: "linear", delay }}
               />
@@ -170,7 +170,7 @@ function DeployGraphic() {
 
           {/* Bastion */}
           <div className="shrink-0 flex flex-col items-center gap-1">
-            <div className="h-10 w-10 rounded-xl bg-white/25 border-2 border-white/40 flex items-center justify-center shadow-lg shadow-black/20">
+            <div className="h-10 w-10 rounded-sm bg-surface/25 border-2 border-white/40 flex items-center justify-center shadow-lg shadow-black/20">
               <svg viewBox="0 0 14 16" className="h-5 w-5 text-white" fill="none">
                 <path d="M7 1L1 3.5v5C1 12 3.5 15 7 15.5 10.5 15 13 12 13 8.5v-5L7 1z" fill="rgba(255,255,255,0.2)" stroke="white" strokeWidth="1.2" />
                 <path d="M4.5 8.5l2 2L9.5 6" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -181,11 +181,11 @@ function DeployGraphic() {
 
           {/* Animated connector */}
           <div className="flex-1 relative h-3 flex items-center overflow-hidden">
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-white/15" />
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-surface/15" />
             {[0, 0.6].map((delay, i) => (
               <motion.div
                 key={i}
-                className="absolute top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-white/70"
+                className="absolute top-1/2 -translate-y-1/2 h-1.5 w-1.5 rounded-full bg-surface/70"
                 animate={{ left: ["0%", "100%"] }}
                 transition={{ duration: 1.1, repeat: Infinity, ease: "linear", delay }}
               />
@@ -194,7 +194,7 @@ function DeployGraphic() {
 
           {/* LLM */}
           <div className="shrink-0 flex flex-col items-center gap-1">
-            <div className="h-8 w-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+            <div className="h-8 w-8 rounded-full bg-surface/10 border border-white/20 flex items-center justify-center">
               <svg viewBox="0 0 16 16" className="h-4 w-4 text-white/50" fill="none">
                 <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.1" />
                 <path d="M1.5 8h13M8 1.5c-2 2.5-2 8.5 0 13M8 1.5c2 2.5 2 8.5 0 13" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
@@ -207,7 +207,7 @@ function DeployGraphic() {
         {/* Per-call checks + local telemetry — two columns */}
         <div className="grid grid-cols-2 gap-2">
           {/* Per-call checks */}
-          <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2.5">
+          <div className="rounded-sm border border-white/15 bg-black/20 px-3 py-2.5">
             <p className="text-[7px] font-bold uppercase tracking-widest text-white/40 mb-2">Per call</p>
             <div className="space-y-1.5">
               {CHECKS.map((c, i) => (
@@ -232,7 +232,7 @@ function DeployGraphic() {
           </div>
 
           {/* Local telemetry */}
-          <div className="rounded-lg border border-white/15 bg-black/20 px-3 py-2.5">
+          <div className="rounded-sm border border-white/15 bg-black/20 px-3 py-2.5">
             <p className="text-[7px] font-bold uppercase tracking-widest text-white/40 mb-2">Local telemetry store</p>
             <div className="space-y-1.5">
               {[
@@ -246,9 +246,9 @@ function DeployGraphic() {
                     <p className="text-[7px] text-white/40">{bar.label}</p>
                     <p className="text-[7px] text-white/40">{bar.fill}%</p>
                   </div>
-                  <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
+                  <div className="h-1 w-full rounded-full bg-surface/10 overflow-hidden">
                     <motion.div
-                      className="h-full rounded-full bg-white/50"
+                      className="h-full rounded-full bg-surface/50"
                       initial={{ width: "0%" }}
                       animate={{ width: `${bar.fill}%` }}
                       transition={{ delay: 0.2 + i * 0.08, duration: 0.6, ease: "easeOut" }}
@@ -262,7 +262,7 @@ function DeployGraphic() {
         </div>
 
         {/* Env var */}
-        <div className="mt-2.5 rounded-lg bg-black/30 border border-white/10 px-3 py-1.5 font-mono flex items-center gap-2">
+        <div className="mt-2.5 rounded-sm bg-black/30 border border-white/10 px-3 py-1.5 font-mono flex items-center gap-2">
           <span className="text-[7px] text-white/30 shrink-0">Only change needed:</span>
           <span className="text-[8px] text-blue-300">OPENAI_BASE_URL</span>
           <span className="text-[8px] text-white/25">=</span>
@@ -271,7 +271,7 @@ function DeployGraphic() {
       </div>
 
       {/* Telemetry metrics */}
-      <div className="rounded-xl border border-white/15 bg-white/5 px-4 py-3">
+      <div className="rounded-sm border border-white/15 bg-surface/5 px-4 py-3">
         <p className="text-[7px] font-bold uppercase tracking-widest text-white/35 mb-2.5">
           After 30 days — carrier report generated locally
         </p>
@@ -298,9 +298,9 @@ function DeployGraphic() {
             <span>Day 0 — deploy binary</span>
             <span>Day 30 — baseline complete</span>
           </div>
-          <div className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+          <div className="h-1.5 w-full rounded-full bg-surface/10 overflow-hidden">
             <motion.div
-              className="h-full rounded-full bg-white"
+              className="h-full rounded-full bg-surface"
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
               transition={{ duration: 2, delay: 0.5, ease: "easeInOut" }}
@@ -310,7 +310,7 @@ function DeployGraphic() {
         <svg viewBox="0 0 14 10" className="h-2.5 w-3.5 text-white/25 shrink-0" fill="none">
           <path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <div className="shrink-0 rounded-lg border border-white/25 bg-white/10 px-2.5 py-1 text-center">
+        <div className="shrink-0 rounded-sm border border-white/25 bg-surface/10 px-2.5 py-1 text-center">
           <p className="text-[8px] font-bold text-white leading-none">Carrier</p>
           <p className="text-[8px] font-bold text-white leading-none">Report</p>
         </div>
@@ -363,10 +363,10 @@ export default function BrokerageSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
               onClick={() => setActive(active === i ? null : i)}
-              className={`cursor-pointer rounded-2xl border p-8 transition-all duration-300 ${
+              className={`cursor-pointer rounded-sm border p-8 transition-all duration-300 ${
                 active === i
                   ? "border-primary bg-primary shadow-xl shadow-primary/20"
-                  : "border-border bg-white shadow-sm hover:border-primary/40 hover:shadow-md"
+                  : "border-border bg-surface shadow-sm hover:border-primary/40 hover:shadow-md"
               }`}
             >
               <div className="flex items-start justify-between gap-4">
@@ -395,7 +395,7 @@ export default function BrokerageSection() {
         >
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-base font-semibold text-white transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-3.5 text-base font-semibold text-white transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
           >
             Partner with us
             <svg viewBox="0 0 20 12" className="h-3 w-5" fill="none">

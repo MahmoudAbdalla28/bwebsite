@@ -51,7 +51,7 @@ export default function RedSection() {
                 initial={{ opacity: 0, x: -10 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 0.15 + i * 0.1 }}
-                className="rounded-xl border border-border bg-white p-5"
+                className="rounded-sm border border-border bg-surface p-5"
               >
                 <p className="text-sm font-semibold text-text">{cat.name}</p>
                 <p className="mt-1.5 text-sm leading-relaxed text-text-muted">{cat.desc}</p>
@@ -66,11 +66,11 @@ export default function RedSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 lg:w-72"
           >
-            <div className="rounded-xl border border-border bg-white p-5">
+            <div className="rounded-sm border border-border bg-surface p-5">
               <p className="text-xs font-semibold text-text">Low Effort</p>
               <p className="mt-1 text-xs text-text-muted">CI/CD smoke tests. 30 seconds to 2 minutes. Run on every PR.</p>
             </div>
-            <div className="rounded-xl border border-border bg-white p-5">
+            <div className="rounded-sm border border-border bg-surface p-5">
               <p className="text-xs font-semibold text-text">High Effort</p>
               <p className="mt-1 text-xs text-text-muted">Full adversarial campaigns. 2 to 5 minutes per category. Pre-launch audits.</p>
             </div>

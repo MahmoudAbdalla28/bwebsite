@@ -195,7 +195,7 @@ export default function InsuranceNexusSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="rounded-2xl border border-border bg-white p-6 md:p-8 shadow-lg shadow-primary/5 overflow-x-auto"
+          className="rounded-sm border border-border bg-surface p-6 md:p-8 shadow-lg shadow-primary/5 overflow-x-auto"
         >
           <div className="min-w-[720px]">
             {/* Column headers */}
@@ -251,7 +251,7 @@ export default function InsuranceNexusSection() {
                         onMouseLeave={() => setHoverCell(null)}
                       >
                         <div
-                          className={`flex items-center justify-center rounded-lg p-2 transition-all duration-300 ${
+                          className={`flex items-center justify-center rounded-sm p-2 transition-all duration-300 ${
                             level !== "none" ? "cursor-help" : ""
                           } ${
                             colHighlighted && level !== "none"
@@ -262,7 +262,7 @@ export default function InsuranceNexusSection() {
                           <CellSymbol level={level} />
                         </div>
                         {isHovered && level !== "none" && (
-                          <div className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-56 -translate-x-1/2 rounded-lg bg-text px-3 py-2 text-xs text-white shadow-xl">
+                          <div className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-56 -translate-x-1/2 rounded-sm bg-text px-3 py-2 text-xs text-white shadow-xl">
                             <p className="font-semibold mb-0.5">{feature.name}</p>
                             <p className="text-white/80 leading-relaxed">{feature.tip[c.id]}</p>
                             <span className="absolute top-full left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 w-2 h-2 bg-text" />
@@ -316,13 +316,13 @@ export default function InsuranceNexusSection() {
                   className={`rounded-full px-4 py-2 text-sm font-medium border transition-all duration-200 cursor-pointer ${
                     activeRisk === i
                       ? "bg-primary text-white border-primary shadow-md shadow-primary/20"
-                      : "bg-white text-text-muted border-border hover:border-primary/40 hover:text-text"
+                      : "bg-surface text-text-muted border-border hover:border-primary/40 hover:text-text"
                   }`}
                 >
                   {risk.name}
                 </button>
                 {hoverRisk === i && (
-                  <div className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-2 w-64 -translate-x-1/2 rounded-lg bg-text px-3 py-2 text-xs text-white shadow-xl">
+                  <div className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-2 w-64 -translate-x-1/2 rounded-sm bg-text px-3 py-2 text-xs text-white shadow-xl">
                     <p className="font-semibold mb-0.5">{risk.name}</p>
                     <p className="text-white/80 leading-relaxed">{risk.description}</p>
                     <span className="absolute top-full left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 w-2 h-2 bg-text" />
@@ -351,7 +351,7 @@ export default function InsuranceNexusSection() {
             </h3>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl border-2 border-primary bg-white p-8 shadow-md shadow-primary/10">
+            <div className="rounded-sm border-2 border-primary bg-surface p-8 shadow-md shadow-primary/10">
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary mb-4">
                 Confidence to Deploy
               </p>
@@ -362,7 +362,7 @@ export default function InsuranceNexusSection() {
                 Bastion is the controls, evidence, and defenses your legal and risk teams can sign off on.
               </p>
             </div>
-            <div className="rounded-2xl border-2 border-primary bg-white p-8 shadow-md shadow-primary/10">
+            <div className="rounded-sm border-2 border-primary bg-surface p-8 shadow-md shadow-primary/10">
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary mb-4">
                 Confidence to Procure
               </p>

@@ -67,7 +67,7 @@ export default function BlueFleetSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.15 + i * 0.08 }}
-              className={`rounded-xl border p-5 transition-all duration-300 ${
+              className={`rounded-sm border p-5 transition-all duration-300 ${
                 agent.status === "divergent"
                   ? "border-primary/50 bg-primary-bg shadow-md shadow-primary/10"
                   : "border-primary/50 bg-primary-bg shadow-md shadow-primary/10"
@@ -95,7 +95,7 @@ export default function BlueFleetSection() {
               </div>
 
               {agent.alert && (
-                <div className="mt-3 rounded-lg bg-white border border-primary/20 p-3">
+                <div className="mt-3 rounded-sm bg-surface border border-primary/20 p-3">
                   <p className="text-[10px] font-semibold text-primary mb-1">Fleet anomaly detected</p>
                   <p className="text-[10px] text-text-muted leading-relaxed">{agent.alert}</p>
                 </div>
@@ -127,7 +127,7 @@ export default function BlueFleetSection() {
                 desc: "Operator starts calling delete_record. No other agent has ever used it. Individual monitoring sees nothing wrong. Fleet correlation flags it immediately.",
               },
             ].map((item) => (
-              <div key={item.title} className="rounded-xl border border-border bg-white p-5">
+              <div key={item.title} className="rounded-sm border border-border bg-surface p-5">
                 <p className="text-sm font-semibold text-text">{item.title}</p>
                 <p className="text-xs text-text-muted mt-2 leading-relaxed">{item.desc}</p>
               </div>

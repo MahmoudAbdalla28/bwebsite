@@ -70,7 +70,7 @@ export default function ReportSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.07 }}
-              className="rounded-2xl border border-border bg-white p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col h-full"
+              className="rounded-sm border border-border bg-surface p-6 hover:border-primary/30 hover:shadow-md transition-all duration-300 flex flex-col h-full"
             >
               <h3 className="text-base font-bold text-text mb-2">{c.name}</h3>
               <p className="text-xs text-text-muted leading-relaxed mb-4 min-h-[72px]">{c.measures}</p>

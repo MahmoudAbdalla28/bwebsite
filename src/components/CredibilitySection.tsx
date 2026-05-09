@@ -27,7 +27,7 @@ export default function CredibilitySection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-12 overflow-hidden rounded-2xl border border-border bg-white shadow-xl shadow-black/5"
+          className="mt-12 overflow-hidden rounded-sm border border-border bg-surface shadow-xl shadow-black/5"
         >
           <div className="border-b border-border px-8 py-5">
             <div className="flex items-center justify-between flex-wrap gap-3">
@@ -55,7 +55,7 @@ export default function CredibilitySection() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.4 + i * 0.08 }}
-                  className={`rounded-xl ${m.bg} p-5`}
+                  className={`rounded-sm ${m.bg} p-5`}
                 >
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-text-dim">{m.label}</p>
                   <p className="mt-2">
@@ -67,7 +67,7 @@ export default function CredibilitySection() {
               ))}
             </div>
 
-            <div className="mt-6 rounded-xl border border-primary/20 bg-primary-bg px-5 py-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+            <div className="mt-6 rounded-sm border border-primary/20 bg-primary-bg px-5 py-4 flex flex-wrap items-center gap-x-6 gap-y-2">
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-primary" />
                 <span className="text-sm font-semibold text-primary">Eligible for standard AI liability coverage</span>
