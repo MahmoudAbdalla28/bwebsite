@@ -29,7 +29,7 @@ const PARTNERS = [
       "Active intervention before claims are filed",
     ],
     ctaLabel: "Partner with Bastion",
-    ctaHref: "/bastion/contact/",
+    ctaHref: "/contact/",
   },
   {
     eyebrow: "Auditors",
@@ -42,7 +42,7 @@ const PARTNERS = [
       "ISO 14971 risk-management dossiers",
     ],
     ctaLabel: "Partner with Bastion",
-    ctaHref: "/bastion/contact/",
+    ctaHref: "/contact/",
   },
   {
     eyebrow: "Compliance Firms",
@@ -55,7 +55,7 @@ const PARTNERS = [
       "Co-delivery on AI-specific procurement reviews",
     ],
     ctaLabel: "Partner with Bastion",
-    ctaHref: "/bastion/contact/",
+    ctaHref: "/contact/",
   },
 ];
 
@@ -170,7 +170,7 @@ export default function PartnersPage() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-100px" }}
-              href="/bastion/contact/"
+              href="/contact/"
               className="group flex flex-col md:flex-row items-start md:items-center justify-between gap-8 p-10 md:p-14 rounded-3xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-xl shadow-blue-500/5 transition-all hover:bg-white hover:-translate-y-1 hover:shadow-blue-500/15"
             >
               <div>

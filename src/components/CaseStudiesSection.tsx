@@ -51,7 +51,7 @@ const studies: CaseStudy[] = [
       },
     ],
     tags: ["Industrial AI", "Insurtech", "CGL Continuity", "Runtime Enforcement"],
-    href: "/bastion/case-studies/meba/",
+    href: "/case-studies/meba/",
   },
 ];
 
@@ -112,7 +112,7 @@ export default function CaseStudiesSection() {
             </h2>
           </div>
           <a
-            href="/bastion/contact/"
+            href="/contact/"
             className="group inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-gray-500 hover:text-blue-600 transition-colors"
             style={{ fontFamily: MONO }}
           >

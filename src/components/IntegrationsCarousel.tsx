@@ -6,27 +6,27 @@ type Integration = { name: string; logo: string; wordmark: boolean; category: Ca
 
 const integrations: Integration[] = [
   // LLM providers
-  { name: "OpenAI", logo: "/bastion/assets/logos/openai.svg", wordmark: false, category: "llm" },
-  { name: "Anthropic", logo: "/bastion/assets/logos/anthropic.svg", wordmark: false, category: "llm" },
-  { name: "AWS Bedrock", logo: "/bastion/assets/logos/aws.svg", wordmark: true, category: "llm" },
-  { name: "Google Vertex AI", logo: "/bastion/assets/logos/google-cloud.svg", wordmark: true, category: "llm" },
-  { name: "Azure OpenAI", logo: "/bastion/assets/logos/azure.svg", wordmark: false, category: "llm" },
-  { name: "Ollama", logo: "/bastion/assets/logos/ollama.svg", wordmark: false, category: "llm" },
-  { name: "LiteLLM", logo: "/bastion/assets/logos/litellm.svg", wordmark: false, category: "llm" },
+  { name: "OpenAI", logo: "/assets/logos/openai.svg", wordmark: false, category: "llm" },
+  { name: "Anthropic", logo: "/assets/logos/anthropic.svg", wordmark: false, category: "llm" },
+  { name: "AWS Bedrock", logo: "/assets/logos/aws.svg", wordmark: true, category: "llm" },
+  { name: "Google Vertex AI", logo: "/assets/logos/google-cloud.svg", wordmark: true, category: "llm" },
+  { name: "Azure OpenAI", logo: "/assets/logos/azure.svg", wordmark: false, category: "llm" },
+  { name: "Ollama", logo: "/assets/logos/ollama.svg", wordmark: false, category: "llm" },
+  { name: "LiteLLM", logo: "/assets/logos/litellm.svg", wordmark: false, category: "llm" },
 
   // SIEM / observability
-  { name: "Splunk", logo: "/bastion/assets/logos/splunk.svg", wordmark: false, category: "siem" },
-  { name: "Datadog", logo: "/bastion/assets/logos/datadog.svg", wordmark: false, category: "siem" },
-  { name: "Elastic", logo: "/bastion/assets/logos/elastic.svg", wordmark: false, category: "siem" },
-  { name: "Microsoft Sentinel", logo: "/bastion/assets/logos/microsoft.svg", wordmark: false, category: "siem" },
+  { name: "Splunk", logo: "/assets/logos/splunk.svg", wordmark: false, category: "siem" },
+  { name: "Datadog", logo: "/assets/logos/datadog.svg", wordmark: false, category: "siem" },
+  { name: "Elastic", logo: "/assets/logos/elastic.svg", wordmark: false, category: "siem" },
+  { name: "Microsoft Sentinel", logo: "/assets/logos/microsoft.svg", wordmark: false, category: "siem" },
 
   // Endpoint security / CASB
-  { name: "CrowdStrike", logo: "/bastion/assets/logos/crowdstrike.svg", wordmark: true, category: "security" },
-  { name: "Netskope", logo: "/bastion/assets/logos/netskope.svg", wordmark: true, category: "security" },
-  { name: "Zscaler", logo: "/bastion/assets/logos/zscaler.svg", wordmark: true, category: "security" },
-  { name: "Palo Alto", logo: "/bastion/assets/logos/paloalto.svg", wordmark: false, category: "security" },
-  { name: "SentinelOne", logo: "/bastion/assets/logos/sentinelone.svg", wordmark: true, category: "security" },
-  { name: "Bitdefender", logo: "/bastion/assets/logos/bitdefender.svg", wordmark: false, category: "security" },
+  { name: "CrowdStrike", logo: "/assets/logos/crowdstrike.svg", wordmark: true, category: "security" },
+  { name: "Netskope", logo: "/assets/logos/netskope.svg", wordmark: true, category: "security" },
+  { name: "Zscaler", logo: "/assets/logos/zscaler.svg", wordmark: true, category: "security" },
+  { name: "Palo Alto", logo: "/assets/logos/paloalto.svg", wordmark: false, category: "security" },
+  { name: "SentinelOne", logo: "/assets/logos/sentinelone.svg", wordmark: true, category: "security" },
+  { name: "Bitdefender", logo: "/assets/logos/bitdefender.svg", wordmark: false, category: "security" },
 ];
 
 const copy: Record<Category, { label: string; title: string; body: string }> = {

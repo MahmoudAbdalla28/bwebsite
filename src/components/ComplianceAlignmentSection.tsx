@@ -459,7 +459,7 @@ export default function ComplianceAlignmentSection() {
           className="mt-10 flex justify-center"
         >
           <a
-            href="/bastion/contact/"
+            href="/contact/"
             className="btn-glow inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-4 text-sm font-semibold text-white transition-all hover: bg-primary-dark hover: scale-[1.02] active: scale-[0.99]"
           >
             Talk to us about your compliance posture

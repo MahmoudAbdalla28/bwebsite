@@ -10,13 +10,13 @@ const SANS = "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif";
 const MONO = "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif";
 
 const COMPLIANCES: { name: string; logo: string; type: "circle" | "wide" }[] = [
-  { name: "EU AI Act", logo: "/bastion/assets/compliance/eu-ai-act.png", type: "circle" },
-  { name: "NAIC", logo: "/bastion/assets/compliance/naic.png", type: "wide" },
-  { name: "GDPR", logo: "/bastion/assets/compliance/gdpr.png", type: "circle" },
-  { name: "Central Bank of Bahrain", logo: "/bastion/assets/compliance/cbb.png", type: "circle" },
-  { name: "FDA", logo: "/bastion/assets/compliance/fda.png", type: "circle" },
-  { name: "ISO 14971", logo: "/bastion/assets/compliance/iso.png", type: "circle" },
-  { name: "NIST RMF", logo: "/bastion/assets/compliance/nist.png", type: "circle" },
+  { name: "EU AI Act", logo: "/assets/compliance/eu-ai-act.png", type: "circle" },
+  { name: "NAIC", logo: "/assets/compliance/naic.png", type: "wide" },
+  { name: "GDPR", logo: "/assets/compliance/gdpr.png", type: "circle" },
+  { name: "Central Bank of Bahrain", logo: "/assets/compliance/cbb.png", type: "circle" },
+  { name: "FDA", logo: "/assets/compliance/fda.png", type: "circle" },
+  { name: "ISO 14971", logo: "/assets/compliance/iso.png", type: "circle" },
+  { name: "NIST RMF", logo: "/assets/compliance/nist.png", type: "circle" },
 ];
 
 interface PostureItem {
@@ -72,7 +72,7 @@ const ANALYSTS: { source: string; date: string; title: string; quote: string; ta
     quote: "70% of organizations lack a defined AI governance model. 72% aren't fully compliant with the EU AI Act, even as awareness reaches 80%.",
     tags: ["Governance", "EU AI Act"],
     url: "https://www.ey.com/en_ro/newsroom/2025/08/ey-survey-ai-adoption-outpaces-governance-as-risk-awareness",
-    image: "/bastion/assets/analysts/ey.png",
+    image: "/assets/analysts/ey.png",
   },
   {
     source: "Gartner",
@@ -81,7 +81,7 @@ const ANALYSTS: { source: string; date: string; title: string; quote: string; ta
     quote: "By 2028, 25% of large organizations will run dedicated AI governance teams — up from less than 1% in 2023. Runtime inspection is now core.",
     tags: ["AI TRiSM", "Runtime"],
     url: "https://www.gartner.com/en/articles/ai-trust-and-ai-risk",
-    image: "/bastion/assets/analysts/gartner.png",
+    image: "/assets/analysts/gartner.png",
   },
   {
     source: "McKinsey",
@@ -90,7 +90,7 @@ const ANALYSTS: { source: string; date: string; title: string; quote: string; ta
     quote: "80% of organizations have encountered risky behavior from AI agents. Without upgrading inventory, identity management, or observability, organizations can't govern what they can't see.",
     tags: ["Governance", "Agents"],
     url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
-    image: "/bastion/assets/analysts/mckinsey.png",
+    image: "/assets/analysts/mckinsey.png",
   },
   {
     source: "PwC",
@@ -99,7 +99,7 @@ const ANALYSTS: { source: string; date: string; title: string; quote: string; ta
     quote: "Just 14% of organizations are fully prepared for the EU AI Act. 53% cite limited internal expertise as the top blocker — the build-it-yourself path is closing.",
     tags: ["Compliance", "Readiness"],
     url: "https://www.pwc.ie/media-centre/press-releases/2026/responsible-ai-survey.html",
-    image: "/bastion/assets/analysts/pwc.png",
+    image: "/assets/analysts/pwc.png",
   },
 ];
 
@@ -139,7 +139,7 @@ export default function Home() {
             aria-hidden="true"
             className="absolute inset-0 z-0"
             style={{
-              backgroundImage: "url(/bastion/assets/landing-mountains.png)",
+              backgroundImage: "url(/assets/landing-mountains.png)",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -185,7 +185,7 @@ export default function Home() {
               className="mt-12 flex flex-wrap items-center justify-center gap-3"
             >
               <a
-                href="/bastion/contact/"
+                href="/contact/"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-blue-600 hover:bg-blue-500 px-7 py-3.5 text-[14px] font-semibold text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-[0_10px_30px_-8px_rgba(37,99,235,0.7)]"
               >
                 Book an Assessment
@@ -194,7 +194,7 @@ export default function Home() {
                 </svg>
               </a>
               <a
-                href="/bastion/contact/"
+                href="/contact/"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/15 hover:border-white/50 px-7 py-3.5 text-[14px] font-semibold text-white transition-all hover:-translate-y-0.5"
               >
                 Underwriting AI Risk?
@@ -311,7 +311,7 @@ export default function Home() {
                 title="Your existing certifications cover the infrastructure, not the agent."
                 body="SOC 2 proves your access controls work. HIPAA proves your data is encrypted. ISO 27001 proves your security program is documented. None of them prove your AI agent stayed within its declared clinical or financial boundaries on Tuesday at 3pm. When your FDA reviewer asks, when your enterprise buyer's procurement team asks, when your carrier needs to underwrite the agent itself, the compliance you already maintain doesn't answer the question. Bastion produces the evidence layer that does, continuously, mapped to FDA PCCP, EU AI Act, MRM, AIUC, and the frameworks that govern agentic behavior specifically."
                 cta="See what Bastion produces"
-                ctaHref="/bastion/insurance/"
+                ctaHref="/insurance/"
                 slideFrom="left"
               />
               <GlassProblemCard
@@ -319,7 +319,7 @@ export default function Home() {
                 title="Compliance isn't a milestone. Neither is agentic attestation."
                 body="You renew SOC 2 every year. You re-attest HIPAA continuously. You don't ship a model update and assume your security posture is intact. You re-validate. Your AI agent works the same way. A new model version, a prompt change, an infrastructure update you didn't control: any of these can silently move your agent outside its declared boundaries. Your existing compliance tools don't catch it because they were never built to. Bastion re-attests on every change, automatically."
                 cta="See how Bastion catches it"
-                ctaHref="/bastion/platform/"
+                ctaHref="/platform/"
                 slideFrom="right"
               />
             </motion.div>
@@ -375,7 +375,7 @@ export default function Home() {
                   Your SOC 2 program proves access controls. Your HIPAA program proves data handling. Neither proves that your AI agent stayed inside its declared clinical, financial, or operational boundaries on Tuesday at 3pm. Bastion is the continuous, framework-mapped posture file your auditor and your enterprise buyer can act on &mdash; built specifically for the agentic-behavior layer.
                 </p>
                 <a
-                  href="/bastion/compliance/"
+                  href="/compliance/"
                   className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-900"
                 >
                   See the framework mapping <span aria-hidden>→</span>
@@ -399,7 +399,7 @@ export default function Home() {
                   An AI-specific addendum lands on your customer&apos;s desk. It gets forwarded to whoever owns compliance. Someone spends a weekend in a Google Doc. Their team comes back with 15 follow-ups. Three weeks later, the deal moves. With Bastion, you walk in with the document already done &mdash; and steps 3 through 5 collapse into a single posture file.
                 </p>
                 <a
-                  href="/bastion/contact/"
+                  href="/contact/"
                   className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-900"
                 >
                   Book an assessment <span aria-hidden>→</span>
@@ -982,7 +982,7 @@ export default function Home() {
           >
             <motion.a
               variants={FADE_LEFT}
-              href="/bastion/contact/"
+              href="/contact/"
               className="group flex flex-col justify-between gap-12 p-10 md:p-14 rounded-3xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-xl shadow-blue-500/5 transition-all hover:bg-white hover:-translate-y-1 hover:shadow-blue-500/15"
             >
               <div>
@@ -1008,7 +1008,7 @@ export default function Home() {
             </motion.a>
             <motion.a
               variants={FADE_RIGHT}
-              href="/bastion/contact/"
+              href="/contact/"
               className="group flex flex-col justify-between gap-12 p-10 md:p-14 rounded-3xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-xl shadow-blue-500/5 transition-all hover:bg-white hover:-translate-y-1 hover:shadow-blue-500/15"
             >
               <div>
@@ -1040,7 +1040,7 @@ export default function Home() {
           <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/bastion/assets/bastion-logo.webp" alt="Bastion" className="h-8 w-auto opacity-90" />
+              <img src="/assets/bastion-logo.webp" alt="Bastion" className="h-8 w-auto opacity-90" />
               <span className="border-l border-gray-300 pl-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 leading-tight">
                 Agentic Risk<br />Infrastructure
               </span>

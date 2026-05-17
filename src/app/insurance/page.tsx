@@ -83,7 +83,7 @@ export default function InsurancePage() {
               className="mt-12 flex flex-wrap items-center justify-center gap-3"
             >
               <a
-                href="/bastion/contact/"
+                href="/contact/"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-blue-600 hover:bg-blue-700 px-7 py-3.5 text-[14px] font-semibold text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-[0_10px_30px_-8px_rgba(37,99,235,0.5)]"
               >
                 Book a Pre-Underwriting Walkthrough
@@ -413,7 +413,7 @@ export default function InsurancePage() {
             >
               Ecosystem learning operates on anonymized failure classes, never customer payloads. We don&apos;t train models on your data and we don&apos;t sell or share it.{" "}
               <a
-                href="/bastion/faq/#faq"
+                href="/faq/#faq"
                 className="text-blue-700 hover:text-blue-800 underline underline-offset-2 decoration-blue-700/40 hover:decoration-blue-800/70 transition-colors"
               >
                 See data handling
@@ -483,7 +483,7 @@ export default function InsurancePage() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-100px" }}
-              href="/bastion/contact/"
+              href="/contact/"
               className="group flex flex-col md:flex-row items-start md:items-center justify-between gap-8 p-10 md:p-14 rounded-3xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-xl shadow-blue-500/5 transition-all hover:bg-white hover:-translate-y-1 hover:shadow-blue-500/15"
             >
               <div>
@@ -515,7 +515,7 @@ export default function InsurancePage() {
           <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/bastion/assets/bastion-logo.webp" alt="Bastion" className="h-8 w-auto opacity-90" />
+              <img src="/assets/bastion-logo.webp" alt="Bastion" className="h-8 w-auto opacity-90" />
               <span className="border-l border-gray-300 pl-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 leading-tight">
                 Agentic Risk<br />Infrastructure
               </span>

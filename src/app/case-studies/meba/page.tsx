@@ -16,7 +16,7 @@ export default function MebaCaseStudyPage() {
         <article className="mx-auto max-w-5xl px-6">
           {/* Back link */}
           <a
-            href="/bastion/case-studies/"
+            href="/case-studies/"
             className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-text-dim hover:text-primary transition-colors"
           >
             <svg viewBox="0 0 16 16" className="h-3 w-3" fill="none">
@@ -97,7 +97,7 @@ export default function MebaCaseStudyPage() {
             <figure className="overflow-hidden rounded-sm border border-border bg-bg-alt shadow-lg shadow-primary/5 lg:-mx-12 xl:-mx-24">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/bastion/assets/case-studies/meba-knowledge-graph-v2.png"
+                src="/assets/case-studies/meba-knowledge-graph-v2.png"
                 alt="Bastion policy vault knowledge graph governing MEBA agent operations"
                 className="w-full"
               />
@@ -167,7 +167,7 @@ export default function MebaCaseStudyPage() {
               MEBA engagement implemented by <strong className="text-text font-semibold">Piston Solutions</strong>, with deep experience deploying industrial AI infrastructure across Tier 1 supply chains.
             </p>
             <a
-              href="/bastion/contact/"
+              href="/contact/"
               className="btn-glow mt-6 inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.98]"
             >
               Request a briefing

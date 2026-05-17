@@ -29,14 +29,14 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
   const burgerCls = "bg-text-muted";
 
   const links = [
-    { label: "Platform", href: "/bastion/platform/" },
-    { label: "Insurance", href: "/bastion/insurance/" },
-    { label: "Compliance", href: "/bastion/compliance/" },
+    { label: "Platform", href: "/platform/" },
+    { label: "Insurance", href: "/insurance/" },
+    { label: "Compliance", href: "/compliance/" },
   ];
 
   const resources: ResourceItem[] = [
-    { label: "Case Studies", href: "/bastion/case-studies/" },
-    { label: "Partners", href: "/bastion/partners/" },
+    { label: "Case Studies", href: "/case-studies/" },
+    { label: "Partners", href: "/partners/" },
   ];
 
   const openResources = () => {
@@ -55,10 +55,10 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
       className="fixed top-4 md:top-5 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] md:w-[calc(100%-3rem)] max-w-7xl rounded-2xl bg-white/95 backdrop-blur-xl border border-gray-200/70 shadow-lg shadow-gray-900/5"
     >
       <div className="flex items-center justify-between px-5 md:px-6 py-3 md:py-4">
-        <a href="/bastion" className="cursor-pointer flex items-center gap-3">
+        <a href="/" className="cursor-pointer flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/bastion/assets/bastion-logo.webp"
+            src="/assets/bastion-logo.webp"
             alt="Bastion"
             className="h-9 md:h-11 w-auto object-contain"
             style={{
@@ -126,7 +126,7 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
 
         <div className="hidden items-center gap-3 md:flex">
           <a
-            href="/bastion/contact/"
+            href="/contact/"
             className="rounded-full bg-blue-600 hover:bg-blue-700 px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-white transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer shadow-md shadow-blue-500/30"
           >
             Book an Assessment
@@ -168,7 +168,7 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
                 </a>
               ))}
               <div className="mt-3 border-t border-border pt-4">
-                <a href="/bastion/contact/" onClick={() => setMobileOpen(false)} className="btn-glow block rounded-sm bg-primary px-5 py-3 text-center text-sm font-semibold text-white cursor-pointer">
+                <a href="/contact/" onClick={() => setMobileOpen(false)} className="btn-glow block rounded-sm bg-primary px-5 py-3 text-center text-sm font-semibold text-white cursor-pointer">
                   Request a demo
                 </a>
               </div>

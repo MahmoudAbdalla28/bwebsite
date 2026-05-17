@@ -158,7 +158,7 @@ export default function WhatThisMeansSection() {
           className="mt-8 flex justify-center"
         >
           <a
-            href={`/bastion/contact/?persona=${persona.id}`}
+            href={`/contact/?persona=${persona.id}`}
             className="btn-glow inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-4 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
           >
             Continue this conversation

@@ -81,7 +81,7 @@ const AUDIENCES = [
       "Annual SOC 2, ISO 42001, and NIST AI RMF attestations",
     ],
     ctaLabel: "Book an Assessment",
-    ctaHref: "/bastion/contact/",
+    ctaHref: "/contact/",
   },
 ];
 
@@ -142,7 +142,7 @@ export default function PlatformPage() {
                 className="mt-12 flex flex-wrap items-center justify-center gap-3"
               >
                 <a
-                  href="/bastion/contact/"
+                  href="/contact/"
                   className="group inline-flex items-center gap-2.5 rounded-full bg-blue-600 hover:bg-blue-700 px-7 py-3.5 text-[14px] font-semibold text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-[0_10px_30px_-8px_rgba(37,99,235,0.5)]"
                 >
                   Book a Walkthrough
@@ -448,7 +448,7 @@ export default function PlatformPage() {
             >
               Carrier, MGA, auditor, or compliance firm?{" "}
               <a
-                href="/bastion/partners/"
+                href="/partners/"
                 className="font-semibold text-blue-700 hover:text-blue-900"
               >
                 See how we partner →
@@ -524,7 +524,7 @@ export default function PlatformPage() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-100px" }}
-              href="/bastion/contact/"
+              href="/contact/"
               className="group flex flex-col md:flex-row items-start md:items-center justify-between gap-8 p-10 md:p-14 rounded-3xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-xl shadow-blue-500/5 transition-all hover:bg-white hover:-translate-y-1 hover:shadow-blue-500/15"
             >
               <div>
@@ -556,14 +556,14 @@ export default function PlatformPage() {
           <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/bastion/assets/bastion-logo.webp" alt="Bastion" className="h-8 w-auto opacity-90" />
+              <img src="/assets/bastion-logo.webp" alt="Bastion" className="h-8 w-auto opacity-90" />
               <span className="border-l border-gray-300 pl-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 leading-tight">
                 Agentic Risk<br />Infrastructure
               </span>
             </div>
             <div className="flex flex-wrap items-center gap-8">
-              <a href="/bastion/faq/" className="text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-600 hover:text-gray-900 transition-colors">FAQ</a>
-              <a href="/bastion/contact/" className="text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
+              <a href="/faq/" className="text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-600 hover:text-gray-900 transition-colors">FAQ</a>
+              <a href="/contact/" className="text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
             </div>
             <p
               className="text-[11px] text-gray-500 leading-relaxed max-w-2xl"
