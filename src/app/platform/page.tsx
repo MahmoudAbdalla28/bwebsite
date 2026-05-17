@@ -36,35 +36,35 @@ const PIPELINE = [
     number: "01",
     title: "External Probe",
     sub: "Adversarial QA on the public surface.",
-    body: "We attack your public-facing agent — phone number, chatbot endpoint, API. Prompt injection, scope-boundary manipulation, tool-chain composition attacks, jailbreaks. No SDK on your side, no data shared, no install. Your agent is probed exactly the way an attacker would probe it.",
+    body: "We attack your public-facing agent: phone number, chatbot endpoint, API. Prompt injection, scope-boundary manipulation, tool-chain composition attacks, jailbreaks. No SDK on your side, no data shared, no install. Your agent is probed exactly the way an attacker would probe it.",
     note: "No integration required to start. We probe from outside.",
   },
   {
     number: "02",
     title: "Knowledge Graph",
     sub: "Your deployment-specific failure surface.",
-    body: "Every finding gets encoded into a structured map of how your agent fails — not its intended behavior. Vectors, severity, the path through your tool-chain. A living model of your real failure surface, not a generic threat list.",
+    body: "Every finding gets encoded into a structured map of how your agent fails, not its intended behavior. Vectors, severity, the path through your tool-chain. A living model of your real failure surface, not a generic threat list.",
     note: "Re-built on every model, prompt, corpus, or tool-chain change.",
   },
   {
     number: "03",
-    title: "CI/CD Re-attestation",
-    sub: "Every change triggers a regression pass.",
-    body: "A new model version. A prompt change. An infra update you didn't control. Each one runs against the Knowledge Graph automatically. Did this change introduce a pattern we've already proven is dangerous? Did it move the agent outside its declared boundaries?",
-    note: "Automatic. Hooks into your existing CI/CD.",
+    title: "Continuous Re-attestation",
+    sub: "Every change re-tested against the proven failure surface.",
+    body: "A new model version. A prompt change. A new tool or knowledge update. Each one runs against the Knowledge Graph automatically. Did this change reintroduce a pattern we've already proven is dangerous? Did it move the agent outside its declared boundaries? You see the answer before the change reaches your customers.",
+    note: "Automatic. Triggered the moment your agent changes.",
   },
   {
     number: "04",
     title: "Runtime Pattern Matching",
     sub: "Production traffic checked against the verified surface.",
-    body: "In production, every live interaction is checked against the Knowledge Graph. Not generic anomaly detection — specific pattern matching against your known failure vectors. When a real interaction approaches a vector we've already proven dangerous, Bastion flags it before it becomes an incident.",
+    body: "In production, every live interaction is checked against the Knowledge Graph. Not generic anomaly detection: specific pattern matching against your known failure vectors. When a real interaction approaches a vector we've already proven dangerous, Bastion flags it before it becomes an incident.",
     note: "Sub-millisecond overhead. Out-of-band by default; inline when enforcement is enabled.",
   },
   {
     number: "05",
     title: "Posture File",
     sub: "The artifact your regulator can act on.",
-    body: "A continuously versioned evidence file. Every adversarial finding, every CI/CD pass, every runtime observation — mapped to your specific regulatory framework. FDA PCCP, ISO 14971, NIST AI RMF, EU AI Act, NAIC. When someone asks you to prove the agent behaved, this is what you hand them.",
+    body: "A continuously versioned evidence file. Every adversarial finding, every re-attestation, every runtime observation, mapped to your specific regulatory framework. FDA PCCP, ISO 14971, HIPAA, NIST AI RMF, EU AI Act, NAIC. When someone asks you to prove the agent behaved, this is what you hand them.",
     note: "Carrier-panel format. Regulator-defensible. Tamper-evident.",
   },
 ];
@@ -73,7 +73,7 @@ const AUDIENCES = [
   {
     eyebrow: "For Enterprises",
     title: "Deploying AI agents in production.",
-    body: "Security and platform engineering own the deploy. Risk and compliance often hold the budget because of the insurance angle. Bastion drops in without an SDK rewrite and produces the evidence file your legal, audit, and risk teams have been asking for.",
+    body: "The Chief Compliance Officer and CISO own this decision. The CEO unblocks the procurement cycle. Bastion produces the evidence file your legal, audit, and risk teams have been asked to prove, without a months-long buildout. Your SOC 2 and ISO 27001 programs prove your infrastructure is secure. Bastion is the regulatory framework infrastructure that proves your AI agent is, a category neither was built to address.",
     triggers: [
       "FDA submissions and post-market change reports",
       "Enterprise procurement reviews and AI liability questionnaires",
@@ -81,32 +81,6 @@ const AUDIENCES = [
       "Annual SOC 2, ISO 42001, and NIST AI RMF attestations",
     ],
     ctaLabel: "Book an Assessment",
-    ctaHref: "/bastion/contact/",
-  },
-  {
-    eyebrow: "For Carriers / MGAs",
-    title: "Underwriting agentic AI policies.",
-    body: "You cannot write affirmative AI coverage on a self-attested questionnaire. Bastion is the independent telemetry layer your policy period requires — pre-bind, in-force, and at renewal. We do not underwrite. We produce the evidence file your carrier panel can consume.",
-    triggers: [
-      "Pre-bind risk posture without asking the client to integrate",
-      "In-force monitoring across the policy period",
-      "Renewal pricing on policy-long evidence, not point-in-time questionnaires",
-      "Active intervention before claims are filed",
-    ],
-    ctaLabel: "MGA / Carrier Partner",
-    ctaHref: "/bastion/insurance/",
-  },
-  {
-    eyebrow: "For Regulators & Auditors",
-    title: "Verifying agentic AI compliance.",
-    body: "When the question is whether an agent stayed within its declared boundaries across every interaction, every update, every change — the answer is in the posture file. Bastion produces the documented evidence trail that converts opinion into fact.",
-    triggers: [
-      "FDA Predetermined Change Control Plan reviews",
-      "EU AI Act high-risk system audits (Articles 9–15)",
-      "NAIC Model Bulletin compliance evidence",
-      "ISO 14971 risk-management dossiers",
-    ],
-    ctaLabel: "Reach Out",
     ctaHref: "/bastion/contact/",
   },
 ];
@@ -122,7 +96,6 @@ const VERTICALS = [
 
 export default function PlatformPage() {
   const [activeStep, setActiveStep] = useState(0);
-  const [selectedAudience, setSelectedAudience] = useState<number | null>(null);
   return (
     <div
       className="relative min-h-screen text-gray-900 overflow-x-hidden"
@@ -359,7 +332,7 @@ export default function PlatformPage() {
                 <span className="text-blue-600 italic font-medium">live.</span>
               </h2>
               <p className="mt-7 text-base md:text-lg leading-relaxed text-gray-600">
-                Click any node — agent, tool, policy, finding — to see the facts Bastion has indexed. Filter by source to see what came from telemetry, what came from policy docs, what came from Red findings.
+                Click any node (agent, tool, policy, finding) to see the facts Bastion has indexed. Filter by source to see what came from telemetry, what came from policy docs, what came from Red findings.
               </p>
             </motion.div>
 
@@ -374,7 +347,7 @@ export default function PlatformPage() {
           </div>
         </section>
 
-        {/* WHO — three audiences */}
+        {/* WHO — built for enterprises */}
         <section className="relative py-20 md:py-28">
           <div className="mx-auto max-w-7xl px-6">
             <motion.div
@@ -382,7 +355,7 @@ export default function PlatformPage() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-100px" }}
-              className="mb-16 text-center max-w-3xl mx-auto"
+              className="mb-12 md:mb-14 text-center max-w-3xl mx-auto"
             >
               <p
                 className="text-[11px] font-semibold uppercase tracking-[0.28em] text-blue-700 mb-5"
@@ -394,169 +367,93 @@ export default function PlatformPage() {
                 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.025em] leading-[1.05] text-gray-900"
                 style={{ fontFamily: SANS }}
               >
-                Three audiences.{" "}
-                <span className="text-blue-600 italic font-medium">One evidence layer.</span>
+                Built for enterprises{" "}
+                <span className="text-blue-600 italic font-medium">deploying AI agents.</span>
               </h2>
               <p className="mt-7 text-base md:text-lg leading-relaxed text-gray-600">
-                The same posture file is consumable by the people building the agent, the people writing the policy, and the people checking the work.
+                The posture file is built for the compliance owner who has to defend it, the executive who has to close the deal, and the auditor who has to sign off.
               </p>
             </motion.div>
 
-            <div className="relative min-h-[420px] md:min-h-[480px]">
-              <AnimatePresence mode="wait">
-                {selectedAudience === null ? (
-                  <motion.div
-                    key="rotating"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="relative"
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="mx-auto max-w-5xl rounded-3xl bg-white/80 backdrop-blur-xl border border-gray-200/70 shadow-lg shadow-blue-500/5 p-8 md:p-12 grid md:grid-cols-12 gap-10 md:gap-14"
+            >
+              <div className="md:col-span-5 flex flex-col">
+                <p
+                  className="text-[11px] font-semibold uppercase tracking-[0.28em] text-blue-700 mb-5"
+                  style={{ fontFamily: MONO }}
+                >
+                  {AUDIENCES[0].eyebrow}
+                </p>
+                <h3
+                  className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-[-0.02em] text-gray-900 leading-[1.1]"
+                  style={{ fontFamily: SANS }}
+                >
+                  {AUDIENCES[0].title}
+                </h3>
+                <a
+                  href={AUDIENCES[0].ctaHref}
+                  className="mt-8 inline-flex items-center gap-2 self-start rounded-full bg-blue-600 hover:bg-blue-700 px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.16em] text-white transition-all hover:-translate-y-0.5 shadow-md shadow-blue-500/30"
+                >
+                  {AUDIENCES[0].ctaLabel}
+                  <svg viewBox="0 0 16 12" className="h-3 w-4" fill="none">
+                    <path
+                      d="M0 6h13M9 1l5 5-5 5"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </a>
+              </div>
+
+              <div className="md:col-span-7">
+                <p className="text-base md:text-lg leading-relaxed text-gray-700">
+                  {AUDIENCES[0].body}
+                </p>
+
+                <div className="mt-8 pt-6 border-t border-gray-200/60">
+                  <p
+                    className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gray-500 mb-4"
+                    style={{ fontFamily: MONO }}
                   >
-                    <p
-                      className="text-center text-[10px] font-semibold uppercase tracking-[0.32em] text-gray-400 mb-10"
-                      style={{ fontFamily: MONO }}
-                    >
-                      Click a name to see how it fits
-                    </p>
-
-                    <div
-                      className="relative h-[330px] md:h-[420px] overflow-hidden"
-                      style={{
-                        // Fade names in at the top and out at the bottom via alpha mask —
-                        // no overlay divs, no backdrop blur, the page mesh shows through cleanly.
-                        maskImage:
-                          "linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%)",
-                        WebkitMaskImage:
-                          "linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%)",
-                      }}
-                    >
-                      <motion.div
-                        initial={{ y: "-50%" }}
-                        animate={{ y: "0%" }}
-                        transition={{
-                          duration: 14,
-                          ease: "linear",
-                          repeat: Infinity,
-                          repeatType: "loop",
-                        }}
-                        className="flex flex-col"
+                    Where It Triggers
+                  </p>
+                  <ul className="space-y-3">
+                    {AUDIENCES[0].triggers.map((t) => (
+                      <li
+                        key={t}
+                        className="flex items-start gap-3 text-sm md:text-base leading-relaxed text-gray-700"
                       >
-                        {[...AUDIENCES, ...AUDIENCES].map((aud, i) => (
-                          <button
-                            key={i}
-                            type="button"
-                            onClick={() => setSelectedAudience(i % AUDIENCES.length)}
-                            className="h-[110px] md:h-[140px] flex items-center justify-center text-3xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.025em] text-gray-300 hover:text-blue-600 active:text-blue-700 transition-colors duration-300 cursor-pointer text-center px-6"
-                            style={{ fontFamily: SANS }}
-                          >
-                            {aud.eyebrow}
-                          </button>
-                        ))}
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="detail"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                    className="relative grid md:grid-cols-12 gap-10 md:gap-16 pt-4"
-                  >
-                    {/* Close button */}
-                    <button
-                      type="button"
-                      onClick={() => setSelectedAudience(null)}
-                      className="absolute top-0 right-0 h-11 w-11 rounded-full bg-white/80 backdrop-blur-md border border-gray-200/60 hover:bg-white hover:border-blue-300 flex items-center justify-center group transition-colors z-10"
-                      aria-label="Close"
-                    >
-                      <svg
-                        viewBox="0 0 16 16"
-                        className="h-4 w-4 text-gray-500 group-hover:text-blue-600 transition-colors"
-                        fill="none"
-                      >
-                        <path
-                          d="M3 3l10 10M13 3L3 13"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </button>
+                        <span className="mt-2.5 h-1.5 w-1.5 rounded-full bg-blue-600 shrink-0" />
+                        <span>{t}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
 
-                    {/* Left: title */}
-                    <motion.div
-                      initial={{ x: 30, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-                      className="md:col-span-5 flex flex-col justify-center md:sticky md:top-32 md:self-start md:pr-6"
-                    >
-                      <p
-                        className="text-[11px] font-semibold uppercase tracking-[0.28em] text-blue-700 mb-6"
-                        style={{ fontFamily: MONO }}
-                      >
-                        {AUDIENCES[selectedAudience].eyebrow}
-                      </p>
-                      <h3
-                        className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-[-0.02em] text-gray-900 leading-[1.1]"
-                        style={{ fontFamily: SANS }}
-                      >
-                        {AUDIENCES[selectedAudience].title}
-                      </h3>
-                    </motion.div>
-
-                    {/* Right: info */}
-                    <motion.div
-                      initial={{ x: -20, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-                      className="md:col-span-7 flex flex-col pr-14 md:pr-16"
-                    >
-                      <p className="text-base md:text-lg leading-relaxed text-gray-600">
-                        {AUDIENCES[selectedAudience].body}
-                      </p>
-
-                      <div className="mt-8 pt-6 border-t border-gray-200/60">
-                        <p
-                          className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gray-500 mb-4"
-                          style={{ fontFamily: MONO }}
-                        >
-                          Where It Triggers
-                        </p>
-                        <ul className="space-y-3">
-                          {AUDIENCES[selectedAudience].triggers.map((t) => (
-                            <li
-                              key={t}
-                              className="flex items-start gap-3 text-sm md:text-base leading-relaxed text-gray-700"
-                            >
-                              <span className="mt-2.5 h-1.5 w-1.5 rounded-full bg-blue-600 shrink-0" />
-                              <span>{t}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <a
-                        href={AUDIENCES[selectedAudience].ctaHref}
-                        className="mt-10 inline-flex items-center gap-2 self-start rounded-full bg-blue-600 hover:bg-blue-700 px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.16em] text-white transition-all hover:-translate-y-0.5 shadow-md shadow-blue-500/30"
-                      >
-                        {AUDIENCES[selectedAudience].ctaLabel}
-                        <svg viewBox="0 0 16 12" className="h-3 w-4" fill="none">
-                          <path
-                            d="M0 6h13M9 1l5 5-5 5"
-                            stroke="currentColor"
-                            strokeWidth="1.6"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                      </a>
-                    </motion.div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            {/* Partner pointer */}
+            <motion.p
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="mt-8 text-center text-[12px] md:text-[13px] text-gray-600"
+            >
+              Carrier, MGA, auditor, or compliance firm?{" "}
+              <a
+                href="/bastion/partners/"
+                className="font-semibold text-blue-700 hover:text-blue-900"
+              >
+                See how we partner →
+              </a>
+            </motion.p>
           </div>
         </section>
 
@@ -641,7 +538,7 @@ export default function PlatformPage() {
                   className="text-2xl md:text-3xl font-semibold tracking-[-0.015em] leading-tight text-gray-900"
                   style={{ fontFamily: SANS }}
                 >
-                  Pre-underwriting probe in 30 minutes. Posture file in under a week. Production enforcement at 30 days.
+                  Pre-underwriting probe in 30 minutes. Posture report in 24 hours. Audit-ready in 2 weeks.
                 </p>
               </div>
               <span className="inline-flex items-center gap-3 text-[13px] font-semibold uppercase tracking-[0.16em] text-gray-900 shrink-0">

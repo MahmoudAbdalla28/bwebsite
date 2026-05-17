@@ -30,15 +30,15 @@ const FRAMEWORKS: Framework[] = [
     description: "Binding EU law for high-risk AI systems. Articles 9–15 set the technical requirements.",
     items: [
       {
-        title: "Article 9 — Risk Management System",
+        title: "Article 9: Risk Management System",
         text: "Continuous, lifecycle-long process to identify, analyze, evaluate, and mitigate risks to health, safety, and fundamental rights.",
         bastion: [
-          "Tested Before Launch, Re-Tested on Every Change — continuous risk identification across the lifecycle",
+          "Tested Before Launch, Re-Tested on Every Change: continuous risk identification across the lifecycle",
           "Six Signals provide the measurable inputs to ongoing risk assessment",
         ],
       },
       {
-        title: "Article 10 — Data and Data Governance",
+        title: "Article 10: Data and Data Governance",
         text: "Training, validation, and test datasets must meet quality criteria and be subject to data governance practices.",
         bastion: [
           "Single Gateway with Live Risk Visibility logs every data flow into and out of the agent",
@@ -46,43 +46,43 @@ const FRAMEWORKS: Framework[] = [
         ],
       },
       {
-        title: "Article 11 — Technical Documentation",
+        title: "Article 11: Technical Documentation",
         text: "Drawn up before placing on market and continuously updated; must demonstrate compliance with the high-risk requirements.",
         bastion: [
-          "Audit-Ready Compliance — framework-mapped evidence pack regenerated on every change",
+          "Audit-Ready Compliance: framework-mapped evidence pack regenerated on every change",
           "Immutable Vault preserves the documentation chain of custody",
         ],
       },
       {
-        title: "Article 12 — Record-Keeping",
+        title: "Article 12: Record-Keeping",
         text: "Automatic logging of events over the lifetime of the AI system, with traceability appropriate to the intended purpose.",
         bastion: [
-          "Immutable Vault — tamper-evident records of every interaction",
+          "Immutable Vault: tamper-evident records of every interaction",
           "Single Gateway captures every request, response, and tool call",
         ],
       },
       {
-        title: "Article 13 — Transparency to Deployers",
+        title: "Article 13: Transparency to Deployers",
         text: "Provide deployers with sufficient information to interpret outputs and use the system appropriately.",
         bastion: [
-          "Audit-Ready Compliance — narrative reporting alongside the structured telemetry",
+          "Audit-Ready Compliance: narrative reporting alongside the structured telemetry",
           "Six Signals expose performance characteristics deployers need to interpret outputs",
         ],
       },
       {
-        title: "Article 14 — Human Oversight",
+        title: "Article 14: Human Oversight",
         text: "Designed and developed to be effectively overseen by natural persons during the period the system is in use.",
         bastion: [
-          "Outputs Grounded or Blocked in Real Time — enables human review and intervention before action",
+          "Outputs Grounded or Blocked in Real Time: enables human review and intervention before action",
           "Single Gateway centralizes the oversight surface across the agent fleet",
         ],
       },
       {
-        title: "Article 15 — Accuracy, Robustness, and Cybersecurity",
+        title: "Article 15: Accuracy, Robustness, and Cybersecurity",
         text: "Achieve appropriate accuracy, robustness, and cybersecurity, and perform consistently in those respects throughout the lifecycle.",
         bastion: [
-          "Tested Before Launch, Re-Tested on Every Change — adversarial validation under attack conditions",
-          "Six Signals — Drift & Regression detect accuracy degradation",
+          "Tested Before Launch, Re-Tested on Every Change: adversarial validation under attack conditions",
+          "Six Signals: Drift & Regression detect accuracy degradation",
           "Continuous attestation across the lifecycle, not point-in-time",
         ],
       },
@@ -100,15 +100,15 @@ const FRAMEWORKS: Framework[] = [
         title: "Written AI Systems Program (AIS Program)",
         text: "Insurers must develop, implement, and maintain a written program for the responsible use of AI Systems making or supporting decisions that impact consumers.",
         bastion: [
-          "Audit-Ready Compliance — produces the documented evidence base of an AIS Program",
-          "Single Gateway with Live Risk Visibility — operational backbone the program runs on",
+          "Audit-Ready Compliance: produces the documented evidence base of an AIS Program",
+          "Single Gateway with Live Risk Visibility: operational backbone the program runs on",
         ],
       },
       {
         title: "Governance Structure & Accountability",
         text: "Cross-functional governance with stakeholders from actuarial, data science, underwriting, compliance, and legal, with clear roles and decision-making authority.",
         bastion: [
-          "Single Gateway centralizes accountability — every action attributable to a defined role and policy",
+          "Single Gateway centralizes accountability: every action attributable to a defined role and policy",
           "Audit-Ready Compliance creates a shared evidence base across actuarial, compliance, and legal teams",
         ],
       },
@@ -116,15 +116,15 @@ const FRAMEWORKS: Framework[] = [
         title: "Risk Management & Internal Controls",
         text: "Robust controls, internal audit functions, and written policies covering each stage of an AI system's lifecycle.",
         bastion: [
-          "Six Signals across the agent lifecycle — Behavioral Baselines, Action Accountability, Drift & Regression",
-          "Tested Before Launch, Re-Tested on Every Change — adversarial validation feeds the risk register",
+          "Six Signals across the agent lifecycle: Behavioral Baselines, Action Accountability, Drift & Regression",
+          "Tested Before Launch, Re-Tested on Every Change: adversarial validation feeds the risk register",
         ],
       },
       {
         title: "Bias Testing & Validation",
         text: "Demonstrate bias testing, fairness metrics, and validation across consumer-impacting AI systems.",
         bastion: [
-          "Six Signals — Fleet-Wide Correlation surfaces aggregate bias patterns across cohorts",
+          "Six Signals: Fleet-Wide Correlation surfaces aggregate bias patterns across cohorts",
           "Behavioral Baselines flag drift in outcomes by demographic segment",
         ],
       },
@@ -140,7 +140,7 @@ const FRAMEWORKS: Framework[] = [
         title: "Consumer Transparency & Notification",
         text: "Notify consumers when AI systems are in use; provide appropriate information on how AI affects decisions impacting them.",
         bastion: [
-          "Audit-Ready Compliance — narrative + structured records explaining decisions affecting consumers",
+          "Audit-Ready Compliance: narrative + structured records explaining decisions affecting consumers",
           "Immutable Vault provides the verifiable trail behind each decision",
         ],
       },
@@ -158,7 +158,7 @@ const FRAMEWORKS: Framework[] = [
         title: "AI Governance for Regulated Financial Services",
         text: "Authorised firms must apply governance, risk management, and operational controls when deploying AI in regulated financial activity.",
         bastion: [
-          "Audit-Ready Compliance — governance evidence consumable by CBB and equivalent GCC regulators",
+          "Audit-Ready Compliance: governance evidence consumable by CBB and equivalent GCC regulators",
           "Single Gateway centralizes accountability across AI-driven financial workflows",
         ],
       },
@@ -166,15 +166,15 @@ const FRAMEWORKS: Framework[] = [
         title: "Operational Risk for Autonomous Workflows",
         text: "Managing operational risk introduced by autonomous decisioning, including monitoring, escalation, and human override pathways.",
         bastion: [
-          "Outputs Grounded or Blocked in Real Time — sub-millisecond intervention before unsafe autonomous action",
-          "Six Signals — Action Accountability validates every autonomous decision against composed policy",
+          "Outputs Grounded or Blocked in Real Time: sub-millisecond intervention before unsafe autonomous action",
+          "Six Signals: Action Accountability validates every autonomous decision against composed policy",
         ],
       },
       {
         title: "Sharia & Islamic Banking Compliance",
         text: "AI deployments in Islamic finance must respect Sharia principles, including avoidance of gharar (excessive uncertainty) and maintenance of Sharia-board oversight pathways.",
         bastion: [
-          "Audit-Ready Compliance — encodes Sharia-board policy into runtime constraints",
+          "Audit-Ready Compliance: encodes Sharia-board policy into runtime constraints",
           "Outputs Grounded or Blocked in Real Time enforces Sharia-aligned operational boundaries",
         ],
       },
@@ -190,7 +190,7 @@ const FRAMEWORKS: Framework[] = [
         title: "Regulatory Reporting & Audit",
         text: "Continuous documentation enabling on-demand regulatory inquiry, audit, and supervisory review.",
         bastion: [
-          "Audit-Ready Compliance — framework-mapped evidence pack regenerated on demand",
+          "Audit-Ready Compliance: framework-mapped evidence pack regenerated on demand",
           "Continuous attestation across the AI lifecycle, not point-in-time snapshots",
         ],
       },
@@ -205,43 +205,43 @@ const FRAMEWORKS: Framework[] = [
     description: "Binding EU privacy law. Sets controls over personal data processing, including AI-driven decisions and outputs.",
     items: [
       {
-        title: "Article 5 — Lawful, Fair, and Transparent Processing",
+        title: "Article 5: Lawful, Fair, and Transparent Processing",
         text: "Personal data must be processed lawfully, fairly, and transparently. Includes purpose limitation, data minimization, accuracy, and storage limitation.",
         bastion: [
-          "Single Gateway logs every data flow into and out of agents — supports lawfulness and transparency evidence",
+          "Single Gateway logs every data flow into and out of agents: supports lawfulness and transparency evidence",
           "Outputs Grounded or Blocked in Real Time enforces purpose limitation at the runtime layer",
         ],
       },
       {
-        title: "Article 22 — Automated Decision-Making and Profiling",
+        title: "Article 22: Automated Decision-Making and Profiling",
         text: "Data subjects have the right not to be subject to a decision based solely on automated processing that produces legal or similarly significant effects.",
         bastion: [
-          "Outputs Grounded or Blocked in Real Time — enables human review and intervention before automated decisions execute",
+          "Outputs Grounded or Blocked in Real Time: enables human review and intervention before automated decisions execute",
           "Single Gateway centralizes the human-oversight pathway across the agent fleet",
         ],
       },
       {
-        title: "Article 25 — Data Protection by Design and by Default",
+        title: "Article 25: Data Protection by Design and by Default",
         text: "Data protection principles must be embedded into the design of processing activities and applied by default.",
         bastion: [
-          "Single Gateway with Live Risk Visibility — privacy-by-design infrastructure layer",
+          "Single Gateway with Live Risk Visibility: privacy-by-design infrastructure layer",
           "Audit-Ready Compliance bakes data-protection controls into the deployment baseline",
         ],
       },
       {
-        title: "Article 32 — Security of Processing",
+        title: "Article 32: Security of Processing",
         text: "Implement appropriate technical and organizational measures to ensure security of personal data processing.",
         bastion: [
-          "Outputs Grounded or Blocked in Real Time — PII redaction and exfiltration prevention at the gateway",
-          "Immutable Vault — tamper-evident records of every access and processing event",
+          "Outputs Grounded or Blocked in Real Time: PII redaction and exfiltration prevention at the gateway",
+          "Immutable Vault: tamper-evident records of every access and processing event",
         ],
       },
       {
-        title: "Article 35 — Data Protection Impact Assessment (DPIA)",
+        title: "Article 35: Data Protection Impact Assessment (DPIA)",
         text: "Required for processing likely to result in high risk to rights and freedoms, including large-scale automated profiling.",
         bastion: [
-          "Tested Before Launch, Re-Tested on Every Change — adversarial impact assessment feeding the DPIA",
-          "Six Signals — Fleet-Wide Correlation surfaces aggregate impact patterns",
+          "Tested Before Launch, Re-Tested on Every Change: adversarial impact assessment feeding the DPIA",
+          "Six Signals: Fleet-Wide Correlation surfaces aggregate impact patterns",
         ],
       },
     ],
@@ -266,7 +266,7 @@ export default function ComplianceAlignmentSection() {
   };
 
   return (
-    <section className="relative py-24 md:py-32 bg-bg" ref={ref}>
+    <section className="relative py-24 md: py-32 bg-bg" ref={ref}>
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -275,7 +275,7 @@ export default function ComplianceAlignmentSection() {
           className="text-center mb-12"
         >
           <span className="label-pill">Compliance</span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm:text-5xl">
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-text sm: text-5xl">
             How Bastion Aligns With{" "}
             <span className="gradient-text">Regulation</span>
           </h2>
@@ -289,7 +289,7 @@ export default function ComplianceAlignmentSection() {
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-10"
+          className="grid grid-cols-2 sm: grid-cols-3 lg: grid-cols-4 gap-3 mb-10"
         >
           {FRAMEWORKS.map((f) => {
             const isActive = activeId === f.id;
@@ -300,7 +300,7 @@ export default function ComplianceAlignmentSection() {
                 className={`flex flex-col items-start gap-1 rounded-sm border p-4 text-left transition-all duration-200 cursor-pointer ${
                   isActive
                     ? "border-primary bg-primary-bg shadow-md shadow-primary/10"
-                    : "border-border bg-surface hover:border-primary/30 hover:shadow-sm"
+                    : "border-border bg-surface hover: border-primary/30 hover: shadow-sm"
                 }`}
               >
                 <span
@@ -326,7 +326,7 @@ export default function ComplianceAlignmentSection() {
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="rounded-sm border border-border bg-surface p-8 md:p-10 shadow-sm overflow-hidden"
+          className="rounded-sm border border-border bg-surface p-8 md: p-10 shadow-sm overflow-hidden"
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -339,7 +339,7 @@ export default function ComplianceAlignmentSection() {
               {/* Framework header */}
               <div className="mb-8 pb-6 border-b border-border">
                 <div className="flex flex-wrap items-baseline gap-3 mb-3">
-                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-text">
+                  <h3 className="text-2xl md: text-3xl font-bold tracking-tight text-text">
                     {framework.abbrev}
                   </h3>
                   <span className="text-sm text-text-muted">
@@ -354,7 +354,7 @@ export default function ComplianceAlignmentSection() {
                 </p>
               </div>
 
-              {/* Items list — collapsed by default, click to expand */}
+              {/* Items list: collapsed by default, click to expand */}
               <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-text-dim mb-4">
                 {framework.items.length} principles · click any to expand
               </p>
@@ -367,7 +367,7 @@ export default function ComplianceAlignmentSection() {
                       className={`rounded-sm border transition-all duration-200 ${
                         isOpen
                           ? "border-primary/40 bg-primary-bg/30"
-                          : "border-border bg-surface hover:border-primary/20"
+                          : "border-border bg-surface hover: border-primary/20"
                       }`}
                     >
                       <button
@@ -415,7 +415,7 @@ export default function ComplianceAlignmentSection() {
                             transition={{ duration: 0.2 }}
                             className="overflow-hidden"
                           >
-                            <div className="px-5 pb-5 pt-1 grid md:grid-cols-2 gap-6 md:gap-8 border-t border-primary/15">
+                            <div className="px-5 pb-5 pt-1 grid md: grid-cols-2 gap-6 md: gap-8 border-t border-primary/15">
                               <div className="pt-4">
                                 <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-primary mb-2">
                                   The Principle
@@ -460,7 +460,7 @@ export default function ComplianceAlignmentSection() {
         >
           <a
             href="/bastion/contact/"
-            className="btn-glow inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-4 text-sm font-semibold text-white transition-all hover:bg-primary-dark hover:scale-[1.02] active:scale-[0.99]"
+            className="btn-glow inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-4 text-sm font-semibold text-white transition-all hover: bg-primary-dark hover: scale-[1.02] active: scale-[0.99]"
           >
             Talk to us about your compliance posture
             <svg viewBox="0 0 16 12" className="h-3 w-4" fill="none">

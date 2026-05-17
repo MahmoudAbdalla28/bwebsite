@@ -36,6 +36,7 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
 
   const resources: ResourceItem[] = [
     { label: "Case Studies", href: "/bastion/case-studies/" },
+    { label: "Partners", href: "/bastion/partners/" },
   ];
 
   const openResources = () => {

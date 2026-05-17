@@ -37,7 +37,7 @@ const POSTURE_ITEMS: PostureItem[] = [
   },
   {
     label: "Change History & Re-attestation",
-    desc: "CI/CD hooks tying every model/prompt change to a regression pass.",
+    desc: "Every model, prompt, or tool change automatically re-tested. The posture file stays current.",
     details: [
       { k: "Last regression pass", v: "12 min ago" },
       { k: "Model swaps this quarter", v: "4" },
@@ -175,7 +175,7 @@ export default function Home() {
               className="mx-auto mt-10 max-w-3xl text-base md:text-lg leading-relaxed text-gray-100 rounded-2xl bg-slate-900/55 backdrop-blur-md border border-white/10 px-7 py-6 md:px-9 md:py-7 shadow-xl shadow-black/30"
               style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}
             >
-              Every AI agent in a regulated context will need continuous attestation. The only question is whether yours has it before or after the first incident. Bastion is the adversarial testing and evidence layer that proves your agent behaved &mdash; continuously, across every change, in a format your regulator, your enterprise buyer, and your carrier can act on.
+              Built for voice AI in regulated industries. Every AI agent in a regulated context will need continuous attestation. The only question is whether yours has it before or after the first incident. Bastion is the adversarial testing and evidence layer that proves your agent behaved &mdash; continuously, across every change, in a format your regulator, your enterprise buyer, and your carrier can act on.
             </motion.p>
 
             <motion.div
@@ -206,6 +206,84 @@ export default function Home() {
           </div>
         </section>
 
+        {/* INDUSTRY CHIPS — voice + regulated vertical signal */}
+        <section className="relative pt-10 md:pt-12">
+          <div className="mx-auto max-w-5xl px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.55, ease: "easeOut" }}
+              className="flex flex-wrap items-center justify-center gap-2.5"
+            >
+              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500 mr-2" style={{ fontFamily: MONO }}>
+                Specialized in
+              </span>
+              {[
+                "Voice AI",
+                "Healthcare",
+                "Financial Services",
+                "Contact Center",
+                "Regulated Verticals",
+              ].map((chip) => (
+                <span
+                  key={chip}
+                  className="inline-flex items-center rounded-full bg-white/80 backdrop-blur-md border border-gray-200/80 px-3.5 py-1.5 text-[12px] font-semibold text-gray-800 shadow-sm"
+                >
+                  {chip}
+                </span>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* TIMING — three-step promise (30min / 24h / 2 weeks) */}
+        <section className="relative -mt-12 md:-mt-16 z-20">
+          <div className="mx-auto max-w-5xl px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="rounded-2xl bg-white/85 backdrop-blur-xl border border-white/90 shadow-2xl shadow-blue-500/10 px-6 py-5 md:px-10 md:py-7 grid grid-cols-3 gap-4 md:gap-8 items-center"
+            >
+              <div className="text-center">
+                <p
+                  className="text-2xl md:text-4xl font-semibold tracking-[-0.02em] text-blue-700"
+                  style={{ fontFamily: SANS }}
+                >
+                  30 min
+                </p>
+                <p className="mt-1 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-600">
+                  Pre-underwriting probe
+                </p>
+              </div>
+              <div className="text-center border-x border-gray-200/70 px-2 md:px-4">
+                <p
+                  className="text-2xl md:text-4xl font-semibold tracking-[-0.02em] text-blue-700"
+                  style={{ fontFamily: SANS }}
+                >
+                  24 hours
+                </p>
+                <p className="mt-1 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-600">
+                  Posture report
+                </p>
+              </div>
+              <div className="text-center">
+                <p
+                  className="text-2xl md:text-4xl font-semibold tracking-[-0.02em] text-blue-700"
+                  style={{ fontFamily: SANS }}
+                >
+                  2 weeks
+                </p>
+                <p className="mt-1 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-600">
+                  Audit-ready
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* PROBLEM */}
         <section className="relative py-24 md:py-32">
           <div className="mx-auto max-w-6xl px-6">
@@ -231,7 +309,7 @@ export default function Home() {
               <GlassProblemCard
                 eyebrow="The Compliance Wall"
                 title="Your existing certifications cover the infrastructure, not the agent."
-                body="SOC 2 proves your access controls work. HIPAA proves your data is encrypted. ISO 27001 proves your security program is documented. None of them prove your AI agent stayed within its declared clinical or financial boundaries on Tuesday at 3pm. When your FDA reviewer asks, when your enterprise buyer's procurement team asks, when your carrier needs to underwrite the agent itself — the compliance you already maintain doesn't answer the question. Bastion produces the evidence layer that does, continuously, mapped to FDA PCCP, EU AI Act, MRM, AIUC, and the frameworks that govern agentic behavior specifically."
+                body="SOC 2 proves your access controls work. HIPAA proves your data is encrypted. ISO 27001 proves your security program is documented. None of them prove your AI agent stayed within its declared clinical or financial boundaries on Tuesday at 3pm. When your FDA reviewer asks, when your enterprise buyer's procurement team asks, when your carrier needs to underwrite the agent itself, the compliance you already maintain doesn't answer the question. Bastion produces the evidence layer that does, continuously, mapped to FDA PCCP, EU AI Act, MRM, AIUC, and the frameworks that govern agentic behavior specifically."
                 cta="See what Bastion produces"
                 ctaHref="/bastion/insurance/"
                 slideFrom="left"
@@ -239,11 +317,240 @@ export default function Home() {
               <GlassProblemCard
                 eyebrow="The Drift"
                 title="Compliance isn't a milestone. Neither is agentic attestation."
-                body="You renew SOC 2 every year. You re-attest HIPAA continuously. You don't ship a model update and assume your security posture is intact — you re-validate. Your AI agent works the same way. A new model version, a prompt change, an infrastructure update you didn't control — any of these can silently move your agent outside its declared boundaries. Your existing compliance tools don't catch it because they were never built to. Bastion re-attests on every change, automatically."
+                body="You renew SOC 2 every year. You re-attest HIPAA continuously. You don't ship a model update and assume your security posture is intact. You re-validate. Your AI agent works the same way. A new model version, a prompt change, an infrastructure update you didn't control: any of these can silently move your agent outside its declared boundaries. Your existing compliance tools don't catch it because they were never built to. Bastion re-attests on every change, automatically."
                 cta="See how Bastion catches it"
                 ctaHref="/bastion/platform/"
                 slideFrom="right"
               />
+            </motion.div>
+          </div>
+        </section>
+
+        {/* BUILT FOR — buyer-persona stripe (CCO/CISO + CEO) */}
+        <section className="relative py-20 md:py-28">
+          <div className="mx-auto max-w-6xl px-6">
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-center max-w-3xl mx-auto"
+            >
+              <p
+                className="text-[11px] font-bold uppercase tracking-[0.28em] text-blue-700"
+                style={{ fontFamily: MONO }}
+              >
+                Built for
+              </p>
+              <h2
+                className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.02em] leading-[1.1] text-gray-900"
+                style={{ fontFamily: SANS }}
+              >
+                Compliance owns the decision.{" "}
+                <span className="text-blue-600/80 italic font-medium">The C-suite unblocks the deal.</span>
+              </h2>
+            </motion.div>
+
+            <motion.div
+              variants={STAGGER}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="mt-14 grid md:grid-cols-2 gap-6"
+            >
+              <motion.div
+                variants={FADE_UP}
+                className="rounded-2xl bg-white/70 backdrop-blur-xl border border-white/80 shadow-lg shadow-blue-500/5 p-7 md:p-9"
+              >
+                <p
+                  className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-700"
+                  style={{ fontFamily: MONO }}
+                >
+                  For the Chief Compliance Officer / CISO
+                </p>
+                <h3 className="mt-3 text-xl md:text-2xl font-semibold tracking-[-0.01em] text-gray-900 leading-snug">
+                  You own AI compliance. The stack you already operate doesn&apos;t cover the agent itself.
+                </h3>
+                <p className="mt-4 text-sm md:text-base leading-relaxed text-gray-700">
+                  Your SOC 2 program proves access controls. Your HIPAA program proves data handling. Neither proves that your AI agent stayed inside its declared clinical, financial, or operational boundaries on Tuesday at 3pm. Bastion is the continuous, framework-mapped posture file your auditor and your enterprise buyer can act on &mdash; built specifically for the agentic-behavior layer.
+                </p>
+                <a
+                  href="/bastion/compliance/"
+                  className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-900"
+                >
+                  See the framework mapping <span aria-hidden>→</span>
+                </a>
+              </motion.div>
+
+              <motion.div
+                variants={FADE_UP}
+                className="rounded-2xl bg-white/70 backdrop-blur-xl border border-white/80 shadow-lg shadow-blue-500/5 p-7 md:p-9"
+              >
+                <p
+                  className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-700"
+                  style={{ fontFamily: MONO }}
+                >
+                  For the CEO
+                </p>
+                <h3 className="mt-3 text-xl md:text-2xl font-semibold tracking-[-0.01em] text-gray-900 leading-snug">
+                  AI risk reviews are stalling your enterprise deals.
+                </h3>
+                <p className="mt-4 text-sm md:text-base leading-relaxed text-gray-700">
+                  An AI-specific addendum lands on your customer&apos;s desk. It gets forwarded to whoever owns compliance. Someone spends a weekend in a Google Doc. Their team comes back with 15 follow-ups. Three weeks later, the deal moves. With Bastion, you walk in with the document already done &mdash; and steps 3 through 5 collapse into a single posture file.
+                </p>
+                <a
+                  href="/bastion/contact/"
+                  className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-900"
+                >
+                  Book an assessment <span aria-hidden>→</span>
+                </a>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* WHY DEALS STALL — 6-step procurement cycle vs Bastion's 3-step */}
+        <section id="why-deals-stall" className="relative py-20 md:py-28">
+          <div className="mx-auto max-w-6xl px-6">
+            {/* Heading */}
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-center max-w-3xl mx-auto"
+            >
+              <p
+                className="text-[11px] font-bold uppercase tracking-[0.28em] text-blue-700"
+                style={{ fontFamily: MONO }}
+              >
+                The 3-Week Problem
+              </p>
+              <h2
+                className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-semibold tracking-[-0.025em] leading-[1.05] text-gray-900"
+                style={{ fontFamily: SANS }}
+              >
+                Why Enterprise AI Deals{" "}
+                <span className="text-blue-600/80 italic font-medium">Stall.</span>
+              </h2>
+            </motion.div>
+
+            {/* Comparison */}
+            <motion.div
+              variants={STAGGER}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="mt-14 md:mt-20 grid md:grid-cols-2 gap-6 md:gap-10 relative"
+            >
+              {/* Arrow divider — desktop only */}
+              <div
+                aria-hidden
+                className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center rounded-full bg-white shadow-lg border border-gray-200 w-12 h-12"
+              >
+                <svg viewBox="0 0 16 12" className="h-4 w-5 text-blue-700" fill="none">
+                  <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+
+              {/* TODAY column */}
+              <motion.div
+                variants={FADE_UP}
+                className="rounded-2xl bg-gray-50/70 border border-gray-200 p-6 md:p-8"
+              >
+                <p
+                  className="text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500"
+                  style={{ fontFamily: MONO }}
+                >
+                  Today
+                </p>
+                <p className="mt-2 text-sm text-gray-600 italic">
+                  The current AI compliance procurement cycle
+                </p>
+
+                <ol className="mt-6 space-y-5 relative">
+                  <div aria-hidden className="absolute left-[14px] top-3 bottom-3 w-px bg-gray-300" />
+                  {[
+                    { n: "01", t: "Enterprise customer sends an AI-specific addendum", dim: false },
+                    { n: "02", t: 'Your eng team forwards it to "whoever does compliance"', dim: false },
+                    { n: "03", t: "CTO spends a weekend in a Google Doc", dim: true },
+                    { n: "04", t: "Customer's compliance team comes back with 15 follow-ups", dim: true },
+                    { n: "05", t: "Three weeks later, the deal moves", dim: true },
+                    { n: "06", t: "You forget the process until the next customer asks", dim: false },
+                  ].map((step) => (
+                    <li
+                      key={step.n}
+                      className={`relative flex gap-4 items-start ${step.dim ? "opacity-50" : ""}`}
+                    >
+                      <span className="z-10 shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-gray-200 text-gray-600 text-[10px] font-bold font-mono">
+                        {step.n}
+                      </span>
+                      <p className="text-sm leading-relaxed text-gray-700 pt-1">{step.t}</p>
+                    </li>
+                  ))}
+                </ol>
+
+                <div className="mt-6 pt-4 border-t border-gray-200 text-[12px] text-gray-500">
+                  <span className="font-semibold text-gray-700">~3 weeks.</span> Repeats per customer.
+                </div>
+              </motion.div>
+
+              {/* WITH BASTION column */}
+              <motion.div
+                variants={FADE_UP}
+                className="rounded-2xl bg-white border border-blue-200/60 shadow-lg shadow-blue-500/10 p-6 md:p-8"
+              >
+                <p
+                  className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-700"
+                  style={{ fontFamily: MONO }}
+                >
+                  With Bastion
+                </p>
+                <p className="mt-2 text-sm text-gray-600 italic">
+                  The same cycle, three weeks shorter
+                </p>
+
+                <ol className="mt-6 space-y-5 relative">
+                  <div aria-hidden className="absolute left-[14px] top-3 bottom-3 w-px bg-blue-200" />
+                  {[
+                    { n: "01", t: "Enterprise customer sends an AI-specific addendum" },
+                    { n: "02", t: "Forwarded to compliance, who already has the document ready" },
+                    { n: "03", t: "Hand over the Bastion posture file. Deal moves." },
+                  ].map((step) => (
+                    <li key={step.n} className="relative flex gap-4 items-start">
+                      <span className="z-10 shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-600 text-white text-[10px] font-bold font-mono">
+                        {step.n}
+                      </span>
+                      <p className="text-sm leading-relaxed text-gray-900 pt-1 font-medium">{step.t}</p>
+                    </li>
+                  ))}
+                </ol>
+
+                <div className="mt-6 pt-4 border-t border-blue-100 text-[12px] text-blue-700">
+                  <span className="font-semibold">Hours, not weeks.</span> Reusable across customers.
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Payoff + CTA */}
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="mt-12 text-center"
+            >
+              <p className="max-w-2xl mx-auto text-base md:text-lg text-gray-700 leading-relaxed">
+                Steps 3 through 5 collapse to{" "}
+                <span className="font-semibold text-gray-900">a single posture file</span>{" "}
+                your buyer&apos;s compliance team can act on.
+              </p>
+              <a
+                href="#evidence-artifact"
+                className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-900"
+              >
+                See a sample posture file <span aria-hidden>→</span>
+              </a>
             </motion.div>
           </div>
         </section>
@@ -289,19 +596,34 @@ export default function Home() {
           </div>
         </section>
 
-        {/* WE ALIGN WITH — compliance logos (positioned right under Find. Prove. Cover.) */}
+        {/* REGULATORY EXPERTISE — framework logos + depth stats */}
         <section className="relative py-20 md:py-28">
           <div className="mx-auto max-w-7xl px-6">
-            <motion.p
+            <motion.div
               variants={FADE_UP}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true, margin: "-50px" }}
-              className="text-center text-[10px] font-semibold uppercase tracking-[0.32em] text-gray-500 mb-10"
-              style={{ fontFamily: MONO }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-center max-w-3xl mx-auto mb-12 md:mb-14"
             >
-              We Align With
-            </motion.p>
+              <p
+                className="text-[11px] font-bold uppercase tracking-[0.28em] text-blue-700"
+                style={{ fontFamily: MONO }}
+              >
+                Regulatory Framework Expertise
+              </p>
+              <h2
+                className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.02em] leading-[1.1] text-gray-900"
+                style={{ fontFamily: SANS }}
+              >
+                The regulatory framework infrastructure{" "}
+                <span className="text-blue-600/80 italic font-medium">for agentic AI.</span>
+              </h2>
+              <p className="mt-5 text-base md:text-lg leading-relaxed text-gray-700">
+                Not an audit checkbox. Not a layer bolted onto your existing compliance program. A purpose-built evidence engine that maps every probe, every change, and every runtime event to the specific regulations your AI agent is governed by &mdash; at section-level granularity, refreshed continuously.
+              </p>
+            </motion.div>
+
             <motion.div
               variants={STAGGER}
               initial="hidden"
@@ -331,11 +653,42 @@ export default function Home() {
                 ))}
               </div>
             </motion.div>
+
+            {/* Depth stats */}
+            <motion.div
+              variants={STAGGER}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4"
+            >
+              {[
+                { v: "7+", k: "Frameworks mapped" },
+                { v: "§-level", k: "Per-section citations" },
+                { v: "Voice AI", k: "Specialized focus" },
+              ].map((s) => (
+                <motion.div
+                  key={s.k}
+                  variants={FADE_UP}
+                  className="rounded-xl bg-white/70 backdrop-blur-md border border-gray-200/70 px-5 py-4 text-center"
+                >
+                  <p
+                    className="text-xl md:text-2xl font-semibold tracking-[-0.015em] text-blue-700"
+                    style={{ fontFamily: SANS }}
+                  >
+                    {s.v}
+                  </p>
+                  <p className="mt-1 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-600">
+                    {s.k}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </section>
 
         {/* EVIDENCE ARTIFACT — the posture / attestation report */}
-        <section className="relative py-24 md:py-32">
+        <section id="evidence-artifact" className="relative py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-6">
             <motion.div
               variants={FADE_UP}
@@ -355,8 +708,11 @@ export default function Home() {
                   className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.02em] leading-[1.1] text-gray-900"
                   style={{ fontFamily: SANS }}
                 >
-                  Structured attestation evidence mapped to common regulatory frameworks. <span className="text-gray-500 font-normal">Intended for non-technical readers.</span>
+                  One document. <span className="text-blue-600/80 italic font-medium">Two audiences.</span>
                 </h2>
+                <p className="mt-5 text-base md:text-lg leading-relaxed text-gray-700">
+                  The same posture report your <span className="font-semibold text-gray-900">regulator accepts</span> is the one your <span className="font-semibold text-gray-900">carrier panel prices off</span> &mdash; mapped to FDA, ISO, HIPAA, and NIST controls on one side, and to the underwriting telemetry your carrier needs to write affirmative AI coverage on the other. Intended for non-technical readers.
+                </p>
               </div>
               <button
                 type="button"
@@ -763,21 +1119,21 @@ const SOLUTION_CARDS = [
     number: "01",
     title: "Find",
     tagline: "Adversarial QA, before and after every change.",
-    body: "Before your agent goes live — and after every change — Bastion attacks it. Adversarial QA probes your public-facing agent with prompt injection, scope boundary manipulation, tool-chain composition attacks, and jailbreaks. Every finding gets encoded into a deployment-specific knowledge graph: a structured map of your agent's actual failure surface, not its intended one. Our attack library is built across every deployment we've seen. An in-house team building this only ever sees their own agent fail. We see failure classes across every agentic deployment in your category — and every new engagement makes the library sharper. No integration required to start. We probe your external-facing agent from outside.",
+    body: "Before your agent goes live, and after every change, Bastion attacks it. Adversarial QA probes your public-facing agent with prompt injection, scope boundary manipulation, tool-chain composition attacks, and jailbreaks. Every finding gets encoded into a deployment-specific knowledge graph: a structured map of your agent's actual failure surface, not its intended one. Our attack library is built across every deployment we've seen. An in-house team building this only ever sees their own agent fail. We see failure classes across every agentic deployment in your category. Every new engagement makes the library sharper. No integration required to start. We probe your external-facing agent from outside.",
     icon: <FindIcon />,
   },
   {
     number: "02",
     title: "Prove",
     tagline: "A versioned posture file, mapped to your regulator.",
-    body: "Every adversarial finding feeds a CI/CD re-attestation pipeline. Every deployment change — new model, updated prompt, tool-chain modification, infra update you didn't control — triggers an automatic re-attestation pass against your knowledge graph. Did this change introduce a pattern we've already proven is dangerous? Does this update move your agent outside its declared boundaries? The output is a continuously versioned posture file mapped to your specific regulatory framework — FDA PCCP, ISO 14971, NIST AI RMF — not a generic compliance document. When your regulator, enterprise buyer, or board asks, this is what you hand them. Re-attested on every model, prompt, corpus, or tool-chain change. Automatically. Bastion lives alongside your existing compliance stack — Vanta for SOC 2, Drata for ISO 27001 — adding the agentic behavior layer that those tools don't cover. Same continuous-attestation logic, applied to a layer they don't see.",
+    body: "Every adversarial finding feeds the next posture file. Whenever your agent changes (new model, updated prompt, tool addition, knowledge refresh), Bastion re-attests automatically against your knowledge graph. Did this change reintroduce a pattern we've already proven is dangerous? Does it move your agent outside its declared boundaries? The output is a continuously versioned posture file mapped to your specific regulatory framework (FDA PCCP, ISO 14971, HIPAA, NIST AI RMF), not a generic compliance document. When your regulator, enterprise buyer, or carrier asks, this is what you hand them. SOC 2 and ISO 27001 prove your infrastructure is secure. Bastion proves your AI agent is. Two distinct categories of evidence; you need both, and only one of them existed until now.",
     icon: <ProveIcon />,
   },
   {
     number: "03",
     title: "Cover",
     tagline: "Active insurance for agentic AI in production.",
-    body: "In production, every live interaction gets checked against the knowledge graph built through adversarial QA. Not generic anomaly detection — specific pattern matching against your known failure surface. When a real interaction approaches a vector we've already proven is dangerous for your specific agent, Bastion flags it before it becomes an incident. That continuous telemetry is the evidence layer your carrier needs to underwrite AI risk across the policy period. The graph gets sharper with time. The posture file gets richer. The coverage gets more accurate. Active insurance for agentic AI — the same model that made Coalition the leading cyber insurer. Value compounds with time and traffic. This is not a dashboard. It is a continuously improving evidence layer.",
+    body: "In production, every live interaction gets checked against the knowledge graph built through adversarial QA. Not generic anomaly detection: specific pattern matching against your known failure surface. When a real interaction approaches a vector we've already proven is dangerous for your specific agent, Bastion flags it before it becomes an incident. That continuous telemetry is the evidence layer your carrier needs to underwrite AI risk across the policy period. The graph gets sharper with time. The posture file gets richer. The coverage gets more accurate. Active insurance for agentic AI. The same continuous-telemetry model that reshaped cyber underwriting, now applied to AI behavior. Value compounds with time and traffic. This is not a dashboard. It is a continuously improving evidence layer.",
     icon: <CoverIcon />,
   },
 ];

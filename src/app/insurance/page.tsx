@@ -28,13 +28,13 @@ const PIPELINE = [
   {
     eyebrow: "Pre-underwriting",
     label: "Non-invasive Assessment",
-    body: "Every agentic AI system has an external surface — a phone number, a chatbot endpoint, a public API. Bastion probes it adversarially before your client integrates anything. No SDK. No install. No friction. You get an initial risk posture that prices the policy. Your client gets a preview of their actual failure surface. The quote gets written.",
+    body: "Every agentic AI system has an external surface: a phone number, a chatbot endpoint, a public API. Bastion probes it adversarially before your client integrates anything. No SDK. No install. No friction. You get an initial risk posture that prices the policy. Your client gets a preview of their actual failure surface. The quote gets written.",
   },
   {
     eyebrow: "In-force",
     label: "Active Telemetry Across the Policy Period",
-    body: "Once the policy is bound, Bastion integration becomes a coverage condition. One endpoint change on the client side. From that point, every agent interaction writes structured tamper-evident evidence into a continuously updated posture file. You see the risk profile in real time — not at renewal, not when a claim is filed. When a client's agent starts drifting toward known failure patterns, you know before it becomes your problem.",
-    italic: "The same model Coalition uses to intervene before cyber incidents become claims — applied to agentic AI behavior.",
+    body: "Once the policy is bound, Bastion integration becomes a coverage condition. One endpoint change on the client side. From that point, every agent interaction writes structured tamper-evident evidence into a continuously updated posture file. You see the risk profile in real time, not at renewal, not when a claim is filed. When a client's agent starts drifting toward known failure patterns, you know before it becomes your problem.",
+    italic: "The same continuous-telemetry model that reshaped cyber underwriting, applied to agentic AI behavior.",
   },
   {
     eyebrow: "Renewal",
@@ -73,7 +73,7 @@ export default function InsurancePage() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="mx-auto mt-10 max-w-3xl text-base md:text-lg leading-relaxed text-gray-600"
             >
-              Bastion&apos;s pre-underwriting assessment probes any client&apos;s public-facing AI agent &mdash; phone number, chatbot, API endpoint &mdash; and produces a risk posture you can price from. No SDK on their side. No friction. The quote gets written. Integration becomes a condition of coverage.
+              Bastion&apos;s pre-underwriting assessment probes any client&apos;s public-facing AI agent (phone number, chatbot, API endpoint) and produces a risk posture you can price from. No SDK on their side. No friction. The quote gets written. Integration becomes a condition of coverage.
             </motion.p>
 
             <motion.div
@@ -273,7 +273,7 @@ export default function InsurancePage() {
           </div>
         </section>
 
-        {/* SECTION 4 — Coalition proof */}
+        {/* SECTION 4 — Cyber-insurance proof of model */}
         <section className="relative py-20 md:py-28">
           <div className="mx-auto max-w-7xl px-6">
             <div className="rounded-3xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-xl shadow-blue-500/5 p-10 md:p-16">
@@ -296,7 +296,7 @@ export default function InsurancePage() {
                     style={{ fontFamily: SANS }}
                   >
                     Active underwriting works.{" "}
-                    <span className="text-blue-600 italic font-medium">Coalition proved it.</span>
+                    <span className="text-blue-600 italic font-medium">The cyber-insurance industry proved it.</span>
                   </h2>
                   <div className="mt-10 grid grid-cols-2 gap-6">
                     <div>
@@ -331,10 +331,10 @@ export default function InsurancePage() {
                   className="md:col-span-7"
                 >
                   <p className="text-base md:text-lg leading-relaxed text-gray-700">
-                    Coalition has underwritten cyber risk on continuous proprietary telemetry since 2017. The result: <strong className="text-gray-900 font-semibold">64% fewer claims than the industry average.</strong> The model is simple &mdash; independent continuous telemetry produces more accurate pricing, earlier intervention, and better loss ratios than point-in-time assessment.
+                    Cyber carriers underwriting on continuous independent telemetry have, since 2017, run <strong className="text-gray-900 font-semibold">64% fewer claims than the industry average.</strong> The model is simple: continuous independent telemetry produces more accurate pricing, earlier intervention, and better loss ratios than point-in-time assessment.
                   </p>
                   <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-700">
-                    Bastion brings that model to agentic AI. We don&apos;t underwrite. We don&apos;t compete with carriers. We produce the independent evidence layer your policy period requires &mdash; in a format any carrier panel can consume.
+                    Bastion brings that model to agentic AI. We don&apos;t underwrite. We don&apos;t compete with carriers. We produce the independent evidence layer your policy period requires, in a format any carrier panel can consume.
                   </p>
                 </motion.div>
               </div>
@@ -411,7 +411,7 @@ export default function InsurancePage() {
               transition={{ delay: 0.18 }}
               className="mt-4 max-w-3xl text-xs leading-relaxed text-gray-500"
             >
-              Ecosystem learning operates on anonymized failure classes &mdash; never customer payloads. We don&apos;t train models on your data and we don&apos;t sell or share it.{" "}
+              Ecosystem learning operates on anonymized failure classes, never customer payloads. We don&apos;t train models on your data and we don&apos;t sell or share it.{" "}
               <a
                 href="/bastion/faq/#faq"
                 className="text-blue-700 hover:text-blue-800 underline underline-offset-2 decoration-blue-700/40 hover:decoration-blue-800/70 transition-colors"
@@ -430,7 +430,7 @@ export default function InsurancePage() {
               transition={{ delay: 0.2 }}
               className="mt-10 max-w-4xl text-base md:text-lg leading-relaxed text-gray-700"
             >
-              Bastion sees across every agentic deployment it monitors. Failure patterns discovered in one deployment get tested against all others. A vulnerability class that appears consistently across voice AI agents in clinical settings becomes a pricing signal for every policy in that category. There is no AI liability loss history anywhere in the market right now. Bastion is building it &mdash; and every MGA that partners with us gets access to the taxonomy that makes accurate pricing possible.
+              Bastion sees across every agentic deployment it monitors. Failure patterns discovered in one deployment get tested against all others. A vulnerability class that appears consistently across voice AI agents in clinical settings becomes a pricing signal for every policy in that category. There is no AI liability loss history anywhere in the market right now. Bastion is building it, and every MGA that partners with us gets access to the taxonomy that makes accurate pricing possible.
             </motion.p>
             <motion.p
               variants={FADE_UP}
@@ -469,7 +469,7 @@ export default function InsurancePage() {
                 transition={{ delay: 0.15 }}
                 className="mt-8 text-base md:text-lg leading-relaxed text-gray-700"
               >
-                Bastion is the independent infrastructure layer that produces the evidence your policy period requires. A carrier cannot underwrite on self-reported logs &mdash; the evidence has to come from outside the system being assessed. That independence is what makes the posture file carrier-consumable and what makes claims defensible when they&apos;re filed.
+                Bastion is the independent infrastructure layer that produces the evidence your policy period requires. A carrier cannot underwrite on self-reported logs. The evidence has to come from outside the system being assessed. That independence is what makes the posture file carrier-consumable and what makes claims defensible when they&apos;re filed.
               </motion.p>
             </div>
           </div>

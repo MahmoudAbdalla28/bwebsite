@@ -23,7 +23,7 @@ export default function CompliancePage() {
               <span className="text-blue-700 italic font-medium">regulation.</span>
             </p>
             <p className="mx-auto mt-6 max-w-3xl text-base md:text-lg text-gray-700 font-normal text-center">
-              Pick a framework. See the principles inside it and how Bastion satisfies each one — mapped to artefacts your regulator, enterprise buyer, and carrier panel will accept.
+              Pick a framework. See the principles inside it and how Bastion satisfies each one, mapped to artefacts your regulator, enterprise buyer, and carrier panel will accept.
             </p>
           </div>
         </WavyBackground>
