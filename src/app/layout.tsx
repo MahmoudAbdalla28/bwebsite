@@ -11,6 +11,8 @@ export const metadata: Metadata = {
       { url: "/favicon.webp", type: "image/webp" },
       { url: "/favicon.png", type: "image/png" },
     ],
+    apple: "/favicon.png",
+    shortcut: "/favicon.png",
   },
 };
 
