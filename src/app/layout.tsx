@@ -7,7 +7,10 @@ export const metadata: Metadata = {
   description:
     "Bastion is Agentic Risk Infrastructure (ARI). Continuous visibility, evidence, and enforcement for production AI agents.",
   icons: {
-    icon: "/favicon.png",
+    icon: [
+      { url: "/favicon.webp", type: "image/webp" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
   },
 };
 
