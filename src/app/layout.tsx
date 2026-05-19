@@ -26,7 +26,13 @@ export default function RootLayout({
       </head>
       <body className="text-gray-900 font-sans antialiased">
         <SoftMeshBackground />
-        <div className="relative z-10">{children}</div>
+        <div className="relative z-10">
+          {/* Announcement banner — winners' badge */}
+          <div className="relative z-30 bg-[#aec2d6] text-gray-900 text-center px-4 py-3 md:py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] border-b border-white/40">
+            Bastion wins BDO&apos;s &ldquo;Best Quantified Savings&rdquo; prize at Mila Build OS26
+          </div>
+          {children}
+        </div>
       </body>
     </html>
   );

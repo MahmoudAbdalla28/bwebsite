@@ -175,7 +175,7 @@ export default function Home() {
               className="mx-auto mt-10 max-w-3xl text-base md:text-lg leading-relaxed text-gray-100 rounded-2xl bg-slate-900/55 backdrop-blur-md border border-white/10 px-7 py-6 md:px-9 md:py-7 shadow-xl shadow-black/30"
               style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}
             >
-              Built for voice AI in regulated industries. Every AI agent in a regulated context will need continuous attestation. The only question is whether yours has it before or after the first incident. Bastion is the adversarial testing and evidence layer that proves your agent behaved &mdash; continuously, across every change, in a format your regulator, your enterprise buyer, and your carrier can act on.
+              Built for voice AI in regulated industries. Every AI agent in a regulated context will need continuous attestation. Bastion is the adversarial testing and evidence layer that proves your agent behaved &mdash; continuously, across every change, in a format your regulator, your enterprise buyer, and your carrier can act on.
             </motion.p>
 
             <motion.div
@@ -202,37 +202,6 @@ export default function Home() {
                   <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* INDUSTRY CHIPS — voice + regulated vertical signal */}
-        <section className="relative pt-10 md:pt-12">
-          <div className="mx-auto max-w-5xl px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.55, ease: "easeOut" }}
-              className="flex flex-wrap items-center justify-center gap-2.5"
-            >
-              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-500 mr-2" style={{ fontFamily: MONO }}>
-                Specialized in
-              </span>
-              {[
-                "Voice AI",
-                "Healthcare",
-                "Financial Services",
-                "Contact Center",
-                "Regulated Verticals",
-              ].map((chip) => (
-                <span
-                  key={chip}
-                  className="inline-flex items-center rounded-full bg-white/80 backdrop-blur-md border border-gray-200/80 px-3.5 py-1.5 text-[12px] font-semibold text-gray-800 shadow-sm"
-                >
-                  {chip}
-                </span>
-              ))}
             </motion.div>
           </div>
         </section>
@@ -665,7 +634,7 @@ export default function Home() {
               {[
                 { v: "7+", k: "Frameworks mapped" },
                 { v: "§-level", k: "Per-section citations" },
-                { v: "Voice AI", k: "Specialized focus" },
+                { v: "Voice + Scribes", k: "Specialized agent classes" },
               ].map((s) => (
                 <motion.div
                   key={s.k}
