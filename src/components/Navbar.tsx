@@ -52,7 +52,7 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-14 md:top-16 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] md:w-[calc(100%-3rem)] max-w-7xl rounded-2xl bg-white/95 backdrop-blur-xl border border-gray-200/70 shadow-lg shadow-gray-900/5"
+      className="fixed top-12 md:top-14 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] md:w-[calc(100%-3rem)] max-w-7xl rounded-2xl bg-white/95 backdrop-blur-xl border border-gray-200/70 shadow-lg shadow-gray-900/5"
     >
       <div className="flex items-center justify-between px-5 md:px-6 py-3 md:py-4">
         <a href="/" className="cursor-pointer flex items-center gap-3">

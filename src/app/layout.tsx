@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SoftMeshBackground from "@/components/SoftMeshBackground";
+import AwardBubble from "@/components/AwardBubble";
 
 export const metadata: Metadata = {
   title: "Bastion | Agentic Risk Infrastructure",
@@ -32,10 +33,7 @@ export default function RootLayout({
       <body className="text-gray-900 font-sans antialiased">
         <SoftMeshBackground />
         <div className="relative z-10">
-          {/* Announcement banner — winners' badge */}
-          <div className="relative z-30 bg-[#aec2d6] text-gray-900 text-center px-4 py-3 md:py-3.5 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] border-b border-white/40">
-            Bastion wins BDO&apos;s &ldquo;Best Quantified Savings&rdquo; prize at Mila Build OS26
-          </div>
+          <AwardBubble />
           {children}
         </div>
       </body>
