@@ -278,7 +278,7 @@ export default function Home() {
               <GlassProblemCard
                 eyebrow="The Compliance Wall"
                 title="Your existing certifications cover the infrastructure, not the agent."
-                body="SOC 2 proves your access controls work. HIPAA proves your data is encrypted. ISO 27001 proves your security program is documented. None of them prove your AI agent stayed within its declared clinical or financial boundaries on Tuesday at 3pm. When your FDA reviewer asks, when your enterprise buyer's procurement team asks, when your carrier needs to underwrite the agent itself, the compliance you already maintain doesn't answer the question. Bastion produces the evidence layer that does, continuously, mapped to FDA PCCP, EU AI Act, MRM, AIUC, and the frameworks that govern agentic behavior specifically."
+                body="SOC 2 proves your access controls work. HIPAA proves your data is encrypted. ISO 27001 proves your security program is documented. None of them prove your AI agent stayed within its declared clinical or financial boundaries on Tuesday at 3pm. Your regulator can't audit it. Your enterprise buyer can't sign off on it. Your carrier can't underwrite it. Bastion produces the evidence layer that answers all three, continuously, mapped to the frameworks that govern agentic behavior (FDA PCCP, EU AI Act, MRM, AIUC) and the carrier-consumable telemetry that makes AI insurable in the first place."
                 cta="See what Bastion produces"
                 ctaHref="/insurance/"
                 slideFrom="left"
@@ -286,7 +286,7 @@ export default function Home() {
               <GlassProblemCard
                 eyebrow="The Drift"
                 title="Compliance isn't a milestone. Neither is agentic attestation."
-                body="You renew SOC 2 every year. You re-attest HIPAA continuously. You don't ship a model update and assume your security posture is intact. You re-validate. Your AI agent works the same way. A new model version, a prompt change, an infrastructure update you didn't control: any of these can silently move your agent outside its declared boundaries. Your existing compliance tools don't catch it because they were never built to. Bastion re-attests on every change, automatically."
+                body="You renew SOC 2 every year. You re-attest HIPAA continuously. You don't ship a model update and assume your security posture is intact. You re-validate. Your AI agent works the same way. A new model version, a prompt change, an infrastructure update you didn't control: any of these can silently move your agent outside its declared boundaries — and outside the underwriting basis your carrier priced the policy on. Your existing compliance tools don't catch it because they were never built to. Bastion re-attests on every change, automatically — keeping your compliance evidence and your insurance basis current."
                 cta="See how Bastion catches it"
                 ctaHref="/platform/"
                 slideFrom="right"
@@ -341,7 +341,7 @@ export default function Home() {
                   You own AI compliance. The stack you already operate doesn&apos;t cover the agent itself.
                 </h3>
                 <p className="mt-4 text-sm md:text-base leading-relaxed text-gray-700">
-                  Your SOC 2 program proves access controls. Your HIPAA program proves data handling. Neither proves that your AI agent stayed inside its declared clinical, financial, or operational boundaries on Tuesday at 3pm. Bastion is the continuous, framework-mapped posture file your auditor and your enterprise buyer can act on &mdash; built specifically for the agentic-behavior layer.
+                  Your SOC 2 program proves access controls. Your HIPAA program proves data handling. Neither proves that your AI agent stayed inside its declared clinical, financial, or operational boundaries on Tuesday at 3pm. Bastion is the continuous, framework-mapped posture file your auditor, your enterprise buyer, and your carrier panel can each act on &mdash; built specifically for the agentic-behavior layer.
                 </p>
                 <a
                   href="/compliance/"
@@ -365,7 +365,7 @@ export default function Home() {
                   AI risk reviews are stalling your enterprise deals.
                 </h3>
                 <p className="mt-4 text-sm md:text-base leading-relaxed text-gray-700">
-                  An AI-specific addendum lands on your customer&apos;s desk. It gets forwarded to whoever owns compliance. Someone spends a weekend in a Google Doc. Their team comes back with 15 follow-ups. Three weeks later, the deal moves. With Bastion, you walk in with the document already done &mdash; and steps 3 through 5 collapse into a single posture file.
+                  An AI-specific addendum lands on your customer&apos;s desk. It gets forwarded to whoever owns compliance. Someone spends a weekend in a Google Doc. Their team comes back with 15 follow-ups. Three weeks later, the deal moves. Worse: your board won&apos;t authorize what your carrier won&apos;t insure, and carriers are stripping AI from standard policies. With Bastion, you walk in with the document already done &mdash; the same posture file the buyer&apos;s compliance team and their carrier panel can both act on.
                 </p>
                 <a
                   href="/contact/"
@@ -374,6 +374,153 @@ export default function Home() {
                   Book an assessment <span aria-hidden>→</span>
                 </a>
               </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* INSURANCE WALL — parallel to "Why Deals Stall", insurance angle */}
+        <section id="why-uninsurable" className="relative py-20 md:py-28">
+          <div className="mx-auto max-w-6xl px-6">
+            {/* Heading */}
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-center max-w-3xl mx-auto"
+            >
+              <p
+                className="text-[11px] font-bold uppercase tracking-[0.28em] text-blue-700"
+                style={{ fontFamily: MONO }}
+              >
+                The Insurance Wall
+              </p>
+              <h2
+                className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-semibold tracking-[-0.025em] leading-[1.05] text-gray-900"
+                style={{ fontFamily: SANS }}
+              >
+                Why AI Coverage Doesn&apos;t{" "}
+                <span className="text-blue-600/80 italic font-medium">Exist Yet.</span>
+              </h2>
+            </motion.div>
+
+            {/* Comparison */}
+            <motion.div
+              variants={STAGGER}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="mt-14 md:mt-20 grid md:grid-cols-2 gap-6 md:gap-10 relative"
+            >
+              {/* Arrow divider — desktop only */}
+              <div
+                aria-hidden
+                className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center rounded-full bg-white shadow-lg border border-gray-200 w-12 h-12"
+              >
+                <svg viewBox="0 0 16 12" className="h-4 w-5 text-blue-700" fill="none">
+                  <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+
+              {/* TODAY column */}
+              <motion.div
+                variants={FADE_UP}
+                className="rounded-2xl bg-gray-50/70 border border-gray-200 p-6 md:p-8"
+              >
+                <p
+                  className="text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500"
+                  style={{ fontFamily: MONO }}
+                >
+                  Today
+                </p>
+                <p className="mt-2 text-sm text-gray-600 italic">
+                  AI is effectively uninsurable
+                </p>
+
+                <ul className="mt-6 space-y-4">
+                  {[
+                    "Carriers have no loss history, no actuarial data, no model for autonomous-system exposure.",
+                    "Affirmative AI coverage is excluded from standard policies.",
+                    "Enterprises can&apos;t deploy what they can&apos;t insure. Boards stall on AI initiatives.",
+                    "No data, no coverage, no deployment.",
+                  ].map((line, i) => (
+                    <li key={i} className="flex gap-3 items-start">
+                      <span
+                        aria-hidden
+                        className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-gray-400 shrink-0"
+                      />
+                      <p
+                        className="text-sm leading-relaxed text-gray-700"
+                        dangerouslySetInnerHTML={{ __html: line }}
+                      />
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-6 pt-4 border-t border-gray-200 text-[12px] text-gray-500">
+                  <span className="font-semibold text-gray-700">$2.52T agentic economy</span>{" "}
+                  locked at the data layer.
+                </div>
+              </motion.div>
+
+              {/* WITH BASTION column */}
+              <motion.div
+                variants={FADE_UP}
+                className="rounded-2xl bg-white border border-blue-200/60 shadow-lg shadow-blue-500/10 p-6 md:p-8"
+              >
+                <p
+                  className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-700"
+                  style={{ fontFamily: MONO }}
+                >
+                  With Bastion
+                </p>
+                <p className="mt-2 text-sm text-gray-600 italic">
+                  The risk-data layer that unlocks coverage
+                </p>
+
+                <ul className="mt-6 space-y-4">
+                  {[
+                    "Continuous adversarial probes plus runtime telemetry, written to a tamper-evident posture file.",
+                    "Carrier-consumable evidence per policy period: pre-bind, in-force, and at renewal.",
+                    "Affirmative AI coverage becomes underwritable. Enterprises deploy. Boards sign off.",
+                    "The continuous-telemetry model that reshaped cyber underwriting, applied to AI behavior.",
+                  ].map((line, i) => (
+                    <li key={i} className="flex gap-3 items-start">
+                      <span
+                        aria-hidden
+                        className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-blue-600 shrink-0"
+                      />
+                      <p className="text-sm leading-relaxed text-gray-900 font-medium">{line}</p>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-6 pt-4 border-t border-blue-100 text-[12px] text-blue-700">
+                  <span className="font-semibold">Insurable.</span> Deployable. Board-approvable.
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Payoff + CTA */}
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="mt-12 text-center"
+            >
+              <p className="max-w-2xl mx-auto text-base md:text-lg text-gray-700 leading-relaxed">
+                Insurance is a data business. Without continuous risk data on AI agents, carriers can&apos;t price the policy.{" "}
+                <span className="font-semibold text-gray-900">
+                  Bastion produces that data.
+                </span>
+              </p>
+              <a
+                href="/insurance/"
+                className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-900"
+              >
+                How underwriters use Bastion <span aria-hidden>→</span>
+              </a>
             </motion.div>
           </div>
         </section>
@@ -602,11 +749,10 @@ export default function Home() {
             >
               <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 md:gap-x-16">
                 {COMPLIANCES.map((c) => (
-                  <motion.div
+                  <div
                     key={c.name}
-                    variants={FADE_UP}
                     title={c.name}
-                    className="flex items-center justify-center grayscale-[20%] hover:grayscale-0 transition-all duration-300"
+                    className="flex items-center justify-center grayscale-[20%] hover:grayscale-0 transition-[filter] duration-300"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -618,7 +764,7 @@ export default function Home() {
                           : "h-14 md:h-16 w-auto"
                       }`}
                     />
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </motion.div>
@@ -677,10 +823,10 @@ export default function Home() {
                   className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.02em] leading-[1.1] text-gray-900"
                   style={{ fontFamily: SANS }}
                 >
-                  One document. <span className="text-blue-600/80 italic font-medium">Two audiences.</span>
+                  One document. <span className="text-blue-600/80 italic font-medium">Three audiences.</span>
                 </h2>
                 <p className="mt-5 text-base md:text-lg leading-relaxed text-gray-700">
-                  The same posture report your <span className="font-semibold text-gray-900">regulator accepts</span> is the one your <span className="font-semibold text-gray-900">carrier panel prices off</span> &mdash; mapped to FDA, ISO, HIPAA, and NIST controls on one side, and to the underwriting telemetry your carrier needs to write affirmative AI coverage on the other. Intended for non-technical readers.
+                  The same posture report your <span className="font-semibold text-gray-900">regulator accepts</span> is the one your <span className="font-semibold text-gray-900">carrier panel prices off</span> &mdash; and the one your <span className="font-semibold text-gray-900">C-suite and board</span> use to see what&apos;s deployed, where the agent&apos;s risk profile stands, and what they&apos;re signing off on. Mapped to FDA, ISO, HIPAA, and NIST controls on one side, to the underwriting telemetry carriers need to write affirmative AI coverage on the other, and to the deployment visibility every internal stakeholder accountable for the agent has to see. Intended for non-technical readers.
                 </p>
               </div>
             </motion.div>
