@@ -683,16 +683,6 @@ export default function Home() {
                   The same posture report your <span className="font-semibold text-gray-900">regulator accepts</span> is the one your <span className="font-semibold text-gray-900">carrier panel prices off</span> &mdash; mapped to FDA, ISO, HIPAA, and NIST controls on one side, and to the underwriting telemetry your carrier needs to write affirmative AI coverage on the other. Intended for non-technical readers.
                 </p>
               </div>
-              <button
-                type="button"
-                className="self-start md:self-auto inline-flex items-center gap-2 rounded-full bg-white border border-gray-200 hover:border-blue-300 hover:text-blue-700 px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-700 transition-colors shadow-sm shrink-0"
-                style={{ fontFamily: MONO }}
-              >
-                <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 8a5 5 0 1 1 1.46 3.54M3 13v-3h3" />
-                </svg>
-                Regenerate
-              </button>
             </motion.div>
 
             <motion.div
