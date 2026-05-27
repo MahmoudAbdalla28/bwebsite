@@ -341,7 +341,7 @@ export default function Home() {
                   You own AI compliance. The stack you already operate doesn&apos;t cover the agent itself.
                 </h3>
                 <p className="mt-4 text-sm md:text-base leading-relaxed text-gray-700">
-                  Your SOC 2 program proves access controls. Your HIPAA program proves data handling. Neither proves that your AI agent stayed inside its declared clinical, financial, or operational boundaries on Tuesday at 3pm. Bastion is the continuous, framework-mapped posture file your auditor, your enterprise buyer, and your carrier panel can each act on &mdash; built specifically for the agentic-behavior layer.
+                  You signed off on the agent&apos;s scope at launch. Then the prompt changed. The knowledge base updated. The model vendor pushed a quiet weight refresh. Your governance file says nothing about any of it &mdash; and you&apos;re the one defending the deployment when the auditor walks in. Bastion is the continuous, framework-mapped posture file that re-attests on every change, so what your auditor, your enterprise buyer, and your carrier panel see matches what the agent is doing today.
                 </p>
                 <a
                   href="/compliance/"
@@ -740,19 +740,13 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <motion.div
-              variants={STAGGER}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-              className="rounded-3xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-sm px-8 py-10 md:px-14 md:py-12"
-            >
+            <div className="rounded-3xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-sm px-8 py-10 md:px-14 md:py-12">
               <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 md:gap-x-16">
                 {COMPLIANCES.map((c) => (
                   <div
                     key={c.name}
                     title={c.name}
-                    className="flex items-center justify-center grayscale-[20%] hover:grayscale-0 transition-[filter] duration-300"
+                    className="flex items-center justify-center"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -767,7 +761,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
             {/* Depth stats */}
             <motion.div
