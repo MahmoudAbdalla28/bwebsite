@@ -175,7 +175,7 @@ export default function Home() {
               className="mx-auto mt-10 max-w-3xl text-base md:text-lg leading-relaxed text-gray-100 rounded-2xl bg-slate-900/55 backdrop-blur-md border border-white/10 px-7 py-6 md:px-9 md:py-7 shadow-xl shadow-black/30"
               style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}
             >
-              Built for voice AI in regulated industries. Every AI agent in a regulated context will need continuous attestation. Bastion is the adversarial testing and evidence layer that proves your agent behaved &mdash; continuously, across every change, in a format your regulator, your enterprise buyer, and your carrier can act on.
+              Built for agentic AI in regulated industries. Every AI agent in a regulated context will need continuous attestation. Bastion is the adversarial testing and evidence layer that proves your agent behaved &mdash; continuously, across every change, in a format your regulator, your enterprise buyer, and your carrier can act on.
             </motion.p>
 
             <motion.div
@@ -675,7 +675,7 @@ export default function Home() {
         <section className="relative py-12 md:py-20">
           <div className="w-full">
             <div
-              className="relative overflow-hidden shadow-2xl shadow-blue-500/15 w-full"
+              className="relative overflow-hidden w-full"
               style={{
                 background:
                   "linear-gradient(180deg, #dadfe5 0%, #c3c8d3 33%, #aec2d6 66%, #7ab3de 100%)",
@@ -683,27 +683,17 @@ export default function Home() {
             >
               <div className="relative z-10 px-8 md:px-16 lg:px-20 xl:px-24 py-20 md:py-28 lg:py-32">
                 <div className="grid md:grid-cols-12 gap-10 md:gap-16 items-end mb-16">
-                  <motion.h2
-                    variants={FADE_LEFT}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-100px" }}
+                  <h2
                     className="md:col-span-5 text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-semibold tracking-[-0.025em] leading-[0.95] text-gray-900"
                     style={{ fontFamily: SANS }}
                   >
                     Find.{" "}
                     <span className="text-blue-700 italic font-medium">Prove.</span>{" "}
                     Cover.
-                  </motion.h2>
-                  <motion.p
-                    variants={FADE_RIGHT}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="md:col-span-7 text-base md:text-lg leading-relaxed text-gray-800"
-                  >
+                  </h2>
+                  <p className="md:col-span-7 text-base md:text-lg leading-relaxed text-gray-800">
                     There is no existing infrastructure for agentic risk. Compliance frameworks weren&apos;t written for systems that change behavior between deployments. Cyber insurance wasn&apos;t designed for risk that lives inside an inference loop. Pentest tooling wasn&apos;t built for agents that update themselves while running. We&apos;re building what this market actually needs &mdash; three layers, one continuous evidence trail.
-                  </motion.p>
+                  </p>
                 </div>
 
                 <SolutionDeck />
@@ -774,7 +764,7 @@ export default function Home() {
               {[
                 { v: "7+", k: "Frameworks mapped" },
                 { v: "§-level", k: "Per-section citations" },
-                { v: "Voice + Scribes", k: "Specialized agent classes" },
+                { v: "Multi-class", k: "Voice, chat, scribes, tool-use" },
               ].map((s) => (
                 <motion.div
                   key={s.k}
@@ -836,7 +826,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* WHY YOUR STACK MISSES IT */}
+        {/* WHY YOUR STACK MISSES IT — TABLED 2026-05-28 (toggle false → true to restore) */}
+        {false && (
         <section className="relative py-24 md:py-32">
           <div className="mx-auto max-w-6xl px-6">
             <motion.div
@@ -945,6 +936,7 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
+        )}
 
 
         {/* FROM THE ANALYST DESKS — third-party validation */}
