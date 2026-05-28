@@ -740,7 +740,7 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <div className="rounded-3xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-sm px-8 py-10 md:px-14 md:py-12">
+            <div className="rounded-3xl bg-white border border-gray-200/60 shadow-sm px-8 py-10 md:px-14 md:py-12">
               <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 md:gap-x-16">
                 {COMPLIANCES.map((c) => (
                   <div
@@ -1238,172 +1238,35 @@ const SOLUTION_CARDS = [
 ];
 
 function SolutionDeck() {
-  const [spread, setSpread] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  // Trigger spread once when section is in view
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const node = ref.current;
-    if (!node) return;
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            // Hold the stack briefly so the user actually sees it before it fans out
-            setTimeout(() => setSpread(true), 450);
-            obs.disconnect();
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-    obs.observe(node);
-    return () => obs.disconnect();
-  }, []);
-
-  // Each card's animation:
-  // Stacked state: all three cards centered (visually one stack), with rotation/offset/scale
-  // Spread state: cards land at their grid positions
-  const stackedFor = (idx: number) => {
-    // Card 0 starts pushed RIGHT (toward center where card 1 is)
-    // Card 2 starts pushed LEFT (toward center where card 1 is)
-    // Card 1 stays centered
-    const offsetX =
-      idx === 0
-        ? "calc(100% + 1.5rem)"
-        : idx === 2
-          ? "calc(-100% - 1.5rem)"
-          : 0;
-    const offsetY = idx === 1 ? -16 : idx === 0 ? 14 : 14;
-    const rotate = idx === 0 ? -7 : idx === 2 ? 7 : 0;
-    const scale = idx === 1 ? 1 : 0.94;
-    return { x: offsetX, y: offsetY, rotate, scale };
-  };
-
   return (
-    <div
-      ref={ref}
-      className="relative grid md:grid-cols-3 gap-8 lg:gap-10 [perspective:1400px]"
-    >
-      {SOLUTION_CARDS.map((c, i) => {
-        const stacked = stackedFor(i);
-        // Z order: middle card on top of stack, then outer cards
-        const z = i === 1 ? 30 : i === 0 ? 20 : 10;
-        return (
-          <motion.div
-            key={c.number}
-            initial={stacked}
-            animate={
-              spread
-                ? { x: 0, y: 0, rotate: 0, scale: 1 }
-                : stacked
-            }
-            transition={{
-              type: "spring",
-              stiffness: 52,
-              damping: 20,
-              mass: 1,
-              delay: spread ? (i === 1 ? 0 : 0.28 + Math.abs(i - 1) * 0.04) : 0,
-            }}
-            whileHover={
-              spread
-                ? {
-                    y: -10,
-                    transition: { type: "spring", stiffness: 220, damping: 18 },
-                  }
-                : undefined
-            }
-            style={{
-              zIndex: z,
-              transformStyle: "preserve-3d",
-              willChange: "transform",
-            }}
-            className="relative group rounded-3xl bg-white/95 backdrop-blur-xl border border-gray-200/60 shadow-xl shadow-blue-500/5 hover:shadow-blue-500/15 hover:bg-white p-10 md:p-14 lg:p-16 transition-shadow duration-500"
+    <div className="relative grid md:grid-cols-3 gap-8 lg:gap-10">
+      {SOLUTION_CARDS.map((c) => (
+        <div
+          key={c.number}
+          className="relative rounded-3xl bg-white border border-gray-200/60 shadow-xl shadow-blue-500/5 p-10 md:p-14 lg:p-16"
+        >
+          <div className="flex items-start justify-between mb-10">
+            <span className="h-12 w-12 rounded-2xl border flex items-center justify-center bg-white text-blue-700 border-gray-200">
+              {c.icon}
+            </span>
+          </div>
+          <h3
+            className="text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-gray-900"
+            style={{ fontFamily: SANS }}
           >
-            {/* Sheen sweep on settle */}
-            <motion.span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-3xl overflow-hidden"
-              initial={{ opacity: 0 }}
-              animate={spread ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.4, delay: 0.6 + i * 0.1 }}
-            >
-              <motion.span
-                className="absolute -inset-y-2 -left-1/4 w-1/2 bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-[-18deg]"
-                initial={{ x: "-200%" }}
-                animate={spread ? { x: "300%" } : { x: "-200%" }}
-                transition={{ duration: 1.4, delay: 0.7 + i * 0.12, ease: "easeOut" }}
-              />
-            </motion.span>
-
-            {/* Subtle inner glow on hover */}
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              style={{
-                background:
-                  "radial-gradient(ellipse at top, rgba(37,99,235,0.06) 0%, transparent 60%)",
-              }}
-            />
-
-            {/* Card content */}
-            <div className="relative">
-              <div className="flex items-start justify-between mb-10">
-                <motion.span
-                  initial={{ scale: 0.85, opacity: 0 }}
-                  animate={
-                    spread ? { scale: 1, opacity: 1 } : { scale: 0.85, opacity: 0.6 }
-                  }
-                  transition={{
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 14,
-                    delay: 0.4 + i * 0.08,
-                  }}
-                  className="h-12 w-12 rounded-2xl backdrop-blur-md border flex items-center justify-center bg-white/80 text-blue-700 border-gray-200 group-hover:text-blue-600 group-hover:border-blue-200 transition-colors"
-                >
-                  {c.icon}
-                </motion.span>
-              </div>
-
-              <motion.h3
-                initial={{ opacity: 0, y: 12 }}
-                animate={spread ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-                transition={{ duration: 0.5, delay: 0.45 + i * 0.08, ease: "easeOut" }}
-                className="text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-gray-900"
-                style={{ fontFamily: SANS }}
-              >
-                {c.title}
-              </motion.h3>
-              <motion.p
-                initial={{ opacity: 0, y: 8 }}
-                animate={spread ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-                transition={{ duration: 0.5, delay: 0.55 + i * 0.08 }}
-                className="mt-3 text-sm font-semibold uppercase tracking-[0.16em] text-blue-700"
-                style={{ fontFamily: MONO }}
-              >
-                {c.tagline}
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={spread ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-                transition={{ duration: 0.6, delay: 0.65 + i * 0.08 }}
-                className="mt-7 text-base leading-relaxed text-gray-900"
-              >
-                {c.body}
-              </motion.p>
-            </div>
-
-            {/* Subtle border highlight on hover */}
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-3xl border border-blue-300/0 group-hover:border-blue-300/40 transition-colors duration-500"
-            />
-          </motion.div>
-        );
-      })}
+            {c.title}
+          </h3>
+          <p
+            className="mt-3 text-sm font-semibold uppercase tracking-[0.16em] text-blue-700"
+            style={{ fontFamily: MONO }}
+          >
+            {c.tagline}
+          </p>
+          <p className="mt-7 text-base leading-relaxed text-gray-900">
+            {c.body}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }
