@@ -430,7 +430,7 @@ export default function InsurancePage() {
               transition={{ delay: 0.2 }}
               className="mt-10 max-w-4xl text-base md:text-lg leading-relaxed text-gray-700"
             >
-              Bastion sees across every agentic deployment it monitors. Failure patterns discovered in one deployment get tested against all others. A vulnerability class that appears consistently across voice AI agents in clinical settings becomes a pricing signal for every policy in that category. There is no AI liability loss history anywhere in the market right now. Bastion is building it, and every MGA that partners with us gets access to the taxonomy that makes accurate pricing possible.
+              Bastion sees across every agentic deployment it monitors. Failure patterns discovered in one deployment get tested against all others. A vulnerability class that appears consistently across AI agents in clinical settings becomes a pricing signal for every policy in that category. There is no AI liability loss history anywhere in the market right now. Bastion is building it, and every MGA that partners with us gets access to the taxonomy that makes accurate pricing possible.
             </motion.p>
             <motion.p
               variants={FADE_UP}
