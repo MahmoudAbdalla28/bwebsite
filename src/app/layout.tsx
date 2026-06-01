@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SoftMeshBackground from "@/components/SoftMeshBackground";
-import AwardBubble from "@/components/AwardBubble";
 
 export const metadata: Metadata = {
   title: "Bastion | Agentic Risk Infrastructure",
@@ -32,10 +31,7 @@ export default function RootLayout({
       </head>
       <body className="text-gray-900 font-sans antialiased">
         <SoftMeshBackground />
-        <div className="relative z-10">
-          <AwardBubble />
-          {children}
-        </div>
+        <div className="relative z-10">{children}</div>
       </body>
     </html>
   );
