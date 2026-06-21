@@ -3,9 +3,9 @@ import "./globals.css";
 import SoftMeshBackground from "@/components/SoftMeshBackground";
 
 export const metadata: Metadata = {
-  title: "Bastion | Agentic Risk Infrastructure",
+  title: "Bastion | Adversarial Testing for AI Agents",
   description:
-    "Bastion is Agentic Risk Infrastructure (ARI). Continuous visibility, evidence, and enforcement for production AI agents.",
+    "We break AI agents before your customers do. Adversarial testing mapped to OWASP LLM Top 10, OWASP Agentic AI Threats, and MITRE ATLAS. CI/CD-native.",
   icons: {
     icon: [
       { url: "/favicon.webp", type: "image/webp" },
