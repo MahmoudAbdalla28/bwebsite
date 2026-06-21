@@ -93,6 +93,9 @@ export default function Home() {
               <p className="text-lg md:text-2xl font-medium leading-snug text-white">
                 Adversarial testing for AI agents.
               </p>
+              <p className="mt-3 text-base md:text-lg leading-snug text-gray-200">
+                Drop in the SDK, point us at an endpoint, or give us a phone number.
+              </p>
               <p className="mt-5 text-sm md:text-base leading-relaxed text-gray-300">
                 <span className="text-gray-400">Mapped to:</span>{" "}
                 <span className="text-gray-100">OWASP LLM Top 10</span>
@@ -293,7 +296,95 @@ export default function Home() {
           </div>
         </section>
 
+        {/* TRACTION — what we broke, named customers */}
+        <section className="relative py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-6">
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="max-w-4xl mb-14 md:mb-16"
+            >
+              <p
+                className="text-[11px] font-bold uppercase tracking-[0.28em] text-blue-700 mb-5"
+                style={{ fontFamily: MONO }}
+              >
+                Traction
+              </p>
+              <h2
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-gray-900"
+                style={{ fontFamily: SANS }}
+              >
+                What others{" "}
+                <span className="text-blue-600/80 italic font-medium">couldn&apos;t find.</span>
+              </h2>
+              <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-700 max-w-3xl">
+                From low-severity exposures to critical PII leakages, these industry-leading companies could not find what we did. Agents we have successfully broken:
+              </p>
+            </motion.div>
 
+            <motion.div
+              variants={STAGGER}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6"
+            >
+              {[
+                {
+                  name: "GitHub Copilot",
+                  logo: "/assets/logos/github.png",
+                  body: "AI pair programmer used by 20M+ developers across GitHub's platform.",
+                },
+                {
+                  name: "Priceline",
+                  logo: "/assets/logos/priceline.png",
+                  body: "One of the world's largest online travel platforms, serving tens of millions of travelers across 220+ countries every year.",
+                },
+                {
+                  name: "Chatbase",
+                  logo: "/assets/logos/chatbase.png",
+                  body: "Leading no-code AI chatbot builder, powering conversations for millions of end-users across 10,000+ businesses in 140+ countries.",
+                },
+                {
+                  name: "Scorpion",
+                  logo: "/assets/logos/scorpion.png",
+                  body: "One of the largest digital marketing agencies for local businesses, with 10,000+ clients reaching millions of customers across the US annually.",
+                },
+              ].map((c) => (
+                <motion.div
+                  key={c.name}
+                  variants={FADE_UP}
+                  className="rounded-2xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-lg shadow-blue-500/5 p-7 md:p-8 flex flex-col"
+                >
+                  <div className="h-12 md:h-14 flex items-center mb-6">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={c.logo}
+                      alt={c.name}
+                      className="h-full w-auto max-w-[140px] object-contain"
+                    />
+                  </div>
+                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                    {c.body}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.p
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="mt-10 text-xs md:text-sm uppercase tracking-[0.18em] text-gray-500"
+              style={{ fontFamily: MONO }}
+            >
+              Independent research and bug-bounty findings. Details under NDA where applicable.
+            </motion.p>
+          </div>
+        </section>
 
         {/* WHY YOUR STACK MISSES IT — TABLED 2026-05-28 (toggle false → true to restore) */}
         {false && (
@@ -432,7 +523,7 @@ export default function Home() {
               className="mt-20 grid md:grid-cols-2 gap-6"
             >
               <GlassProblemCard
-                eyebrow="AI Agents Are Shipping Broken"
+                eyebrow="Failures in the wild"
                 title="Companies are finding out from incidents, not audits."
                 body="Air Canada's chatbot invented a refund policy and courts held the airline liable. Chevrolet's bot got prompt-injected into selling a Tahoe for $1. Replit's agent ignored 11 code-freeze orders, wiped production, then fabricated 4,000 fake users to cover it. Hallucination, prompt injection, autonomous destruction. Every one of these failures was findable in advance."
                 cta="See what we test"
