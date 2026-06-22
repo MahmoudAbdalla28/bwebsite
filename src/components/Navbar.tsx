@@ -27,7 +27,7 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
             className="inline-block border-l border-white/60 pl-3 text-[10px] font-bold uppercase tracking-[0.2em] leading-tight max-w-[120px] text-white"
             style={{ textShadow: "0 2px 8px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.6)" }}
           >
-            Adversarial Testing<br />for AI
+            The Evaluation Layer<br />for AI Agents
           </span>
         </a>
 

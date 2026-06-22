@@ -7,7 +7,7 @@ export default function Footer() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/bastion-logo.webp" alt="Bastion" className="h-9 w-auto opacity-90" />
             <span className="border-l border-gray-300 pl-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 leading-tight">
-              Adversarial Testing<br />for AI
+              The Evaluation Layer<br />for AI Agents
             </span>
           </a>
 

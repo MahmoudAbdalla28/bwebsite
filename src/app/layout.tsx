@@ -3,9 +3,9 @@ import "./globals.css";
 import SoftMeshBackground from "@/components/SoftMeshBackground";
 
 export const metadata: Metadata = {
-  title: "Bastion | Adversarial Testing for AI Agents",
+  title: "Bastion | The Evaluation Layer for AI Agents",
   description:
-    "We break AI agents before your customers do. Adversarial testing mapped to OWASP LLM Top 10, OWASP Agentic AI Threats, and MITRE ATLAS. CI/CD-native.",
+    "Bastion is the security review for AI agents. We pentest them against OWASP LLM Top 10, OWASP Agentic AI Threats, and MITRE ATLAS. Drop in the SDK, point us at an endpoint, or give us a phone number.",
   icons: {
     icon: [
       { url: "/favicon.webp", type: "image/webp" },
