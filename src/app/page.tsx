@@ -781,10 +781,10 @@ await probe.run({
             </div>
             <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-7">
               <a
-                href="mailto:hello@trybastion.ai"
+                href="mailto:team@trybastion.ai"
                 className="text-sm font-medium text-gray-600 hover:text-blue-700 transition-colors"
               >
-                hello@trybastion.ai
+                team@trybastion.ai
               </a>
               <a
                 href="/contact/"
