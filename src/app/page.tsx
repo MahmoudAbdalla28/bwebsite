@@ -67,8 +67,8 @@ export default function Home() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="text-[11px] md:text-[12px] font-bold uppercase tracking-[0.32em] text-white"
-              style={{ fontFamily: MONO, textShadow: "0 2px 6px rgba(0,0,0,0.55)" }}
+              className="text-xs md:text-sm font-bold uppercase tracking-[0.32em] text-white"
+              style={{ fontFamily: MONO, textShadow: "0 2px 8px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.6)" }}
             >
               AI Agent Pentesting
             </motion.p>
@@ -94,10 +94,10 @@ export default function Home() {
               <p className="text-lg md:text-2xl font-medium leading-snug text-white">
                 AI agents don&apos;t have a security checklist yet.
               </p>
-              <p className="mt-3 text-base md:text-lg leading-snug text-gray-200">
+              <p className="mt-3 text-base md:text-lg leading-snug text-gray-100">
                 We pentest them against OWASP LLM Top 10, OWASP Agentic AI Threats, and MITRE ATLAS.
               </p>
-              <p className="mt-5 text-sm md:text-base leading-relaxed text-gray-300">
+              <p className="mt-5 text-base md:text-xl font-semibold leading-snug text-white">
                 Drop in the SDK, point us at an endpoint, or give us a phone number.
               </p>
             </motion.div>
@@ -141,7 +141,7 @@ export default function Home() {
               className="max-w-4xl mb-16 md:mb-20"
             >
               <p
-                className="text-[11px] font-bold uppercase tracking-[0.28em] text-blue-700 mb-5"
+                className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-800 mb-5"
                 style={{ fontFamily: MONO }}
               >
                 Methods of breaking
@@ -158,7 +158,13 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <div className="space-y-12 md:space-y-16">
+            <motion.div
+              variants={STAGGER}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+            >
               {[
                 {
                   name: "Jailbreaks & prompt injection",
@@ -167,9 +173,9 @@ export default function Home() {
                     company: "Chevrolet",
                     logo: "/assets/logos/chevrolet.png",
                     date: "Dec 2023",
-                    story: "A Chevrolet dealership chatbot was prompt-injected into agreeing to sell a $76K Tahoe for $1. Pulled from deployment within days.",
+                    story: "Dealership chatbot prompt-injected into selling a $76K Tahoe for $1. Pulled within days.",
                   },
-                  catch: "Bastion's adversarial fleet runs prompt-injection probes against your agent before deployment. Every successful jailbreak ships as a reproducible proof of concept with a severity score.",
+                  catch: "Adversarial fleet runs prompt-injection probes before deployment. Every jailbreak ships as a reproducible PoC with a severity score.",
                 },
                 {
                   name: "Tool & action abuse",
@@ -178,20 +184,20 @@ export default function Home() {
                     company: "Meta",
                     logo: "/assets/logos/meta.png",
                     date: "Jun 2026",
-                    story: "A Meta AI support tool was misused to hijack 20,000 Instagram accounts. Disabled by the company as a high-risk threat.",
+                    story: "AI support tool misused to hijack 20,000 Instagram accounts. Disabled as a high-risk threat.",
                   },
-                  catch: "Bastion probes every tool the agent exposes. The autonomous fleet adapts mid-conversation and surfaces any path where the agent calls a tool it should not have.",
+                  catch: "Probes every tool the agent exposes; the fleet adapts mid-conversation and surfaces any path to a tool it shouldn't call.",
                 },
                 {
                   name: "Authorization & cross-user data",
                   desc: "One user reaching another user's data or actions through the agent. Where the real damage lives.",
                   incident: {
-                    company: "GitHub Copilot",
+                    company: "GitHub",
                     logo: "/assets/logos/github.png",
                     date: "",
                     story: "Bastion identified an authorization vulnerability in GitHub Copilot's agent surface.",
                   },
-                  catch: "Bastion probes cross-session data flow with multi-tenant attacks. Where one user can reach another user's data or actions, the finding ships with a verbatim trace.",
+                  catch: "Probes cross-session data flow with multi-tenant attacks; cross-user reach ships with a verbatim trace.",
                 },
                 {
                   name: "Behavioral drift",
@@ -200,89 +206,121 @@ export default function Home() {
                     company: "Air Canada",
                     logo: "/assets/logos/aircanada.png",
                     date: "Feb 2024",
-                    story: "Air Canada's chatbot invented a refund policy. The Civil Resolution Tribunal held the airline liable. Legal precedent: companies own what their bots say.",
+                    story: "Chatbot invented a refund policy; tribunal held the airline liable. Companies own what their bots say.",
                   },
-                  catch: "Bastion re-runs on every change. A new model or prompt that reintroduces this class of failure is flagged as a regression before merge.",
+                  catch: "Re-runs on every change. A new model or prompt that reintroduces this failure class is flagged as a regression before merge.",
                 },
-              ].map((m, i) => (
+              ].map((m) => (
                 <motion.div
                   key={m.name}
-                  variants={i % 2 === 1 ? FADE_RIGHT : FADE_LEFT}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, margin: "-100px" }}
-                  className="grid md:grid-cols-12 gap-6 md:gap-10 items-start border-t border-gray-200/70 pt-12 md:pt-14"
+                  variants={FADE_UP}
+                  className="flex flex-col rounded-2xl bg-white/95 border border-gray-200/70 shadow-lg shadow-blue-500/5 p-7 md:p-8"
                 >
-                  <div className="md:col-span-3">
-                    <h3
-                      className="text-2xl md:text-3xl font-semibold tracking-[-0.02em] leading-tight text-blue-700"
-                      style={{ fontFamily: SANS }}
-                    >
-                      {m.name}
-                    </h3>
-                  </div>
-                  <div className="md:col-span-9 grid md:grid-cols-3 gap-6 md:gap-8">
-                    <div>
-                      <p
-                        className="text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500 mb-3"
-                        style={{ fontFamily: MONO }}
-                      >
-                        Description
-                      </p>
-                      <p className="text-sm md:text-base leading-relaxed text-gray-800">
-                        {m.desc}
-                      </p>
-                    </div>
-                    <div>
-                      <p
-                        className="text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500 mb-3"
-                        style={{ fontFamily: MONO }}
-                      >
-                        Example
-                      </p>
-                      {m.incident ? (
-                        <div>
-                          <div className="flex items-center gap-3 mb-3">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={m.incident.logo}
-                              alt={m.incident.company}
-                              className="h-7 md:h-8 w-auto max-w-[130px] object-contain"
-                            />
-                            {m.incident.date && (
-                              <span
-                                className="text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-500"
-                                style={{ fontFamily: MONO }}
-                              >
-                                {m.incident.date}
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                            {m.incident.story}
-                          </p>
-                        </div>
-                      ) : (
-                        <p className="text-sm md:text-base leading-relaxed text-gray-500 italic">
-                          No public incident published yet. Findings in this category are held under NDA.
-                        </p>
+                  <h3
+                    className="text-2xl md:text-[1.75rem] font-semibold tracking-[-0.02em] leading-tight text-blue-700"
+                    style={{ fontFamily: SANS }}
+                  >
+                    {m.name}
+                  </h3>
+                  <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-800">
+                    {m.desc}
+                  </p>
+
+                  <div className="mt-6 rounded-xl bg-gray-50/90 border border-gray-200/80 p-5 md:p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={m.incident.logo}
+                        alt={m.incident.company}
+                        className="h-7 md:h-8 w-auto max-w-[140px] object-contain"
+                      />
+                      {m.incident.date && (
+                        <span
+                          className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-gray-700 bg-white border border-gray-200 px-2.5 py-1 rounded-full"
+                          style={{ fontFamily: MONO }}
+                        >
+                          {m.incident.date}
+                        </span>
                       )}
                     </div>
-                    <div>
-                      <p
-                        className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-700 mb-3"
-                        style={{ fontFamily: MONO }}
-                      >
-                        How Bastion would have caught it
-                      </p>
-                      <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                        {m.catch}
-                      </p>
-                    </div>
+                    <p className="text-sm md:text-base leading-relaxed text-gray-800">
+                      {m.incident.story}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 pt-5 border-t border-gray-200/70 flex-grow">
+                    <p
+                      className="text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] text-blue-800 mb-2.5"
+                      style={{ fontFamily: MONO }}
+                    >
+                      How Bastion catches it
+                    </p>
+                    <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                      {m.catch}
+                    </p>
                   </div>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* TRACTION STRIP — named-customer credibility band, no fabricated metrics */}
+        <section className="relative py-16 md:py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="max-w-3xl mb-10 md:mb-12"
+            >
+              <p
+                className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-800 mb-4"
+                style={{ fontFamily: MONO }}
+              >
+                Traction
+              </p>
+              <h2
+                className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-tight text-gray-900"
+                style={{ fontFamily: SANS }}
+              >
+                We break{" "}
+                <span className="text-blue-600/80 italic font-medium">what others ship.</span>
+              </h2>
+            </motion.div>
+
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="rounded-2xl bg-white/95 border border-gray-200/60 shadow-lg shadow-blue-500/5 px-6 py-8 md:px-10 md:py-10"
+            >
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 items-center">
+                {[
+                  { name: "GitHub Copilot", logo: "/assets/logos/github.png" },
+                  { name: "Priceline", logo: "/assets/logos/priceline.png" },
+                  { name: "Chatbase", logo: "/assets/logos/chatbase.png" },
+                  { name: "Scorpion", logo: "/assets/logos/scorpion.png" },
+                ].map((c) => (
+                  <div key={c.name} className="flex items-center justify-center">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={c.logo}
+                      alt={c.name}
+                      className="h-9 md:h-10 w-auto max-w-[160px] object-contain opacity-90"
+                    />
+                  </div>
+                ))}
+              </div>
+              <p
+                className="mt-8 text-center text-xs md:text-sm text-gray-600 leading-relaxed"
+                style={{ fontFamily: MONO }}
+              >
+                Independent research and bug-bounty findings. Details under NDA where applicable.
+              </p>
+            </motion.div>
           </div>
         </section>
 
@@ -297,7 +335,7 @@ export default function Home() {
               className="max-w-4xl"
             >
               <p
-                className="text-[11px] font-bold uppercase tracking-[0.28em] text-blue-700 mb-5"
+                className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-800 mb-5"
                 style={{ fontFamily: MONO }}
               >
                 How it works
@@ -314,7 +352,7 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <div className="mt-20 md:mt-28 space-y-24 md:space-y-32">
+            <div className="mt-16 md:mt-20 space-y-20 md:space-y-24">
               {/* 01 — CONNECT */}
               <motion.div
                 variants={FADE_LEFT}
@@ -532,7 +570,7 @@ await probe.run({
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-80px" }}
-              className="mt-20 md:mt-28 flex flex-col sm:flex-row items-center justify-center gap-4"
+              className="mt-14 md:mt-20 flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <a
                 href="/contact/"
@@ -587,7 +625,7 @@ await probe.run({
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-100px" }}
-              className="rounded-3xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-xl shadow-blue-500/5 px-6 md:px-10 py-3 md:py-5"
+              className="rounded-3xl bg-white/95 border border-gray-200/60 shadow-xl shadow-blue-500/5 px-6 md:px-10 py-3 md:py-5"
             >
               {/* Header row */}
               <div
@@ -679,7 +717,7 @@ await probe.run({
             <motion.a
               variants={FADE_LEFT}
               href="/contact/"
-              className="group flex flex-col justify-between gap-12 p-10 md:p-14 rounded-3xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-xl shadow-blue-500/5 transition-all hover:bg-white hover:-translate-y-1 hover:shadow-blue-500/15"
+              className="group flex flex-col justify-between gap-12 p-10 md:p-14 rounded-3xl bg-white/95 border border-gray-200/60 shadow-xl shadow-blue-500/5 transition-all hover:bg-white hover:-translate-y-1 hover:shadow-blue-500/15"
             >
               <div>
                 <p
@@ -705,7 +743,7 @@ await probe.run({
             <motion.a
               variants={FADE_RIGHT}
               href="/contact/"
-              className="group flex flex-col justify-between gap-12 p-10 md:p-14 rounded-3xl bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-xl shadow-blue-500/5 transition-all hover:bg-white hover:-translate-y-1 hover:shadow-blue-500/15"
+              className="group flex flex-col justify-between gap-12 p-10 md:p-14 rounded-3xl bg-white/95 border border-gray-200/60 shadow-xl shadow-blue-500/5 transition-all hover:bg-white hover:-translate-y-1 hover:shadow-blue-500/15"
             >
               <div>
                 <p
@@ -732,7 +770,7 @@ await probe.run({
         </section>
 
         {/* FOOTER */}
-        <footer className="relative py-14 mt-8 border-t border-gray-200/60">
+        <footer className="relative py-12 mt-8 border-t border-gray-200/60">
           <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -740,6 +778,23 @@ await probe.run({
               <span className="border-l border-gray-300 pl-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 leading-tight">
                 The Evaluation Layer<br />for AI Agents
               </span>
+            </div>
+            <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-7">
+              <a
+                href="mailto:hello@trybastion.ai"
+                className="text-sm font-medium text-gray-600 hover:text-blue-700 transition-colors"
+              >
+                hello@trybastion.ai
+              </a>
+              <a
+                href="/contact/"
+                className="inline-flex items-center gap-2 rounded-full bg-blue-600 hover:bg-blue-700 px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-md shadow-blue-500/30 whitespace-nowrap"
+              >
+                Book a security review
+                <svg viewBox="0 0 16 12" className="h-3 w-4" fill="none">
+                  <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
             </div>
           </div>
         </footer>

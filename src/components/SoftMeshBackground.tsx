@@ -11,9 +11,9 @@ export default function SoftMeshBackground() {
       className="fixed inset-0 z-0 overflow-hidden pointer-events-none"
       style={{ background: "#FFFFFF" }}
     >
-      <div className="absolute -top-32 -left-40 h-[700px] w-[700px] rounded-full bg-blue-200/35 blur-2xl" />
-      <div className="absolute top-1/4 -right-32 h-[600px] w-[600px] rounded-full bg-cyan-200/30 blur-2xl" />
-      <div className="absolute -bottom-32 left-1/3 h-[600px] w-[600px] rounded-full bg-indigo-200/25 blur-2xl" />
+      <div className="absolute -top-32 -left-40 h-[700px] w-[700px] rounded-full bg-blue-200/35 blur-xl" />
+      <div className="absolute top-1/4 -right-32 h-[600px] w-[600px] rounded-full bg-cyan-200/30 blur-xl" />
+      <div className="absolute -bottom-32 left-1/3 h-[600px] w-[600px] rounded-full bg-indigo-200/25 blur-xl" />
     </div>
   );
 }

@@ -13,19 +13,19 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
       className="absolute top-3 md:top-5 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] md:w-[calc(100%-3rem)] max-w-7xl"
     >
       <div className="flex items-center justify-between px-2 md:px-4 py-2">
-        <a href="/" className="cursor-pointer flex items-center gap-3">
+        <a href="/" className="cursor-pointer flex items-center gap-3 rounded-2xl bg-slate-950/75 border border-white/10 px-3 py-2 shadow-lg shadow-black/30">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/assets/bastion-logo.webp"
             alt="Bastion"
-            className="h-10 md:h-12 w-auto object-contain"
+            className="h-9 md:h-11 w-auto object-contain"
             style={{
-              filter: "drop-shadow(0 0 10px rgba(59, 130, 246, 0.55)) drop-shadow(0 0 22px rgba(110, 180, 255, 0.35))",
+              filter: "drop-shadow(0 0 14px rgba(110, 180, 255, 0.6)) brightness(1.08)",
             }}
           />
           <span
-            className="inline-block border-l border-white/60 pl-3 text-[10px] font-bold uppercase tracking-[0.2em] leading-tight max-w-[120px] text-white"
-            style={{ textShadow: "0 2px 8px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.6)" }}
+            className="inline-block border-l border-white/40 pl-3 text-[10px] font-bold uppercase tracking-[0.2em] leading-tight max-w-[120px] text-white"
+            style={{ textShadow: "0 2px 6px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.7)" }}
           >
             The Evaluation Layer<br />for AI Agents
           </span>
