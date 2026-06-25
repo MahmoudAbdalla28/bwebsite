@@ -512,39 +512,61 @@ await probe.run({
                 viewport={{ once: true, margin: "-100px" }}
                 className="grid md:grid-cols-2 gap-10 md:gap-16 items-center"
               >
-                {/* Loop visual */}
-                <div className="md:order-1 order-2 relative rounded-2xl bg-gradient-to-br from-blue-50 via-white to-blue-50/40 border border-blue-100 p-10 md:p-14 flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 opacity-50" style={{
-                    backgroundImage: "radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 60%)"
-                  }} />
-                  <div className="relative w-full max-w-xs">
-                    <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.2em] text-blue-700 mb-3">
-                      <span>Build #182</span>
-                      <span className="flex items-center gap-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                        Passed
+                {/* PR check pane visual */}
+                <div className="md:order-1 order-2 rounded-2xl bg-white border border-gray-200 shadow-2xl shadow-blue-900/10 overflow-hidden">
+                  {/* Header */}
+                  <div className="flex items-center gap-3 px-5 py-3.5 border-b border-gray-200 bg-amber-50/50">
+                    <svg viewBox="0 0 16 16" className="h-4 w-4 text-amber-600 flex-shrink-0" fill="currentColor" aria-hidden>
+                      <path d="M7.001 1.5a1 1 0 0 1 1.998 0L8.747 9a.75.75 0 0 1-1.494 0L7.001 1.5ZM8 14.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z" />
+                    </svg>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[13px] font-semibold text-gray-900 leading-tight">
+                        Some checks were not successful
+                      </p>
+                      <p className="text-[11px] text-gray-500 mt-0.5 font-mono">
+                        4 successful · 1 finding
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Check rows */}
+                  <div className="divide-y divide-gray-100">
+                    {[
+                      { name: "lint", status: "Successful in 8s", state: "ok" },
+                      { name: "type-check", status: "Successful in 14s", state: "ok" },
+                      { name: "tests", status: "Successful in 1m 22s", state: "ok" },
+                      { name: "build", status: "Successful in 2m 7s", state: "ok" },
+                    ].map((c) => (
+                      <div key={c.name} className="flex items-center gap-3 px-5 py-2.5">
+                        <svg viewBox="0 0 16 16" className="h-4 w-4 text-emerald-600 flex-shrink-0" fill="currentColor" aria-hidden>
+                          <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm3.78 5.97a.75.75 0 0 0-1.06-.02L6.75 9.94 5.28 8.47a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l4.5-4.5a.75.75 0 0 0 0-1.06Z" />
+                        </svg>
+                        <span className="text-[13px] font-mono text-gray-800 flex-shrink-0">{c.name}</span>
+                        <span className="text-[12px] text-gray-500 truncate">— {c.status}</span>
+                        <span className="ml-auto text-[12px] font-medium text-blue-700 hover:text-blue-900 cursor-pointer">Details</span>
+                      </div>
+                    ))}
+
+                    {/* Bastion row — focal point */}
+                    <div className="flex items-center gap-3 px-5 py-3 bg-blue-50/40 border-l-2 border-blue-600">
+                      <span className="relative flex h-4 w-4 items-center justify-center flex-shrink-0">
+                        <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60 animate-ping" />
+                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-amber-500" />
                       </span>
+                      <span className="text-[13px] font-mono font-semibold text-gray-900 flex-shrink-0">bastion / pentest</span>
+                      <span className="text-[12px] text-amber-700 font-medium truncate">— 1 new critical finding · 38 probes passed</span>
+                      <span className="ml-auto text-[12px] font-semibold text-blue-700 hover:text-blue-900 cursor-pointer">Details</span>
                     </div>
-                    <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.2em] text-blue-700 mb-3">
-                      <span>Build #183</span>
-                      <span className="flex items-center gap-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-yellow-500" />
-                        New finding
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs font-mono uppercase tracking-[0.2em] text-blue-700 mb-6">
-                      <span>Build #184</span>
-                      <span className="flex items-center gap-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
-                        Fix verified
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-center gap-3 text-blue-700">
-                      <svg viewBox="0 0 24 24" className="h-10 w-10 animate-spin" style={{ animationDuration: "6s" }} fill="none">
-                        <path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      <span className="text-sm font-mono uppercase tracking-[0.18em]">Re-running on every change</span>
-                    </div>
+                  </div>
+
+                  {/* Footer note */}
+                  <div className="px-5 py-3 bg-gray-50/70 border-t border-gray-200 flex items-center gap-2">
+                    <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 text-gray-500" fill="currentColor" aria-hidden>
+                      <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM1.5 8a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0Zm7-3.25v3.5l2.25 1.5-.83 1.24L7 9.5V4.75h1.5Z" />
+                    </svg>
+                    <span className="text-[11px] font-mono text-gray-500 tracking-wide">
+                      Re-runs on every change · prompt, model, knowledge-base
+                    </span>
                   </div>
                 </div>
                 <div className="md:order-2 order-1">
