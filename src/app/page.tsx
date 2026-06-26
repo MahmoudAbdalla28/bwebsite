@@ -70,18 +70,20 @@ export default function Home() {
               className="text-xs md:text-sm font-bold uppercase tracking-[0.32em] text-white"
               style={{ fontFamily: MONO, textShadow: "0 2px 8px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.6)" }}
             >
-              AI Agent Pentesting
+              Red-Teaming for AI Agents
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.95, ease: "easeOut", delay: 0.1 }}
               className="mx-auto mt-6 max-w-5xl text-[2.5rem] sm:text-5xl md:text-7xl lg:text-[5.25rem] font-semibold tracking-[-0.025em] leading-[1.04] text-white"
-              style={{ fontFamily: SANS }}
+              style={{
+                fontFamily: SANS,
+                textShadow: "0 1px 3px rgba(0,0,0,0.3), 0 0 2px rgba(0,0,0,0.4), 0 4px 18px rgba(0,0,0,0.18)",
+              }}
             >
-              Bastion is the{" "}
-              <span className="text-blue-300 italic font-medium">security review</span>{" "}
-              for AI agents.
+              We attack your AI agents{" "}
+              <span className="text-blue-300 italic font-medium">so attackers can&apos;t.</span>
             </motion.h1>
 
             <motion.div
@@ -92,13 +94,10 @@ export default function Home() {
               style={{ textShadow: "0 1px 2px rgba(0,0,0,0.4)" }}
             >
               <p className="text-lg md:text-2xl font-medium leading-snug text-white">
-                AI agents don&apos;t have a security checklist yet.
+                continuous red-teaming for AI agents. voice and chat.
               </p>
-              <p className="mt-3 text-base md:text-lg leading-snug text-gray-100">
-                We pentest them against OWASP LLM Top 10, OWASP Agentic AI Threats, and MITRE ATLAS.
-              </p>
-              <p className="mt-5 text-base md:text-xl font-semibold leading-snug text-white">
-                Drop in the SDK, point us at an endpoint, or give us a phone number.
+              <p className="mt-5 text-base md:text-lg leading-snug text-gray-100">
+                Give us a phone number, point us at an endpoint, or drop in the SDK.
               </p>
             </motion.div>
 
@@ -112,17 +111,17 @@ export default function Home() {
                 href="/contact/"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-blue-600 hover:bg-blue-500 px-7 py-3.5 text-[14px] font-semibold text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-[0_10px_30px_-8px_rgba(37,99,235,0.7)]"
               >
-                Try the tool
+                Try the SDK
                 <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-0.5" fill="none">
                   <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
               <a
                 href="/contact/"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/15 hover:border-white/50 px-7 py-3.5 text-[14px] font-semibold text-white transition-all hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2.5 text-[13px] font-medium text-white/80 hover:text-white transition-colors underline underline-offset-4 decoration-white/30 hover:decoration-white/70"
               >
-                Book a security review
-                <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-0.5" fill="none">
+                or talk to us
+                <svg viewBox="0 0 16 12" className="h-2.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none">
                   <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
@@ -154,7 +153,7 @@ export default function Home() {
                 <span className="text-blue-600/80 italic font-medium">in production.</span>
               </h2>
               <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-700 max-w-3xl">
-                Each category below is mapped to OWASP LLM Top 10, OWASP Agentic AI Threats, and MITRE ATLAS. Every one has happened to a company you have heard of.
+                Every one has happened to a company you have heard of.
               </p>
             </motion.div>
 
@@ -170,12 +169,12 @@ export default function Home() {
                   name: "Jailbreaks & prompt injection",
                   desc: "Crafted and hidden inputs that get the agent off-policy. The way in, not the prize.",
                   incident: {
-                    company: "Chevrolet",
-                    logo: "/assets/logos/chevrolet.png",
-                    date: "Dec 2023",
-                    story: "Dealership chatbot prompt-injected into selling a $76K Tahoe for $1. Pulled within days.",
+                    company: "Microsoft Copilot",
+                    logo: "/assets/logos/copilot.png",
+                    date: "Jun 2025",
+                    story: "Researchers disclosed a zero-click prompt injection in Microsoft 365 Copilot (CVE-2025-32711). A crafted email could silently exfiltrate corporate data from the user's OneDrive, SharePoint, and Teams. The user never had to click.",
                   },
-                  catch: "Adversarial fleet runs prompt-injection probes before deployment. Every jailbreak ships as a reproducible PoC with a severity score.",
+                  catch: "Probes for indirect prompt injection. Hidden instructions in documents, emails, or tool responses that the agent reads on a user's behalf. The LLM behaves, but the data-access layer leaks. Findings ship with the exact payload that landed.",
                 },
                 {
                   name: "Tool & action abuse",
@@ -265,65 +264,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* TRACTION STRIP — named-customer credibility band, no fabricated metrics */}
-        <section className="relative py-16 md:py-20">
-          <div className="mx-auto max-w-7xl px-6">
-            <motion.div
-              variants={FADE_UP}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-              className="max-w-3xl mb-10 md:mb-12"
-            >
-              <p
-                className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-800 mb-4"
-                style={{ fontFamily: MONO }}
-              >
-                Traction
-              </p>
-              <h2
-                className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-tight text-gray-900"
-                style={{ fontFamily: SANS }}
-              >
-                We break{" "}
-                <span className="text-blue-600/80 italic font-medium">what others ship.</span>
-              </h2>
-            </motion.div>
-
-            <motion.div
-              variants={FADE_UP}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-              className="rounded-2xl bg-white/95 border border-gray-200/60 shadow-lg shadow-blue-500/5 px-6 py-8 md:px-10 md:py-10"
-            >
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 items-center">
-                {[
-                  { name: "GitHub Copilot", logo: "/assets/logos/github.png" },
-                  { name: "Priceline", logo: "/assets/logos/priceline.png" },
-                  { name: "Chatbase", logo: "/assets/logos/chatbase.png" },
-                  { name: "Scorpion", logo: "/assets/logos/scorpion.png" },
-                ].map((c) => (
-                  <div key={c.name} className="flex items-center justify-center">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={c.logo}
-                      alt={c.name}
-                      className="h-9 md:h-10 w-auto max-w-[160px] object-contain opacity-90"
-                    />
-                  </div>
-                ))}
-              </div>
-              <p
-                className="mt-8 text-center text-xs md:text-sm text-gray-600 leading-relaxed"
-                style={{ fontFamily: MONO }}
-              >
-                Independent research and bug-bounty findings. Details under NDA where applicable.
-              </p>
-            </motion.div>
-          </div>
-        </section>
-
         {/* HOW IT WORKS — visual treatment, replaces "What Bastion does" */}
         <section className="relative py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-6">
@@ -345,7 +285,7 @@ export default function Home() {
                 style={{ fontFamily: SANS }}
               >
                 Connect.{" "}
-                <span className="text-blue-600/80 italic font-medium">Attack. Prove. Continuous.</span>
+                <span className="text-blue-600/80 italic font-medium">Attack. Prove. Repeat.</span>
               </h2>
               <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-700 max-w-3xl">
                 Four steps, one continuous loop. Plug in your agent, let our fleet probe it, ship the report, then re-run on every change.
@@ -369,7 +309,7 @@ export default function Home() {
                     Connect
                   </h3>
                   <p className="mt-5 text-lg md:text-xl leading-snug text-gray-800">
-                    Drop in the SDK, or give us an endpoint or a phone number.
+                    Give us a phone number, point us at an endpoint, or drop in the SDK.
                   </p>
                   <p className="mt-5 text-base md:text-lg leading-relaxed text-gray-600">
                     Text and voice agents, nothing to rebuild. Bastion plugs into what is already running.
@@ -574,7 +514,7 @@ await probe.run({
                     className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.02em] leading-[1.05] text-blue-700"
                     style={{ fontFamily: SANS }}
                   >
-                    Continuous
+                    Repeat
                   </h3>
                   <p className="mt-5 text-lg md:text-xl leading-snug text-gray-800">
                     It re-runs as the agent changes.
@@ -586,30 +526,6 @@ await probe.run({
               </motion.div>
             </div>
 
-            {/* CTA */}
-            <motion.div
-              variants={FADE_UP}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-              className="mt-14 md:mt-20 flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <a
-                href="/contact/"
-                className="inline-flex items-center gap-2.5 rounded-full bg-blue-600 hover:bg-blue-700 px-7 py-3.5 text-[14px] font-semibold uppercase tracking-[0.16em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-lg shadow-blue-500/30"
-              >
-                Book a security review
-                <svg viewBox="0 0 16 12" className="h-3 w-4" fill="none">
-                  <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-              <a
-                href="/contact/"
-                className="inline-flex items-center gap-2.5 rounded-full bg-white border border-gray-200 hover:border-blue-300 hover:bg-blue-50/50 px-7 py-3.5 text-[14px] font-semibold uppercase tracking-[0.16em] text-gray-900 transition-all hover:-translate-y-0.5"
-              >
-                Get the SDK
-              </a>
-            </motion.div>
           </div>
         </section>
 
@@ -728,96 +644,74 @@ await probe.run({
 
 
         {/* DUAL CTA */}
-        <section className="relative py-20 md:py-28">
+        <section className="relative py-12 md:py-16">
           <motion.div
             variants={STAGGER}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
-            className="mx-auto max-w-7xl px-6 grid md:grid-cols-2 gap-6"
+            className="mx-auto max-w-4xl px-6 text-center"
           >
-            <motion.a
-              variants={FADE_LEFT}
-              href="/contact/"
-              className="group flex flex-col justify-between gap-12 p-10 md:p-14 rounded-3xl bg-white/95 border border-gray-200/60 shadow-xl shadow-blue-500/5 transition-all hover:bg-white hover:-translate-y-1 hover:shadow-blue-500/15"
+            <motion.p
+              variants={FADE_UP}
+              className="text-[11px] font-bold uppercase tracking-[0.28em] text-blue-700 mb-5"
+              style={{ fontFamily: MONO }}
             >
-              <div>
-                <p
-                  className="text-[11px] font-semibold uppercase tracking-[0.28em] text-blue-700 mb-5"
-                  style={{ fontFamily: MONO }}
-                >
-                  Self-serve
-                </p>
-                <p
-                  className="text-2xl md:text-3xl font-semibold tracking-[-0.015em] leading-tight text-gray-900"
-                  style={{ fontFamily: SANS }}
-                >
-                  Drop in the SDK and see what breaks.
-                </p>
-              </div>
-              <span className="inline-flex items-center gap-3 text-[13px] font-semibold uppercase tracking-[0.16em] text-gray-900">
-                Try the tool
-                <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-1.5" fill="none">
-                  <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                </svg>
-              </span>
-            </motion.a>
-            <motion.a
-              variants={FADE_RIGHT}
-              href="/contact/"
-              className="group flex flex-col justify-between gap-12 p-10 md:p-14 rounded-3xl bg-white/95 border border-gray-200/60 shadow-xl shadow-blue-500/5 transition-all hover:bg-white hover:-translate-y-1 hover:shadow-blue-500/15"
+              Self-serve
+            </motion.p>
+            <motion.h2
+              variants={FADE_UP}
+              className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.02em] leading-tight text-gray-900"
+              style={{ fontFamily: SANS }}
             >
-              <div>
-                <p
-                  className="text-[11px] font-semibold uppercase tracking-[0.28em] text-blue-700 mb-5"
-                  style={{ fontFamily: MONO }}
-                >
-                  Talk to us
-                </p>
-                <p
-                  className="text-2xl md:text-3xl font-semibold tracking-[-0.015em] leading-tight text-gray-900"
-                  style={{ fontFamily: SANS }}
-                >
-                  Walk through your agent with our team.
-                </p>
-              </div>
-              <span className="inline-flex items-center gap-3 text-[13px] font-semibold uppercase tracking-[0.16em] text-gray-900">
-                Book a security review
-                <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-1.5" fill="none">
-                  <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              Drop in the SDK and{" "}
+              <span className="text-blue-600/80 italic font-medium">see what breaks.</span>
+            </motion.h2>
+            <motion.p
+              variants={FADE_UP}
+              className="mt-6 text-base md:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed"
+            >
+              Install in minutes, point it at an endpoint, run the first probe. The findings come back as reproducible proofs of concept with severity scores.
+            </motion.p>
+            <motion.div
+              variants={FADE_UP}
+              className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5"
+            >
+              <a
+                href="/contact/"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-blue-600 hover:bg-blue-700 px-8 py-4 text-[14px] font-semibold uppercase tracking-[0.16em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-xl shadow-blue-500/30"
+              >
+                Try the SDK
+                <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-0.5" fill="none">
+                  <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </span>
-            </motion.a>
+              </a>
+              <a
+                href="/contact/"
+                className="inline-flex items-center gap-2 text-[14px] font-medium text-gray-600 hover:text-blue-700 transition-colors underline underline-offset-4 decoration-gray-300 hover:decoration-blue-500"
+              >
+                or talk to us about a guided red-team
+              </a>
+            </motion.div>
           </motion.div>
         </section>
 
         {/* FOOTER */}
-        <footer className="relative py-12 mt-8 border-t border-gray-200/60">
+        <footer className="relative py-10 border-t border-gray-200/60">
           <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/assets/bastion-logo.webp" alt="Bastion" className="h-8 w-auto opacity-90" />
               <span className="border-l border-gray-300 pl-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-500 leading-tight">
-                The Evaluation Layer<br />for AI Agents
+                Continuous Red-Teaming<br />for AI Agents
               </span>
             </div>
-            <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-7">
-              <a
-                href="mailto:team@trybastion.ai"
-                className="text-sm font-medium text-gray-600 hover:text-blue-700 transition-colors"
-              >
-                team@trybastion.ai
-              </a>
-              <a
-                href="/contact/"
-                className="inline-flex items-center gap-2 rounded-full bg-blue-600 hover:bg-blue-700 px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-md shadow-blue-500/30 whitespace-nowrap"
-              >
-                Book a security review
-                <svg viewBox="0 0 16 12" className="h-3 w-4" fill="none">
-                  <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-            </div>
+            <a
+              href="mailto:team@trybastion.ai"
+              className="text-sm font-medium text-gray-600 hover:text-blue-700 transition-colors"
+            >
+              team@trybastion.ai
+            </a>
           </div>
         </footer>
       </main>
