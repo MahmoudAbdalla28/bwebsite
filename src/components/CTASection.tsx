@@ -4,13 +4,13 @@ import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 const PERSONA_PRESETS: Record<string, { type: string; message: string }> = {
-  risk: {
-    type: "Enterprise deploying AI",
-    message: "I'm on the security and compliance side, looking at continuous AI attestation that drops into our agent fleet without adding new tooling overhead.",
+  dev: {
+    type: "Dev team shipping AI agents",
+    message: "We're shipping AI agents and want to drop Bastion into our pipeline. Tell me how to get the SDK running and what the first probe looks like.",
   },
-  carrier: {
-    type: "Insurance carrier",
-    message: "I'm an underwriter exploring continuous, carrier-panel-ready AI risk telemetry.",
+  founder: {
+    type: "Founder / engineering leader",
+    message: "Enterprise security reviews are slowing our deals. I want to see what a Bastion red-team report looks like and how fast we can hand one to a buyer's CISO.",
   },
 };
 
@@ -69,27 +69,23 @@ export default function CTASection() {
             {/* Left copy */}
             <div className="p-8 md:p-12 flex flex-col justify-center">
               <h2 className="text-3xl font-semibold tracking-tight text-text sm:text-4xl">
-                Get in Touch
+                Talk to us
               </h2>
               <p className="mt-4 text-base leading-relaxed text-text-secondary">
-                AI agents need telemetry to be insurable. We build it.
+                Tell us about your AI agent. We'll point a red-team at it and come back with a real finding.
               </p>
 
               <div className="mt-8 space-y-4">
                 <div className="rounded-sm border border-border bg-bg-alt p-4">
-                  <p className="text-sm font-semibold text-text">For enterprises</p>
+                  <p className="text-sm font-semibold text-text">For dev teams</p>
                   <p className="mt-1 text-xs text-text-muted">
-                    30-day pilot on your infrastructure. We generate the telemetry
-                    your carrier needs to price the policy.
+                    Give us a phone number, point us at an endpoint, or drop in the SDK. The first probe runs the same day. Findings come back as reproducible proofs of concept with severity.
                   </p>
                 </div>
                 <div className="rounded-sm border border-border bg-bg-alt p-4">
-                  <p className="text-sm font-semibold text-text">For carriers &amp; MGAs</p>
+                  <p className="text-sm font-semibold text-text">For founders</p>
                   <p className="mt-1 text-xs text-text-muted">
-                    Continuous, actuarial-grade telemetry for AI lines. Map
-                    agentic-risk signals to affirmative policy buybacks,
-                    quantify exposure across your book, and write AI coverage
-                    with Evidence of Control, not point-in-time questionnaires.
+                    Enterprise security reviews kill deals. We hand you the red-team report your buyer's CISO already wants, in weeks instead of months, ready to ship with your next pitch.
                   </p>
                 </div>
               </div>
@@ -131,10 +127,9 @@ export default function CTASection() {
                     <select id="type" name="type" required value={form.type} onChange={handleChange}
                       className="w-full cursor-pointer rounded-sm border border-border bg-surface px-4 py-3 text-sm text-text focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20">
                       <option value="" disabled>Select</option>
-                      <option value="Enterprise deploying AI">Enterprise deploying AI agents</option>
-                      <option value="Insurance carrier">Insurance carrier</option>
-                      <option value="MGA">MGA</option>
-                      <option value="Risk / compliance leader">Risk / compliance leader</option>
+                      <option value="Dev team shipping AI agents">Dev team shipping AI agents</option>
+                      <option value="Founder / engineering leader">Founder / engineering leader</option>
+                      <option value="Security / compliance owner">Security / compliance owner</option>
                       <option value="Other">Other</option>
                     </select>
                   </div>
@@ -147,7 +142,7 @@ export default function CTASection() {
 
                   <button type="submit" disabled={status === "sending"}
                     className="w-full cursor-pointer rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-white hover:bg-primary-dark transition-all disabled:opacity-50">
-                    {status === "sending" ? "Sending..." : status === "error" ? "Try again" : "Request a briefing"}
+                    {status === "sending" ? "Sending..." : status === "error" ? "Try again" : "Send"}
                   </button>
                 </form>
               )}
