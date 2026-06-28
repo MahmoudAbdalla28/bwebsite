@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import SoftMeshBackground from "@/components/SoftMeshBackground";
 
 export const metadata: Metadata = {
-  title: "Bastion · Continuous Red-Teaming for AI Agents",
+  title: "Bastion · Adversarial Testing for AI Agents",
   description:
-    "We attack your AI agents so attackers can't. Continuous red-teaming for voice and chat agents. Real attacks, real findings, the same engine that gets paid on public bug-bounty programs.",
+    "We attack your AI agents so attackers can't. Adversarial testing for voice and chat agents. Real attacks, real findings, the same engine that gets paid on public bug-bounty programs.",
   icons: {
     icon: [
       { url: "/favicon.webp", type: "image/webp" },
@@ -29,8 +28,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="text-gray-900 font-sans antialiased">
-        <SoftMeshBackground />
+      <body className="bg-slate-950 text-white font-sans antialiased">
         <div className="relative z-10">{children}</div>
       </body>
     </html>
