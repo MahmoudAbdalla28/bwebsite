@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { MacbookScroll } from "@/components/ui/macbook-scroll";
 import { Spotlight } from "@/components/ui/spotlight";
 import { WarpBackground } from "@/components/ui/warp-background";
@@ -834,24 +835,8 @@ await probe.run({
           </motion.div>
         </section>
 
-        {/* FOOTER */}
-        <footer className="relative py-10 border-t border-white/10">
-          <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/bastion-logo.webp" alt="Bastion" className="h-8 w-auto opacity-90" />
-              <span className="border-l border-white/20 pl-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 leading-tight">
-                Adversarial Testing<br />for AI Agents
-              </span>
-            </div>
-            <a
-              href="mailto:team@trybastion.ai"
-              className="text-sm font-medium text-gray-400 hover:text-blue-500 transition-colors"
-            >
-              team@trybastion.ai
-            </a>
-          </div>
-        </footer>
+        {/* FOOTER — unified shared component (same on every page) */}
+        <Footer />
       </main>
     </div>
   );

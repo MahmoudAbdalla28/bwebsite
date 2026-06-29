@@ -81,7 +81,7 @@ export default function FAQSection() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="relative py-24 md:py-32 bg-bg-alt border-t border-border-light scroll-mt-20" ref={ref}>
+    <section id="faq" className="relative py-24 md:py-32 bg-slate-950 border-t border-white/10 scroll-mt-20" ref={ref}>
       <div className="relative mx-auto max-w-3xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -89,17 +89,17 @@ export default function FAQSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-primary mb-5">FAQ</p>
-          <h2 className="text-3xl font-bold tracking-tight text-text sm:text-5xl">
-            Common Questions.{" "}
-            <span className="gradient-text">Direct Answers.</span>
+          <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-blue-500 mb-5">FAQ</p>
+          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-5xl">
+            Common questions.{" "}
+            <span className="text-blue-400 italic font-medium">Direct answers.</span>
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-text-secondary">
+          <p className="mt-4 text-base leading-relaxed text-gray-300">
             For questions not addressed here, contact our team directly.
           </p>
         </motion.div>
 
-        <div className="divide-y divide-border">
+        <div className="divide-y divide-white/10 border-t border-b border-white/10">
           {faqs.map((faq, i) => (
             <motion.div
               key={i}
@@ -109,13 +109,13 @@ export default function FAQSection() {
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between gap-6 py-5 text-left group"
+                className="w-full flex items-center justify-between gap-6 py-5 text-left group cursor-pointer"
               >
                 <div className="min-w-0">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-primary/60 mb-1">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-500 mb-1.5">
                     {faq.category}
                   </p>
-                  <p className="text-base font-semibold text-text group-hover:text-primary transition-colors duration-200">
+                  <p className="text-base font-semibold text-white group-hover:text-blue-400 transition-colors duration-200">
                     {faq.q}
                   </p>
                 </div>
@@ -123,7 +123,7 @@ export default function FAQSection() {
                   animate={{ rotate: open === i ? 180 : 0 }}
                   transition={{ duration: 0.22 }}
                   viewBox="0 0 16 16"
-                  className="h-4 w-4 shrink-0 text-text-dim"
+                  className="h-4 w-4 shrink-0 text-gray-400"
                   fill="none"
                 >
                   <path d="M3 6l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -140,16 +140,16 @@ export default function FAQSection() {
                   >
                     <div className="pb-6 space-y-3">
                       {(Array.isArray(faq.a) ? faq.a : [faq.a]).map((para, pi) => (
-                        <p key={pi} className="text-sm leading-relaxed text-text-muted">{para}</p>
+                        <p key={pi} className="text-sm leading-relaxed text-gray-300">{para}</p>
                       ))}
                       {faq.list && (
                         <ul className="space-y-2.5 pl-1">
                           {faq.list.map((item, idx) => (
-                            <li key={idx} className="flex gap-3 text-sm leading-relaxed text-text-muted">
-                              <span className="mt-2 h-1 w-1 rounded-full bg-primary shrink-0" />
+                            <li key={idx} className="flex gap-3 text-sm leading-relaxed text-gray-300">
+                              <span className="mt-2 h-1 w-1 rounded-full bg-blue-500 shrink-0" />
                               <p>
                                 {item.label && (
-                                  <span className="font-semibold text-text">{item.label}: </span>
+                                  <span className="font-semibold text-white">{item.label}: </span>
                                 )}
                                 {item.body}
                               </p>

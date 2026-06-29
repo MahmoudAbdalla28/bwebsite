@@ -11,10 +11,25 @@ export default function Footer() {
             </span>
           </a>
 
-          <div className="flex flex-wrap items-center justify-center gap-8">
-            <a href="/faq/" className="text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-400 hover:text-white transition-colors cursor-pointer">FAQ</a>
-            <a href="/contact/" className="text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-400 hover:text-white transition-colors cursor-pointer">Contact</a>
-            <a href="/contact/" className="text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-400 hover:text-white transition-colors cursor-pointer">Book a Demo</a>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="mailto:team@trybastion.ai"
+              className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
+            >
+              team@trybastion.ai
+            </a>
+            <a
+              href="/contact/"
+              className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-300 hover:text-white transition-all cursor-pointer"
+            >
+              Contact
+            </a>
+            <a
+              href="/contact/"
+              className="inline-flex items-center rounded-full bg-blue-700 hover:bg-blue-800 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-md shadow-blue-900/40 cursor-pointer"
+            >
+              Book a Demo
+            </a>
           </div>
 
           <p className="text-[11px] text-gray-500">&copy; {new Date().getFullYear()} PistonSolutions</p>
