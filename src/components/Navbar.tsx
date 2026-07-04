@@ -33,12 +33,6 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
           >
             For Carriers
           </a>
-          <a
-            href="/contact/"
-            className="rounded-full bg-blue-700 hover:bg-blue-800 px-3.5 md:px-5 py-2 md:py-2.5 text-[10px] md:text-[12px] font-semibold uppercase tracking-[0.14em] md:tracking-[0.16em] text-white transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer shadow-lg shadow-blue-900/50 whitespace-nowrap"
-          >
-            Book a Demo
-          </a>
         </div>
       </div>
     </motion.nav>
