@@ -24,20 +24,28 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
             }}
           />
           <span
-            className="hidden md:inline-block border-l border-white/50 pl-3 text-[10px] font-bold uppercase tracking-[0.2em] leading-tight max-w-[120px] text-white"
+            className="hidden md:inline-block border-l border-white/50 pl-3 text-[10px] font-bold uppercase tracking-[0.2em] leading-tight max-w-[130px] text-white"
             style={{ textShadow: "0 2px 8px rgba(0,0,0,0.95), 0 0 3px rgba(0,0,0,0.85), 0 0 1px rgba(0,0,0,0.7)" }}
           >
-            Adversarial Testing<br />for AI Agents
+            The Assurance Layer<br />for AI Agents
           </span>
         </a>
 
-        <a
-          href="/contact/"
-          className="rounded-full bg-blue-700 hover:bg-blue-800 px-3.5 md:px-5 py-2 md:py-2.5 text-[10px] md:text-[12px] font-semibold uppercase tracking-[0.14em] md:tracking-[0.16em] text-white transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer shadow-lg shadow-blue-900/50 whitespace-nowrap flex-shrink-0"
-        >
-          <span className="md:hidden">Try the SDK</span>
-          <span className="hidden md:inline">Try the SDK</span>
-        </a>
+        <div className="flex items-center gap-3 md:gap-5 flex-shrink-0">
+          <a
+            href="/insurance/"
+            className="hidden md:inline-block text-[12px] font-semibold uppercase tracking-[0.16em] text-white/85 hover:text-white transition-colors whitespace-nowrap"
+            style={{ textShadow: "0 2px 8px rgba(0,0,0,0.9)" }}
+          >
+            For Carriers
+          </a>
+          <a
+            href="/contact/"
+            className="rounded-full bg-blue-700 hover:bg-blue-800 px-3.5 md:px-5 py-2 md:py-2.5 text-[10px] md:text-[12px] font-semibold uppercase tracking-[0.14em] md:tracking-[0.16em] text-white transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer shadow-lg shadow-blue-900/50 whitespace-nowrap"
+          >
+            Try the SDK
+          </a>
+        </div>
       </div>
     </motion.nav>
   );

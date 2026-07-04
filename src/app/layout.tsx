@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Bastion · Adversarial Testing for AI Agents",
+  title: "Bastion · The Assurance Layer for AI Agents",
   description:
-    "We attack your AI agents so attackers can't. Adversarial testing for voice and chat agents. Real attacks, real findings, the same engine that gets paid on public bug-bounty programs.",
+    "Independent, continuous adversarial testing for voice and chat AI agents. The report clears enterprise security review. The data becomes the risk layer carriers price coverage against.",
   icons: {
     icon: [
       { url: "/favicon.webp", type: "image/webp" },

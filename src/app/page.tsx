@@ -65,8 +65,8 @@ export default function Home() {
                 textShadow: "0 1px 3px rgba(0,0,0,0.3), 0 0 2px rgba(0,0,0,0.4), 0 4px 18px rgba(0,0,0,0.18)",
               }}
             >
-              We attack your AI agents{" "}
-              <span className="text-blue-400 italic font-medium">so attackers can&apos;t.</span>
+              Prove your AI agents are safe.{" "}
+              <span className="text-blue-400 italic font-medium">Before your buyer asks.</span>
             </motion.h1>
 
             <motion.div
@@ -76,7 +76,7 @@ export default function Home() {
               className="mx-auto mt-10 max-w-2xl"
             >
               <p className="text-lg md:text-2xl font-medium leading-snug text-white">
-                Adversarial testing for AI agents. Voice and Chat.
+                Independent, continuous adversarial testing. The report clears your buyer&apos;s security review and stays current every time you ship.
               </p>
               <p className="mt-5 text-base md:text-lg leading-snug text-gray-300">
                 Give us a phone number, point us at an endpoint, or drop in the SDK.
@@ -665,6 +665,102 @@ await probe.run({
               </motion.div>
             </div>
 
+          </div>
+        </section>
+
+        {/* INSURANCE — the risk data layer, client-facing framing, links to /insurance */}
+        <section className="relative py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-6">
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="max-w-4xl mb-14 md:mb-16"
+            >
+              <p
+                className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
+                style={{ fontFamily: MONO }}
+              >
+                Insurance
+              </p>
+              <h2
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-white"
+                style={{ fontFamily: SANS }}
+              >
+                The risk data layer for{" "}
+                <span className="text-blue-400 italic font-medium">AI agent coverage.</span>
+              </h2>
+              <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-300 max-w-3xl">
+                Carriers exclude AI agents from coverage because no loss history exists. Bastion is building it. Every test writes structured risk data that carriers can price against.
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={STAGGER}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+            >
+              {[
+                {
+                  eyebrow: "The gap",
+                  title: "No one can price AI agent risk.",
+                  body: "AI exclusions are spreading across cyber and E&O policies. Carriers writing AI risk today are pricing blind, so most simply exclude it.",
+                },
+                {
+                  eyebrow: "The data",
+                  title: "Every probe is a recorded loss event.",
+                  body: "Each finding becomes a structured record: failure class, frequency, severity, time-to-detect. Across customers it compounds into the loss history the market is missing.",
+                },
+                {
+                  eyebrow: "What it means for you",
+                  title: "Your evidence file gets you covered.",
+                  body: "When carriers price AI agent coverage, they price it against this dataset. Companies testing with Bastion walk in with the evidence already on file.",
+                },
+              ].map((c) => (
+                <motion.div
+                  key={c.eyebrow}
+                  variants={FADE_UP}
+                  className="flex flex-col rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg shadow-blue-500/5 p-7 md:p-8"
+                >
+                  <p
+                    className="text-[11px] font-bold uppercase tracking-[0.22em] text-blue-500 mb-4"
+                    style={{ fontFamily: MONO }}
+                  >
+                    {c.eyebrow}
+                  </p>
+                  <h3
+                    className="text-xl md:text-2xl font-semibold tracking-[-0.01em] text-white leading-snug"
+                    style={{ fontFamily: SANS }}
+                  >
+                    {c.title}
+                  </h3>
+                  <p className="mt-4 text-base leading-relaxed text-gray-300">
+                    {c.body}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="mt-10"
+            >
+              <a
+                href="/insurance/"
+                className="group inline-flex items-center gap-2.5 text-[13px] font-semibold uppercase tracking-[0.16em] text-blue-500 hover:text-blue-400 transition-colors"
+              >
+                For carriers &amp; MGAs
+                <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-1" fill="none">
+                  <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            </motion.div>
           </div>
         </section>
 
