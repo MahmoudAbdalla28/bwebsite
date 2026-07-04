@@ -111,95 +111,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SELECTED FINDINGS — anonymized real Bastion engagements with concrete numbers */}
-        <section className="relative py-24 md:py-32">
-          <div className="mx-auto max-w-7xl px-6">
-            <motion.div
-              variants={FADE_UP}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-100px" }}
-              className="max-w-4xl mb-14 md:mb-16"
-            >
-              <p
-                className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
-                style={{ fontFamily: MONO }}
-              >
-                Selected Findings
-              </p>
-              <h2
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-white"
-                style={{ fontFamily: SANS }}
-              >
-                Real findings from{" "}
-                <span className="text-blue-400 italic font-medium">production AI agents.</span>
-              </h2>
-            </motion.div>
-
-            <motion.div
-              variants={STAGGER}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-              className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-7"
-            >
-              {[
-                {
-                  target: "Coding agent at a major developer platform",
-                  body: "Cross-agent memory injection chained with runner control. The agent could be steered to leak its own credentials through normal conversation.",
-                  status: "Coordinated disclosure. Fixed.",
-                },
-                {
-                  target: "Voice AI platform deployed across 47 enterprise sites",
-                  body: "5,724 customer records readable from a single unauthenticated route. 77 of 296 production API routes shipping with no auth.",
-                  status: "Disclosed.",
-                },
-                {
-                  target: "Conversational AI platform with named enterprise customers",
-                  body: "2,292 conversations across 26 tenants readable from one unauth endpoint. Control-plane write and delete on tenants accessible from the same surface.",
-                  status: "Disclosed.",
-                },
-              ].map((f) => (
-                <motion.div
-                  key={f.target}
-                  variants={FADE_UP}
-                  className="flex flex-col rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg shadow-blue-500/5 p-7 md:p-8 min-h-[260px]"
-                >
-                  <p
-                    className="text-sm md:text-[15px] font-semibold text-white leading-snug mb-4"
-                    style={{ fontFamily: MONO }}
-                  >
-                    {f.target}
-                  </p>
-                  <p className="text-base leading-relaxed text-gray-300 flex-grow">
-                    {f.body}
-                  </p>
-                  <div className="mt-6 pt-5 border-t border-white/10 flex items-center gap-2">
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    <p
-                      className="text-[11px] font-bold uppercase tracking-[0.22em] text-gray-400"
-                      style={{ fontFamily: MONO }}
-                    >
-                      {f.status}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.p
-              variants={FADE_UP}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-              className="mt-10 text-xs md:text-sm text-gray-500 tracking-[0.18em] uppercase"
-              style={{ fontFamily: MONO }}
-            >
-              Anonymized · Disclosed · Fixed
-            </motion.p>
-          </div>
-        </section>
-
         {/* THINGS WE BROKE — customer engagements in Methods-of-Breaking visual format */}
         <section className="relative py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-6">
@@ -214,17 +125,17 @@ export default function Home() {
                 className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
                 style={{ fontFamily: MONO }}
               >
-                Things we broke
+                Where we&apos;ve tested
               </p>
               <h2
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-white"
                 style={{ fontFamily: SANS }}
               >
-                Agents we have{" "}
-                <span className="text-blue-400 italic font-medium">successfully broken.</span>
+                Findings that cleared through{" "}
+                <span className="text-blue-400 italic font-medium">coordinated disclosure.</span>
               </h2>
               <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-300 max-w-3xl">
-                From low-severity exposures to critical PII leakages. These industry-leading companies could not find what we did.
+                Bastion has surfaced vulnerabilities in AI agents at these companies. Each finding was disclosed through the vendor&apos;s security process before publication.
               </p>
             </motion.div>
 
@@ -400,6 +311,95 @@ export default function Home() {
                 </motion.div>
               ))}
             </motion.div>
+          </div>
+        </section>
+
+        {/* SELECTED FINDINGS — anonymized real Bastion engagements with concrete numbers */}
+        <section className="relative py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-6">
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="max-w-4xl mb-14 md:mb-16"
+            >
+              <p
+                className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
+                style={{ fontFamily: MONO }}
+              >
+                Selected Findings
+              </p>
+              <h2
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-white"
+                style={{ fontFamily: SANS }}
+              >
+                Real findings from{" "}
+                <span className="text-blue-400 italic font-medium">production AI agents.</span>
+              </h2>
+            </motion.div>
+
+            <motion.div
+              variants={STAGGER}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-7"
+            >
+              {[
+                {
+                  target: "Coding agent at a major developer platform",
+                  body: "Cross-agent memory injection chained with runner control. The agent could be steered to leak its own credentials through normal conversation.",
+                  status: "Coordinated disclosure. Fixed.",
+                },
+                {
+                  target: "Voice AI platform deployed across 47 enterprise sites",
+                  body: "5,724 customer records readable from a single unauthenticated route. 77 of 296 production API routes shipping with no auth.",
+                  status: "Disclosed.",
+                },
+                {
+                  target: "Conversational AI platform with named enterprise customers",
+                  body: "2,292 conversations across 26 tenants readable from one unauth endpoint. Control-plane write and delete on tenants accessible from the same surface.",
+                  status: "Disclosed.",
+                },
+              ].map((f) => (
+                <motion.div
+                  key={f.target}
+                  variants={FADE_UP}
+                  className="flex flex-col rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg shadow-blue-500/5 p-7 md:p-8 min-h-[260px]"
+                >
+                  <p
+                    className="text-sm md:text-[15px] font-semibold text-white leading-snug mb-4"
+                    style={{ fontFamily: MONO }}
+                  >
+                    {f.target}
+                  </p>
+                  <p className="text-base leading-relaxed text-gray-300 flex-grow">
+                    {f.body}
+                  </p>
+                  <div className="mt-6 pt-5 border-t border-white/10 flex items-center gap-2">
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    <p
+                      className="text-[11px] font-bold uppercase tracking-[0.22em] text-gray-400"
+                      style={{ fontFamily: MONO }}
+                    >
+                      {f.status}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.p
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="mt-10 text-xs md:text-sm text-gray-500 tracking-[0.18em] uppercase"
+              style={{ fontFamily: MONO }}
+            >
+              Anonymized · Disclosed · Fixed
+            </motion.p>
           </div>
         </section>
 
