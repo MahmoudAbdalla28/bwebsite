@@ -12,6 +12,10 @@ const PERSONA_PRESETS: Record<string, { type: string; message: string }> = {
     type: "Founder / engineering leader",
     message: "Enterprise security reviews are slowing our deals. I want to see what a Bastion findings report looks like and how fast we can hand one to a buyer's CISO.",
   },
+  carrier: {
+    type: "Insurance carrier / MGA",
+    message: "We're looking at AI agent exposure. I want to see the dataset structure and how it maps to our book.",
+  },
 };
 
 export default function CTASection() {
@@ -130,6 +134,7 @@ export default function CTASection() {
                       <option value="Dev team shipping AI agents">Dev team shipping AI agents</option>
                       <option value="Founder / engineering leader">Founder / engineering leader</option>
                       <option value="Security / compliance owner">Security / compliance owner</option>
+                      <option value="Insurance carrier / MGA">Insurance carrier / MGA</option>
                       <option value="Other">Other</option>
                     </select>
                   </div>

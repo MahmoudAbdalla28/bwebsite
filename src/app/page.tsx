@@ -93,7 +93,7 @@ export default function Home() {
                 href="/contact/"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-blue-700 hover:bg-blue-600 px-7 py-3.5 text-[14px] font-semibold text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-[0_10px_30px_-8px_rgba(37,99,235,0.7)]"
               >
-                Try the SDK
+                Get your first findings
                 <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-0.5" fill="none">
                   <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -892,7 +892,7 @@ await probe.run({
               className="text-[11px] font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
               style={{ fontFamily: MONO }}
             >
-              Self-serve
+              Get started
             </motion.p>
             <motion.h2
               variants={FADE_UP}
@@ -916,7 +916,7 @@ await probe.run({
                 href="/contact/"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-blue-700 hover:bg-blue-800 px-8 py-4 text-[14px] font-semibold uppercase tracking-[0.16em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-xl shadow-blue-500/30"
               >
-                Try the SDK
+                Get your first findings
                 <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-0.5" fill="none">
                   <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -938,80 +938,4 @@ await probe.run({
   );
 }
 
-/* ─────────────── Glass cards (light) ─────────────── */
-
-function GlassProblemCard({
-  eyebrow,
-  title,
-  body,
-  cta,
-  ctaHref,
-  slideFrom,
-}: {
-  eyebrow: string;
-  title: string;
-  body: string;
-  cta: string;
-  ctaHref: string;
-  slideFrom: "left" | "right";
-}) {
-  const variant = slideFrom === "left" ? FADE_LEFT : FADE_RIGHT;
-  return (
-    <motion.div
-      variants={variant}
-      whileHover={{ y: -6, transition: { duration: 0.3 } }}
-      className="rounded-[30px] p-10 md:p-12 transition-all"
-      style={{
-        background: "#f0f0f0",
-        boxShadow: "15px 15px 30px #cfcfcf, -15px -15px 30px #ffffff",
-      }}
-    >
-      <p
-        className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white mb-6"
-        style={{ fontFamily: MONO }}
-      >
-        — {eyebrow}
-      </p>
-      <h3
-        className="text-2xl md:text-3xl font-semibold tracking-[-0.015em] leading-tight text-white mb-6"
-        style={{ fontFamily: SANS }}
-      >
-        {title}
-      </h3>
-      <p className="text-sm md:text-base leading-relaxed text-white">{body}</p>
-      <a
-        href={ctaHref}
-        className="mt-8 group inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.16em] text-blue-600 hover:text-blue-500 transition-colors"
-      >
-        {cta}
-        <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-1" fill="none">
-          <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        </svg>
-      </a>
-    </motion.div>
-  );
-}
-
-const CATCHES = [
-  {
-    title: "Jailbreaks & injection",
-    body: "Crafted and hidden inputs that get the agent off-policy. The way in, not the prize.",
-  },
-  {
-    title: "Tool & action abuse",
-    body: "Driving the agent to call tools and reach systems it never should.",
-  },
-  {
-    title: "Authorization & cross-user data",
-    body: "One user reaching another's data or actions through the agent. Where the real damage lives.",
-  },
-  {
-    title: "Live voice agents",
-    body: "Real adversarial phone calls against telephony agents. The surface almost no one can test.",
-  },
-  {
-    title: "Behavioral drift",
-    body: "The agent quietly stops following policy as it ships new versions.",
-  },
-];
 

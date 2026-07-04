@@ -49,7 +49,7 @@ export default function Footer() {
             )}
           </div>
 
-          <p className="text-[11px] text-gray-500">&copy; {new Date().getFullYear()} PistonSolutions</p>
+          <p className="text-[11px] text-gray-500">&copy; {new Date().getFullYear()} trybastion.ai</p>
         </div>
       </div>
     </footer>
