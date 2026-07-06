@@ -225,7 +225,7 @@ export default function Home() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-80px" }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
             >
               {[
                 {
@@ -237,12 +237,8 @@ export default function Home() {
                   body: "Those secure the pipe, not the decisions. Your agent is policy plus tools plus memory. That's what we test.",
                 },
                 {
-                  title: "Not a one-time audit.",
-                  body: "A pentest report from last quarter decays the moment you swap a model or push a prompt. Bastion re-runs on every change.",
-                },
-                {
-                  title: "Continuous, not point-in-time.",
-                  body: "Your agent changes every ship. A new model, a new prompt, a new tool, and yesterday's clean pentest is out of date. Bastion re-tests on every change, so your report is never stale when your buyer checks.",
+                  title: "Continuous, not a one-time audit.",
+                  body: "A pentest from last quarter decays the moment you swap a model or push a prompt. Bastion re-tests on every change, so your report is never stale when your buyer checks.",
                 },
               ].map((p) => (
                 <motion.div
@@ -265,10 +261,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* WHAT WE'VE CAUGHT — anonymized engagements + public-CVE citation.
-            LEGAL: third-party names appear ONLY with a public CVE citation or written
-            permission / completed coordinated disclosure. Do not re-add names or logos
-            without counsel review. */}
+        {/* TRACK RECORD — single anonymized findings section.
+            LEGAL: no third-party company names, no logos, no disclosure dates that
+            aren't independently verifiable. Do not re-add named companies without
+            written permission or completed coordinated disclosure + counsel review. */}
         <section id="findings" className="relative py-24 md:py-32 scroll-mt-24">
           <div className="mx-auto max-w-7xl px-6">
             <motion.div
@@ -276,7 +272,7 @@ export default function Home() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-100px" }}
-              className="max-w-4xl mb-16 md:mb-20"
+              className="max-w-4xl mb-14 md:mb-16"
             >
               <p
                 className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
@@ -294,124 +290,6 @@ export default function Home() {
               <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-300 max-w-3xl">
                 From low-severity exposures to critical PII leaks, in agents already serving real customers. This is what your buyer&apos;s security team would have flagged.
               </p>
-            </motion.div>
-
-            <motion.div
-              variants={STAGGER}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
-            >
-              {[
-                {
-                  name: "GitHub Copilot",
-                  desc: "AI pair programmer used by over 20 million developers.",
-                  tag: "CVE-2025-53773 · CVSS 7.8 High",
-                  date: "2025",
-                  story: "A publicly disclosed prompt-injection vulnerability that could allow code execution via crafted content. Disclosed June 2025, patched August 2025. This is the class of agent vulnerability Bastion's continuous testing surfaces before your buyer's security team does.",
-                  catch: "Probes cross-session data flow with multi-tenant attacks. Where one user can reach another user's data, the finding ships with a verbatim trace.",
-                },
-                {
-                  name: "A publicly-traded online travel platform",
-                  desc: "Serves tens of millions of travelers worldwide every year.",
-                  tag: "Details under NDA",
-                  date: "2026",
-                  story: "Bastion identified vulnerabilities in the customer-facing agent surface. Details under NDA.",
-                  catch: "An autonomous fleet of adversarial agents probes the agent's tool chain and auth boundaries, adapting mid-conversation to surface real exploit paths.",
-                },
-                {
-                  name: "A conversational-AI customer-support platform",
-                  desc: "No-code chatbot builder powering conversations for millions of end users across thousands of businesses.",
-                  tag: "Details under NDA",
-                  date: "2026",
-                  story: "Bastion identified vulnerabilities in the multi-tenant agent platform. Details under NDA.",
-                  catch: "Multi-tenant attacks fingerprint session state and identity carryover across calls. Cross-customer reach ships with a reproducible payload.",
-                },
-                {
-                  name: "A vertical marketing-automation platform",
-                  desc: "Serves thousands of local-business clients reaching millions of customers across the US.",
-                  tag: "Details under NDA",
-                  date: "2026",
-                  story: "Bastion identified vulnerabilities in the customer-facing agent surface. Details under NDA.",
-                  catch: "Real adversarial probes against the live agent surface. Every successful exploit ships as a reproducible proof of concept with a severity score.",
-                },
-              ].map((m) => (
-                <motion.div
-                  key={m.name}
-                  variants={FADE_UP}
-                  className="flex flex-col rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg shadow-blue-500/5 p-7 md:p-8"
-                >
-                  <h3
-                    className="text-xl md:text-2xl font-semibold tracking-[-0.02em] leading-tight text-blue-500"
-                    style={{ fontFamily: SANS }}
-                  >
-                    {m.name}
-                  </h3>
-                  <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-200">
-                    {m.desc}
-                  </p>
-
-                  <div className="mt-6 rounded-xl bg-white/[0.04] border border-white/10 p-5 md:p-6">
-                    <div className="flex flex-wrap items-center gap-2 mb-4">
-                      <span
-                        className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.14em] text-blue-300 bg-blue-500/15 border border-blue-500/30 px-2.5 py-1 rounded-full"
-                        style={{ fontFamily: MONO }}
-                      >
-                        {m.tag}
-                      </span>
-                      <span
-                        className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-gray-300 bg-white/[0.08] border border-white/15 px-2.5 py-1 rounded-full"
-                        style={{ fontFamily: MONO }}
-                      >
-                        {m.date}
-                      </span>
-                    </div>
-                    <p className="text-sm md:text-base leading-relaxed text-gray-200">
-                      {m.story}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 pt-5 border-t border-white/10 flex-grow">
-                    <p
-                      className="text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] text-blue-500 mb-2.5"
-                      style={{ fontFamily: MONO }}
-                    >
-                      How Bastion catches it
-                    </p>
-                    <p className="text-sm md:text-base leading-relaxed text-gray-300">
-                      {m.catch}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* SELECTED FINDINGS — anonymized real Bastion engagements with concrete numbers */}
-        <section className="relative py-24 md:py-32">
-          <div className="mx-auto max-w-7xl px-6">
-            <motion.div
-              variants={FADE_UP}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-100px" }}
-              className="max-w-4xl mb-14 md:mb-16"
-            >
-              <p
-                className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
-                style={{ fontFamily: MONO }}
-              >
-                Selected Findings
-              </p>
-              <h2
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-white"
-                style={{ fontFamily: SANS }}
-              >
-                Real findings from{" "}
-                <span className="text-blue-400 italic font-medium">production AI agents.</span>
-              </h2>
             </motion.div>
 
             <motion.div
