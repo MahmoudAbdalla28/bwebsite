@@ -23,7 +23,7 @@ export default function Footer() {
               href="/insurance/"
               className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
             >
-              For Carriers
+              For insurers
             </a>
             <a
               href="mailto:team@trybastion.ai"
@@ -51,6 +51,11 @@ export default function Footer() {
 
           <p className="text-[11px] text-gray-500">&copy; {new Date().getFullYear()} trybastion.ai</p>
         </div>
+
+        {/* Founder credibility — keep factual per pitch deck; no unverified credentials */}
+        <p className="mt-8 text-[11px] leading-relaxed text-gray-500 max-w-xl">
+          Independent, third-party testing. Built by engineers from NYSE quant-trading systems and adversarial ML research.
+        </p>
       </div>
     </footer>
   );

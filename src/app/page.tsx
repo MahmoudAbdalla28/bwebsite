@@ -1,10 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { MacbookScroll } from "@/components/ui/macbook-scroll";
 import { Spotlight } from "@/components/ui/spotlight";
 import { WarpBackground } from "@/components/ui/warp-background";
 
@@ -40,7 +38,7 @@ export default function Home() {
 
       <main className="relative z-10">
 
-        {/* HERO — dark warp background, Bastion blue/cyan rays */}
+        {/* HERO — dark warp background, revenue-owner reframe */}
         <section className="relative overflow-hidden min-h-screen flex items-center bg-slate-950">
           <WarpBackground />
           {/* Spotlight — adds a subtle light sweep on top of the warp */}
@@ -59,27 +57,27 @@ export default function Home() {
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.95, ease: "easeOut", delay: 0.1 }}
-              className="mx-auto mt-6 max-w-5xl text-[2.5rem] sm:text-5xl md:text-7xl lg:text-[5.25rem] font-semibold tracking-[-0.025em] leading-[1.04] text-white"
+              className="mx-auto mt-6 max-w-5xl text-[2.4rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] font-semibold tracking-[-0.025em] leading-[1.06] text-white"
               style={{
                 fontFamily: SANS,
                 textShadow: "0 1px 3px rgba(0,0,0,0.3), 0 0 2px rgba(0,0,0,0.4), 0 4px 18px rgba(0,0,0,0.18)",
               }}
             >
-              Prove your AI agents are safe.{" "}
-              <span className="text-blue-400 italic font-medium">Before your buyer asks.</span>
+              Close the enterprise deal{" "}
+              <span className="text-blue-400 italic font-medium">your security review is holding up.</span>
             </motion.h1>
 
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="mx-auto mt-10 max-w-2xl"
+              className="mx-auto mt-9 max-w-2xl"
             >
               <p className="text-lg md:text-2xl font-medium leading-snug text-white">
-                Independent, continuous adversarial testing. The report clears your buyer&apos;s security review and stays current every time you ship.
+                Bastion hands you the independent adversarial-testing report that clears your buyer&apos;s security review, so stalled deals close instead of dying in procurement.
               </p>
               <p className="mt-5 text-base md:text-lg leading-snug text-gray-300">
-                Give us a phone number, point us at an endpoint, or drop in the SDK.
+                Continuous coverage. The report stays current every time you ship.
               </p>
             </motion.div>
 
@@ -87,26 +85,306 @@ export default function Home() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.38 }}
-              className="mt-12 flex flex-wrap items-center justify-center gap-3"
+              className="mt-11 flex flex-wrap items-center justify-center gap-4"
             >
               <a
                 href="/contact/"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-blue-700 hover:bg-blue-600 px-7 py-3.5 text-[14px] font-semibold text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-[0_10px_30px_-8px_rgba(37,99,235,0.7)]"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-blue-700 hover:bg-blue-600 px-8 py-4 text-[15px] font-semibold text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-[0_10px_30px_-8px_rgba(37,99,235,0.7)]"
               >
-                Get your first findings
+                Book a demo
                 <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-0.5" fill="none">
                   <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
               <a
-                href="/contact/"
-                className="group inline-flex items-center gap-2.5 text-[13px] font-medium text-white/80 hover:text-white transition-colors underline underline-offset-4 decoration-white/30 hover:decoration-white/70"
+                href="/sample-report/"
+                className="group inline-flex items-center gap-2.5 text-[14px] font-medium text-white/80 hover:text-white transition-colors underline underline-offset-4 decoration-white/30 hover:decoration-white/70"
               >
-                or talk to us
+                See a sample report
                 <svg viewBox="0 0 16 12" className="h-2.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none">
                   <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.55 }}
+              className="mt-6 text-[13px] text-gray-400"
+            >
+              First findings within 48 hours of your intro call.
+            </motion.p>
+          </div>
+        </section>
+
+        {/* THE PROBLEM — stalled security review kills the deal */}
+        <section className="relative py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-6">
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="max-w-4xl mb-12 md:mb-14"
+            >
+              <p
+                className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
+                style={{ fontFamily: MONO }}
+              >
+                The problem
+              </p>
+              <h2
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-white"
+                style={{ fontFamily: SANS }}
+              >
+                Your biggest deals don&apos;t die in the demo.{" "}
+                <span className="text-blue-400 italic font-medium">They die in the security review.</span>
+              </h2>
+              <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-300 max-w-3xl">
+                You sold the CEO. You sold the champion. Then the deal hits your buyer&apos;s mandatory AI security review and stalls for months. In regulated verticals like healthcare, financial services, and insurance, an AI agent vendor can&apos;t close until someone independent has stress-tested the agent and handed over a report the security team will accept. Most vendors don&apos;t have that report. So the deal sits. Champions move on. Budget gets reallocated. The deal quietly dies.
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={STAGGER}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+            >
+              {[
+                {
+                  stat: "Mandatory",
+                  body: "An AI security review is now a standard gate before enterprise AI deals close.",
+                },
+                {
+                  stat: "Months",
+                  body: "The typical dead time a review adds to a sales cycle while the deal waits.",
+                },
+                {
+                  stat: "Every ship",
+                  body: "Each model update reopens what was already reviewed. A one-time audit isn't enough.",
+                },
+              ].map((c) => (
+                <motion.div
+                  key={c.stat}
+                  variants={FADE_UP}
+                  className="flex flex-col rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg shadow-blue-500/5 p-7 md:p-8"
+                >
+                  <p
+                    className="text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-blue-400"
+                    style={{ fontFamily: SANS }}
+                  >
+                    {c.stat}
+                  </p>
+                  <p className="mt-4 text-base leading-relaxed text-gray-300">{c.body}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.p
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="mt-10 text-lg md:text-xl font-medium text-white max-w-3xl"
+            >
+              Bastion is the report that clears the review, and keeps clearing it every time you ship.
+            </motion.p>
+          </div>
+        </section>
+
+        {/* WHY BASTION — differentiation + positive continuous-coverage claim */}
+        <section className="relative py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-6">
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="max-w-4xl mb-14 md:mb-16"
+            >
+              <p
+                className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
+                style={{ fontFamily: MONO }}
+              >
+                Why Bastion
+              </p>
+              <h2
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-white"
+                style={{ fontFamily: SANS }}
+              >
+                Not a guardrail. Not endpoint security.{" "}
+                <span className="text-blue-400 italic font-medium">Not a one-time audit.</span>
+              </h2>
+            </motion.div>
+
+            <motion.div
+              variants={STAGGER}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+            >
+              {[
+                {
+                  title: "Not a guardrail.",
+                  body: "Guardrails block known prompt patterns at the input layer. They don't probe your tool chain, your auth boundaries, or what leaks across user sessions.",
+                },
+                {
+                  title: "Not endpoint or network security.",
+                  body: "Those secure the pipe, not the decisions. Your agent is policy plus tools plus memory. That's what we test.",
+                },
+                {
+                  title: "Not a one-time audit.",
+                  body: "A pentest report from last quarter decays the moment you swap a model or push a prompt. Bastion re-runs on every change.",
+                },
+                {
+                  title: "Continuous, not point-in-time.",
+                  body: "Your agent changes every ship. A new model, a new prompt, a new tool, and yesterday's clean pentest is out of date. Bastion re-tests on every change, so your report is never stale when your buyer checks.",
+                },
+              ].map((p) => (
+                <motion.div
+                  key={p.title}
+                  variants={FADE_UP}
+                  className="flex flex-col rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg shadow-blue-500/5 p-7 md:p-8"
+                >
+                  <h3
+                    className="text-xl md:text-2xl font-semibold tracking-[-0.01em] text-blue-500 leading-snug"
+                    style={{ fontFamily: SANS }}
+                  >
+                    {p.title}
+                  </h3>
+                  <p className="mt-4 text-base leading-relaxed text-gray-300">
+                    {p.body}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* WHAT WE'VE CAUGHT — anonymized engagements + public-CVE citation.
+            LEGAL: third-party names appear ONLY with a public CVE citation or written
+            permission / completed coordinated disclosure. Do not re-add names or logos
+            without counsel review. */}
+        <section id="findings" className="relative py-24 md:py-32 scroll-mt-24">
+          <div className="mx-auto max-w-7xl px-6">
+            <motion.div
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="max-w-4xl mb-16 md:mb-20"
+            >
+              <p
+                className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
+                style={{ fontFamily: MONO }}
+              >
+                Track record
+              </p>
+              <h2
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-white"
+                style={{ fontFamily: SANS }}
+              >
+                What we&apos;ve caught in{" "}
+                <span className="text-blue-400 italic font-medium">production AI agents.</span>
+              </h2>
+              <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-300 max-w-3xl">
+                From low-severity exposures to critical PII leaks, in agents already serving real customers. This is what your buyer&apos;s security team would have flagged.
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={STAGGER}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+            >
+              {[
+                {
+                  name: "GitHub Copilot",
+                  desc: "AI pair programmer used by over 20 million developers.",
+                  tag: "CVE-2025-53773 · CVSS 7.8 High",
+                  date: "2025",
+                  story: "A publicly disclosed prompt-injection vulnerability that could allow code execution via crafted content. Disclosed June 2025, patched August 2025. This is the class of agent vulnerability Bastion's continuous testing surfaces before your buyer's security team does.",
+                  catch: "Probes cross-session data flow with multi-tenant attacks. Where one user can reach another user's data, the finding ships with a verbatim trace.",
+                },
+                {
+                  name: "A publicly-traded online travel platform",
+                  desc: "Serves tens of millions of travelers worldwide every year.",
+                  tag: "Details under NDA",
+                  date: "2026",
+                  story: "Bastion identified vulnerabilities in the customer-facing agent surface. Details under NDA.",
+                  catch: "An autonomous fleet of adversarial agents probes the agent's tool chain and auth boundaries, adapting mid-conversation to surface real exploit paths.",
+                },
+                {
+                  name: "A conversational-AI customer-support platform",
+                  desc: "No-code chatbot builder powering conversations for millions of end users across thousands of businesses.",
+                  tag: "Details under NDA",
+                  date: "2026",
+                  story: "Bastion identified vulnerabilities in the multi-tenant agent platform. Details under NDA.",
+                  catch: "Multi-tenant attacks fingerprint session state and identity carryover across calls. Cross-customer reach ships with a reproducible payload.",
+                },
+                {
+                  name: "A vertical marketing-automation platform",
+                  desc: "Serves thousands of local-business clients reaching millions of customers across the US.",
+                  tag: "Details under NDA",
+                  date: "2026",
+                  story: "Bastion identified vulnerabilities in the customer-facing agent surface. Details under NDA.",
+                  catch: "Real adversarial probes against the live agent surface. Every successful exploit ships as a reproducible proof of concept with a severity score.",
+                },
+              ].map((m) => (
+                <motion.div
+                  key={m.name}
+                  variants={FADE_UP}
+                  className="flex flex-col rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg shadow-blue-500/5 p-7 md:p-8"
+                >
+                  <h3
+                    className="text-xl md:text-2xl font-semibold tracking-[-0.02em] leading-tight text-blue-500"
+                    style={{ fontFamily: SANS }}
+                  >
+                    {m.name}
+                  </h3>
+                  <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-200">
+                    {m.desc}
+                  </p>
+
+                  <div className="mt-6 rounded-xl bg-white/[0.04] border border-white/10 p-5 md:p-6">
+                    <div className="flex flex-wrap items-center gap-2 mb-4">
+                      <span
+                        className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.14em] text-blue-300 bg-blue-500/15 border border-blue-500/30 px-2.5 py-1 rounded-full"
+                        style={{ fontFamily: MONO }}
+                      >
+                        {m.tag}
+                      </span>
+                      <span
+                        className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-gray-300 bg-white/[0.08] border border-white/15 px-2.5 py-1 rounded-full"
+                        style={{ fontFamily: MONO }}
+                      >
+                        {m.date}
+                      </span>
+                    </div>
+                    <p className="text-sm md:text-base leading-relaxed text-gray-200">
+                      {m.story}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 pt-5 border-t border-white/10 flex-grow">
+                    <p
+                      className="text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] text-blue-500 mb-2.5"
+                      style={{ fontFamily: MONO }}
+                    >
+                      How Bastion catches it
+                    </p>
+                    <p className="text-sm md:text-base leading-relaxed text-gray-300">
+                      {m.catch}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         </section>
@@ -200,144 +478,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* THINGS WE BROKE — customer engagements in Methods-of-Breaking visual format */}
-        <section className="relative py-24 md:py-32">
-          <div className="mx-auto max-w-7xl px-6">
-            <motion.div
-              variants={FADE_UP}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-100px" }}
-              className="max-w-4xl mb-16 md:mb-20"
-            >
-              <p
-                className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
-                style={{ fontFamily: MONO }}
-              >
-                Things we broke
-              </p>
-              <h2
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-white"
-                style={{ fontFamily: SANS }}
-              >
-                Agents we have{" "}
-                <span className="text-blue-400 italic font-medium">successfully broken.</span>
-              </h2>
-              <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-300 max-w-3xl">
-                From low-severity exposures to critical PII leakages. These industry-leading companies could not find what we did.
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={STAGGER}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
-            >
-              {[
-                {
-                  name: "GitHub Copilot",
-                  desc: "AI pair programmer used by 20M+ developers across GitHub's platform.",
-                  incident: {
-                    company: "GitHub",
-                    logo: "/assets/logos/github.png",
-                    date: "2026",
-                    story: "Bastion identified an authorization vulnerability in the agent surface. Coordinated disclosure.",
-                  },
-                  catch: "Probes cross-session data flow with multi-tenant attacks. Where one user can reach another user's data, the finding ships with a verbatim trace.",
-                },
-                {
-                  name: "Priceline",
-                  desc: "One of the world's largest online travel platforms, serving tens of millions of travelers across 220+ countries every year.",
-                  incident: {
-                    company: "Priceline",
-                    logo: "/assets/logos/priceline.png",
-                    date: "2026",
-                    story: "Bastion identified vulnerabilities in the customer-facing agent surface. Details under NDA.",
-                  },
-                  catch: "An autonomous fleet of adversarial agents probes the agent's tool chain and auth boundaries, adapting mid-conversation to surface real exploit paths.",
-                },
-                {
-                  name: "Chatbase",
-                  desc: "Leading no-code AI chatbot builder, powering conversations for millions of end-users across 10,000+ businesses in 140+ countries.",
-                  incident: {
-                    company: "Chatbase",
-                    logo: "/assets/logos/chatbase.png",
-                    date: "2026",
-                    story: "Bastion identified vulnerabilities in the multi-tenant agent platform. Details under NDA.",
-                  },
-                  catch: "Multi-tenant attacks fingerprint session state and identity carryover across calls. Cross-customer reach ships with a reproducible payload.",
-                },
-                {
-                  name: "Scorpion",
-                  desc: "One of the largest digital marketing agencies for local businesses, with 10,000+ clients reaching millions of customers across the US annually.",
-                  incident: {
-                    company: "Scorpion",
-                    logo: "/assets/logos/scorpion.png",
-                    date: "2026",
-                    story: "Bastion identified vulnerabilities in the customer-facing agent surface. Details under NDA.",
-                  },
-                  catch: "Real adversarial probes against the live agent surface. Every successful exploit ships as a reproducible proof of concept with a severity score.",
-                },
-              ].map((m) => (
-                <motion.div
-                  key={m.name}
-                  variants={FADE_UP}
-                  className="flex flex-col rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg shadow-blue-500/5 p-7 md:p-8"
-                >
-                  <h3
-                    className="text-2xl md:text-[1.75rem] font-semibold tracking-[-0.02em] leading-tight text-blue-500"
-                    style={{ fontFamily: SANS }}
-                  >
-                    {m.name}
-                  </h3>
-                  <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-200">
-                    {m.desc}
-                  </p>
-
-                  <div className="mt-6 rounded-xl bg-white/[0.04] border border-white/10 p-5 md:p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="bg-white rounded-md px-3 py-2 flex items-center justify-center">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={m.incident.logo}
-                          alt={m.incident.company}
-                          className="h-10 md:h-11 w-auto max-w-[160px] object-contain"
-                        />
-                      </div>
-                      {m.incident.date && (
-                        <span
-                          className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-gray-300 bg-white/[0.08] border border-white/15 px-2.5 py-1 rounded-full"
-                          style={{ fontFamily: MONO }}
-                        >
-                          {m.incident.date}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-sm md:text-base leading-relaxed text-gray-200">
-                      {m.incident.story}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 pt-5 border-t border-white/10 flex-grow">
-                    <p
-                      className="text-[11px] md:text-xs font-bold uppercase tracking-[0.22em] text-blue-500 mb-2.5"
-                      style={{ fontFamily: MONO }}
-                    >
-                      How Bastion catches it
-                    </p>
-                    <p className="text-sm md:text-base leading-relaxed text-gray-300">
-                      {m.catch}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* WHY BASTION — differentiation against guardrails / endpoint / one-time audits */}
+        {/* THE ARTIFACT — what the buyer's security team receives */}
         <section className="relative py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-6">
             <motion.div
@@ -351,60 +492,186 @@ export default function Home() {
                 className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
                 style={{ fontFamily: MONO }}
               >
-                Why Bastion
+                The deliverable
               </p>
               <h2
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-white"
                 style={{ fontFamily: SANS }}
               >
-                Not a guardrail. Not endpoint security.{" "}
-                <span className="text-blue-400 italic font-medium">Not a one-time audit.</span>
+                What you hand your buyer&apos;s{" "}
+                <span className="text-blue-400 italic font-medium">security team.</span>
               </h2>
+              <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-300 max-w-3xl">
+                A report their reviewers already know how to read, mapped to the frameworks they cite.
+              </p>
             </motion.div>
 
+            <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+              <motion.div
+                variants={FADE_LEFT}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <ul className="space-y-4">
+                  {[
+                    "Executive summary for non-technical stakeholders",
+                    "Findings mapped to OWASP LLM Top 10, OWASP Top 10 for Agentic Applications, and MITRE ATLAS",
+                    "Alignment notes for ISO 42001 and NIST AI RMF",
+                    "Severity ratings and remediation status",
+                    "A coverage timestamp proving the report reflects your current shipped agent",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <svg viewBox="0 0 16 16" className="h-4 w-4 mt-1 text-blue-400 flex-shrink-0" fill="currentColor" aria-hidden>
+                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm3.78 5.97a.75.75 0 0 0-1.06-.02L6.75 9.94 5.28 8.47a.75.75 0 0 0-1.06 1.06l2 2a.75.75 0 0 0 1.06 0l4.5-4.5a.75.75 0 0 0 0-1.06Z" />
+                      </svg>
+                      <span className="text-base md:text-lg leading-relaxed text-gray-200">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="/sample-report/"
+                  className="mt-8 group inline-flex items-center gap-2.5 text-[13px] font-semibold uppercase tracking-[0.16em] text-blue-500 hover:text-blue-400 transition-colors"
+                >
+                  See a sample report
+                  <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-1" fill="none">
+                    <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              </motion.div>
+
+              {/* Report preview mock — dark, consistent with Prove/Repeat visuals */}
+              <motion.div
+                variants={FADE_RIGHT}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-100px" }}
+                className="rounded-2xl bg-slate-900 border border-white/10 shadow-2xl shadow-blue-900/30 overflow-hidden"
+              >
+                <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-slate-950/60">
+                  <span className="text-[10px] font-mono text-gray-400 tracking-wider uppercase">Bastion Security Assessment · ACME-2026-Q3</span>
+                  <span className="text-[10px] font-mono text-gray-500">Retested 2026-07-02</span>
+                </div>
+                <div className="p-5 md:p-6">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-gray-500 mb-2" style={{ fontFamily: MONO }}>
+                    Executive summary
+                  </p>
+                  <p className="text-sm text-gray-300 leading-relaxed">
+                    41 adversarial probes across 6 vector classes. 1 critical finding remediated and retested. Current posture: no open critical or high findings.
+                  </p>
+
+                  <p className="mt-5 text-[11px] font-bold uppercase tracking-[0.22em] text-gray-500 mb-2" style={{ fontFamily: MONO }}>
+                    Framework mapping
+                  </p>
+                  <div className="divide-y divide-white/[0.06] rounded-lg border border-white/10 overflow-hidden">
+                    {[
+                      { fw: "OWASP LLM Top 10", status: "10/10 categories tested" },
+                      { fw: "OWASP Agentic (ASI01-10)", status: "Covered" },
+                      { fw: "MITRE ATLAS", status: "Techniques mapped" },
+                      { fw: "ISO 42001", status: "Alignment notes" },
+                      { fw: "NIST AI RMF", status: "Alignment notes" },
+                    ].map((r) => (
+                      <div key={r.fw} className="flex items-center justify-between px-3.5 py-2 bg-white/[0.02]">
+                        <span className="text-[12px] font-mono text-gray-200">{r.fw}</span>
+                        <span className="text-[11px] font-mono text-emerald-400">{r.status}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between pt-3 border-t border-white/10">
+                    <span className="text-[11px] text-gray-500">2 resolved · 0 open critical</span>
+                    <span className="text-[11px] font-mono text-gray-500">Coverage current as of last ship</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* FRAMEWORK ROW — neutral text badges only.
+            Do NOT use the official AICPA SOC 2 logo or an ISO certification mark:
+            Bastion maps to these frameworks, it is not certified against them.
+            Always "maps to / aligned with", never "certified". */}
+        <section className="relative py-16 md:py-20">
+          <div className="mx-auto max-w-6xl px-6 text-center">
+            <motion.h2
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.1] text-white"
+              style={{ fontFamily: SANS }}
+            >
+              Built around the frameworks your buyers&apos;{" "}
+              <span className="text-blue-400 italic font-medium">security teams already use.</span>
+            </motion.h2>
             <motion.div
               variants={STAGGER}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+              viewport={{ once: true, margin: "-60px" }}
+              className="mt-10 flex flex-wrap items-center justify-center gap-3"
             >
               {[
-                {
-                  title: "Not a guardrail.",
-                  body: "Guardrails block known prompt patterns at the input layer. They don't probe your tool chain, your auth boundaries, or what leaks across user sessions.",
-                },
-                {
-                  title: "Not endpoint or network security.",
-                  body: "Those secure the pipe, not the decisions. Your agent is policy plus tools plus memory. That's what we test.",
-                },
-                {
-                  title: "Not a one-time audit.",
-                  body: "A pentest report from last quarter decays the moment you swap a model or push a prompt. Bastion re-runs on every change.",
-                },
-              ].map((p) => (
-                <motion.div
-                  key={p.title}
+                "OWASP LLM Top 10",
+                "OWASP Top 10 for Agentic Applications",
+                "MITRE ATLAS",
+                "ISO 42001",
+                "NIST AI RMF",
+                "SOC 2",
+              ].map((fw) => (
+                <motion.span
+                  key={fw}
                   variants={FADE_UP}
-                  className="flex flex-col rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg shadow-blue-500/5 p-7 md:p-8"
+                  className="inline-block rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-[13px] font-semibold text-gray-200"
+                  style={{ fontFamily: MONO }}
                 >
-                  <h3
-                    className="text-xl md:text-2xl font-semibold tracking-[-0.01em] text-blue-500 leading-snug"
-                    style={{ fontFamily: SANS }}
-                  >
-                    {p.title}
-                  </h3>
-                  <p className="mt-4 text-base leading-relaxed text-gray-300">
-                    {p.body}
-                  </p>
-                </motion.div>
+                  {fw}
+                </motion.span>
               ))}
             </motion.div>
+            <motion.p
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-60px" }}
+              className="mt-8 text-sm md:text-base text-gray-400 max-w-2xl mx-auto leading-relaxed"
+            >
+              Your Bastion report maps findings directly to these frameworks, so procurement and security reviewers recognize it on sight.
+            </motion.p>
           </div>
         </section>
 
-        {/* HOW IT WORKS — visual treatment, replaces "What Bastion does" */}
+        {/* PROCUREMENT-OUTCOME SOCIAL PROOF — DISABLED until real, permissioned quotes exist.
+            DO NOT fabricate quotes. Toggle false → true and replace the placeholder slots
+            only when a customer has approved a quote in writing. */}
+        {false && (
         <section className="relative py-24 md:py-32">
+          <div className="mx-auto max-w-6xl px-6">
+            <h2
+              className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.1] text-white mb-12"
+              style={{ fontFamily: SANS }}
+            >
+              Teams use Bastion to turn &ldquo;we&apos;ll need to review your security&rdquo;{" "}
+              <span className="text-blue-400 italic font-medium">into a closed deal.</span>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {/* TODO: replace with named, permissioned customer quotes. */}
+              <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-7 md:p-8">
+                <p className="text-base leading-relaxed text-gray-200">[Permissioned quote slot 1]</p>
+                <p className="mt-4 text-sm text-gray-500">[Role, company descriptor]</p>
+              </div>
+              <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-7 md:p-8">
+                <p className="text-base leading-relaxed text-gray-200">[Permissioned quote slot 2]</p>
+                <p className="mt-4 text-sm text-gray-500">[Role, company descriptor]</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        )}
+
+        {/* HOW IT WORKS — visual treatment */}
+        <section id="how-it-works" className="relative py-24 md:py-32 scroll-mt-24">
           <div className="mx-auto max-w-7xl px-6">
             <motion.div
               variants={FADE_UP}
@@ -668,32 +935,29 @@ await probe.run({
           </div>
         </section>
 
-        {/* INSURANCE — the risk data layer, client-facing framing, links to /insurance */}
-        <section className="relative py-24 md:py-32">
-          <div className="mx-auto max-w-7xl px-6">
+        {/* FAQ — security-review objection handling */}
+        <section id="faq" className="relative py-24 md:py-32 scroll-mt-24">
+          <div className="mx-auto max-w-4xl px-6">
             <motion.div
               variants={FADE_UP}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-100px" }}
-              className="max-w-4xl mb-14 md:mb-16"
+              className="mb-12 md:mb-14"
             >
               <p
                 className="text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
                 style={{ fontFamily: MONO }}
               >
-                Insurance
+                FAQ
               </p>
               <h2
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] leading-[1.05] text-white"
+                className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.02em] leading-[1.05] text-white"
                 style={{ fontFamily: SANS }}
               >
-                The risk data layer for{" "}
-                <span className="text-blue-400 italic font-medium">AI agent coverage.</span>
+                Security-review questions,{" "}
+                <span className="text-blue-400 italic font-medium">answered.</span>
               </h2>
-              <p className="mt-6 text-base md:text-lg leading-relaxed text-gray-300 max-w-3xl">
-                Carriers exclude AI agents from coverage because no loss history exists. Bastion is building it. Every test writes structured risk data that carriers can price against.
-              </p>
             </motion.div>
 
             <motion.div
@@ -701,59 +965,84 @@ await probe.run({
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-80px" }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+              className="space-y-4"
             >
               {[
                 {
-                  eyebrow: "The gap",
-                  title: "No one can price AI agent risk.",
-                  body: "AI exclusions are spreading across cyber and E&O policies. Carriers writing AI risk today are pricing blind, so most simply exclude it.",
+                  q: "Will a report from a young company satisfy my buyer's security team?",
+                  a: "What reviewers ask for is independent adversarial testing. The report maps every finding to OWASP LLM Top 10, OWASP Top 10 for Agentic Applications, MITRE ATLAS, ISO 42001, and NIST AI RMF: the frameworks their questionnaires already cite.",
                 },
                 {
-                  eyebrow: "The data",
-                  title: "Every probe is a recorded loss event.",
-                  body: "Each finding becomes a structured record: failure class, frequency, severity, time-to-detect. Across customers it compounds into the loss history the market is missing.",
+                  q: "We already did a pentest. Why isn't that enough?",
+                  a: "A point-in-time pentest goes stale the moment you ship a new model or prompt. Buyers increasingly ask for current, continuous coverage. Bastion re-tests on every change, so the report reflects the agent you actually shipped.",
                 },
                 {
-                  eyebrow: "What it means for you",
-                  title: "Your evidence file gets you covered.",
-                  body: "When carriers price AI agent coverage, they price it against this dataset. Companies testing with Bastion walk in with the evidence already on file.",
+                  q: "How fast can we get the report?",
+                  a: "First findings within 48 hours of the intro call. The full report follows the first complete testing cycle.",
                 },
-              ].map((c) => (
-                <motion.div
-                  key={c.eyebrow}
+                {
+                  q: "Do we have to rip out our stack or integrate a heavy SDK?",
+                  a: "No. Give us a phone number, point us at an endpoint, or drop in the lightweight SDK. Nothing gets rebuilt and nothing sits in your production path.",
+                },
+                {
+                  q: "Is this a guardrail or a runtime product?",
+                  a: "No. Bastion is independent adversarial testing plus the assurance report. We do not sit inline in your production traffic.",
+                },
+                {
+                  q: "What frameworks do you cover?",
+                  a: "OWASP LLM Top 10, OWASP Top 10 for Agentic Applications, and MITRE ATLAS for findings, with alignment notes for ISO 42001 and NIST AI RMF.",
+                },
+              ].map((item) => (
+                <motion.details
+                  key={item.q}
                   variants={FADE_UP}
-                  className="flex flex-col rounded-2xl bg-white/[0.03] border border-white/10 shadow-lg shadow-blue-500/5 p-7 md:p-8"
+                  className="group rounded-2xl bg-white/[0.03] border border-white/10 px-6 py-5 open:bg-white/[0.05] transition-colors"
                 >
-                  <p
-                    className="text-[11px] font-bold uppercase tracking-[0.22em] text-blue-500 mb-4"
-                    style={{ fontFamily: MONO }}
-                  >
-                    {c.eyebrow}
+                  <summary className="flex items-center justify-between cursor-pointer list-none text-base md:text-lg font-semibold text-white">
+                    {item.q}
+                    <svg viewBox="0 0 16 16" className="h-4 w-4 text-blue-400 flex-shrink-0 ml-4 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                      <path d="M8 2v12M2 8h12" />
+                    </svg>
+                  </summary>
+                  <p className="mt-4 text-sm md:text-base leading-relaxed text-gray-300">
+                    {item.a}
                   </p>
-                  <h3
-                    className="text-xl md:text-2xl font-semibold tracking-[-0.01em] text-white leading-snug"
-                    style={{ fontFamily: SANS }}
-                  >
-                    {c.title}
-                  </h3>
-                  <p className="mt-4 text-base leading-relaxed text-gray-300">
-                    {c.body}
-                  </p>
-                </motion.div>
+                </motion.details>
               ))}
             </motion.div>
+          </div>
+        </section>
 
+        {/* INSURANCE TEASER — kept subordinate by design. Forward-looking framing only;
+            not a shipping product and no active carrier partnerships. Links to /insurance. */}
+        <section className="relative py-20 md:py-28">
+          <div className="mx-auto max-w-5xl px-6">
             <motion.div
               variants={FADE_UP}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-              className="mt-10"
+              viewport={{ once: true, margin: "-100px" }}
+              className="rounded-3xl bg-white/[0.03] border border-white/10 shadow-xl shadow-blue-500/5 p-10 md:p-14"
             >
+              <p
+                className="text-[11px] font-bold uppercase tracking-[0.28em] text-blue-500 mb-5"
+                style={{ fontFamily: MONO }}
+              >
+                Insurance
+              </p>
+              <h2
+                className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-[-0.02em] leading-[1.1] text-white"
+                style={{ fontFamily: SANS }}
+              >
+                The assurance layer for{" "}
+                <span className="text-blue-400 italic font-medium">AI agents.</span>
+              </h2>
+              <p className="mt-5 text-base md:text-lg leading-relaxed text-gray-300 max-w-3xl">
+                Every Bastion test writes structured risk data: failure class, frequency, severity, drift. As carriers move from excluding AI agents to pricing them, that dataset is what coverage will be priced against. We&apos;re building it now.
+              </p>
               <a
                 href="/insurance/"
-                className="group inline-flex items-center gap-2.5 text-[13px] font-semibold uppercase tracking-[0.16em] text-blue-500 hover:text-blue-400 transition-colors"
+                className="mt-7 group inline-flex items-center gap-2.5 text-[13px] font-semibold uppercase tracking-[0.16em] text-blue-500 hover:text-blue-400 transition-colors"
               >
                 For carriers &amp; MGAs
                 <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-1" fill="none">
@@ -876,9 +1165,7 @@ await probe.run({
         </section>
         )}
 
-
-
-        {/* DUAL CTA */}
+        {/* GET STARTED — single dominant CTA + what happens next */}
         <section className="relative py-12 md:py-16">
           <motion.div
             variants={STAGGER}
@@ -899,14 +1186,14 @@ await probe.run({
               className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.02em] leading-tight text-white"
               style={{ fontFamily: SANS }}
             >
-              Drop in the SDK and{" "}
-              <span className="text-blue-400 italic font-medium">see what breaks.</span>
+              Your next security review doesn&apos;t have to{" "}
+              <span className="text-blue-400 italic font-medium">stall the deal.</span>
             </motion.h2>
             <motion.p
               variants={FADE_UP}
               className="mt-6 text-base md:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed"
             >
-              First findings within 48 hours of your intro call. Send a phone number, point us at an endpoint, or drop in the SDK. Reproducible proofs of concept with severity scores come back.
+              What happens after you book: a 20-minute intro call to scope your agent, then your first findings within 48 hours. No SDK rip-out, no long procurement of your own.
             </motion.p>
             <motion.div
               variants={FADE_UP}
@@ -916,16 +1203,16 @@ await probe.run({
                 href="/contact/"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-blue-700 hover:bg-blue-800 px-8 py-4 text-[14px] font-semibold uppercase tracking-[0.16em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-xl shadow-blue-500/30"
               >
-                Get your first findings
+                Book a demo
                 <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-0.5" fill="none">
                   <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
               <a
-                href="/contact/"
+                href="/sample-report/"
                 className="inline-flex items-center gap-2 text-[14px] font-medium text-gray-400 hover:text-blue-500 transition-colors underline underline-offset-4 decoration-gray-300 hover:decoration-blue-500"
               >
-                or talk to us about a guided assessment
+                See a sample report →
               </a>
             </motion.div>
           </motion.div>
@@ -937,5 +1224,3 @@ await probe.run({
     </div>
   );
 }
-
-

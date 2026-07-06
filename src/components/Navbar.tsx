@@ -25,14 +25,22 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
           />
         </a>
 
-        <div className="flex items-center gap-3 md:gap-5 flex-shrink-0">
-          <a
-            href="/insurance/"
-            className="hidden md:inline-block text-[12px] font-semibold uppercase tracking-[0.16em] text-white/85 hover:text-white transition-colors whitespace-nowrap"
-            style={{ textShadow: "0 2px 8px rgba(0,0,0,0.9)" }}
-          >
-            For Carriers
-          </a>
+        <div className="flex items-center gap-3 md:gap-6 flex-shrink-0">
+          {/* "For Carriers" demoted to footer per procurement-unlock spec; customer path owns the nav */}
+          {[
+            { label: "How it works", href: "/#how-it-works" },
+            { label: "Findings", href: "/#findings" },
+            { label: "FAQ", href: "/#faq" },
+          ].map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="hidden md:inline-block text-[12px] font-semibold uppercase tracking-[0.16em] text-white/85 hover:text-white transition-colors whitespace-nowrap"
+              style={{ textShadow: "0 2px 8px rgba(0,0,0,0.9)" }}
+            >
+              {l.label}
+            </a>
+          ))}
           <a
             href="/contact/"
             className="rounded-full bg-blue-700 hover:bg-blue-800 px-3.5 md:px-5 py-2 md:py-2.5 text-[10px] md:text-[12px] font-semibold uppercase tracking-[0.14em] md:tracking-[0.16em] text-white transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer shadow-lg shadow-blue-900/50 whitespace-nowrap"

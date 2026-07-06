@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Bastion · The Assurance Layer for AI Agents",
   description:
-    "Independent, continuous adversarial testing for voice and chat AI agents. The report clears enterprise security review. The data becomes the risk layer carriers price coverage against.",
+    "Bastion hands AI agent vendors the independent adversarial-testing report that clears enterprise security review, so stalled deals close. Continuous coverage for voice and chat agents.",
   icons: {
     icon: [
       { url: "/favicon.webp", type: "image/webp" },
