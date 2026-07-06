@@ -91,16 +91,16 @@ export default function Home() {
                 href="/contact/"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-blue-700 hover:bg-blue-600 px-8 py-4 text-[15px] font-semibold text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-[0_10px_30px_-8px_rgba(37,99,235,0.7)]"
               >
-                Book a demo
+                Get your first findings
                 <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-0.5" fill="none">
                   <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
               <a
-                href="/sample-report/"
+                href="/contact/"
                 className="group inline-flex items-center gap-2.5 text-[14px] font-medium text-white/80 hover:text-white transition-colors underline underline-offset-4 decoration-white/30 hover:decoration-white/70"
               >
-                See a sample report
+                Book a demo
                 <svg viewBox="0 0 16 12" className="h-2.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none">
                   <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -229,16 +229,16 @@ export default function Home() {
             >
               {[
                 {
+                  title: "Coverage that never goes stale.",
+                  body: "Your agents change every time you ship. Bastion re-runs the full adversarial suite on every model or prompt change, so the report your buyer sees is always current. Not a one-time audit that decays the moment you push.",
+                },
+                {
                   title: "Not a guardrail.",
                   body: "Guardrails block known prompt patterns at the input layer. They don't probe your tool chain, your auth boundaries, or what leaks across user sessions.",
                 },
                 {
                   title: "Not endpoint or network security.",
                   body: "Those secure the pipe, not the decisions. Your agent is policy plus tools plus memory. That's what we test.",
-                },
-                {
-                  title: "Continuous, not a one-time audit.",
-                  body: "A pentest from last quarter decays the moment you swap a model or push a prompt. Bastion re-tests on every change, so your report is never stale when your buyer checks.",
                 },
               ].map((p) => (
                 <motion.div
@@ -352,6 +352,15 @@ export default function Home() {
               style={{ fontFamily: MONO }}
             >
               Anonymized · Disclosed · Fixed
+            </motion.p>
+            <motion.p
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="mt-4 max-w-3xl text-xs md:text-sm leading-relaxed text-gray-500"
+            >
+              Findings are anonymized and published only after disclosure to the affected vendor. Company names appear only with the vendor&apos;s written permission.
             </motion.p>
           </div>
         </section>
@@ -690,6 +699,9 @@ await probe.run({
                   <p className="mt-5 text-base md:text-lg leading-relaxed text-gray-400">
                     Verbatim evidence, fully reproducible. Your team can replay every exploit and verify the fix.
                   </p>
+                  <p className="mt-5 text-sm leading-relaxed text-gray-500 italic">
+                    Every finding ships with a verbatim, reproducible proof of concept your engineers can re-run.
+                  </p>
                 </div>
                 {/* Mock report card visual — dark GitHub-style */}
                 <div className="rounded-2xl bg-slate-900 border border-white/10 shadow-2xl shadow-blue-900/30 overflow-hidden">
@@ -703,7 +715,7 @@ await probe.run({
                         Critical
                       </span>
                       <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-300 bg-white/[0.06] border border-white/10 px-2.5 py-1 rounded-full">
-                        OWASP LLM07
+                        OWASP LLM06 · Excessive Agency
                       </span>
                     </div>
                     <h4 className="text-base md:text-lg font-semibold text-white leading-snug">
@@ -801,10 +813,10 @@ await probe.run({
                     Repeat
                   </h3>
                   <p className="mt-5 text-lg md:text-xl leading-snug text-gray-200">
-                    It re-runs as the agent changes.
+                    It re-runs as the agent changes, and gates your deploys.
                   </p>
                   <p className="mt-5 text-base md:text-lg leading-relaxed text-gray-400">
-                    A new model or prompt cannot quietly reopen what you already fixed. The test surface evolves with the agent.
+                    A new model or prompt cannot quietly reopen what you already fixed. Wire Bastion into CI/CD as a pentest gate that blocks the deploy while a critical finding is open.
                   </p>
                 </div>
               </motion.div>
@@ -1081,16 +1093,16 @@ await probe.run({
                 href="/contact/"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-blue-700 hover:bg-blue-800 px-8 py-4 text-[14px] font-semibold uppercase tracking-[0.16em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98] shadow-xl shadow-blue-500/30"
               >
-                Book a demo
+                Get your first findings
                 <svg viewBox="0 0 16 12" className="h-3 w-4 transition-transform group-hover:translate-x-0.5" fill="none">
                   <path d="M0 6h13M9 1l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
               <a
-                href="/sample-report/"
+                href="/contact/"
                 className="inline-flex items-center gap-2 text-[14px] font-medium text-gray-400 hover:text-blue-500 transition-colors underline underline-offset-4 decoration-gray-300 hover:decoration-blue-500"
               >
-                See a sample report →
+                Book a demo
               </a>
             </motion.div>
           </motion.div>

@@ -52,9 +52,8 @@ export default function Footer() {
           <p className="text-[11px] text-gray-500">&copy; {new Date().getFullYear()} trybastion.ai</p>
         </div>
 
-        {/* Founder credibility — keep factual per pitch deck; no unverified credentials */}
-        <p className="mt-8 text-[11px] leading-relaxed text-gray-500 max-w-xl">
-          Independent, third-party testing. Built by engineers from NYSE quant-trading systems and adversarial ML research.
+        <p className="mt-8 text-[11px] leading-relaxed text-gray-500 max-w-2xl">
+          Independent, third-party testing. All third-party names and marks are the property of their respective owners and are used for identification only; their use does not imply endorsement.
         </p>
       </div>
     </footer>
