@@ -26,11 +26,11 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
         </a>
 
         <div className="flex items-center gap-3 md:gap-6 flex-shrink-0">
-          {/* "For Carriers" demoted to footer per procurement-unlock spec; customer path owns the nav */}
           {[
             { label: "How it works", href: "/#how-it-works" },
             { label: "Findings", href: "/#findings" },
             { label: "FAQ", href: "/#faq" },
+            { label: "Insurance", href: "/insurance/" },
           ].map((l) => (
             <a
               key={l.href}
