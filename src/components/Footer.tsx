@@ -23,7 +23,7 @@ export default function Footer() {
               href="/insurance/"
               className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
             >
-              For Carriers
+              For insurers
             </a>
             <a
               href="mailto:team@trybastion.ai"
@@ -51,6 +51,10 @@ export default function Footer() {
 
           <p className="text-[11px] text-gray-500">&copy; {new Date().getFullYear()} trybastion.ai</p>
         </div>
+
+        <p className="mt-8 text-[11px] leading-relaxed text-gray-500 max-w-2xl">
+          Independent, third-party testing. All third-party names and marks are the property of their respective owners and are used for identification only; their use does not imply endorsement.
+        </p>
       </div>
     </footer>
   );
