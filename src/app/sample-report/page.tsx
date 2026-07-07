@@ -25,13 +25,20 @@ export default function SampleReportPage() {
     e.preventDefault();
     setStatus("sending");
     try {
-      const response = await fetch("https://pistonsolutions.ai/api/contact", {
+      // FormSubmit delivers to team@trybastion.ai. First-ever submission triggers
+      // a one-time activation email that must be confirmed once before forwarding.
+      const response = await fetch("https://formsubmit.co/ajax/team@trybastion.ai", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          name: form.company,
+          type: "Sample report request",
           email: form.email,
-          message: `TYPE: Sample report request\nROLE: ${form.role}\nORG: ${form.company}\nAGENT: ${form.agent}`,
+          company: form.company,
+          role: form.role,
+          agent: form.agent,
+          _subject: `Sample report request — ${form.company || form.email}`,
+          _template: "table",
+          _captcha: "false",
         }),
       });
       if (!response.ok) throw new Error("Failed");

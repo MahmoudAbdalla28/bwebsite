@@ -43,13 +43,21 @@ export default function CTASection() {
     setStatus("sending");
 
     try {
-      const response = await fetch("https://pistonsolutions.ai/api/contact", {
+      // FormSubmit delivers to team@trybastion.ai. Same email is the reply-to.
+      // First-ever submission triggers a one-time activation email that must be
+      // confirmed once before forwarding begins.
+      const response = await fetch("https://formsubmit.co/ajax/team@trybastion.ai", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           name: form.name,
           email: form.email,
-          message: `TYPE: ${form.type}\nORG: ${form.organization}\n\n${form.message}`,
+          organization: form.organization,
+          type: form.type,
+          message: form.message,
+          _subject: `New Bastion inquiry — ${form.type || "Contact"}${form.organization ? ` (${form.organization})` : ""}`,
+          _template: "table",
+          _captcha: "false",
         }),
       });
 
