@@ -104,13 +104,17 @@ export default function FreeAssessmentSection() {
       return `- ${q.prompt} → ${display}`;
     }).join("\n");
     try {
-      const response = await fetch("https://pistonsolutions.ai/api/contact", {
+      const response = await fetch("https://formsubmit.co/ajax/team@trybastion.ai", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           name: form.name,
           email: form.email,
-          message: `SOURCE: Free Assessment (Insurance Nexus)\nORG: ${form.organization}\n\nASSESSMENT ANSWERS:\n${assessmentSummary}\n\nMESSAGE:\n${form.message || "(none)"}`,
+          organization: form.organization,
+          message: `SOURCE: Free Assessment (Insurance Nexus)\n\nASSESSMENT ANSWERS:\n${assessmentSummary}\n\nMESSAGE:\n${form.message || "(none)"}`,
+          _subject: `Free Assessment — ${form.organization || form.name || form.email}`,
+          _template: "table",
+          _captcha: "false",
         }),
       });
       if (!response.ok) throw new Error("Failed");
