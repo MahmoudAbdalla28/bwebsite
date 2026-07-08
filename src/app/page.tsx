@@ -51,7 +51,7 @@ export default function Home() {
               className="text-xs md:text-sm font-bold uppercase tracking-[0.32em] text-white"
               style={{ fontFamily: MONO, textShadow: "0 2px 8px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.6)" }}
             >
-              Adversarial Testing for Fintech AI Agents
+              Adversarial Testing for AI Agents
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 28 }}
