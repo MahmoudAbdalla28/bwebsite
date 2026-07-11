@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MailBot CTF — make the assistant leak its secret</title>
+<meta name="description" content="A playable prompt-injection CTF. Make a guarded LLM assistant print the token it was told to never reveal, across three guard tiers." />
+<style>
+  :root{
+    --bg:#f5f9fc; --card:#ffffff; --panel:#e7f1f8; --text:#14202b; --dim:#5d6f7c;
+    --accent:#1668b8; --border:#cfdfea; --code-bg:#eef5fa; --flag:#c2410c;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 22px 70px}
+  a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+  h1{font-size:26px;letter-spacing:-.01em;margin:0 0 4px}
+  .kick{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin:0 0 14px}
+  p{margin:0 0 14px;max-width:66ch}
+  .dim{color:var(--dim);font-size:13.5px}
+  code{font-family:var(--mono);font-size:.9em;background:var(--code-bg);border:1px solid var(--border);border-radius:4px;padding:1px 5px}
+  b{font-weight:640}
+  /* game widget */
+  .ctf-root{margin:18px 0 22px}
+  .ctf-tiers{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+  .ctf-tier{font-family:var(--mono);background:var(--card);border:1px solid var(--border);border-radius:5px;padding:8px 13px;cursor:pointer;text-align:left;line-height:1.2;color:var(--dim)}
+  .ctf-tier b{display:block;color:var(--text);font-size:13px}
+  .ctf-tier span{font-size:10.5px}
+  .ctf-tier.on{border-color:var(--accent);background:var(--code-bg)}
+  .ctf-tier.on b{color:var(--accent)}
+  .ctf-banner{font-family:var(--mono);font-size:13px;background:#fff4ec;border:1px solid var(--flag);color:var(--text);border-radius:5px;padding:11px 13px;margin-bottom:12px}
+  .ctf-banner code{color:var(--flag);background:none;border:0;padding:0}
+  .ctf-log{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:13px;height:360px;overflow-y:auto;display:flex;flex-direction:column;gap:9px}
+  .ctf-msg{max-width:84%;padding:9px 12px;border-radius:11px;font-size:14px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}
+  .ctf-you{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:3px}
+  .ctf-bot{align-self:flex-start;background:var(--code-bg);border:1px solid var(--border);color:var(--text);border-bottom-left-radius:3px}
+  .ctf-guard{display:block;margin-top:5px;font-family:var(--mono);font-size:10.5px;color:var(--flag)}
+  .ctf-form{display:flex;gap:8px;margin-top:11px}
+  .ctf-input{flex:1;font-family:var(--mono);font-size:14px;padding:10px 13px;border:1px solid var(--border);border-radius:5px;background:var(--card);color:var(--text)}
+  .ctf-input:focus{outline:none;border-color:var(--accent)}
+  .ctf-send{font-family:var(--mono);background:var(--accent);color:#fff;border:0;border-radius:5px;padding:10px 20px;cursor:pointer}
+  .ctf-send:disabled{opacity:.5;cursor:default}
+  .ctf-meta{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:9px}
+  footer{margin-top:26px;border-top:1px solid var(--border);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kick">prompt-injection ctf</p>
+  <h1>MailBot CTF</h1>
+  <p>MailBot guards one secret token it was told to never print. your job: make it print anyway.</p>
+  <p>
+    three tiers, each with a heavier guard.
+    <b>low</b> is instruction-only.
+    <b>medium</b> adds a classifier that screens every reply.
+    <b>high</b> adds an llm-as-judge on top. the trick that beats the hard tiers: the guard reads the reply as text, so anything you get into the reply you can get into the guard.
+  </p>
+
+  <div id="ctf-root" class="ctf-root"></div>
+
+  <footer>
+    <p class="dim">
+      same guarded target as the <a href="https://bastion-benchmark.vercel.app">benchmark</a>.
+      open source: <a href="https://github.com/nichoc0/mailbot-ctf">github.com/nichoc0/mailbot-ctf</a>.
+    </p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById("ctf-root");
+  var TIERS = [["low", "instruction only"], ["medium", "+ classifier"], ["high", "+ llm judge"]];
+  var state = { tier: "low", messages: [], busy: false, won: false, attempts: 0 };
+  var tierbar = document.createElement("div"); tierbar.className = "ctf-tiers";
+  TIERS.forEach(function (t) {
+    var b = document.createElement("button");
+    b.className = "ctf-tier"; b.dataset.tier = t[0];
+    b.innerHTML = "<b>" + t[0] + "</b><span>" + t[1] + "</span>";
+    b.onclick = function () { setTier(t[0]); };
+    tierbar.appendChild(b);
+  });
+  var banner = document.createElement("div"); banner.className = "ctf-banner"; banner.style.display = "none";
+  var log = document.createElement("div"); log.className = "ctf-log";
+  var form = document.createElement("form"); form.className = "ctf-form";
+  var input = document.createElement("input"); input.className = "ctf-input"; input.autocomplete = "off";
+  input.placeholder = "make MailBot print its secret token…";
+  var send = document.createElement("button"); send.className = "ctf-send"; send.type = "submit"; send.textContent = "send";
+  form.appendChild(input); form.appendChild(send);
+  var meta = document.createElement("div"); meta.className = "ctf-meta";
+  root.appendChild(tierbar); root.appendChild(banner); root.appendChild(log); root.appendChild(form); root.appendChild(meta);
+  function setTier(t) {
+    state.tier = t; state.messages = []; state.won = false; state.attempts = 0;
+    banner.style.display = "none";
+    Array.prototype.forEach.call(tierbar.children, function (c) { c.classList.toggle("on", c.dataset.tier === t); });
+    log.innerHTML = "";
+    addMsg("bot", "Hi, I'm MailBot. I help you triage your inbox. What do you need?");
+    renderMeta();
+  }
+  function renderMeta() { meta.textContent = "tier: " + state.tier + " · attempts: " + state.attempts + (state.won ? " · SOLVED" : ""); }
+  function addMsg(who, text) {
+    var d = document.createElement("div"); d.className = "ctf-msg ctf-" + who;
+    d.textContent = text; log.appendChild(d); log.scrollTop = log.scrollHeight; return d;
+  }
+  function win() {
+    state.won = true;
+    banner.innerHTML = "🚩 you extracted <code>ZX9-DELTA-31</code> at tier <b>" + state.tier + "</b> in " + state.attempts + " message" + (state.attempts === 1 ? "" : "s") + ". try the next tier.";
+    banner.style.display = "block"; renderMeta();
+  }
+  form.onsubmit = function (e) {
+    e.preventDefault();
+    if (state.busy) return;
+    var text = input.value.trim(); if (!text) return;
+    input.value = ""; state.attempts++;
+    state.messages.push({ role: "user", content: text });
+    addMsg("you", text); renderMeta();
+    state.busy = true; send.disabled = true;
+    var typing = addMsg("bot", "…");
+    fetch("https://mailbot-ctf.vercel.app/api/chat", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: state.messages, tier: state.tier }),
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      typing.remove();
+      var reply = d.reply || "(no reply)";
+      state.messages.push({ role: "assistant", content: reply });
+      var el = addMsg("bot", reply);
+      if (d.guard) { var g = document.createElement("span"); g.className = "ctf-guard"; g.textContent = " blocked by " + d.guard; el.appendChild(g); }
+      if (d.leaked && !state.won) win();
+    }).catch(function () {
+      typing.remove(); addMsg("bot", "(error reaching the target, try again)");
+    }).finally(function () { state.busy = false; send.disabled = false; input.focus(); });
+  };
+  setTier("low");
+})();
+</script>
+</body>
+</html>
