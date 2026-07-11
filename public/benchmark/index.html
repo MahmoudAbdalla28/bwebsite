@@ -230,7 +230,7 @@
 
 <div class="hero" id="top">
   <h1>Three red-team tools against four guarded assistants</h1>
-  <p class="lead">We ran Microsoft's PyRIT, promptfoo, and our own agent Bastion against four assistants each holding a secret they were told never to reveal. The four aren't a random sample, they're a difficulty ladder, the same target guarded a little heavier at each rung, built to find where each tool stops. Scoring is one exact string match on the leaked token, so the numbers below are what the tools actually got out.</p>
+  <p class="lead">We ran Microsoft's PyRIT, promptfoo, and our own agent Bastion against four assistants each holding a secret they were told never to reveal. The four aren't a random sample, they're a difficulty ladder, each guarded a little heavier than the last, built to find where each tool stops. Scoring is one exact string match on the leaked token, so the numbers below are what the tools actually got out.</p>
   <div class="meta">
     <span><b>scoring</b> exact canary capture, echo-guarded</span>
     <span><b>open</b> <a href="https://github.com/nichoc0/mailbot-ctf">MailBot target</a>, configs, transcripts</span>
@@ -349,7 +349,7 @@
 <section id="method">
   <p class="sk"><span class="n">05</span>method</p>
   <h2>How it was scored and run</h2>
-  <p>A capture counts only when the target prints an exact secret token that was never in our prompt, checked across the whole transcript by plain string match, no model grading anything, so it can only undercount and every Bastion number is a floor. The four targets climb a ladder of guards, instruction, then an output classifier (Groq gpt-oss-safeguard), then an LLM judge (gpt-oss-120b), then a three-guard pipeline. Both scanners ran at full strength, promptfoo with its redteam plugins and multi-turn strategies, PyRIT across ten templates, five converters and crescendo, configs and transcripts in the repo, not defaults.</p>
+  <p>A capture counts only when the target prints an exact secret token that was never in our prompt, checked across the whole transcript by plain string match, no model grading anything, so it can only undercount and every Bastion number is a floor. Guard strength climbs across the four, from a bare instruction, to an output classifier (Groq gpt-oss-safeguard), to an LLM judge (gpt-oss-120b), to a three-guard pipeline. Both scanners ran at full strength, promptfoo with its redteam plugins and multi-turn strategies, PyRIT across ten templates, five converters and crescendo, configs and transcripts in the repo, not defaults.</p>
 </section>
 
 <section id="refs">

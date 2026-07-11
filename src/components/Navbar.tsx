@@ -29,7 +29,6 @@ export default function Navbar({ heroTheme = "light" }: { heroTheme?: "light" | 
           {[
             { label: "How it works", href: "/#how-it-works" },
             { label: "Findings", href: "/#findings" },
-            { label: "Benchmark", href: "/benchmark/" },
             { label: "FAQ", href: "/#faq" },
             { label: "Insurance", href: "/insurance/" },
           ].map((l) => (
