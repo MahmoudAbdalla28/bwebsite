@@ -7,34 +7,35 @@
    ============================================================ */
 
 :root {
-  /* surface */
-  --bone: #f6f1e8;
-  --bone-lift: #fcf9f3;
-  --parchment: #ece4d6;
-  --stone: #d9cebc;
-  --stone-line: #cbbfa9;
+  /* surface. dark throughout. the light has to have somewhere to land. */
+  --bone: #100f0d;
+  --bone-lift: #1a1915;
+  --panel: #1a1915;
+  --parchment: #24221c;
+  --stone: #2e2b24;
+  --stone-line: #36332b;
 
   /* ink */
-  --ink: #191713;
-  --ink-2: #453f37;
-  --muted: #6e6558;
+  --ink: #f5efe2;
+  --ink-2: #b9b2a2;
+  --muted: #8a8376;
 
   /* accent */
-  --gold: #a87a2c;
-  --gold-text: #8a6117;
-  --gold-lift: #cb9c46;
-  --gold-wash: rgba(168, 122, 44, 0.09);
+  --gold: #d1a049;
+  --gold-text: #e6bd71;
+  --gold-lift: #f2d493;
+  --gold-wash: rgba(209, 160, 73, 0.14);
 
   /* the spectrum. the mark is a prism, so light entering warm and leaving
      split is the whole visual system. these are the mark's own blues. */
-  --sp-1: #b8862f;
-  --sp-2: #7d7a4e;
-  --sp-3: #2f6ea8;
-  --sp-4: #1e6fd9;
-  --sp-5: #6fb2f0;
+  --sp-1: #d9a441;
+  --sp-2: #a8a05e;
+  --sp-3: #55a0d8;
+  --sp-4: #3f8fe8;
+  --sp-5: #8fc8f5;
 
   /* depth */
-  --slate: #2c3136;
+  --slate: #2a2925;
 
   /* type. one grotesque, one mono. clean and technical, nothing decorative.
      to swap the display face, change --display and add its fontsource import. */
@@ -77,8 +78,8 @@ body::after {
   position: fixed;
   inset: 0;
   background-image: var(--grain);
-  opacity: 0.5;
-  mix-blend-mode: multiply;
+  opacity: 0.22;
+  mix-blend-mode: screen;
   pointer-events: none;
   z-index: 9999;
 }
@@ -137,7 +138,7 @@ svg {
 }
 
 .section {
-  padding-block: clamp(4rem, 8vw, 7rem);
+  padding-block: clamp(3.25rem, 5.5vw, 5rem);
   position: relative;
 }
 
@@ -146,7 +147,7 @@ svg {
   font-family: var(--sans);
   font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold-text);
   margin: 0;
@@ -204,7 +205,7 @@ svg {
 
 .btn-primary {
   background: var(--ink);
-  color: var(--bone-lift);
+  color: #14130f;
   position: relative;
   overflow: hidden;
 }
@@ -238,7 +239,7 @@ svg {
 }
 
 .btn-primary:hover {
-  background: var(--slate);
+  background: #fff;
   transform: translateY(-1px);
 }
 
