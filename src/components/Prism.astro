@@ -5,15 +5,18 @@ import { mechanisms } from '../data/mechanisms'
 ---
 
 <div class="solid">
-  <div class="stage">
-    <canvas></canvas>
+  <div class="left">
+    <div class="stage">
+      <canvas></canvas>
+    </div>
+
     <div class="pad">
-      <button data-turn="up" aria-label="Rotate up">▲</button>
-      <div class="row">
-        <button data-turn="left" aria-label="Rotate left">◀</button>
-        <button data-turn="right" aria-label="Rotate right">▶</button>
+      <button data-turn="left" aria-label="Previous face">←</button>
+      <div class="col">
+        <button data-turn="up" aria-label="Face above">↑</button>
+        <button data-turn="down" aria-label="Face below">↓</button>
       </div>
-      <button data-turn="down" aria-label="Rotate down">▼</button>
+      <button data-turn="right" aria-label="Next face">→</button>
     </div>
   </div>
 
@@ -171,15 +174,32 @@ import { mechanisms } from '../data/mechanisms'
 
     const stage = root.querySelector('.stage')
 
-    // arrows, not dragging. one face-step per press, eased.
+    // the orientation that brings face n to dead centre, facing the camera.
+    // derived rather than guessed: solve Rx(rx)*Ry(ry)*n = (0,0,-1).
+    const orientTo = (n) => {
+      const [x, y, z] = n
+      const r = Math.hypot(x, z)
+      return { ry: Math.atan2(x, z) + Math.PI, rx: Math.atan2(y, -r) + Math.PI }
+    }
+
+    const shortest = (from, to) => {
+      let d = (to - from) % (Math.PI * 2)
+      if (d > Math.PI) d -= Math.PI * 2
+      if (d < -Math.PI) d += Math.PI * 2
+      return from + d
+    }
+
     let anim = null
-    const turn = (dx, dy) => {
+    const goTo = (i) => {
+      sel = i
+      show()
+      const t = orientTo(FACES[i].n)
       const from = { rx, ry }
-      const to = { rx: rx + dy * 0.62, ry: ry + dx * 0.62 }
+      const to = { rx: shortest(rx, t.rx), ry: shortest(ry, t.ry) }
       const t0 = performance.now()
       cancelAnimationFrame(anim)
       const step = (now) => {
-        const k = Math.min(1, (now - t0) / 420)
+        const k = Math.min(1, (now - t0) / 520)
         const e = 1 - Math.pow(1 - k, 3)
         rx = from.rx + (to.rx - from.rx) * e
         ry = from.ry + (to.ry - from.ry) * e
@@ -189,26 +209,41 @@ import { mechanisms } from '../data/mechanisms'
       anim = requestAnimationFrame(step)
     }
 
+    // the neighbour in a screen direction: whichever face currently sits that
+    // way in view space and is not already the one facing us
+    const neighbour = (dx, dy) => {
+      let best = sel, score = -Infinity
+      for (let i = 0; i < FACES.length; i++) {
+        if (i === sel) continue
+        const n = rot(FACES[i].n)
+        const s = n[0] * dx + n[1] * dy - Math.abs(n[2]) * 0.55
+        if (s > score) { score = s; best = i }
+      }
+      return best
+    }
+
     root.querySelectorAll('[data-turn]').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation()
         const d = btn.dataset.turn
-        turn(d === 'left' ? -1 : d === 'right' ? 1 : 0, d === 'up' ? -1 : d === 'down' ? 1 : 0)
+        goTo(neighbour(d === 'left' ? -1 : d === 'right' ? 1 : 0, d === 'up' ? -1 : d === 'down' ? 1 : 0))
       })
     })
 
-    // clicking a face selects it. no drag, so there is no click/drag ambiguity.
+    // clicking a face brings it round and selects it too
     stage.addEventListener('click', (e) => {
       if (e.target.closest('[data-turn]')) return
       const r = stage.getBoundingClientRect()
       const pt = [e.clientX - r.left, e.clientY - r.top]
       for (let k = proj.length - 1; k >= 0; k--) {
-        if (proj[k].facing > 0 && inside(pt, proj[k].pts)) { sel = proj[k].i; show(); draw(); return }
+        if (proj[k].facing > 0 && inside(pt, proj[k].pts)) { goTo(proj[k].i); return }
       }
     })
     addEventListener('resize', () => { size(); draw() }, { passive: true })
 
-    size(); show(); draw()
+    size(); show()
+    { const t0 = orientTo(FACES[sel].n); rx = t0.rx; ry = t0.ry }
+    draw()
   })()
 </script>
 
@@ -220,43 +255,54 @@ import { mechanisms } from '../data/mechanisms'
     align-items: center;
   }
 
+  .left {
+    display: grid;
+    gap: 0.25rem;
+  }
+
   .stage {
     position: relative;
     aspect-ratio: 1 / 0.88;
     min-height: 360px;
   }
 
+  /* centred under the solid, and large enough to read as the control */
   .pad {
-    position: absolute;
-    right: 2%;
-    bottom: 4%;
-    display: grid;
-    justify-items: center;
-    gap: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
   }
 
-  .pad .row {
-    display: flex;
-    gap: 0.3rem;
+  .pad .col {
+    display: grid;
+    gap: 0.5rem;
   }
 
   .pad button {
-    width: 2.1rem;
-    height: 2.1rem;
+    width: 2.9rem;
+    height: 2.9rem;
     display: grid;
     place-items: center;
-    font-size: 0.62rem;
-    color: var(--ink-2);
-    background: rgba(26, 25, 21, 0.72);
+    font-size: 1.05rem;
+    line-height: 1;
+    color: var(--ink);
+    background: var(--panel);
     border: 1px solid var(--stone-line);
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: color 150ms ease, border-color 150ms ease;
+    transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+  }
+
+  .pad .col button {
+    height: 1.95rem;
   }
 
   .pad button:hover {
-    color: var(--gold-text);
-    border-color: var(--gold);
+    color: #14130f;
+    background: var(--gold-lift);
+    border-color: var(--gold-lift);
   }
 
   canvas {
