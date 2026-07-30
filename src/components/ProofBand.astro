@@ -20,17 +20,20 @@ const proof = [
       ))
     }
 
-    <article class="stat flywheel">
-      <svg viewBox="0 0 64 64" aria-hidden="true" class="wheel">
-        <circle cx="32" cy="32" r="23" class="ring" />
-        <circle cx="32" cy="32" r="23" class="arc" />
-        <circle cx="32" cy="32" r="4.5" class="hub" />
-      </svg>
-      <div>
-        <p class="value">Continuous</p>
-        <hr class="rule" />
-        <p class="label">Vulnerability research</p>
-      </div>
+    <article class="stat">
+      <p class="value">
+        <span class="line">
+          <svg viewBox="0 0 64 64" aria-hidden="true" class="wheel">
+            <circle cx="32" cy="32" r="23" class="ring" />
+            <circle cx="32" cy="32" r="23" class="arc" />
+            <circle cx="32" cy="32" r="4.5" class="hub" />
+          </svg>
+          Continuous
+        </span>
+        <span class="scale">and cross-customer</span>
+      </p>
+      <hr class="rule" />
+      <p class="label">The corpus compounds every run</p>
     </article>
   </div>
 </section>
@@ -80,16 +83,15 @@ const proof = [
     letter-spacing: 0.14em;
   }
 
-  /* the third proof is not a number. it is that it never stops. */
-  .flywheel {
-    grid-template-columns: auto 1fr;
-    align-items: start;
-    gap: 1.15rem;
+  .line {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
   }
 
   .wheel {
-    width: 52px;
-    height: 52px;
+    width: 0.82em;
+    height: 0.82em;
     flex: none;
   }
 
@@ -117,10 +119,6 @@ const proof = [
     to {
       transform: rotate(360deg);
     }
-  }
-
-  .flywheel .value {
-    font-size: clamp(1.7rem, 1.3rem + 1.2vw, 2.3rem);
   }
 
   @media (prefers-reduced-motion: reduce) {
