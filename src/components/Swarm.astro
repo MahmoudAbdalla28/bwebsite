@@ -1,0 +1,270 @@
+---
+// A real swarm, not a recording. Agents roam a surface, converge on a node,
+// work it, and move on. New nodes appear as the surface is mapped.
+//
+// Perf contract, because this is the only JS on the site:
+//   - one canvas, no DOM churn, no library
+//   - paused when offscreen and when the tab is hidden
+//   - never starts at all under prefers-reduced-motion
+//   - agent count scales down on small screens
+interface Props {
+  mode?: 'stage' | 'ambient'
+}
+const { mode = 'stage' } = Astro.props
+---
+
+<div class:list={['swarm', mode]} data-mode={mode} aria-hidden="true">
+  <canvas></canvas>
+</div>
+
+<style>
+  .swarm {
+    pointer-events: none;
+  }
+
+  .swarm.stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    background: var(--bone-lift);
+    border: 1px solid var(--stone-line);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 20px 54px -26px rgba(25, 23, 19, 0.3);
+  }
+
+  /* the ambient one sits behind everything, quietly */
+  .swarm.ambient {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.5;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<script>
+  const INK = '#191713'
+  const GOLD = '#a87a2c'
+  const BLUE = '#1e6fd9'
+  const STONE = '#cbbfa9'
+
+  class Swarm {
+    constructor(root) {
+      this.root = root
+      this.canvas = root.querySelector('canvas')
+      this.ctx = this.canvas.getContext('2d', { alpha: true })
+      this.ambient = root.dataset.mode === 'ambient'
+      this.running = false
+      this.visible = false
+      this.nodes = []
+      this.agents = []
+      this.t = 0
+      this.resize()
+      this.seed()
+
+      this.onResize = () => this.resize()
+      addEventListener('resize', this.onResize, { passive: true })
+
+      document.addEventListener('visibilitychange', () => this.sync())
+
+      new IntersectionObserver((es) => {
+        this.visible = es[0].isIntersecting
+        this.sync()
+      }).observe(root)
+    }
+
+    sync() {
+      const should = this.visible && !document.hidden
+      if (should === this.running) return
+      this.running = should
+      if (should) {
+        this.last = performance.now()
+        this.raf = requestAnimationFrame((t) => this.frame(t))
+      } else {
+        cancelAnimationFrame(this.raf)
+      }
+    }
+
+    resize() {
+      const dpr = Math.min(devicePixelRatio || 1, 2)
+      const r = this.root.getBoundingClientRect()
+      this.w = Math.max(r.width, 1)
+      this.h = Math.max(r.height, 1)
+      this.canvas.width = this.w * dpr
+      this.canvas.height = this.h * dpr
+      this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    }
+
+    seed() {
+      const small = this.w < 700
+      this.maxNodes = this.ambient ? (small ? 5 : 9) : small ? 6 : 11
+      const nAgents = this.ambient ? (small ? 7 : 14) : small ? 10 : 22
+
+      for (let i = 0; i < (this.ambient ? 3 : 4); i++) this.spawnNode()
+
+      for (let i = 0; i < nAgents; i++) {
+        this.agents.push({
+          x: Math.random() * this.w,
+          y: Math.random() * this.h,
+          vx: (Math.random() - 0.5) * 40,
+          vy: (Math.random() - 0.5) * 40,
+          target: (Math.random() * this.nodes.length) | 0,
+          hold: Math.random() * 4,
+          hue: Math.random(),
+        })
+      }
+    }
+
+    spawnNode() {
+      if (this.nodes.length >= this.maxNodes) return
+      const m = 0.14
+      this.nodes.push({
+        x: this.w * (m + Math.random() * (1 - 2 * m)),
+        y: this.h * (m + Math.random() * (1 - 2 * m)),
+        born: this.t,
+        r: 0,
+      })
+    }
+
+    frame(now) {
+      if (!this.running) return
+      let dt = (now - this.last) / 1000
+      this.last = now
+      if (dt > 0.05) dt = 0.05
+      this.t += dt
+
+      // the surface keeps opening up
+      if (this.nodes.length < this.maxNodes && Math.random() < dt * 0.22) {
+        this.spawnNode()
+      }
+
+      this.step(dt)
+      this.draw()
+      this.raf = requestAnimationFrame((t) => this.frame(t))
+    }
+
+    step(dt) {
+      const A = this.agents
+      const maxV = this.ambient ? 46 : 62
+
+      for (let i = 0; i < A.length; i++) {
+        const a = A[i]
+        let sx = 0, sy = 0, ax = 0, ay = 0, cx = 0, cy = 0, n = 0
+
+        for (let j = 0; j < A.length; j++) {
+          if (i === j) continue
+          const b = A[j]
+          const dx = b.x - a.x, dy = b.y - a.y
+          const d2 = dx * dx + dy * dy
+          if (d2 > 9000 || d2 === 0) continue
+          n++
+          ax += b.vx; ay += b.vy
+          cx += b.x; cy += b.y
+          if (d2 < 620) { sx -= dx / d2 * 900; sy -= dy / d2 * 900 }
+        }
+
+        if (n) {
+          a.vx += ((ax / n) - a.vx) * 0.6 * dt
+          a.vy += ((ay / n) - a.vy) * 0.6 * dt
+          a.vx += ((cx / n) - a.x) * 0.22 * dt
+          a.vy += ((cy / n) - a.y) * 0.22 * dt
+        }
+        a.vx += sx * dt
+        a.vy += sy * dt
+
+        // work a node, then go find another. this is the exploring part.
+        const node = this.nodes[a.target % this.nodes.length]
+        if (node) {
+          const dx = node.x - a.x, dy = node.y - a.y
+          const d = Math.hypot(dx, dy) || 1
+          if (d < 34) {
+            a.hold -= dt
+            if (a.hold <= 0) {
+              a.target = (Math.random() * this.nodes.length) | 0
+              a.hold = 1.6 + Math.random() * 4.5
+            }
+          } else {
+            a.vx += (dx / d) * 52 * dt
+            a.vy += (dy / d) * 52 * dt
+          }
+        }
+
+        const sp = Math.hypot(a.vx, a.vy)
+        if (sp > maxV) { a.vx = (a.vx / sp) * maxV; a.vy = (a.vy / sp) * maxV }
+
+        a.x += a.vx * dt
+        a.y += a.vy * dt
+
+        const pad = 6
+        if (a.x < pad) { a.x = pad; a.vx = Math.abs(a.vx) }
+        if (a.x > this.w - pad) { a.x = this.w - pad; a.vx = -Math.abs(a.vx) }
+        if (a.y < pad) { a.y = pad; a.vy = Math.abs(a.vy) }
+        if (a.y > this.h - pad) { a.y = this.h - pad; a.vy = -Math.abs(a.vy) }
+      }
+
+      for (const nd of this.nodes) {
+        const age = this.t - nd.born
+        nd.r = Math.min(1, age / 0.9)
+      }
+    }
+
+    draw() {
+      const c = this.ctx
+      c.clearRect(0, 0, this.w, this.h)
+
+      // the surface being mapped
+      c.strokeStyle = STONE
+      c.globalAlpha = this.ambient ? 0.28 : 0.42
+      c.lineWidth = 1
+      for (let i = 0; i < this.nodes.length; i++) {
+        for (let j = i + 1; j < this.nodes.length; j++) {
+          const a = this.nodes[i], b = this.nodes[j]
+          if (Math.hypot(b.x - a.x, b.y - a.y) > this.w * 0.36) continue
+          c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke()
+        }
+      }
+
+      c.globalAlpha = 1
+      for (const nd of this.nodes) {
+        const r = 3.4 * nd.r
+        c.beginPath()
+        c.arc(nd.x, nd.y, r + 5, 0, 6.2832)
+        c.fillStyle = 'rgba(168,122,44,0.10)'
+        c.fill()
+        c.beginPath()
+        c.arc(nd.x, nd.y, r, 0, 6.2832)
+        c.fillStyle = GOLD
+        c.fill()
+      }
+
+      for (const a of this.agents) {
+        const ang = Math.atan2(a.vy, a.vx)
+        const s = this.ambient ? 3.1 : 4
+        c.save()
+        c.translate(a.x, a.y)
+        c.rotate(ang)
+        c.beginPath()
+        c.moveTo(s * 1.7, 0)
+        c.lineTo(-s, s * 0.72)
+        c.lineTo(-s * 0.4, 0)
+        c.lineTo(-s, -s * 0.72)
+        c.closePath()
+        c.fillStyle = a.hue > 0.62 ? BLUE : a.hue > 0.3 ? INK : GOLD
+        c.globalAlpha = this.ambient ? 0.5 : 0.9
+        c.fill()
+        c.restore()
+      }
+      c.globalAlpha = 1
+    }
+  }
+
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    for (const el of document.querySelectorAll('.swarm')) new Swarm(el)
+  }
+</script>

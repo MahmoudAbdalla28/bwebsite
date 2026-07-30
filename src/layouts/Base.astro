@@ -2,6 +2,7 @@
 import '../styles/global.css'
 import Nav from '../components/Nav.astro'
 import Footer from '../components/Footer.astro'
+import Swarm from '../components/Swarm.astro'
 
 interface Props {
   title: string
@@ -30,6 +31,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href
     <meta name="build" content="v2-2026-07-30" />
   </head>
   <body>
+    <Swarm mode="ambient" />
     <a class="skip" href="#main">Skip to content</a>
     <Nav />
     <main id="main">

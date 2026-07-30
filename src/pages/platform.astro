@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro'
+import Swarm from '../components/Swarm.astro'
 
 const agents = [
   { role: 'orchestrator', does: 'Holds the objective and decides who moves next' },
@@ -51,24 +52,10 @@ const stages = [
   <section class="stage-wrap">
     <div class="page">
       <figure class="stage">
-        <video
-          class="reel"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          poster="/assets/swarm-poster.webp"
-          width="1140"
-          height="560"
-          aria-label="Agents moving between the endpoints of a live target during a run."
-        >
-          <source src="/assets/swarm.webm" type="video/webm" />
-          <source src="/assets/swarm.mp4" type="video/mp4" />
-        </video>
+        <Swarm mode="stage" />
         <figcaption>
-          Agents moving between the endpoints of one target. The swarm retraces
-          exactly where it went, so a run can be replayed turn by turn.
+          Agents roaming one target's surface. They converge on an endpoint,
+          work it, and move on. New endpoints appear as the surface is mapped.
         </figcaption>
       </figure>
     </div>
@@ -169,16 +156,6 @@ const stages = [
 
   .stage {
     margin: 0;
-  }
-
-  .stage video {
-    display: block;
-    width: 100%;
-    height: auto;
-    background: var(--bone-lift);
-    border: 1px solid var(--stone-line);
-    border-radius: 6px;
-    box-shadow: 0 20px 54px -26px rgba(25, 23, 19, 0.3);
   }
 
   figcaption {
