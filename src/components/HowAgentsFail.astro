@@ -173,11 +173,17 @@ const properties = [
     overflow: hidden;
   }
 
+  /* each class gets its own band of the split. the chart is the prism. */
   .fill {
     position: absolute;
     inset: 0 auto 0 0;
-    background: linear-gradient(to right, var(--gold) 0%, var(--gold-lift) 100%);
   }
+
+  li:nth-child(1) .fill { background: linear-gradient(to right, var(--sp-1), #c79542); }
+  li:nth-child(2) .fill { background: linear-gradient(to right, #a88a3c, var(--sp-2)); }
+  li:nth-child(3) .fill { background: linear-gradient(to right, var(--sp-2), #4c7f95); }
+  li:nth-child(4) .fill { background: linear-gradient(to right, #3f7aa8, var(--sp-4)); }
+  li:nth-child(5) .fill { background: linear-gradient(to right, var(--sp-4), var(--sp-5)); }
 
   .bar-count {
     font-size: 0.9rem;
