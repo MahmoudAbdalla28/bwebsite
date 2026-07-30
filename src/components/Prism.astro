@@ -11,12 +11,11 @@ import { mechanisms } from '../data/mechanisms'
     </div>
 
     <div class="pad">
-      <button data-turn="left" aria-label="Previous face">←</button>
-      <div class="col">
-        <button data-turn="up" aria-label="Face above">↑</button>
-        <button data-turn="down" aria-label="Face below">↓</button>
-      </div>
-      <button data-turn="right" aria-label="Next face">→</button>
+      <button data-slot="0" aria-label="Face above"></button>
+      <button data-slot="1" aria-label="Face upper right"></button>
+      <button data-slot="2" aria-label="Face lower right"></button>
+      <button data-slot="3" aria-label="Face lower left"></button>
+      <button data-slot="4" aria-label="Face upper left"></button>
     </div>
   </div>
 
@@ -78,6 +77,14 @@ import { mechanisms } from '../data/mechanisms'
       near.sort((a, b) => ang(a) - ang(b))
       return { idx: near, n }
     })
+
+    // two faces are adjacent when they share an edge, which means two vertices.
+    // a pentagonal face therefore has exactly five neighbours, which is why a
+    // four-way pad could never map onto it without skipping.
+    const ADJ = FACES.map((f, i) =>
+      FACES.map((g, j) => ({ j, shared: g.idx.filter((v) => f.idx.includes(v)).length }))
+        .filter((o) => o.j !== i && o.shared === 2)
+        .map((o) => o.j))
 
     let W = 0, H = 0, rx = -0.42, ry = 0.62, sel = 0, proj = []
 
@@ -193,6 +200,7 @@ import { mechanisms } from '../data/mechanisms'
     const goTo = (i) => {
       sel = i
       show()
+      assign()
       const t = orientTo(FACES[i].n)
       const from = { rx, ry }
       const to = { rx: shortest(rx, t.rx), ry: shortest(ry, t.ry) }
@@ -209,24 +217,35 @@ import { mechanisms } from '../data/mechanisms'
       anim = requestAnimationFrame(step)
     }
 
-    // the neighbour in a screen direction: whichever face currently sits that
-    // way in view space and is not already the one facing us
-    const neighbour = (dx, dy) => {
-      let best = sel, score = -Infinity
-      for (let i = 0; i < FACES.length; i++) {
-        if (i === sel) continue
-        const n = rot(FACES[i].n)
-        const s = n[0] * dx + n[1] * dy - Math.abs(n[2]) * 0.55
-        if (s > score) { score = s; best = i }
-      }
-      return best
+    // the five buttons sit at fixed pentagon points. each press goes to the
+    // neighbour that actually lies in that direction on screen.
+    const SLOTS = [-90, -18, 54, 126, 198].map((d) => (d * Math.PI) / 180)
+    let slotFace = [0, 0, 0, 0, 0]
+
+    const assign = () => {
+      const here = rot(FACES[sel].n)
+      const cand = ADJ[sel].map((j) => {
+        const n = rot(FACES[j].n)
+        return { j, a: Math.atan2(n[1] - here[1], n[0] - here[0]) }
+      })
+      const free = cand.slice()
+      slotFace = SLOTS.map((sa) => {
+        let best = 0, bd = Infinity
+        free.forEach((c, k) => {
+          let d = Math.abs(((c.a - sa + Math.PI * 3) % (Math.PI * 2)) - Math.PI)
+          if (d < bd) { bd = d; best = k }
+        })
+        return free.splice(best, 1)[0].j
+      })
+      root.querySelectorAll('[data-slot]').forEach((btn, k) => {
+        btn.title = mechanisms[slotFace[k]].face
+      })
     }
 
-    root.querySelectorAll('[data-turn]').forEach((btn) => {
+    root.querySelectorAll('[data-slot]').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation()
-        const d = btn.dataset.turn
-        goTo(neighbour(d === 'left' ? -1 : d === 'right' ? 1 : 0, d === 'up' ? -1 : d === 'down' ? 1 : 0))
+        goTo(slotFace[+btn.dataset.slot])
       })
     })
 
@@ -243,7 +262,7 @@ import { mechanisms } from '../data/mechanisms'
 
     size(); show()
     { const t0 = orientTo(FACES[sel].n); rx = t0.rx; ry = t0.ry }
-    draw()
+    assign(); draw()
   })()
 </script>
 
@@ -266,23 +285,20 @@ import { mechanisms } from '../data/mechanisms'
     min-height: 360px;
   }
 
-  /* centred under the solid, and large enough to read as the control */
+  /* five buttons on a pentagon, one per edge of the face you are on */
   .pad {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .pad .col {
-    display: grid;
-    gap: 0.5rem;
+    position: relative;
+    width: 8.6rem;
+    height: 8.6rem;
+    margin: 0.35rem auto 0;
   }
 
   .pad button {
-    width: 2.9rem;
-    height: 2.9rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
     display: grid;
     place-items: center;
     font-size: 1.05rem;
@@ -295,9 +311,25 @@ import { mechanisms } from '../data/mechanisms'
     transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
   }
 
-  .pad .col button {
-    height: 1.95rem;
+  .pad button::after {
+    content: '';
+    width: 0.52rem;
+    height: 0.52rem;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
   }
+
+  [data-slot='0'] { transform: translate(-50%, -50%) translateY(-3.05rem); }
+  [data-slot='1'] { transform: translate(-50%, -50%) translate(2.9rem, -0.95rem); }
+  [data-slot='2'] { transform: translate(-50%, -50%) translate(1.79rem, 2.47rem); }
+  [data-slot='3'] { transform: translate(-50%, -50%) translate(-1.79rem, 2.47rem); }
+  [data-slot='4'] { transform: translate(-50%, -50%) translate(-2.9rem, -0.95rem); }
+
+  [data-slot='0']::after { transform: rotate(-45deg); }
+  [data-slot='1']::after { transform: rotate(27deg); }
+  [data-slot='2']::after { transform: rotate(99deg); }
+  [data-slot='3']::after { transform: rotate(171deg); }
+  [data-slot='4']::after { transform: rotate(243deg); }
 
   .pad button:hover {
     color: #14130f;
