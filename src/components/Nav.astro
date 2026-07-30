@@ -10,7 +10,9 @@ const links = [
 <header>
   <div class="page bar">
     <a class="mark" href="/">
-      <span class="glyph" aria-hidden="true"></span>
+      <span class="glyph"
+        ><img src="/assets/bastion-mark.png" alt="" width="700" height="700" /></span
+      >
       <span class="word">Bastion</span>
     </a>
 
@@ -45,19 +47,27 @@ const links = [
     margin-right: auto;
   }
 
-  /* the glyph is a keystone, the smallest possible nod to the citadel */
+  /* the mark is a 700x700 square whose artwork is a dome in the upper half,
+     so the box is clipped to the artwork and the rest is pulled off-frame */
   .glyph {
-    width: 13px;
-    height: 15px;
-    background: var(--gold);
-    clip-path: polygon(22% 0, 78% 0, 100% 100%, 0 100%);
+    width: 42px;
+    height: 22px;
+    overflow: hidden;
+    display: block;
+    flex: none;
+  }
+
+  .glyph img {
+    width: 42px;
+    height: auto;
+    margin-top: -7px;
   }
 
   .word {
     font-family: var(--display);
-    font-variation-settings: 'opsz' 30;
-    font-size: 1.3rem;
-    letter-spacing: -0.015em;
+    font-size: 1.22rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
   }
 
   nav {

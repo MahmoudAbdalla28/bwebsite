@@ -77,8 +77,9 @@ Current build: 0 JS files, ~6KB gzipped HTML, 5 woff2.
 Light. Bone, gold, slate. Every other vendor in this category is dark, which is the point.
 All tokens in `src/styles/global.css`.
 
-Type is Fraunces Variable for display and Schibsted Grotesk Variable for body, both self-hosted
-through fontsource. Do not apply `font-variant-numeric: tabular-nums` to body text, it widens the
+Type is Instrument Sans Variable throughout, with Geist Mono for figures and refs, self-hosted
+through fontsource. To swap the display face, change --display in global.css and add the matching
+fontsource import. Do not apply `font-variant-numeric: tabular-nums` to body text, it widens the
 comma and period to a full numeral advance. Use the `.tnum` class on figures only.
 
 ## Structure

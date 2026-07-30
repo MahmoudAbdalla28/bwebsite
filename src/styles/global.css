@@ -1,5 +1,5 @@
-@import '@fontsource-variable/fraunces';
-@import '@fontsource-variable/schibsted-grotesk';
+@import '@fontsource-variable/instrument-sans';
+@import '@fontsource-variable/geist-mono';
 
 /* ============================================================
    Bastion design system
@@ -29,10 +29,11 @@
   /* depth */
   --slate: #2c3136;
 
-  /* type */
-  --display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
-  --sans: 'Schibsted Grotesk Variable', -apple-system, BlinkMacSystemFont, sans-serif;
-  --mono: ui-monospace, 'SF Mono', Menlo, monospace;
+  /* type. one grotesque, one mono. clean and technical, nothing decorative.
+     to swap the display face, change --display and add its fontsource import. */
+  --display: 'Instrument Sans Variable', -apple-system, BlinkMacSystemFont, sans-serif;
+  --sans: 'Instrument Sans Variable', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* measure */
   --page: 1180px;
@@ -80,10 +81,9 @@ h1,
 h2,
 h3 {
   font-family: var(--display);
-  font-weight: 400;
-  font-variation-settings: 'SOFT' 0, 'WONK' 0, 'opsz' 84;
-  letter-spacing: -0.022em;
-  line-height: 1.04;
+  font-weight: 500;
+  letter-spacing: -0.032em;
+  line-height: 1.06;
   text-wrap: balance;
   margin: 0;
 }
