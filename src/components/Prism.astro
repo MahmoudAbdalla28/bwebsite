@@ -7,6 +7,14 @@ import { mechanisms } from '../data/mechanisms'
 <div class="solid">
   <div class="stage">
     <canvas></canvas>
+    <div class="pad">
+      <button data-turn="up" aria-label="Rotate up">▲</button>
+      <div class="row">
+        <button data-turn="left" aria-label="Rotate left">◀</button>
+        <button data-turn="right" aria-label="Rotate right">▶</button>
+      </div>
+      <button data-turn="down" aria-label="Rotate down">▼</button>
+    </div>
   </div>
 
   <aside class="read">
@@ -68,7 +76,7 @@ import { mechanisms } from '../data/mechanisms'
       return { idx: near, n }
     })
 
-    let W = 0, H = 0, rx = -0.42, ry = 0.62, drag = null, sel = 0, proj = []
+    let W = 0, H = 0, rx = -0.42, ry = 0.62, sel = 0, proj = []
 
     const size = () => {
       const r = root.querySelector('.stage').getBoundingClientRect()
@@ -162,32 +170,42 @@ import { mechanisms } from '../data/mechanisms'
     }
 
     const stage = root.querySelector('.stage')
-    stage.addEventListener('pointerdown', (e) => {
-      drag = { x: e.clientX, y: e.clientY, rx, ry, moved: 0 }
-      stage.setPointerCapture(e.pointerId)
-      stage.classList.add('grabbing')
+
+    // arrows, not dragging. one face-step per press, eased.
+    let anim = null
+    const turn = (dx, dy) => {
+      const from = { rx, ry }
+      const to = { rx: rx + dy * 0.62, ry: ry + dx * 0.62 }
+      const t0 = performance.now()
+      cancelAnimationFrame(anim)
+      const step = (now) => {
+        const k = Math.min(1, (now - t0) / 420)
+        const e = 1 - Math.pow(1 - k, 3)
+        rx = from.rx + (to.rx - from.rx) * e
+        ry = from.ry + (to.ry - from.ry) * e
+        draw()
+        if (k < 1) anim = requestAnimationFrame(step)
+      }
+      anim = requestAnimationFrame(step)
+    }
+
+    root.querySelectorAll('[data-turn]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation()
+        const d = btn.dataset.turn
+        turn(d === 'left' ? -1 : d === 'right' ? 1 : 0, d === 'up' ? -1 : d === 'down' ? 1 : 0)
+      })
     })
-    stage.addEventListener('pointermove', (e) => {
-      if (!drag) return
-      const dx = e.clientX - drag.x, dy = e.clientY - drag.y
-      drag.moved = Math.max(drag.moved, Math.abs(dx) + Math.abs(dy))
-      ry = drag.ry + dx * 0.008
-      rx = drag.rx + dy * 0.008
-      draw()
-    })
-    const release = (e) => {
-      const wasDrag = drag && drag.moved > 6
-      drag = null
-      stage.classList.remove('grabbing')
-      if (wasDrag || !e) return
+
+    // clicking a face selects it. no drag, so there is no click/drag ambiguity.
+    stage.addEventListener('click', (e) => {
+      if (e.target.closest('[data-turn]')) return
       const r = stage.getBoundingClientRect()
       const pt = [e.clientX - r.left, e.clientY - r.top]
       for (let k = proj.length - 1; k >= 0; k--) {
         if (proj[k].facing > 0 && inside(pt, proj[k].pts)) { sel = proj[k].i; show(); draw(); return }
       }
-    }
-    stage.addEventListener('pointerup', release)
-    stage.addEventListener('pointercancel', () => release(null))
+    })
     addEventListener('resize', () => { size(); draw() }, { passive: true })
 
     size(); show(); draw()
@@ -206,12 +224,39 @@ import { mechanisms } from '../data/mechanisms'
     position: relative;
     aspect-ratio: 1 / 0.88;
     min-height: 360px;
-    cursor: grab;
-    touch-action: none;
   }
 
-  .stage.grabbing {
-    cursor: grabbing;
+  .pad {
+    position: absolute;
+    right: 2%;
+    bottom: 4%;
+    display: grid;
+    justify-items: center;
+    gap: 0.3rem;
+  }
+
+  .pad .row {
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .pad button {
+    width: 2.1rem;
+    height: 2.1rem;
+    display: grid;
+    place-items: center;
+    font-size: 0.62rem;
+    color: var(--ink-2);
+    background: rgba(26, 25, 21, 0.72);
+    border: 1px solid var(--stone-line);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+
+  .pad button:hover {
+    color: var(--gold-text);
+    border-color: var(--gold);
   }
 
   canvas {
