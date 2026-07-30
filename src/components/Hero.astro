@@ -80,23 +80,25 @@
     z-index: -4;
     background:
       radial-gradient(
-        44% 52% at 78% -6%,
-        rgba(255, 253, 246, 1) 0%,
-        rgba(255, 244, 214, 0.92) 22%,
-        rgba(247, 223, 176, 0.55) 42%,
-        rgba(232, 214, 190, 0) 72%
+        40% 46% at 76% -8%,
+        rgba(255, 250, 232, 1) 0%,
+        rgba(255, 226, 168, 0.9) 16%,
+        rgba(224, 160, 74, 0.55) 33%,
+        rgba(120, 84, 52, 0.22) 54%,
+        rgba(20, 19, 18, 0) 74%
       ),
       radial-gradient(
-        70% 50% at 88% 4%,
-        rgba(226, 168, 92, 0.34) 0%,
-        rgba(226, 168, 92, 0) 66%
+        76% 56% at 88% 2%,
+        rgba(232, 158, 70, 0.34) 0%,
+        rgba(232, 158, 70, 0) 62%
       ),
       linear-gradient(
-        168deg,
-        #efe6d6 0%,
-        #f4ece0 34%,
-        #f8f3ea 62%,
-        #fbf8f2 100%
+        166deg,
+        #14140f 0%,
+        #1b1a15 26%,
+        #24211a 48%,
+        #2c2820 70%,
+        #35301f 100%
       );
   }
 
@@ -109,14 +111,14 @@
     z-index: -3;
     transform: rotate(-34deg);
     transform-origin: 78% 0;
-    opacity: 0.5;
+    opacity: 0.75;
     background: repeating-linear-gradient(
       90deg,
-      rgba(255, 250, 236, 0) 0px,
-      rgba(255, 250, 236, 0.5) 18px,
-      rgba(255, 250, 236, 0.72) 34px,
-      rgba(255, 250, 236, 0) 70px,
-      rgba(255, 250, 236, 0) 148px
+      rgba(255, 244, 214, 0) 0px,
+      rgba(255, 244, 214, 0.34) 18px,
+      rgba(255, 240, 200, 0.5) 34px,
+      rgba(255, 244, 214, 0) 70px,
+      rgba(255, 244, 214, 0) 148px
     );
     filter: blur(16px);
     mask-image: radial-gradient(
@@ -159,14 +161,14 @@
     width: 62%;
     height: 78%;
     z-index: -3;
-    opacity: 0.5;
-    filter: blur(7px);
+    opacity: 0.9;
+    filter: blur(5px);
     background: linear-gradient(
       158deg,
-      rgba(96, 88, 76, 0.3) 0%,
-      rgba(118, 108, 94, 0.19) 40%,
-      rgba(140, 130, 114, 0.1) 72%,
-      rgba(150, 140, 122, 0) 100%
+      rgba(8, 8, 7, 0.92) 0%,
+      rgba(14, 13, 11, 0.78) 40%,
+      rgba(22, 20, 17, 0.5) 74%,
+      rgba(30, 27, 22, 0) 100%
     );
     mask-image: linear-gradient(
       to bottom,
@@ -190,10 +192,10 @@
     height: 62%;
     z-index: -2;
     background:
-      radial-gradient(58% 88% at 22% 92%, rgba(255, 252, 246, 0.95) 0%, rgba(255, 252, 246, 0) 62%),
-      radial-gradient(48% 78% at 54% 100%, rgba(253, 247, 236, 0.92) 0%, rgba(253, 247, 236, 0) 64%),
-      radial-gradient(62% 84% at 84% 96%, rgba(255, 250, 240, 0.88) 0%, rgba(255, 250, 240, 0) 66%),
-      linear-gradient(to top, rgba(252, 249, 243, 0.98) 6%, rgba(252, 249, 243, 0) 92%);
+      radial-gradient(56% 84% at 20% 96%, rgba(214, 176, 122, 0.34) 0%, rgba(214, 176, 122, 0) 62%),
+      radial-gradient(50% 76% at 56% 104%, rgba(232, 200, 150, 0.3) 0%, rgba(232, 200, 150, 0) 64%),
+      radial-gradient(64% 82% at 86% 98%, rgba(246, 214, 160, 0.3) 0%, rgba(246, 214, 160, 0) 66%),
+      linear-gradient(to top, rgba(246, 241, 232, 0.96) 0%, rgba(246, 241, 232, 0.5) 22%, rgba(246, 241, 232, 0) 78%);
     filter: blur(2px);
   }
 
@@ -206,8 +208,8 @@
     height: 26%;
     z-index: -1;
     background:
-      radial-gradient(50% 100% at 12% 100%, rgba(196, 183, 162, 0.5) 0%, rgba(196, 183, 162, 0) 68%),
-      radial-gradient(44% 96% at 68% 104%, rgba(206, 194, 174, 0.42) 0%, rgba(206, 194, 174, 0) 70%);
+      radial-gradient(50% 100% at 12% 100%, rgba(246, 241, 232, 0.9) 0%, rgba(246, 241, 232, 0) 70%),
+      radial-gradient(44% 96% at 70% 104%, rgba(246, 241, 232, 0.82) 0%, rgba(246, 241, 232, 0) 72%);
     filter: blur(14px);
   }
 
@@ -215,10 +217,54 @@
     position: relative;
   }
 
+  /* the rays cross the headline, so the type gets its own ground */
+  .inner::before {
+    content: '';
+    position: absolute;
+    inset: -12% -14% -18%;
+    z-index: -1;
+    background: radial-gradient(
+      58% 62% at 46% 46%,
+      rgba(16, 15, 12, 0.62) 0%,
+      rgba(16, 15, 12, 0.34) 46%,
+      rgba(16, 15, 12, 0) 78%
+    );
+  }
+
+  /* the hero is the one dark room in the building */
+  h1 {
+    color: #fbf6ea;
+  }
+
+  .turn {
+    color: rgba(251, 246, 234, 0.88);
+  }
+
+  .lede {
+    color: rgba(246, 240, 226, 0.86);
+  }
+
+  .hero :global(.btn-primary) {
+    background: #fbf6ea;
+    color: #17150f;
+  }
+
+  .hero :global(.btn-primary:hover) {
+    background: #fff;
+  }
+
+  .hero :global(.btn-quiet) {
+    color: rgba(246, 240, 226, 0.72);
+  }
+
+  .hero :global(.btn-quiet:hover) {
+    color: #f4d79a;
+  }
+
   /* the eyebrow should seat the headline, not compete with it */
   .label {
     display: inline-block;
-    color: var(--muted);
+    color: rgba(240, 206, 140, 0.82);
     font-weight: 500;
     letter-spacing: 0.13em;
   }
