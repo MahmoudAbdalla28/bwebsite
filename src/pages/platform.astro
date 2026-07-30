@@ -1,0 +1,271 @@
+---
+import Base from '../layouts/Base.astro'
+
+const agents = [
+  { role: 'orchestrator', does: 'Holds the objective and decides who moves next' },
+  { role: 'recon', does: 'Maps the surface, the tools, and what the agent is allowed to reach' },
+  { role: 'inject', does: 'Fires one probe, reads the refusal, and changes category' },
+  { role: 'verifier', does: 'Refuses to count anything the target did not say itself' },
+]
+
+const stages = [
+  {
+    n: '01',
+    t: 'It recalls before it moves',
+    d: 'Every probe starts by asking the corpus what already worked against this shape of defense. It never opens with a guess.',
+  },
+  {
+    n: '02',
+    t: 'A refusal is information',
+    d: 'The guard that blocked a probe tells us where the boundary sits. The next probe is a different category, never a rephrase.',
+  },
+  {
+    n: '03',
+    t: 'Nothing counts until the target says it',
+    d: 'A finding needs the transcript that produced it. Inference does not count, and neither does a plausible-looking failure.',
+  },
+  {
+    n: '04',
+    t: 'It writes back',
+    d: 'The outcome lands in the corpus either way. A dead end is worth recording, because it stops the next run walking into it.',
+  },
+]
+---
+
+<Base
+  title="Platform · Bastion"
+  description="How a Bastion run works: a swarm of agents probing a live target, recalling before every move, and writing every outcome back to the corpus."
+>
+  <section class="top">
+    <div class="beam" aria-hidden="true"></div>
+    <div class="page">
+      <p class="label">Platform</p>
+      <h1>A swarm, a target, and a record of everything it tried</h1>
+      <p class="lede">
+        A run is not one model firing prompts. It is a fleet of agents working a
+        live target in parallel, each one reading what the last refusal revealed.
+      </p>
+    </div>
+  </section>
+
+  <section class="stage-wrap">
+    <div class="page">
+      <figure class="stage">
+        <video
+          class="reel"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/assets/swarm-poster.webp"
+          width="1140"
+          height="560"
+          aria-label="Agents moving between the endpoints of a live target during a run."
+        >
+          <source src="/assets/swarm.webm" type="video/webm" />
+          <source src="/assets/swarm.mp4" type="video/mp4" />
+        </video>
+        <figcaption>
+          Agents moving between the endpoints of one target. The swarm retraces
+          exactly where it went, so a run can be replayed turn by turn.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page">
+      <p class="label">Who is in a run</p>
+      <div class="roles">
+        {
+          agents.map((a) => (
+            <div class="role">
+              <h3>{a.role}</h3>
+              <p>{a.does}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section discipline">
+    <div class="page">
+      <p class="label">The loop every probe runs</p>
+      <h2>The discipline is what makes it depth instead of spray</h2>
+
+      <ol class="stages">
+        {
+          stages.map((s) => (
+            <li>
+              <span class="n tnum">{s.n}</span>
+              <h3>{s.t}</h3>
+              <p>{s.d}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page">
+      <p class="label">What it writes to</p>
+      <h2>Every run leaves the corpus bigger than it found it</h2>
+      <figure class="shot">
+        <img
+          src="/assets/shot-cortex.webp"
+          width="1800"
+          height="1125"
+          alt="The corpus: techniques, attack mechanisms, jailbreak prompts, engagement record and recon."
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+      <a class="btn btn-primary" href="/contact">Book a scoping call</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .top {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3rem, 6vw, 5rem) clamp(2rem, 4vw, 3rem);
+  }
+
+  .beam {
+    position: absolute;
+    inset: -30% -10% auto -10%;
+    height: 190%;
+    z-index: -1;
+    background:
+      radial-gradient(
+        50% 40% at 22% 0%,
+        rgba(255, 247, 227, 0.9) 0%,
+        rgba(246, 241, 232, 0) 70%
+      ),
+      linear-gradient(
+        100deg,
+        rgba(184, 134, 47, 0) 44%,
+        rgba(184, 134, 47, 0.2) 52%,
+        rgba(47, 110, 168, 0.16) 60%,
+        rgba(111, 178, 240, 0.14) 66%,
+        rgba(111, 178, 240, 0) 76%
+      );
+    filter: blur(30px);
+  }
+
+  h1 {
+    font-size: clamp(2.1rem, 1.3rem + 3.1vw, 3.6rem);
+    margin-block: 1.1rem 1.35rem;
+    max-width: 22ch;
+  }
+
+  .stage-wrap {
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .stage {
+    margin: 0;
+  }
+
+  .stage video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--bone-lift);
+    border: 1px solid var(--stone-line);
+    border-radius: 6px;
+    box-shadow: 0 20px 54px -26px rgba(25, 23, 19, 0.3);
+  }
+
+  figcaption {
+    margin-top: 0.95rem;
+    font-size: 0.86rem;
+    color: var(--muted);
+    max-width: 62ch;
+  }
+
+  .roles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    margin-top: 1.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--stone-line);
+  }
+
+  .role h3 {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .role p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+
+  .discipline h2,
+  .section h2 {
+    font-size: clamp(1.6rem, 1.15rem + 1.9vw, 2.5rem);
+    max-width: 26ch;
+    margin-block: 1.1rem clamp(2.25rem, 4vw, 3.25rem);
+  }
+
+  .stages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.75rem, 4vw, 3rem);
+  }
+
+  .stages li {
+    border-top: 1px solid var(--stone-line);
+    padding-top: 1.15rem;
+  }
+
+  .n {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--gold-text);
+    letter-spacing: 0.1em;
+  }
+
+  .stages h3 {
+    font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+    margin-block: 0.45rem 0.6rem;
+  }
+
+  .stages p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+
+  .shot img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--stone-line);
+    border-radius: 4px;
+    box-shadow: 0 18px 48px -22px rgba(25, 23, 19, 0.26);
+  }
+
+  .shot {
+    margin: 0 0 2.25rem;
+  }
+
+  @media (max-width: 860px) {
+    .roles,
+    .stages {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
