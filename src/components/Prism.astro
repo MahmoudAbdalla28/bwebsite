@@ -8,14 +8,13 @@ import { mechanisms } from '../data/mechanisms'
   <div class="left">
     <div class="stage">
       <canvas></canvas>
-    </div>
-
-    <div class="pad">
+      <div class="pad">
       <button data-slot="0" aria-label="Face above"></button>
       <button data-slot="1" aria-label="Face upper right"></button>
       <button data-slot="2" aria-label="Face lower right"></button>
       <button data-slot="3" aria-label="Face lower left"></button>
-      <button data-slot="4" aria-label="Face upper left"></button>
+        <button data-slot="4" aria-label="Face upper left"></button>
+      </div>
     </div>
   </div>
 
@@ -86,7 +85,7 @@ import { mechanisms } from '../data/mechanisms'
         .filter((o) => o.j !== i && o.shared === 2)
         .map((o) => o.j))
 
-    let W = 0, H = 0, rx = -0.42, ry = 0.62, sel = 0, proj = []
+    let W = 0, H = 0, rx = -0.42, ry = 0.62, rz = 0, sel = 0, proj = []
 
     const size = () => {
       const r = root.querySelector('.stage').getBoundingClientRect()
@@ -103,7 +102,10 @@ import { mechanisms } from '../data/mechanisms'
       x = nx; z = nz
       c = Math.cos(rx); s = Math.sin(rx)
       const ny = y * c - z * s, nz2 = y * s + z * c
-      return [x, ny, nz2]
+      // roll about the view axis. without it every face lands at whatever
+      // rotation falls out, which is why a fixed pad pointed the wrong way.
+      c = Math.cos(rz); s = Math.sin(rz)
+      return [x * c - ny * s, x * s + ny * c, nz2]
     }
 
     const draw = () => {
@@ -183,10 +185,18 @@ import { mechanisms } from '../data/mechanisms'
 
     // the orientation that brings face n to dead centre, facing the camera.
     // derived rather than guessed: solve Rx(rx)*Ry(ry)*n = (0,0,-1).
-    const orientTo = (n) => {
-      const [x, y, z] = n
+    const orientTo = (i) => {
+      const [x, y, z] = FACES[i].n
       const r = Math.hypot(x, z)
-      return { ry: Math.atan2(x, z) + Math.PI, rx: Math.atan2(y, -r) + Math.PI }
+      const ry2 = Math.atan2(x, z) + Math.PI
+      const rx2 = Math.atan2(y, -r) + Math.PI
+      // then roll so this face's first neighbour always sits straight up, which
+      // makes every face land in the same orientation and the pad honest
+      const save = [rx, ry, rz]
+      rx = rx2; ry = ry2; rz = 0
+      const ref = rot(FACES[ADJ[i][0]].n)
+      rx = save[0]; ry = save[1]; rz = save[2]
+      return { rx: rx2, ry: ry2, rz: -Math.atan2(ref[1], ref[0]) - Math.PI / 2 }
     }
 
     const shortest = (from, to) => {
@@ -200,10 +210,15 @@ import { mechanisms } from '../data/mechanisms'
     const goTo = (i) => {
       sel = i
       show()
+      const t = orientTo(i)
+      // assign from the orientation we are moving TO, not the one we are
+      // leaving, or the buttons describe the previous view
+      const keep = [rx, ry, rz]
+      rx = t.rx; ry = t.ry; rz = t.rz
       assign()
-      const t = orientTo(FACES[i].n)
-      const from = { rx, ry }
-      const to = { rx: shortest(rx, t.rx), ry: shortest(ry, t.ry) }
+      rx = keep[0]; ry = keep[1]; rz = keep[2]
+      const from = { rx, ry, rz }
+      const to = { rx: shortest(rx, t.rx), ry: shortest(ry, t.ry), rz: shortest(rz, t.rz) }
       const t0 = performance.now()
       cancelAnimationFrame(anim)
       const step = (now) => {
@@ -211,6 +226,7 @@ import { mechanisms } from '../data/mechanisms'
         const e = 1 - Math.pow(1 - k, 3)
         rx = from.rx + (to.rx - from.rx) * e
         ry = from.ry + (to.ry - from.ry) * e
+        rz = from.rz + (to.rz - from.rz) * e
         draw()
         if (k < 1) anim = requestAnimationFrame(step)
       }
@@ -237,8 +253,14 @@ import { mechanisms } from '../data/mechanisms'
         })
         return free.splice(best, 1)[0].j
       })
+      const rad = Math.min(W, H) * 0.33 * 1.52
       root.querySelectorAll('[data-slot]').forEach((btn, k) => {
-        btn.title = mechanisms[slotFace[k]].face
+        btn.textContent = mechanisms[slotFace[k]].face
+        btn.title = mechanisms[slotFace[k]].title
+        const n = rot(FACES[slotFace[k]].n)
+        const a = Math.atan2(n[1] - here[1], n[0] - here[0])
+        btn.style.left = (W / 2 + Math.cos(a) * rad) + 'px'
+        btn.style.top = (H / 2 + Math.sin(a) * rad) + 'px'
       })
     }
 
@@ -261,7 +283,7 @@ import { mechanisms } from '../data/mechanisms'
     addEventListener('resize', () => { size(); draw() }, { passive: true })
 
     size(); show()
-    { const t0 = orientTo(FACES[sel].n); rx = t0.rx; ry = t0.ry }
+    { const t0 = orientTo(sel); rx = t0.rx; ry = t0.ry; rz = t0.rz }
     assign(); draw()
   })()
 </script>
@@ -281,55 +303,35 @@ import { mechanisms } from '../data/mechanisms'
 
   .stage {
     position: relative;
-    aspect-ratio: 1 / 0.88;
-    min-height: 360px;
+    aspect-ratio: 1 / 0.95;
+    min-height: 420px;
   }
 
   /* five buttons on a pentagon, one per edge of the face you are on */
   .pad {
-    position: relative;
-    width: 8.6rem;
-    height: 8.6rem;
-    margin: 0.35rem auto 0;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
   }
 
   .pad button {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: grid;
-    place-items: center;
-    font-size: 1.05rem;
-    line-height: 1;
-    color: var(--ink);
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+    white-space: nowrap;
+    padding: 0.42rem 0.7rem;
+    font-family: var(--sans);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    color: var(--ink-2);
     background: var(--panel);
     border: 1px solid var(--stone-line);
-    border-radius: 4px;
+    border-radius: 3px;
     cursor: pointer;
     transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
   }
-
-  .pad button::after {
-    content: '';
-    width: 0.52rem;
-    height: 0.52rem;
-    border-top: 2px solid currentColor;
-    border-right: 2px solid currentColor;
-  }
-
-  [data-slot='0'] { transform: translate(-50%, -50%) translateY(-3.05rem); }
-  [data-slot='1'] { transform: translate(-50%, -50%) translate(2.9rem, -0.95rem); }
-  [data-slot='2'] { transform: translate(-50%, -50%) translate(1.79rem, 2.47rem); }
-  [data-slot='3'] { transform: translate(-50%, -50%) translate(-1.79rem, 2.47rem); }
-  [data-slot='4'] { transform: translate(-50%, -50%) translate(-2.9rem, -0.95rem); }
-
-  [data-slot='0']::after { transform: rotate(-45deg); }
-  [data-slot='1']::after { transform: rotate(27deg); }
-  [data-slot='2']::after { transform: rotate(99deg); }
-  [data-slot='3']::after { transform: rotate(171deg); }
-  [data-slot='4']::after { transform: rotate(243deg); }
 
   .pad button:hover {
     color: #14130f;
