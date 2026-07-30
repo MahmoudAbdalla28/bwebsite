@@ -252,3 +252,13 @@ svg {
   }
   .btn { transition: none; }
 }
+
+/* a quiet secondary action. no box, so the primary keeps all the weight */
+.btn-quiet {
+  color: var(--ink-2);
+  padding-inline: 0.9rem;
+}
+
+.btn-quiet:hover {
+  color: var(--gold-text);
+}
