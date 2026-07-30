@@ -49,10 +49,18 @@ const { mode = 'stage' } = Astro.props
 </style>
 
 <script>
-  const INK = '#191713'
-  const GOLD = '#a87a2c'
-  const BLUE = '#1e6fd9'
-  const STONE = '#cbbfa9'
+  const INK = '#f5efe2'
+  const GOLD = '#d1a049'
+  const BLUE = '#6fb2f0'
+  const STONE = '#3a362d'
+  const LABEL = 'rgba(210,201,184,0.78)'
+
+  // real classes, so the diagram reads as data rather than decoration
+  const NODES = [
+    'prompt-injection', 'auth-bypass', 'cross-tenant', 'tool-abuse',
+    'system-prompt', 'off-policy', 'ssrf', 'idor',
+    'rce', 'instruction-drift', 'mcp-poisoning',
+  ]
 
   class Swarm {
     constructor(root) {
@@ -129,12 +137,15 @@ const { mode = 'stage' } = Astro.props
 
     spawnNode() {
       if (this.nodes.length >= this.maxNodes) return
-      const m = 0.14
+      const m = 0.16
+      const used = new Set(this.nodes.map((n) => n.label))
+      const free = NODES.filter((n) => !used.has(n))
       this.nodes.push({
         x: this.w * (m + Math.random() * (1 - 2 * m)),
         y: this.h * (m + Math.random() * (1 - 2 * m)),
         born: this.t,
         r: 0,
+        label: free.length ? free[(Math.random() * free.length) | 0] : '',
       })
     }
 
@@ -271,16 +282,26 @@ const { mode = 'stage' } = Astro.props
       }
 
       c.globalAlpha = 1
+      c.font = '500 11px "Instrument Sans Variable", system-ui, sans-serif'
+      c.textBaseline = 'middle'
       for (const nd of this.nodes) {
         const r = 3.4 * nd.r
         c.beginPath()
-        c.arc(nd.x, nd.y, r + 5, 0, 6.2832)
-        c.fillStyle = 'rgba(168,122,44,0.10)'
+        c.arc(nd.x, nd.y, r + 6, 0, 6.2832)
+        c.fillStyle = 'rgba(209,160,73,0.13)'
         c.fill()
         c.beginPath()
         c.arc(nd.x, nd.y, r, 0, 6.2832)
         c.fillStyle = GOLD
         c.fill()
+
+        // the label is the point. it turns dots into a diagram of what we test.
+        if (nd.label && nd.r > 0.55) {
+          c.globalAlpha = (nd.r - 0.55) / 0.45
+          c.fillStyle = LABEL
+          c.fillText(nd.label, nd.x + 11, nd.y)
+          c.globalAlpha = 1
+        }
       }
       }
 
