@@ -2,31 +2,43 @@
 import { failures } from '../data/failures'
 ---
 
-<section class="feed">
+<section class="feed section">
   <div class="page">
     <div class="head">
-      <p class="label">Agents are failing in public</p>
-      <p class="note">every one of these is somebody’s shipped product</p>
+      <div>
+        <p class="label">Agents are failing in public</p>
+        <h2>Every one of these is somebody’s shipped product</h2>
+      </div>
+      <p class="note">
+        Three of the ones that got written up. Most never do.
+      </p>
     </div>
 
-    <ol>
+    <div class="grid">
       {
         failures.map((f, i) => (
-          <li>
-            <span class="idx">{String(i + 1).padStart(2, '0')}</span>
-            <a href={f.href} target="_blank" rel="noopener noreferrer">
-              <span class="who">{f.who}</span>
-              <span class="what">{f.what}</span>
-            </a>
-            <span class="meta">
-              {f.when}
-              <i>·</i>
-              {f.source}
-            </span>
-          </li>
+          <a class="card" href={f.href} target="_blank" rel="noopener noreferrer">
+            {/* card art, generated from the failure class rather than borrowed */}
+            <div class={`art a${i + 1}`}>
+              <span class="band" />
+              <span class="code">{f.code}</span>
+              <span class="klass">{f.klass}</span>
+            </div>
+
+            <div class="body">
+              <p class="who">{f.who}</p>
+              <p class="what">{f.what}</p>
+              <p class="detail">{f.detail}</p>
+            </div>
+
+            <div class="foot">
+              <span>{f.when}</span>
+              <span class="src">{f.source} ↗</span>
+            </div>
+          </a>
         ))
       }
-    </ol>
+    </div>
   </div>
 </section>
 
@@ -34,96 +46,148 @@ import { failures } from '../data/failures'
   .feed {
     background: var(--panel);
     border-block: 1px solid var(--stone-line);
-    padding-block: clamp(2.25rem, 4vw, 3.25rem);
   }
 
   .head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.4rem 1rem;
-    padding-bottom: 1.1rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 1rem 2rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
     border-bottom: 1px solid var(--stone-line);
   }
 
+  h2 {
+    font-size: clamp(1.5rem, 1.1rem + 1.7vw, 2.3rem);
+    margin-top: 0.85rem;
+    max-width: 24ch;
+  }
+
   .note {
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     color: var(--muted);
+    max-width: 26ch;
+    text-align: right;
   }
 
-  ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
+  .grid {
     display: grid;
-    grid-template-columns: 2rem 1fr auto;
-    align-items: baseline;
-    gap: 0 1.1rem;
-    padding-block: 0.95rem;
-    border-bottom: 1px solid rgba(54, 51, 43, 0.6);
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2vw, 1.6rem);
   }
 
-  li:last-child {
-    border-bottom: 0;
-    padding-bottom: 0;
-  }
-
-  .idx {
-    font-size: 0.78rem;
-    font-variant-numeric: tabular-nums;
-    color: var(--gold);
-  }
-
-  a {
-    text-decoration: none;
+  .card {
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.2rem 0.7rem;
+    flex-direction: column;
+    text-decoration: none;
+    background: var(--bone);
+    border: 1px solid var(--stone-line);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 180ms ease, transform 180ms ease;
+  }
+
+  .card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  /* the art is the failure class, drawn in the spectrum. no borrowed images,
+     no external requests, and it stays on-brand at any size. */
+  .art {
+    position: relative;
+    aspect-ratio: 16 / 8;
+    padding: 0.95rem 1.05rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.3rem;
+    overflow: hidden;
+  }
+
+  .a1 { background: radial-gradient(120% 140% at 12% 0%, rgba(217,164,65,0.34), rgba(16,15,13,0) 62%), #16150f; }
+  .a2 { background: radial-gradient(120% 140% at 12% 0%, rgba(168,160,94,0.3), rgba(16,15,13,0) 62%), #14150f; }
+  .a3 { background: radial-gradient(120% 140% at 12% 0%, rgba(63,143,232,0.3), rgba(16,15,13,0) 62%), #0f1319; }
+
+  .band {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(
+      to right,
+      var(--sp-1),
+      var(--sp-2) 30%,
+      var(--sp-3) 55%,
+      var(--sp-5) 78%,
+      transparent
+    );
+  }
+
+  .code {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--gold-lift);
+  }
+
+  .klass {
+    font-size: 0.88rem;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: rgba(245, 239, 226, 0.9);
+  }
+
+  .body {
+    padding: 1.05rem 1.05rem 0.9rem;
+    flex: 1;
   }
 
   .who {
-    font-size: 1.02rem;
+    font-size: 1.05rem;
     font-weight: 600;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     color: var(--ink);
-    border-bottom: 1px solid transparent;
-    transition: border-color 150ms ease, color 150ms ease;
-  }
-
-  a:hover .who {
-    color: var(--gold-text);
-    border-bottom-color: var(--gold);
   }
 
   .what {
-    font-size: 0.96rem;
+    margin-top: 0.4rem;
+    font-size: 0.94rem;
     line-height: 1.45;
     color: var(--ink-2);
   }
 
-  .meta {
+  .detail {
+    margin-top: 0.6rem;
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1.05rem 0.95rem;
+    border-top: 1px solid var(--stone-line);
     font-size: 0.76rem;
     color: var(--muted);
-    white-space: nowrap;
   }
 
-  .meta i {
-    font-style: normal;
-    color: var(--stone-line);
-    padding-inline: 0.35rem;
+  .card:hover .src {
+    color: var(--gold-text);
   }
 
-  @media (max-width: 720px) {
-    li {
-      grid-template-columns: 1.6rem 1fr;
-      gap: 0.3rem 0.8rem;
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
     }
-    .meta {
-      grid-column: 2;
+    .head {
+      grid-template-columns: 1fr;
+    }
+    .note {
+      text-align: left;
+      max-width: none;
     }
   }
 </style>

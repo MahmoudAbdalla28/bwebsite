@@ -5,23 +5,32 @@ export const failures = [
   {
     who: 'meta ai',
     what: 'guessable prompt ids let one user read another user’s chats',
+    klass: 'broken object level authorization',
+    code: 'API1',
     when: 'jul 2025',
     href: 'https://www.malwarebytes.com/blog/news/2025/07/meta-ai-chatbot-bug-could-have-allowed-anyone-to-see-private-conversations',
     source: 'malwarebytes',
+    detail: 'the server never checked who owned the prompt id',
   },
   {
     who: 'cursor',
     what: 'a poisoned workspace turned allowlisted git commands into arbitrary execution',
+    klass: 'tool-layer poisoning',
+    code: 'LLM08',
     when: 'cve-2026-22708',
     href: 'https://nvd.nist.gov/vuln/detail/CVE-2026-22708',
     source: 'nvd',
+    detail: 'the allowlist was trusted, the environment it ran in was not',
   },
   {
     who: 'nine mexican government agencies',
     what: 'an operator drove coding agents through 305 internal servers',
+    klass: 'agent-driven intrusion',
+    code: 'ASI01',
     when: 'feb 2026',
     href: 'https://research.checkpoint.com/',
     source: 'check point research',
+    detail: 'the agent did the exploitation, the human just pointed it',
   },
 ] as const
 
