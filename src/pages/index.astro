@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro'
 import Hero from '../components/Hero.astro'
+import Prism from '../components/Prism.astro'
 import Failures from '../components/Failures.astro'
 import ProofBand from '../components/ProofBand.astro'
 import HowAgentsFail from '../components/HowAgentsFail.astro'
@@ -14,6 +15,12 @@ import Pipeline from '../components/Pipeline.astro'
   description="The independent record of how AI agents fail. Every failure we find, across security and reliability, compounds into knowledge you cannot build in-house, because you have only ever seen your own agents."
 >
   <Hero />
+  <section class="prism-band">
+    <div class="page">
+      <p class="label">One beam in, every way it breaks out</p>
+      <Prism />
+    </div>
+  </section>
   <Failures />
   <ProofBand />
   <HowAgentsFail />
@@ -21,3 +28,11 @@ import Pipeline from '../components/Pipeline.astro'
   <Evidence />
   <Pipeline />
 </Base>
+
+<style>
+  .prism-band {
+    padding-block: clamp(2.5rem, 5vw, 4.5rem);
+    border-bottom: 1px solid var(--stone-line);
+    overflow: hidden;
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+// The mark is a prism. So is the product: undifferentiated agent behaviour goes
+// in, separated failure classes come out. Real counts, so it is a diagram of
+// data rather than an illustration.
+import { families } from '../data/taxonomy'
+
+const bands = families.slice(0, 7)
+const max = bands[0].count
+
+// fan the output between these angles, in spectrum order
+const spread = 34
+const bandColors = ['#d9a441', '#c9a94b', '#a8a05e', '#6f9e86', '#4f93c4', '#3f8fe8', '#8fc8f5']
+
+const APEX_X = 452
+const APEX_Y = 280
+const OUT_X = 980
+
+const rays = bands.map((b, i) => {
+  const t = bands.length === 1 ? 0.5 : i / (bands.length - 1)
+  const angle = (-spread / 2 + spread * t) * (Math.PI / 180)
+  const len = OUT_X - APEX_X
+  return {
+    ...b,
+    color: bandColors[i],
+    x2: APEX_X + len,
+    y2: APEX_Y + Math.tan(angle) * len,
+    w: 1 + (b.count / max) * 3.4,
+  }
+})
+---
+
+<figure class="prism">
+  <svg viewBox="0 0 1200 560" role="img" aria-label="A prism separating one incoming beam into the failure classes Bastion tracks">
+    <defs>
+      <linearGradient id="beam" x1="0" x2="1">
+        <stop offset="0" stop-color="#fff6e2" stop-opacity="0.12" />
+        <stop offset="0.35" stop-color="#fff6e2" stop-opacity="0.6" />
+        <stop offset="1" stop-color="#fffaf0" stop-opacity="1" />
+      </linearGradient>
+      <linearGradient id="beamGlow" x1="0" x2="1">
+        <stop offset="0" stop-color="#ffeec4" stop-opacity="0" />
+        <stop offset="1" stop-color="#ffeec4" stop-opacity="0.34" />
+      </linearGradient>
+      <radialGradient id="flare">
+        <stop offset="0" stop-color="#fff4d6" stop-opacity="0.9" />
+        <stop offset="1" stop-color="#fff4d6" stop-opacity="0" />
+      </radialGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#f5efe2" stop-opacity="0.16" />
+        <stop offset="1" stop-color="#f5efe2" stop-opacity="0.03" />
+      </linearGradient>
+    </defs>
+
+    <!-- the beam going in: one undifferentiated stream -->
+    <path d="M20 280 H452" stroke="url(#beamGlow)" stroke-width="26" stroke-linecap="round" opacity="0.5" />
+    <path d="M20 280 H452" stroke="url(#beam)" stroke-width="6" stroke-linecap="round" />
+    <text x="20" y="256" class="inlbl">every run, every target</text>
+    <circle cx="452" cy="280" r="86" fill="url(#flare)" />
+
+    <!-- the prism itself, the mark's geometry -->
+    <path
+      d="M452 168 L556 356 L348 356 Z"
+      fill="url(#glass)"
+      stroke="rgba(245,239,226,0.4)"
+      stroke-width="1.5"
+      stroke-linejoin="round"
+    />
+
+    <!-- what comes out: one band per class, thickness by depth -->
+    {
+      rays.map((r, i) => (
+        <g class="ray" style={`--i:${i}`}>
+          <line
+            x1={APEX_X} y1={APEX_Y} x2={r.x2} y2={r.y2}
+            stroke={r.color} stroke-width={r.w} stroke-linecap="round" opacity="0.85"
+          />
+          <circle cx={r.x2} cy={r.y2} r="3" fill={r.color} />
+          <text x={r.x2 + 14} y={r.y2 + 4} class="lbl">{r.label.toLowerCase()}</text>
+          <text x={r.x2 + 14} y={r.y2 + 21} class="cnt">{r.count}</text>
+        </g>
+      ))
+    }
+  </svg>
+</figure>
+
+<style>
+  .prism {
+    margin: 0;
+    width: 100%;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .lbl {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    fill: rgba(245, 239, 226, 0.9);
+  }
+
+  .inlbl {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    fill: rgba(245, 239, 226, 0.42);
+  }
+
+  .cnt {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+    fill: rgba(245, 239, 226, 0.42);
+  }
+
+  /* each band arrives in turn, then stays. nothing is hidden by the animation */
+  @media (prefers-reduced-motion: no-preference) {
+    .ray {
+      opacity: 0;
+      animation: split 620ms cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+      animation-delay: calc(560ms + var(--i) * 85ms);
+    }
+  }
+
+  @keyframes split {
+    from {
+      opacity: 0;
+      transform: translateX(-18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .lbl { font-size: 17px; }
+    .inlbl { font-size: 14px; }
+    .cnt { font-size: 13px; }
+  }
+</style>

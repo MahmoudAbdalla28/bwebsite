@@ -131,21 +131,30 @@ const { mode = 'stage' } = Astro.props
           target: (Math.random() * this.nodes.length) | 0,
           hold: Math.random() * 4,
           hue: Math.random(),
+          trail: [],
         })
       }
     }
 
     spawnNode() {
       if (this.nodes.length >= this.maxNodes) return
-      const m = 0.16
       const used = new Set(this.nodes.map((n) => n.label))
       const free = NODES.filter((n) => !used.has(n))
+      // pick the spot furthest from what is already placed, so the surface
+      // spreads out instead of piling up in the centre
+      let best = null, bestD = -1
+      for (let k = 0; k < 26; k++) {
+        const x = this.w * (0.1 + Math.random() * 0.72)
+        const y = this.h * (0.14 + Math.random() * 0.72)
+        let d = 1e9
+        for (const n of this.nodes) d = Math.min(d, Math.hypot(n.x - x, n.y - y))
+        if (this.nodes.length === 0) d = 1e9
+        if (d > bestD) { bestD = d; best = { x, y } }
+      }
       this.nodes.push({
-        x: this.w * (m + Math.random() * (1 - 2 * m)),
-        y: this.h * (m + Math.random() * (1 - 2 * m)),
-        born: this.t,
-        r: 0,
+        x: best.x, y: best.y, born: this.t, r: 0,
         label: free.length ? free[(Math.random() * free.length) | 0] : '',
+        heat: 0, state: 'idle', work: 0,
       })
     }
 
@@ -262,6 +271,25 @@ const { mode = 'stage' } = Astro.props
         const age = this.t - nd.born
         nd.r = Math.max(0, Math.min(1, age / 0.9))
       }
+
+      if (!this.ambient) {
+        for (const nd of this.nodes) {
+          let near = 0
+          for (const a of A) if (Math.hypot(a.x - nd.x, a.y - nd.y) < 46) near++
+          const want = near > 0 ? 1 : 0
+          nd.heat += (want - nd.heat) * dt * 2.2
+          if (near > 0) {
+            nd.work += dt * near
+            if (nd.state === 'idle' && nd.work > 3.2) {
+              nd.state = Math.random() < 0.38 ? 'broken' : 'held'
+            }
+          }
+        }
+        for (const a of A) {
+          a.trail.push(a.x, a.y)
+          if (a.trail.length > 26) a.trail.splice(0, 2)
+        }
+      }
     }
 
     draw() {
@@ -270,44 +298,70 @@ const { mode = 'stage' } = Astro.props
 
       // the surface being mapped. stage only, the ambient layer has no graph.
       if (!this.ambient) {
-      c.strokeStyle = STONE
-      c.globalAlpha = this.ambient ? 0.28 : 0.42
-      c.lineWidth = 1
-      for (let i = 0; i < this.nodes.length; i++) {
-        for (let j = i + 1; j < this.nodes.length; j++) {
-          const a = this.nodes[i], b = this.nodes[j]
-          if (Math.hypot(b.x - a.x, b.y - a.y) > this.w * 0.36) continue
-          c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke()
+        c.strokeStyle = STONE
+        c.globalAlpha = 0.5
+        c.lineWidth = 1
+        for (let i = 0; i < this.nodes.length; i++) {
+          for (let j = i + 1; j < this.nodes.length; j++) {
+            const a = this.nodes[i], b = this.nodes[j]
+            if (Math.hypot(b.x - a.x, b.y - a.y) > this.w * 0.34) continue
+            c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke()
+          }
         }
-      }
+        c.globalAlpha = 1
 
-      c.globalAlpha = 1
-      c.font = '500 11px "Instrument Sans Variable", system-ui, sans-serif'
-      c.textBaseline = 'middle'
-      for (const nd of this.nodes) {
-        const r = 3.4 * nd.r
-        c.beginPath()
-        c.arc(nd.x, nd.y, r + 6, 0, 6.2832)
-        c.fillStyle = 'rgba(209,160,73,0.13)'
-        c.fill()
-        c.beginPath()
-        c.arc(nd.x, nd.y, r, 0, 6.2832)
-        c.fillStyle = GOLD
-        c.fill()
-
-        // the label is the point. it turns dots into a diagram of what we test.
-        if (nd.label && nd.r > 0.55) {
-          c.globalAlpha = (nd.r - 0.55) / 0.45
-          c.fillStyle = LABEL
-          c.fillText(nd.label, nd.x + 11, nd.y)
-          c.globalAlpha = 1
+        // trails, so you can see where the swarm has been
+        c.lineWidth = 1.4
+        for (const a of this.agents) {
+          const tr = a.trail
+          for (let k = 2; k < tr.length; k += 2) {
+            c.globalAlpha = (k / tr.length) * 0.3
+            c.strokeStyle = a.hue > 0.62 ? BLUE : a.hue > 0.3 ? '#e8dfcc' : GOLD
+            c.beginPath(); c.moveTo(tr[k - 2], tr[k - 1]); c.lineTo(tr[k], tr[k + 1]); c.stroke()
+          }
         }
-      }
+        c.globalAlpha = 1
+
+        c.font = '500 12px "Instrument Sans Variable", system-ui, sans-serif'
+        c.textBaseline = 'middle'
+        for (const nd of this.nodes) {
+          const col = nd.state === 'broken' ? '#e0663c' : nd.state === 'held' ? '#5fa87f' : GOLD
+          const r = 4 * nd.r
+
+          // halo grows while the swarm is working it
+          const halo = 8 + nd.heat * 16
+          c.beginPath(); c.arc(nd.x, nd.y, halo, 0, 6.2832)
+          c.fillStyle = nd.state === 'broken' ? 'rgba(224,102,60,0.16)'
+            : nd.state === 'held' ? 'rgba(95,168,127,0.13)' : 'rgba(209,160,73,0.13)'
+          c.fill()
+
+          if (nd.heat > 0.05) {
+            c.beginPath(); c.arc(nd.x, nd.y, halo + 4, 0, 6.2832)
+            c.strokeStyle = col; c.globalAlpha = nd.heat * 0.5; c.lineWidth = 1
+            c.stroke(); c.globalAlpha = 1
+          }
+
+          c.beginPath(); c.arc(nd.x, nd.y, r, 0, 6.2832)
+          c.fillStyle = col; c.fill()
+
+          if (nd.label && nd.r > 0.55) {
+            c.globalAlpha = (nd.r - 0.55) / 0.45
+            c.fillStyle = 'rgba(226,219,204,0.92)'
+            c.fillText(nd.label, nd.x + 13, nd.y - 1)
+            if (nd.state !== 'idle') {
+              c.fillStyle = nd.state === 'broken' ? 'rgba(224,102,60,0.95)' : 'rgba(95,168,127,0.9)'
+              c.font = '600 10px "Instrument Sans Variable", system-ui, sans-serif'
+              c.fillText(nd.state === 'broken' ? 'BREACHED' : 'HELD', nd.x + 13, nd.y + 13)
+              c.font = '500 12px "Instrument Sans Variable", system-ui, sans-serif'
+            }
+            c.globalAlpha = 1
+          }
+        }
       }
 
       for (const a of this.agents) {
         const ang = Math.atan2(a.vy, a.vx)
-        const s = this.ambient ? 3.1 : 4
+        const s = this.ambient ? 3.1 : 5.4
         c.save()
         c.translate(a.x, a.y)
         c.rotate(ang)
