@@ -29,6 +29,20 @@
       <a class="btn btn-primary" href="/contact">Book a scoping call</a>
       <a class="btn btn-ghost" href="#how-agents-fail">See how agents fail</a>
     </div>
+
+    <figure class="shot rise d5">
+      <img
+        src="/assets/shot-cortex.webp"
+        width="1800"
+        height="1125"
+        alt="The Bastion cortex: 18,158 items and 18,531 links across the attack library, classes and standards, engagement record, and recon."
+        fetchpriority="high"
+        decoding="async"
+      />
+      <figcaption class="muted tnum">
+        The corpus. 18,158 items, 18,531 links, 60 categories.
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -120,5 +134,26 @@
     flex-wrap: wrap;
     gap: 0.85rem;
     margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* the product sits on the cloud line, above the weather */
+  .shot {
+    margin: clamp(3rem, 7vw, 5.5rem) 0 0;
+  }
+
+  .shot img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--stone-line);
+    border-radius: 3px;
+    box-shadow:
+      0 1px 2px rgba(25, 23, 19, 0.04),
+      0 18px 48px -20px rgba(25, 23, 19, 0.28);
+  }
+
+  .shot figcaption {
+    margin-top: 0.9rem;
+    font-family: var(--mono);
+    font-size: 0.76rem;
   }
 </style>
