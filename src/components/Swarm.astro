@@ -105,17 +105,19 @@ const { mode = 'stage' } = Astro.props
       const small = this.w < 700
       // the ambient layer is a school and nothing else. no graph, no nodes.
       this.maxNodes = this.ambient ? 0 : small ? 6 : 11
-      const nAgents = this.ambient ? (small ? 4 : 6) : small ? 10 : 22
+      const nAgents = this.ambient ? (small ? 6 : 8) : small ? 10 : 22
 
       if (!this.ambient) for (let i = 0; i < 4; i++) this.spawnNode()
 
       // one slow heading the whole school shares, so it crosses the page
       this.heading = Math.random() * 6.2832
 
+      const hx = this.w * (0.25 + Math.random() * 0.5)
+      const hy = this.h * (0.25 + Math.random() * 0.5)
       for (let i = 0; i < nAgents; i++) {
         this.agents.push({
-          x: Math.random() * this.w,
-          y: Math.random() * this.h,
+          x: this.ambient ? hx + (Math.random() - 0.5) * 90 : Math.random() * this.w,
+          y: this.ambient ? hy + (Math.random() - 0.5) * 90 : Math.random() * this.h,
           vx: (Math.random() - 0.5) * 40,
           vy: (Math.random() - 0.5) * 40,
           target: (Math.random() * this.nodes.length) | 0,
@@ -171,18 +173,23 @@ const { mode = 'stage' } = Astro.props
           const b = A[j]
           const dx = b.x - a.x, dy = b.y - a.y
           const d2 = dx * dx + dy * dy
-          if (d2 > 9000 || d2 === 0) continue
+          if (d2 === 0) continue
+          if (!this.ambient && d2 > 9000) continue
           n++
           ax += b.vx; ay += b.vy
           cx += b.x; cy += b.y
-          if (d2 < 620) { sx -= dx / d2 * 900; sy -= dy / d2 * 900 }
+          const near = this.ambient ? 1500 : 620
+          const push = this.ambient ? 1500 : 900
+          if (d2 < near) { sx -= dx / d2 * push; sy -= dy / d2 * push }
         }
 
         if (n) {
-          a.vx += ((ax / n) - a.vx) * 0.6 * dt
-          a.vy += ((ay / n) - a.vy) * 0.6 * dt
-          a.vx += ((cx / n) - a.x) * 0.22 * dt
-          a.vy += ((cy / n) - a.y) * 0.22 * dt
+          const align = this.ambient ? 2.2 : 0.6
+          const cohere = this.ambient ? 1.5 : 0.22
+          a.vx += ((ax / n) - a.vx) * align * dt
+          a.vy += ((ay / n) - a.vy) * align * dt
+          a.vx += ((cx / n) - a.x) * cohere * dt
+          a.vy += ((cy / n) - a.y) * cohere * dt
         }
         a.vx += sx * dt
         a.vy += sy * dt
@@ -217,12 +224,7 @@ const { mode = 'stage' } = Astro.props
         a.y += a.vy * dt
 
         if (this.ambient) {
-          // pac-man. off one edge, back on the other.
-          const m = 40
-          if (a.x < -m) a.x = this.w + m
-          if (a.x > this.w + m) a.x = -m
-          if (a.y < -m) a.y = this.h + m
-          if (a.y > this.h + m) a.y = -m
+          // handled after the loop, as a group
         } else {
           const pad = 6
           if (a.x < pad) { a.x = pad; a.vx = Math.abs(a.vx) }
@@ -230,6 +232,19 @@ const { mode = 'stage' } = Astro.props
           if (a.y < pad) { a.y = pad; a.vy = Math.abs(a.vy) }
           if (a.y > this.h - pad) { a.y = this.h - pad; a.vy = -Math.abs(a.vy) }
         }
+      }
+
+      if (this.ambient) {
+        let mx = 0, my = 0
+        for (const a of A) { mx += a.x; my += a.y }
+        mx /= A.length; my /= A.length
+        const m = 90
+        let ox = 0, oy = 0
+        if (mx < -m) ox = this.w + 2 * m
+        else if (mx > this.w + m) ox = -(this.w + 2 * m)
+        if (my < -m) oy = this.h + 2 * m
+        else if (my > this.h + m) oy = -(this.h + 2 * m)
+        if (ox || oy) for (const a of A) { a.x += ox; a.y += oy }
       }
 
       for (const nd of this.nodes) {
