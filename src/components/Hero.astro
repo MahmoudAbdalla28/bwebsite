@@ -64,6 +64,7 @@
     isolation: isolate;
     overflow: hidden;
     padding-top: clamp(2.5rem, 5vw, 4.25rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
     text-align: center;
   }
 
@@ -156,16 +157,14 @@
   .stage {
     margin-top: clamp(2.25rem, 4.5vw, 3.25rem);
     padding-inline: var(--gutter);
-    max-height: 40vh;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .frame {
     max-width: 1080px;
     margin-inline: auto;
     border: 1px solid var(--stone-line);
-    border-bottom: 0;
-    border-radius: 8px 8px 0 0;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow:
       0 -1px 0 rgba(255, 255, 255, 0.7) inset,
@@ -178,7 +177,7 @@
     height: auto;
   }
 
-  .still {
+  .frame .still {
     display: none;
   }
 
@@ -186,14 +185,13 @@
     .reel {
       display: none;
     }
-    .still {
+    .frame .still {
       display: block;
     }
   }
 
   @media (max-width: 720px) {
     .stage {
-      max-height: 34vh;
     }
   }
 </style>

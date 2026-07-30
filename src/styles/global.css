@@ -1,5 +1,4 @@
 @import '@fontsource-variable/instrument-sans';
-@import '@fontsource-variable/geist-mono';
 
 /* ============================================================
    Bastion design system
@@ -33,7 +32,6 @@
      to swap the display face, change --display and add its fontsource import. */
   --display: 'Instrument Sans Variable', -apple-system, BlinkMacSystemFont, sans-serif;
   --sans: 'Instrument Sans Variable', -apple-system, BlinkMacSystemFont, sans-serif;
-  --mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* measure */
   --page: 1180px;
