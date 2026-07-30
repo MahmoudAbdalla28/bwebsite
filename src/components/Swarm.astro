@@ -278,12 +278,7 @@ const { mode = 'stage' } = Astro.props
           for (const a of A) if (Math.hypot(a.x - nd.x, a.y - nd.y) < 46) near++
           const want = near > 0 ? 1 : 0
           nd.heat += (want - nd.heat) * dt * 2.2
-          if (near > 0) {
-            nd.work += dt * near
-            if (nd.state === 'idle' && nd.work > 3.2) {
-              nd.state = Math.random() < 0.38 ? 'broken' : 'held'
-            }
-          }
+          if (near > 0) nd.work += dt * near
         }
         for (const a of A) {
           a.trail.push(a.x, a.y)
@@ -325,14 +320,13 @@ const { mode = 'stage' } = Astro.props
         c.font = '500 12px "Instrument Sans Variable", system-ui, sans-serif'
         c.textBaseline = 'middle'
         for (const nd of this.nodes) {
-          const col = nd.state === 'broken' ? '#e0663c' : nd.state === 'held' ? '#5fa87f' : GOLD
+          const col = GOLD
           const r = 4 * nd.r
 
           // halo grows while the swarm is working it
           const halo = 8 + nd.heat * 16
           c.beginPath(); c.arc(nd.x, nd.y, halo, 0, 6.2832)
-          c.fillStyle = nd.state === 'broken' ? 'rgba(224,102,60,0.16)'
-            : nd.state === 'held' ? 'rgba(95,168,127,0.13)' : 'rgba(209,160,73,0.13)'
+          c.fillStyle = 'rgba(209,160,73,0.13)'
           c.fill()
 
           if (nd.heat > 0.05) {
@@ -347,13 +341,7 @@ const { mode = 'stage' } = Astro.props
           if (nd.label && nd.r > 0.55) {
             c.globalAlpha = (nd.r - 0.55) / 0.45
             c.fillStyle = 'rgba(226,219,204,0.92)'
-            c.fillText(nd.label, nd.x + 13, nd.y - 1)
-            if (nd.state !== 'idle') {
-              c.fillStyle = nd.state === 'broken' ? 'rgba(224,102,60,0.95)' : 'rgba(95,168,127,0.9)'
-              c.font = '600 10px "Instrument Sans Variable", system-ui, sans-serif'
-              c.fillText(nd.state === 'broken' ? 'BREACHED' : 'HELD', nd.x + 13, nd.y + 13)
-              c.font = '500 12px "Instrument Sans Variable", system-ui, sans-serif'
-            }
+            c.fillText(nd.label, nd.x + 13, nd.y)
             c.globalAlpha = 1
           }
         }
