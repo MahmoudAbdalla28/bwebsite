@@ -1,0 +1,81 @@
+---
+const year = new Date().getFullYear()
+---
+
+<footer>
+  <div class="page">
+    <hr class="rule top" />
+    <div class="rows">
+      <div class="brand">
+        <span class="word">Bastion</span>
+        <p class="muted">
+          Independent adversarial testing for AI agents.
+        </p>
+      </div>
+
+      <nav aria-label="Footer">
+        <a href="/#how-agents-fail">How agents fail</a>
+        <a href="/#evidence">The report</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+
+    <p class="legal muted">
+      &copy; {year} Bastion. Third-party marks are the property of their
+      respective owners.
+    </p>
+  </div>
+</footer>
+
+<style>
+  footer {
+    padding-block: clamp(3rem, 6vw, 4.5rem) 3rem;
+    background: var(--bone);
+  }
+
+  .top {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    background: linear-gradient(to right, var(--stone-line), transparent 60%);
+  }
+
+  .rows {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  .word {
+    font-family: var(--display);
+    font-variation-settings: 'opsz' 30;
+    font-size: 1.2rem;
+  }
+
+  .brand p {
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+    max-width: 34ch;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.6rem;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--gold-text);
+  }
+
+  .legal {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: 0.8rem;
+  }
+</style>

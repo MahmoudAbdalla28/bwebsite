@@ -1,0 +1,136 @@
+---
+import Base from '../layouts/Base.astro'
+---
+
+<Base
+  title="Book a scoping call — Bastion"
+  description="Tell us what you are shipping and we will scope an adversarial engagement against it."
+>
+  <section class="section">
+    <div class="page wrap">
+      <div class="intro">
+        <p class="label">Book a scoping call</p>
+        <h1>Tell us what you are shipping.</h1>
+        <p class="lede">
+          We will come back with what we would attack, how long it takes, and
+          what the report will contain.
+        </p>
+      </div>
+
+      <form
+        class="form"
+        action="https://formsubmit.co/team@trybastion.ai"
+        method="POST"
+      >
+        <input type="hidden" name="_subject" value="Bastion scoping call request" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://trybastion.ai/thanks" />
+        <input
+          type="text"
+          name="_honey"
+          style="display:none"
+          tabindex="-1"
+          autocomplete="off"
+        />
+
+        <label>
+          <span>Name</span>
+          <input type="text" name="name" required autocomplete="name" />
+        </label>
+
+        <label>
+          <span>Work email</span>
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+
+        <label>
+          <span>Company</span>
+          <input type="text" name="company" autocomplete="organization" />
+        </label>
+
+        <label>
+          <span>What are you shipping?</span>
+          <textarea
+            name="agent"
+            rows="4"
+            placeholder="What the agent does, what it can reach, who uses it."></textarea>
+        </label>
+
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.25rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 1.3rem + 2.6vw, 3.1rem);
+    margin-block: 1.1rem 1.4rem;
+    max-width: 14ch;
+  }
+
+  .form {
+    display: grid;
+    gap: 1.15rem;
+    background: var(--bone-lift);
+    border: 1px solid var(--stone-line);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  label {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  label span {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  input,
+  textarea {
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--bone);
+    border: 1px solid var(--stone-line);
+    border-radius: 2px;
+    padding: 0.7rem 0.8rem;
+    width: 100%;
+    transition: border-color 150ms ease;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: var(--gold);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  button {
+    justify-self: start;
+    cursor: pointer;
+    font-family: var(--sans);
+    margin-top: 0.35rem;
+  }
+
+  @media (max-width: 860px) {
+    .wrap {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

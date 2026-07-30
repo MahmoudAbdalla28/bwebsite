@@ -1,94 +1,98 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for working in this repo.
 
-## Project Overview
+## What this is
 
-Bastion Blue — marketing site (landing page + funnel + CTA) for an AI agent security proxy. The product is an on-prem Rust binary that sits between AI agents and their LLM API calls, running security checks (PII scanning, tool call validation, rate anomaly detection) and generating insurance-grade telemetry reports for carriers to price AI liability coverage.
+The Bastion marketing site. Rewritten from scratch 2026-07-30, replacing the previous
+Next.js site (which was built around a different product and a different positioning).
 
-**One-liner:** "Turning blackbox AI systems into glassbox with quantifiable managed risks."
+Full spec: `bastion-red/docs/SITE-SPEC.md`. Research behind it: `bastion-red/docs/WEBSITE-RESEARCH.md`.
+Read the spec before changing copy or structure.
 
-**Commercial model:** Sold through insurance broker (AON). Broker tells enterprise client to route agents through Bastion Blue for 30 days → generates underwriting telemetry → carrier prices the policy → premium drops → everyone wins.
+## Positioning, the why behind everything
 
-## Tech Stack
+**We sell knowledge, not capability.**
 
-- **Framework:** Next.js 14+ (App Router)
-- **Styling:** Tailwind CSS + shadcn/ui
-- **Language:** TypeScript
-- **Icons:** Lucide React (no emojis as icons)
-- **Font:** Plus Jakarta Sans (heading + body) — [Google Fonts link](https://fonts.google.com/share?selection.family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400)
+Competitors sell "we are the best attacker, rent our tool." We sell the independent, compounding,
+cross-customer dataset of how AI agents fail. Same activity, different product. They are a capability
+company. We are the independent data and assurance layer.
 
-## Build & Dev Commands
+Every section reinforces accumulated expertise and a compounding dataset, not a scanner. Capability
+appears only as proof, because it is what earned the knowledge.
+
+The framing that carries it: the failure knowledge you cannot build in-house, because you have only
+seen your own agents.
+
+## Hard rules
+
+1. **No size superlatives.** Never "largest dataset" or anything checkable like it. Claim
+   independent, compounding, cross-customer.
+2. **No live-fire self-serve.** Nothing that tests real production systems or collects poolable
+   customer data. Legal framework pending. Self-serve v1 is signup, sample report, sandbox only.
+3. **Technical writeups are stripped.** No live or undisclosed exploits, no CVEs, no working
+   payloads, no named targets. Failure patterns only. Borderline goes to Nick first.
+4. **Never publish a number that is not verified.** Proof-band figures are checked against the
+   cortex graph and recorded in `src/data/dataset.ts` with the date. Re-verify before changing.
+5. **Copy: no em dashes. No AI tells.** Flat, plain, specific. Numbers over adjectives.
+6. **State the fact, do not explain it.** No line telling the reader why something is impressive or
+   what a term means. If a claim needs a sentence of setup, it is the wrong claim.
+7. **Nick finalizes hero copy.** Do not ship invented headline wording.
+
+## Stack
+
+Astro 5, hand-written CSS, TypeScript. No UI framework, no CSS framework, no client JS.
 
 ```bash
-npm run dev        # Local dev server (localhost:3000)
-npm run build      # Production build
-npm run lint       # Lint check
+npm install
+npm run dev       # localhost:4321
+npm run build     # -> dist/
+npm run preview
 ```
 
-## Design System
+Deploy is Vercel. `vercel.json` pins framework, build command and output dir, so it does not depend
+on dashboard settings. Pushing `staging` deploys to staging.trybastion.ai.
 
-### Visual Direction
+## Performance rules
 
-Inspired by **Cisco (enterprise security credibility) + Lakera (modern AI security aesthetic)**. The site should feel like enterprise defense infrastructure — not a startup landing page.
+The previous site shipped three.js, a react-force-graph physics simulation, four canvas rAF loops,
+lottie and three icon packs. It visibly janked on Macs. That is the thing this rebuild exists to not
+repeat.
 
-- **Style:** Bento Box Grid layout — modular cards, asymmetric grid, varied sizes, clean hierarchy
-- **Tone:** Professional, authoritative, enterprise-grade. Insurance/security buyers, not developers.
-- **Dark mode primary** with blue accent palette
+- **Ship zero client JS** unless a feature genuinely needs it, and then only as one island.
+- **Banned:** three.js, react-force-graph, lottie, Aceternity canvas components, smooth-scroll
+  libraries, more than one icon set.
+- **Animate only `transform` and `opacity`.** Never anything that triggers layout.
+- **No scroll-linked JS, and no scroll-triggered reveals.** Content must never depend on an
+  animation to be visible. A scroll-driven `both`-filled animation renders the page blank when the
+  timeline fails to resolve. This already happened once here.
+- **Delete dead sections, do not hide them.** Hidden-but-mounted components still cost.
+- One orchestrated page-load reveal in the hero. That is the whole motion budget.
+- Grain is a static SVG turbulence data URI, computed once. Never a filtered live element.
 
-### Color Palette
+Current build: 0 JS files, ~6KB gzipped HTML, 5 woff2.
 
-| Role | Hex | Usage |
-|------|-----|-------|
-| Primary | `#2563EB` | Brand blue, primary actions |
-| Secondary | `#3B82F6` | Supporting blue |
-| CTA | `#F97316` | Call-to-action buttons, conversion points |
-| Background | `#0F172A` | Dark mode base (slate-900) |
-| Surface | `#1E293B` | Cards, elevated surfaces (slate-800) |
-| Text | `#F8FAFC` | Primary text on dark (slate-50) |
+## Design system
 
-### Key Effects
+Light. Bone, gold, slate. Every other vendor in this category is dark, which is the point.
+All tokens in `src/styles/global.css`.
 
-- `rounded-xl` (16px border radius)
-- Subtle shadows on cards
-- Hover scale (1.02) with smooth transitions (150-300ms)
-- Glass/blur effects for layered defense visualization
+Type is Fraunces Variable for display and Schibsted Grotesk Variable for body, both self-hosted
+through fontsource. Do not apply `font-variant-numeric: tabular-nums` to body text, it widens the
+comma and period to a full numeral advance. Use the `.tnum` class on figures only.
 
-## Site Architecture & Funnel
+## Structure
 
-### Page Structure (Single-page scroll)
+Built (core): hero, proof band, how agents fail, the report (Section A), contact.
+Not built yet: Section B and self-serve entry, then the insurance page and articles.
 
-1. **Hero** — Defense layer visualization. Show multiple layers checking against a knowledge graph. Interactive: clicking reveals a flowchart → output. Tagline conveys "glassbox not blackbox" without saying it literally.
-2. **Problem** — AI agents are deployed with zero visibility. Carriers are excluding AI from policies or pricing at 400%+ premiums. No actuarial data exists.
-3. **Solution** — Visual of the proxy intercepting, scanning, logging. Two modes: Monitor (learn baseline) → Enforce (block/redact). On-prem, single binary, zero data leaves.
-4. **Buyer Paths** — Three persona cards (Blocked CTO / Efficiency MD / Chief Risk Officer). Each with their pain point and how Bastion resolves it. Path selection ("I am a...") pattern.
-5. **Credibility** — Client logos, insurance partnership signals. Trust blue palette.
-6. **CTA** — Demo request or contact form. Primary: "Contact Sales". Secondary: "See Demo".
+Nav only links to pages that exist. No links to empty pages.
 
-### Content Rules
+## Numbers on the page
 
-- **Do NOT publicly list technical differentiators** (NeMo comparison, fleet correlation, Rust binary specifics). The user should FEEL the difference through the UX and visuals, not read a comparison table.
-- **Do NOT mention NeMo Guardrails** anywhere on the site. Bastion is built from scratch.
-- Show defense depth visually (layered intercepting animation) rather than describing it in text.
-- Use insurance/risk language, not developer language. "Quantified risk" not "API proxy."
+`src/data/dataset.ts` holds the published counts and the date they were verified. They come from the
+cortex graph at `localhost:6380` graph `bastion`, which is the source of truth. Not 6379, and not the
+WSL node. Both of those hold stale partial copies.
 
-## Related Codebases
-
-- **Rust proxy source:** `~/redteam/crates/bastion-proxy/`
-- **Existing React dashboard:** `~/redteam/demos/bastion-blue/` (deployed at demo.pistonsolutions.ai/bastion-blue)
-- **Obsidian vault:** bastion-vault (product docs, buyer profiles, metrics, gaps analysis)
-- **Bastion Red (offensive probe):** `~/redteam/demos/bastion-demo/`
-
-## MCP Integrations
-
-- **21st.dev Magic MCP** — `/ui` command for production-grade React components from curated library
-- **Google Stitch MCP** — full-screen design generation from text prompts (not yet configured)
-- **UI/UX Pro Max skill** — design intelligence for style, color, typography, UX rules. Run searches via:
-  ```bash
-  python3 ~/.claude/plugins/cache/ui-ux-pro-max-skill/ui-ux-pro-max/2.0.1/.claude/skills/ui-ux-pro-max/scripts/search.py "<query>" --domain <domain>
-  ```
-
-## Key People
-
-- **Luyun** — CEO. Handles AON sales relationship.
-- **Nicho** — CTO. Builds the tech. Primary user of this repo.
+Deliberately not published: total node count and technique count, both of which are substantially
+ingested public data and cannot carry the "generated by our own attacks" line.

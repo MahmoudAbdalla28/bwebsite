@@ -1,0 +1,102 @@
+---
+// Only pages that exist. /insurance and /articles join the nav when they ship
+// (build sequence steps 2 and 3). No links to empty pages.
+const links = [
+  { href: '/#how-agents-fail', label: 'How agents fail' },
+  { href: '/#evidence', label: 'The report' },
+]
+---
+
+<header>
+  <div class="page bar">
+    <a class="mark" href="/">
+      <span class="glyph" aria-hidden="true"></span>
+      <span class="word">Bastion</span>
+    </a>
+
+    <nav aria-label="Primary">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <a class="btn btn-ghost cta" href="/contact">Book a scoping call</a>
+  </div>
+  <hr class="hairline" />
+</header>
+
+<style>
+  header {
+    background: var(--bone);
+    position: relative;
+    z-index: 10;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 4vw, 3rem);
+    padding-block: 1.35rem;
+  }
+
+  .mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    margin-right: auto;
+  }
+
+  /* the glyph is a keystone, the smallest possible nod to the citadel */
+  .glyph {
+    width: 13px;
+    height: 15px;
+    background: var(--gold);
+    clip-path: polygon(22% 0, 78% 0, 100% 100%, 0 100%);
+  }
+
+  .word {
+    font-family: var(--display);
+    font-variation-settings: 'opsz' 30;
+    font-size: 1.3rem;
+    letter-spacing: -0.015em;
+  }
+
+  nav {
+    display: flex;
+    gap: clamp(1rem, 2.4vw, 2.1rem);
+  }
+
+  nav a {
+    font-size: 0.925rem;
+    text-decoration: none;
+    color: var(--ink-2);
+    transition: color 150ms ease;
+  }
+
+  nav a:hover {
+    color: var(--gold-text);
+  }
+
+  .cta {
+    padding: 0.6rem 1.05rem;
+    font-size: 0.875rem;
+  }
+
+  .hairline {
+    height: 1px;
+    border: 0;
+    margin: 0;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--stone-line) 15%,
+      var(--stone-line) 85%,
+      transparent
+    );
+  }
+
+  @media (max-width: 860px) {
+    nav {
+      display: none;
+    }
+  }
+</style>

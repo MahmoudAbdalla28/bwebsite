@@ -1,0 +1,101 @@
+---
+const proof = [
+  {
+    value: '#5',
+    scale: 'of 10,000+',
+    label: "Lakera's Agent Breaker leaderboard",
+    note: '~4,000 points',
+  },
+  {
+    value: '0.943',
+    scale: 'attack success rate',
+    label: 'AgentHarm, official test split',
+    note: 'n = 176, harm score 0.878',
+  },
+  {
+    value: 'Production systems',
+    scale: 'vulnerabilities disclosed',
+    label: "Two of the world's largest technology companies",
+    note: 'Through their disclosure programs',
+  },
+]
+---
+
+<section class="band">
+  <div class="page grid">
+    {
+      proof.map((p) => (
+        <article class="stat">
+          <p class="value tnum">
+            {p.value}
+            <span class="scale">{p.scale}</span>
+          </p>
+          <hr class="rule" />
+          <p class="label">{p.label}</p>
+          <p class="note muted tnum">{p.note}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .band {
+    background: var(--bone-lift);
+    border-block: 1px solid var(--stone-line);
+    padding-block: clamp(2.75rem, 5vw, 4.25rem);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.75rem, 4vw, 3.5rem);
+  }
+
+  .stat {
+    display: grid;
+    gap: 0.7rem;
+    align-content: start;
+  }
+
+  .value {
+    font-family: var(--display);
+    font-variation-settings: 'opsz' 60, 'SOFT' 0, 'WONK' 0;
+    font-size: clamp(2.35rem, 1.6rem + 2.6vw, 3.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .scale {
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.35;
+    color: var(--muted);
+  }
+
+  .note {
+    font-size: 0.83rem;
+    font-family: var(--mono);
+    letter-spacing: -0.01em;
+  }
+
+  /* the third item is a phrase, not a numeral, so it sizes down to sit level */
+  .stat:last-child .value {
+    font-size: clamp(1.6rem, 1.2rem + 1.3vw, 2.2rem);
+    font-style: italic;
+    font-variation-settings: 'opsz' 30, 'SOFT' 20;
+  }
+
+  @media (max-width: 820px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 2.25rem;
+    }
+  }
+</style>

@@ -1,0 +1,127 @@
+---
+// Headline is built to Nick's direction and is pending his final wording.
+---
+
+<section class="hero">
+  <div class="sky" aria-hidden="true"></div>
+  <div class="cloudline" aria-hidden="true"></div>
+
+  <div class="page inner">
+    <p class="label rise d1">Independent adversarial testing for AI agents</p>
+
+    <h1 class="rise d2">
+      We know how AI agents fail.<br />
+      <span class="turn">So you can trust the ones you ship.</span>
+    </h1>
+
+    <div class="body rise d3">
+      <p class="lede">
+        We run adversarial attacks against live agents, across security and
+        reliability, and turn every finding into an independent, compounding
+        dataset of how agents fail.
+      </p>
+      <p class="counter">
+        You have only seen your own agents break. We have seen everyone's.
+      </p>
+    </div>
+
+    <div class="actions rise d4">
+      <a class="btn btn-primary" href="/contact">Book a scoping call</a>
+      <a class="btn btn-ghost" href="#how-agents-fail">See how agents fail</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3rem, 6vw, 5.5rem) clamp(4.5rem, 10vw, 8rem);
+    isolation: isolate;
+  }
+
+  /* light source, upper right, the way it falls in the reference */
+  .sky {
+    position: absolute;
+    inset: -30% -10% auto -10%;
+    height: 150%;
+    z-index: -2;
+    background:
+      radial-gradient(
+        62% 48% at 82% 6%,
+        rgba(255, 249, 232, 0.95) 0%,
+        rgba(252, 240, 214, 0.6) 34%,
+        rgba(246, 241, 232, 0) 68%
+      ),
+      radial-gradient(
+        40% 34% at 88% 0%,
+        rgba(231, 183, 96, 0.28) 0%,
+        rgba(231, 183, 96, 0) 70%
+      ),
+      radial-gradient(
+        70% 60% at 8% 100%,
+        rgba(206, 196, 178, 0.3) 0%,
+        rgba(246, 241, 232, 0) 62%
+      );
+  }
+
+  /* the cloud line. everything above it is above the weather */
+  .cloudline {
+    position: absolute;
+    left: -5%;
+    right: -5%;
+    bottom: -1px;
+    height: 46%;
+    z-index: -1;
+    background: linear-gradient(
+      to top,
+      var(--bone) 0%,
+      rgba(252, 249, 243, 0.92) 26%,
+      rgba(252, 249, 243, 0.5) 55%,
+      rgba(252, 249, 243, 0) 100%
+    );
+  }
+
+  .inner {
+    position: relative;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 1.4rem + 4.1vw, 4.2rem);
+    margin-block: 1.25rem 0;
+    max-width: 20ch;
+  }
+
+  /* its own block so the balancer works on this sentence alone,
+     otherwise "ship." dangles on a line by itself */
+  .turn {
+    display: block;
+    text-wrap: balance;
+    color: var(--ink-2);
+    font-variation-settings: 'SOFT' 24, 'WONK' 1, 'opsz' 84;
+  }
+
+  .body {
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  .counter {
+    font-family: var(--display);
+    font-variation-settings: 'opsz' 20, 'SOFT' 10;
+    font-size: clamp(1.05rem, 1rem + 0.35vw, 1.28rem);
+    font-style: italic;
+    color: var(--gold-text);
+    max-width: 46ch;
+    padding-left: 1.1rem;
+    border-left: 2px solid var(--gold);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+</style>

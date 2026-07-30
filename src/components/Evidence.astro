@@ -1,0 +1,114 @@
+---
+const contents = [
+  'Reproducible findings, each with the transcript that produced it',
+  'Severity and business impact, not a scanner dump',
+  'Mapped to OWASP LLM Top 10, OWASP Agentic, MITRE ATLAS, NIST AI RMF and ISO 42001',
+  'Coverage dates, so the reviewer knows what was tested and when',
+  'Re-run on every deployment, so the evidence does not go stale',
+]
+---
+
+<section class="section" id="evidence">
+  <div class="page split">
+    <div class="pitch">
+      <p class="label">For teams shipping AI into enterprises</p>
+
+      <h2>
+        Your enterprise customers will make you prove your agent is safe.
+      </h2>
+
+      <p class="lede">
+        We produce the evidence that clears their review. Written to be read by
+        your customer's security reviewer, not by us.
+      </p>
+
+      <a class="btn btn-primary" href="/contact">Book a scoping call</a>
+    </div>
+
+    <aside class="doc" aria-label="What the report contains">
+      <p class="doc-head">The report</p>
+      <hr class="rule" />
+      <ul>
+        {contents.map((c) => <li>{c}</li>)}
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .split {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2.25rem, 6vw, 5.5rem);
+    align-items: start;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 1.15rem + 2.2vw, 2.8rem);
+    margin-block: 1.1rem 1.5rem;
+    max-width: 18ch;
+  }
+
+  .pitch .btn {
+    margin-top: 2rem;
+  }
+
+  .doc {
+    background: var(--bone-lift);
+    border: 1px solid var(--stone-line);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    position: relative;
+  }
+
+  /* a thin gold edge, the only ornament this panel gets */
+  .doc::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background: var(--gold);
+  }
+
+  .doc-head {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 0.9rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 1.4rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  li {
+    font-size: 0.965rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.58em;
+    width: 8px;
+    height: 8px;
+    border: 1px solid var(--gold);
+    transform: rotate(45deg);
+  }
+
+  @media (max-width: 860px) {
+    .split {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
