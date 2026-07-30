@@ -1,198 +1,216 @@
 ---
-// A prism you can grab. Drag it and the refraction angle changes, the spectrum
-// sweeps, and different failure classes light up. Real counts on every band.
-import { families } from '../data/taxonomy'
-const bands = families.slice(0, 9)
+// Twelve faces, one mechanism each. Drag it in any direction. Click a face and
+// it tells you the part of that mechanism that is not obvious.
+import { mechanisms } from '../data/mechanisms'
 ---
 
-<figure class="prism">
-  <div class="frame">
+<div class="solid">
+  <div class="stage">
     <canvas></canvas>
-    <p class="hint"><span>drag the prism</span></p>
   </div>
-  <figcaption>
-    Every run goes in as one beam. What comes out the other side is separated,
-    named, and counted. Turn it and see what else is in there.
-  </figcaption>
-</figure>
 
-<script is:inline define:vars={{ bands }}>
+  <aside class="read">
+    <p class="face" data-face></p>
+    <h3 data-title></h3>
+    <p class="line" data-line></p>
+    <a class="cite" data-cite href="#" target="_blank" rel="noopener noreferrer"></a>
+  </aside>
+</div>
+
+<script is:inline define:vars={{ mechanisms }}>
   ;(() => {
     const root = document.currentScript.previousElementSibling
     const cv = root.querySelector('canvas')
     const ctx = cv.getContext('2d')
-    const COL = ['#f4cd78', '#e0a941', '#c8a94d', '#9fae63', '#6fae90', '#4f93c4', '#3f8fe8', '#7bbef5', '#a9d7f8']
+    const el = {
+      face: root.querySelector('[data-face]'),
+      title: root.querySelector('[data-title]'),
+      line: root.querySelector('[data-line]'),
+      cite: root.querySelector('[data-cite]'),
+    }
 
-    let W = 0, H = 0, yaw = -0.5, drag = null, spin = 0.16, t = 0, raf = 0, live = false
+    // dodecahedron. 20 vertices, and its 12 face centres are the dual's vertices
+    const P = (1 + Math.sqrt(5)) / 2
+    const ip = 1 / P
+    const V = []
+    for (const a of [-1, 1]) for (const b of [-1, 1]) for (const c of [-1, 1]) V.push([a, b, c])
+    for (const a of [-1, 1]) for (const b of [-1, 1]) {
+      V.push([0, a * ip, b * P]); V.push([a * ip, b * P, 0]); V.push([a * P, 0, b * ip])
+    }
+    // face normals. verified numerically: these are the only directions where
+    // exactly five vertices tie for the maximum projection. the other
+    // icosahedral orientation points at vertices, not faces.
+    const C = []
+    for (const a of [-1, 1]) for (const b of [-1, 1]) {
+      C.push([0, a * P, b]); C.push([a * P, b, 0]); C.push([b, 0, a * P])
+    }
+
+    const len = (v) => Math.hypot(v[0], v[1], v[2])
+    const norm = (v) => { const l = len(v); return [v[0] / l, v[1] / l, v[2] / l] }
+    const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]]
+    const cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]]
+    const dot = (a, b) => a[0]*b[0] + a[1]*b[1] + a[2]*b[2]
+
+    // each face is the five vertices nearest its centre, wound around the normal
+    const FACES = C.map((c) => {
+      const n = norm(c)
+      // the five vertices of a face are the five with the largest projection
+      // onto that face's normal. distance-to-centre picks the wrong set.
+      const near = V.map((v, i) => ({ i, d: dot(v, n) }))
+        .sort((a, b) => b.d - a.d).slice(0, 5).map((o) => o.i)
+      // wind them by angle in the face plane. projecting onto that plane means
+      // removing the normal component, not subtracting the unit normal.
+      const planar = (v) => { const d = dot(v, n); return [v[0]-d*n[0], v[1]-d*n[1], v[2]-d*n[2]] }
+      const u = norm(planar(V[near[0]]))
+      const w = cross(n, u)
+      const ang = (j) => { const q = planar(V[j]); return Math.atan2(dot(q, w), dot(q, u)) }
+      near.sort((a, b) => ang(a) - ang(b))
+      return { idx: near, n }
+    })
+
+    let W = 0, H = 0, rx = -0.42, ry = 0.62, drag = null, sel = 0, proj = []
 
     const size = () => {
-      const r = root.querySelector('.frame').getBoundingClientRect()
+      const r = root.querySelector('.stage').getBoundingClientRect()
       const dpr = Math.min(devicePixelRatio || 1, 2)
       W = r.width; H = r.height
       cv.width = W * dpr; cv.height = H * dpr
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
 
-    // a real triangular prism, rotated about Y and projected
-    const project = (p) => {
-      const c = Math.cos(yaw), s = Math.sin(yaw)
-      const x = p[0] * c - p[2] * s
-      const z = p[0] * s + p[2] * c
-      const k = 620 / (620 + z)
-      return [W * 0.34 + x * k, H * 0.5 + p[1] * k, z]
-    }
-
-    const build = () => {
-      const a = 150 * Math.min(1.25, W / 760)
-      const d = a * 0.62
-      const tri = [[0, -a], [a * 0.92, a * 0.62], [-a * 0.92, a * 0.62]]
-      return {
-        front: tri.map((p) => [p[0], p[1], -d]),
-        back: tri.map((p) => [p[0], p[1], d]),
-      }
+    const rot = (p) => {
+      let [x, y, z] = p
+      let c = Math.cos(ry), s = Math.sin(ry)
+      const nx = x * c - z * s, nz = x * s + z * c
+      x = nx; z = nz
+      c = Math.cos(rx); s = Math.sin(rx)
+      const ny = y * c - z * s, nz2 = y * s + z * c
+      return [x, ny, nz2]
     }
 
     const draw = () => {
-      // R has to be computed per frame. as a module constant it was evaluated
-      // while W was still 0, which collapsed every font to 3px.
-      const R = Math.max(0.72, Math.min(1.15, W / 900))
+      if (!W) return
+      const R = Math.min(W, H) * 0.33
       ctx.clearRect(0, 0, W, H)
-      const g = build()
-      const F = g.front.map(project)
-      const B = g.back.map(project)
-
-      const cx = W * 0.26, cy = H * 0.5
-      const entry = [cx - 92, cy - 8]
-      const exit = [cx + 74, cy + 26]
-
-      // one beam in
-      const ig = ctx.createLinearGradient(0, 0, entry[0], 0)
-      ig.addColorStop(0, 'rgba(255,248,232,0.1)')
-      ig.addColorStop(1, 'rgba(255,253,246,1)')
-      ctx.strokeStyle = ig
-      ctx.lineWidth = 16; ctx.globalAlpha = 0.16
-      ctx.beginPath(); ctx.moveTo(0, cy - 18); ctx.lineTo(entry[0], entry[1]); ctx.stroke()
-      ctx.globalAlpha = 1; ctx.lineWidth = 3.5
-      ctx.beginPath(); ctx.moveTo(0, cy - 18); ctx.lineTo(entry[0], entry[1]); ctx.stroke()
-
-      // the fan. its spread and tilt follow the rotation, so turning the prism
-      // sweeps the spectrum and changes which classes are lit.
-      // the sweep has to stay inside the frame at every angle, or the labels
-      // walk off the canvas as you turn it
-      const tilt = Math.sin(yaw) * 0.14
-      const spread = 0.30 + Math.abs(Math.cos(yaw)) * 0.26
-      const far = W - 250 - exit[0]
-
-      bands.forEach((b, i) => {
-        const u = i / (bands.length - 1)
-        const ang = tilt + (-spread / 2 + spread * u)
-        const x2 = exit[0] + far
-        const pad = 34
-        let y2 = exit[1] + Math.tan(ang) * far
-        y2 = Math.max(pad, Math.min(H - pad, y2))
-        // alignment with the current sweep decides how lit a band is
-        const lit = Math.max(0.12, 1 - Math.abs(u - (0.5 + Math.sin(yaw + t * 0.25) * 0.42)) * 2.1)
-
-        const lg = ctx.createLinearGradient(exit[0], exit[1], x2, y2)
-        lg.addColorStop(0, COL[i] + 'ff')
-        lg.addColorStop(0.55, COL[i] + 'cc')
-        lg.addColorStop(1, COL[i] + '66')
-        ctx.strokeStyle = lg
-        ctx.lineWidth = (2 + (b.count / bands[0].count) * 9) * (0.4 + lit * 0.6)
-        ctx.globalAlpha = 0.2 + lit * 0.75
-        ctx.beginPath(); ctx.moveTo(exit[0], exit[1]); ctx.lineTo(x2, y2); ctx.stroke()
-
-        // the labels are the payload. they never dim below readable.
-        ctx.globalAlpha = 1
-        ctx.beginPath(); ctx.arc(x2, y2, 3.2, 0, 6.2832)
-        ctx.fillStyle = COL[i]; ctx.fill()
-
-        ctx.fillStyle = 'rgba(250,246,238,' + (0.72 + lit * 0.28) + ')'
-        ctx.font = '600 ' + (13 * R + 3) + 'px "Instrument Sans Variable", system-ui, sans-serif'
-        ctx.textBaseline = 'middle'
-        ctx.fillText(b.label.toLowerCase(), x2 + 15, y2 - 7)
-        ctx.fillStyle = COL[i]
-        ctx.font = '600 ' + (11 * R + 2) + 'px "Instrument Sans Variable", system-ui, sans-serif'
-        ctx.fillText(String(b.count), x2 + 15, y2 + 11)
+      const cx = W / 2, cy = H / 2
+      const pv = V.map((v) => {
+        const [x, y, z] = rot(v)
+        const k = 5.6 / (5.6 + z)
+        return [cx + x * R * k, cy + y * R * k, z]
       })
 
-      // the glass, drawn after the fan so it sits in front of it
-      const face = (p, fill, stroke) => {
+      proj = FACES.map((f, i) => {
+        const n = rot(f.n)
+        const pts = f.idx.map((j) => pv[j])
+        const depth = pts.reduce((s, p) => s + p[2], 0) / pts.length
+        return { i, pts, facing: -n[2], depth }
+      }).sort((a, b) => b.depth - a.depth)
+
+      for (const f of proj) {
+        const on = f.i === sel
+        const lit = Math.max(0, f.facing)
         ctx.beginPath()
-        ctx.moveTo(p[0][0], p[0][1])
-        for (let i = 1; i < p.length; i++) ctx.lineTo(p[i][0], p[i][1])
+        ctx.moveTo(f.pts[0][0], f.pts[0][1])
+        for (let k = 1; k < f.pts.length; k++) ctx.lineTo(f.pts[k][0], f.pts[k][1])
         ctx.closePath()
-        ctx.fillStyle = fill; ctx.fill()
-        ctx.strokeStyle = stroke; ctx.lineWidth = 1.4; ctx.stroke()
+
+        ctx.fillStyle = on
+          ? 'rgba(209,160,73,' + (0.1 + lit * 0.3) + ')'
+          : 'rgba(246,240,228,' + (0.015 + lit * 0.075) + ')'
+        ctx.fill()
+        ctx.strokeStyle = on
+          ? 'rgba(236,193,116,' + (0.4 + lit * 0.55) + ')'
+          : 'rgba(246,240,228,' + (0.09 + lit * 0.34) + ')'
+        ctx.lineWidth = on ? 1.9 : 1
+        ctx.stroke()
+
+        if (lit > 0.4) {
+          let mx = 0, my = 0
+          for (const p of f.pts) { mx += p[0]; my += p[1] }
+          mx /= f.pts.length; my /= f.pts.length
+          ctx.globalAlpha = Math.min(1, (lit - 0.4) / 0.28)
+          ctx.fillStyle = on ? '#f2d493' : 'rgba(240,235,222,0.82)'
+          ctx.font = '600 ' + Math.max(10, R * 0.052) + 'px "Instrument Sans Variable", system-ui, sans-serif'
+          ctx.textAlign = 'center'
+          ctx.textBaseline = 'middle'
+          const words = mechanisms[f.i].face.split(' ')
+          for (let k = 0; k < words.length; k++) {
+            ctx.fillText(words[k], mx, my + (k - (words.length - 1) / 2) * R * 0.066)
+          }
+          ctx.globalAlpha = 1
+          ctx.textAlign = 'left'
+        }
       }
+    }
 
-      for (let i = 0; i < 3; i++) {
-        const j = (i + 1) % 3
-        face([F[i], F[j], B[j], B[i]], 'rgba(250,244,230,0.07)', 'rgba(250,244,230,0.2)')
+    const show = () => {
+      const m = mechanisms[sel]
+      el.face.textContent = m.face
+      el.title.textContent = m.title
+      el.line.textContent = m.line
+      el.cite.textContent = m.cite + ' ↗'
+      el.cite.href = m.url
+    }
+
+    const inside = (pt, pts) => {
+      let c = false
+      for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+        if ((pts[i][1] > pt[1]) !== (pts[j][1] > pt[1]) &&
+          pt[0] < ((pts[j][0] - pts[i][0]) * (pt[1] - pts[i][1])) / (pts[j][1] - pts[i][1]) + pts[i][0]) c = !c
       }
-      face(B, 'rgba(250,244,230,0.05)', 'rgba(250,244,230,0.22)')
-      face(F, 'rgba(250,244,230,0.11)', 'rgba(253,248,236,0.62)')
-
-      // refracted segment inside the glass
-      ctx.strokeStyle = 'rgba(255,253,246,0.95)'
-      ctx.lineWidth = 2.6
-      ctx.beginPath(); ctx.moveTo(entry[0], entry[1]); ctx.lineTo(exit[0], exit[1]); ctx.stroke()
+      return c
     }
 
-    const frame = () => {
-      if (!live) return
-      t += 0.016
-      if (!drag) yaw += spin * 0.016
-      draw()
-      raf = requestAnimationFrame(frame)
-    }
-
-    const start = (e) => {
-      drag = { x: (e.touches ? e.touches[0] : e).clientX, yaw }
-      root.querySelector('.frame').classList.add('grabbing')
-    }
-    const move = (e) => {
+    const stage = root.querySelector('.stage')
+    stage.addEventListener('pointerdown', (e) => {
+      drag = { x: e.clientX, y: e.clientY, rx, ry, moved: 0 }
+      stage.setPointerCapture(e.pointerId)
+      stage.classList.add('grabbing')
+    })
+    stage.addEventListener('pointermove', (e) => {
       if (!drag) return
-      const x = (e.touches ? e.touches[0] : e).clientX
-      yaw = drag.yaw + (x - drag.x) * 0.009
-      if (e.cancelable) e.preventDefault()
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y
+      drag.moved = Math.max(drag.moved, Math.abs(dx) + Math.abs(dy))
+      ry = drag.ry + dx * 0.008
+      rx = drag.rx + dy * 0.008
+      draw()
+    })
+    const release = (e) => {
+      const wasDrag = drag && drag.moved > 6
+      drag = null
+      stage.classList.remove('grabbing')
+      if (wasDrag || !e) return
+      const r = stage.getBoundingClientRect()
+      const pt = [e.clientX - r.left, e.clientY - r.top]
+      for (let k = proj.length - 1; k >= 0; k--) {
+        if (proj[k].facing > 0 && inside(pt, proj[k].pts)) { sel = proj[k].i; show(); draw(); return }
+      }
     }
-    const end = () => { drag = null; root.querySelector('.frame').classList.remove('grabbing') }
-
-    const f = root.querySelector('.frame')
-    f.addEventListener('pointerdown', start)
-    addEventListener('pointermove', move, { passive: false })
-    addEventListener('pointerup', end)
+    stage.addEventListener('pointerup', release)
+    stage.addEventListener('pointercancel', () => release(null))
     addEventListener('resize', () => { size(); draw() }, { passive: true })
 
-    size()
-    new IntersectionObserver((es) => {
-      live = es[0].isIntersecting && !document.hidden
-      if (live) { raf = requestAnimationFrame(frame) } else cancelAnimationFrame(raf)
-    }).observe(root)
-    document.addEventListener('visibilitychange', () => {
-      live = !document.hidden
-      if (live) raf = requestAnimationFrame(frame)
-    })
-    draw()
+    size(); show(); draw()
   })()
 </script>
 
 <style>
-  .prism {
-    margin: 0;
+  .solid {
+    display: grid;
+    grid-template-columns: 1.02fr 0.98fr;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: center;
   }
 
-  .frame {
+  .stage {
     position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 7.4;
-    min-height: 340px;
+    aspect-ratio: 1 / 0.88;
+    min-height: 360px;
     cursor: grab;
-    touch-action: pan-y;
+    touch-action: none;
   }
 
-  .frame.grabbing {
+  .stage.grabbing {
     cursor: grabbing;
   }
 
@@ -202,30 +220,52 @@ const bands = families.slice(0, 9)
     height: 100%;
   }
 
-  .hint {
-    position: absolute;
-    left: 0;
-    bottom: 4%;
-    pointer-events: none;
+  .read {
+    border-left: 1px solid var(--stone-line);
+    padding-left: clamp(1.25rem, 2.5vw, 2rem);
   }
 
-  .hint span {
+  .face {
     font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ink);
-    border: 1px solid var(--stone-line);
-    border-radius: 999px;
-    padding: 0.4rem 0.85rem;
-    background: rgba(26, 25, 21, 0.8);
+    color: var(--gold-text);
   }
 
-  figcaption {
-    margin-top: 1.1rem;
-    font-size: 0.95rem;
-    line-height: 1.55;
+  h3 {
+    font-size: clamp(1.3rem, 1.05rem + 1.1vw, 1.95rem);
+    margin-block: 0.75rem 0.9rem;
+    max-width: 22ch;
+  }
+
+  .line {
+    font-size: 1rem;
+    line-height: 1.65;
     color: var(--ink-2);
-    max-width: 56ch;
+    max-width: 48ch;
+  }
+
+  .cite {
+    display: inline-block;
+    margin-top: 1.1rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .cite:hover {
+    color: var(--gold-text);
+  }
+
+  @media (max-width: 900px) {
+    .solid {
+      grid-template-columns: 1fr;
+    }
+    .read {
+      border-left: 0;
+      border-top: 1px solid var(--stone-line);
+      padding: 1.25rem 0 0;
+    }
   }
 </style>
