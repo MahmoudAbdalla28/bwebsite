@@ -103,10 +103,14 @@ const { mode = 'stage' } = Astro.props
 
     seed() {
       const small = this.w < 700
-      this.maxNodes = this.ambient ? (small ? 5 : 9) : small ? 6 : 11
-      const nAgents = this.ambient ? (small ? 7 : 14) : small ? 10 : 22
+      // the ambient layer is a school and nothing else. no graph, no nodes.
+      this.maxNodes = this.ambient ? 0 : small ? 6 : 11
+      const nAgents = this.ambient ? (small ? 4 : 6) : small ? 10 : 22
 
-      for (let i = 0; i < (this.ambient ? 3 : 4); i++) this.spawnNode()
+      if (!this.ambient) for (let i = 0; i < 4; i++) this.spawnNode()
+
+      // one slow heading the whole school shares, so it crosses the page
+      this.heading = Math.random() * 6.2832
 
       for (let i = 0; i < nAgents; i++) {
         this.agents.push({
@@ -136,13 +140,18 @@ const { mode = 'stage' } = Astro.props
       if (!this.running) return
       let dt = (now - this.last) / 1000
       this.last = now
+      // a queued rAF from before a pause can fire with a stale timestamp,
+      // which makes dt negative and walks the clock backwards
+      if (!(dt > 0)) dt = 0
       if (dt > 0.05) dt = 0.05
       this.t += dt
 
-      // the surface keeps opening up
+      // the surface keeps opening up (stage only)
       if (this.nodes.length < this.maxNodes && Math.random() < dt * 0.22) {
         this.spawnNode()
       }
+      // the school's heading drifts slowly, so it wanders across and back
+      if (this.ambient) this.heading += (Math.random() - 0.5) * dt * 0.55
 
       this.step(dt)
       this.draw()
@@ -178,8 +187,14 @@ const { mode = 'stage' } = Astro.props
         a.vx += sx * dt
         a.vy += sy * dt
 
+        if (this.ambient) {
+          // no target to seek. just swim, together, in the shared heading.
+          a.vx += Math.cos(this.heading) * 26 * dt
+          a.vy += Math.sin(this.heading) * 26 * dt
+        }
+
         // work a node, then go find another. this is the exploring part.
-        const node = this.nodes[a.target % this.nodes.length]
+        const node = this.ambient ? null : this.nodes[a.target % this.nodes.length]
         if (node) {
           const dx = node.x - a.x, dy = node.y - a.y
           const d = Math.hypot(dx, dy) || 1
@@ -201,16 +216,25 @@ const { mode = 'stage' } = Astro.props
         a.x += a.vx * dt
         a.y += a.vy * dt
 
-        const pad = 6
-        if (a.x < pad) { a.x = pad; a.vx = Math.abs(a.vx) }
-        if (a.x > this.w - pad) { a.x = this.w - pad; a.vx = -Math.abs(a.vx) }
-        if (a.y < pad) { a.y = pad; a.vy = Math.abs(a.vy) }
-        if (a.y > this.h - pad) { a.y = this.h - pad; a.vy = -Math.abs(a.vy) }
+        if (this.ambient) {
+          // pac-man. off one edge, back on the other.
+          const m = 40
+          if (a.x < -m) a.x = this.w + m
+          if (a.x > this.w + m) a.x = -m
+          if (a.y < -m) a.y = this.h + m
+          if (a.y > this.h + m) a.y = -m
+        } else {
+          const pad = 6
+          if (a.x < pad) { a.x = pad; a.vx = Math.abs(a.vx) }
+          if (a.x > this.w - pad) { a.x = this.w - pad; a.vx = -Math.abs(a.vx) }
+          if (a.y < pad) { a.y = pad; a.vy = Math.abs(a.vy) }
+          if (a.y > this.h - pad) { a.y = this.h - pad; a.vy = -Math.abs(a.vy) }
+        }
       }
 
       for (const nd of this.nodes) {
         const age = this.t - nd.born
-        nd.r = Math.min(1, age / 0.9)
+        nd.r = Math.max(0, Math.min(1, age / 0.9))
       }
     }
 
@@ -218,7 +242,8 @@ const { mode = 'stage' } = Astro.props
       const c = this.ctx
       c.clearRect(0, 0, this.w, this.h)
 
-      // the surface being mapped
+      // the surface being mapped. stage only, the ambient layer has no graph.
+      if (!this.ambient) {
       c.strokeStyle = STONE
       c.globalAlpha = this.ambient ? 0.28 : 0.42
       c.lineWidth = 1
@@ -241,6 +266,7 @@ const { mode = 'stage' } = Astro.props
         c.arc(nd.x, nd.y, r, 0, 6.2832)
         c.fillStyle = GOLD
         c.fill()
+      }
       }
 
       for (const a of this.agents) {
