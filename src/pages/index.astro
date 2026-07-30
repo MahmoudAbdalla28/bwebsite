@@ -17,7 +17,8 @@ import Pipeline from '../components/Pipeline.astro'
   <Hero />
   <section class="prism-band">
     <div class="page">
-      <p class="label">One beam in, every way it breaks out</p>
+      <p class="label">The corpus</p>
+      <h2 class="prism-h">One run goes in. Everything it can break comes out named</h2>
       <Prism />
     </div>
   </section>
@@ -31,8 +32,14 @@ import Pipeline from '../components/Pipeline.astro'
 
 <style>
   .prism-band {
-    padding-block: clamp(2.5rem, 5vw, 4.5rem);
+    padding-block: clamp(2.75rem, 5vw, 4.5rem);
     border-bottom: 1px solid var(--stone-line);
     overflow: hidden;
+  }
+
+  .prism-h {
+    font-size: clamp(1.5rem, 1.1rem + 1.7vw, 2.3rem);
+    max-width: 24ch;
+    margin-block: 1rem 1.75rem;
   }
 </style>

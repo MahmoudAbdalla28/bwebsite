@@ -1,197 +1,231 @@
 ---
-// Real dispersion geometry. The beam strikes the left face, bends inside the
-// glass, exits the right face, and opens into one continuous spectrum that
-// widens with distance. The bands are our failure classes, with real depth.
+// A prism you can grab. Drag it and the refraction angle changes, the spectrum
+// sweeps, and different failure classes light up. Real counts on every band.
 import { families } from '../data/taxonomy'
-
-const bands = families.slice(0, 7)
-
-// the glass
-const APEX = [452, 150]
-const BL = [352, 344]
-const BR = [552, 344]
-
-// where the beam meets it, and where it leaves
-const IN = [402, 247]
-const OUT = [512, 276]
-
-// the fan
-const FAR = 1044
-const TOP_Y = 232
-const BOT_Y = 556
-const step = (BOT_Y - TOP_Y) / bands.length
+const bands = families.slice(0, 9)
 ---
 
 <figure class="prism">
-  <svg
-    viewBox="0 0 1200 620"
-    role="img"
-    aria-label="A prism splitting one beam into the failure classes Bastion tracks"
-  >
-    <defs>
-      <linearGradient id="inbeam" x1="0" x2="1">
-        <stop offset="0" stop-color="#fff8e8" stop-opacity="0.05" />
-        <stop offset="1" stop-color="#fffdf6" stop-opacity="1" />
-      </linearGradient>
-
-      <!-- dispersion runs across the fan, not along it -->
-      <linearGradient
-        id="spectrum"
-        gradientUnits="userSpaceOnUse"
-        x1={FAR}
-        y1={TOP_Y}
-        x2={FAR}
-        y2={BOT_Y}
-      >
-        <stop offset="0" stop-color="#f0c268" />
-        <stop offset="0.17" stop-color="#d9a441" />
-        <stop offset="0.34" stop-color="#b6a557" />
-        <stop offset="0.5" stop-color="#7ba883" />
-        <stop offset="0.66" stop-color="#4f93c4" />
-        <stop offset="0.83" stop-color="#3f8fe8" />
-        <stop offset="1" stop-color="#9ad0f7" />
-      </linearGradient>
-
-      <linearGradient id="fade" gradientUnits="userSpaceOnUse" x1={OUT[0]} x2={FAR}>
-        <stop offset="0" stop-color="#fff" stop-opacity="0.95" />
-        <stop offset="0.55" stop-color="#fff" stop-opacity="0.55" />
-        <stop offset="1" stop-color="#fff" stop-opacity="0.16" />
-      </linearGradient>
-
-      <mask id="fanFade">
-        <polygon
-          points={`${OUT[0]},${OUT[1]} ${FAR},${TOP_Y} ${FAR},${BOT_Y}`}
-          fill="url(#fade)"
-        />
-      </mask>
-
-      <linearGradient id="glass" x1="0" y1="0" x2="0.6" y2="1">
-        <stop offset="0" stop-color="#fdf8ec" stop-opacity="0.22" />
-        <stop offset="0.5" stop-color="#fdf8ec" stop-opacity="0.06" />
-        <stop offset="1" stop-color="#fdf8ec" stop-opacity="0.14" />
-      </linearGradient>
-
-      <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
-        <feGaussianBlur stdDeviation="9" />
-      </filter>
-      <filter id="tight" x="-40%" y="-40%" width="180%" height="180%">
-        <feGaussianBlur stdDeviation="2.4" />
-      </filter>
-    </defs>
-
-    <g class="inb">
-      <line
-        x1="24" y1="232" x2={IN[0]} y2={IN[1]}
-        stroke="url(#inbeam)" stroke-width="20" filter="url(#soft)" opacity="0.5"
-      />
-      <line x1="24" y1="232" x2={IN[0]} y2={IN[1]} stroke="url(#inbeam)" stroke-width="4" />
-      <text x="24" y="212" class="inlbl">every run, every target</text>
-    </g>
-
-    <g class="fan" mask="url(#fanFade)">
-      <polygon
-        points={`${OUT[0]},${OUT[1]} ${FAR},${TOP_Y} ${FAR},${BOT_Y}`}
-        fill="url(#spectrum)" filter="url(#soft)" opacity="0.55"
-      />
-      <polygon
-        points={`${OUT[0]},${OUT[1]} ${FAR},${TOP_Y} ${FAR},${BOT_Y}`}
-        fill="url(#spectrum)" filter="url(#tight)" opacity="0.9"
-      />
-    </g>
-
-    <polygon
-      points={`${APEX[0]},${APEX[1]} ${BR[0]},${BR[1]} ${BL[0]},${BL[1]}`}
-      fill="url(#glass)"
-      stroke="rgba(253,248,236,0.5)"
-      stroke-width="1.5"
-      stroke-linejoin="round"
-    />
-    <line
-      x1={IN[0]} y1={IN[1]} x2={OUT[0]} y2={OUT[1]}
-      stroke="#fffdf6" stroke-width="3" opacity="0.95"
-    />
-    <circle cx={IN[0]} cy={IN[1]} r="26" fill="#fff3d4" opacity="0.16" filter="url(#soft)" />
-
-    {
-      bands.map((b, i) => {
-        const y = TOP_Y + step * (i + 0.5)
-        return (
-          <g class="lb" style={`--i:${i}`}>
-            <line
-              x1={FAR} y1={y} x2={FAR + 18} y2={y}
-              stroke="rgba(245,239,226,0.28)" stroke-width="1"
-            />
-            <text x={FAR + 28} y={y - 3} class="lbl">{b.label.toLowerCase()}</text>
-            <text x={FAR + 28} y={y + 14} class="cnt">{b.count}</text>
-          </g>
-        )
-      })
-    }
-  </svg>
+  <div class="frame">
+    <canvas></canvas>
+    <p class="hint"><span>drag the prism</span></p>
+  </div>
+  <figcaption>
+    Every run goes in as one beam. What comes out the other side is separated,
+    named, and counted. Turn it and see what else is in there.
+  </figcaption>
 </figure>
+
+<script is:inline define:vars={{ bands }}>
+  ;(() => {
+    const root = document.currentScript.previousElementSibling
+    const cv = root.querySelector('canvas')
+    const ctx = cv.getContext('2d')
+    const COL = ['#f4cd78', '#e0a941', '#c8a94d', '#9fae63', '#6fae90', '#4f93c4', '#3f8fe8', '#7bbef5', '#a9d7f8']
+
+    let W = 0, H = 0, yaw = -0.5, drag = null, spin = 0.16, t = 0, raf = 0, live = false
+
+    const size = () => {
+      const r = root.querySelector('.frame').getBoundingClientRect()
+      const dpr = Math.min(devicePixelRatio || 1, 2)
+      W = r.width; H = r.height
+      cv.width = W * dpr; cv.height = H * dpr
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    }
+
+    // a real triangular prism, rotated about Y and projected
+    const project = (p) => {
+      const c = Math.cos(yaw), s = Math.sin(yaw)
+      const x = p[0] * c - p[2] * s
+      const z = p[0] * s + p[2] * c
+      const k = 620 / (620 + z)
+      return [W * 0.34 + x * k, H * 0.5 + p[1] * k, z]
+    }
+
+    const build = () => {
+      const a = 150 * Math.min(1.25, W / 760)
+      const d = a * 0.62
+      const tri = [[0, -a], [a * 0.92, a * 0.62], [-a * 0.92, a * 0.62]]
+      return {
+        front: tri.map((p) => [p[0], p[1], -d]),
+        back: tri.map((p) => [p[0], p[1], d]),
+      }
+    }
+
+    const draw = () => {
+      // R has to be computed per frame. as a module constant it was evaluated
+      // while W was still 0, which collapsed every font to 3px.
+      const R = Math.max(0.72, Math.min(1.15, W / 900))
+      ctx.clearRect(0, 0, W, H)
+      const g = build()
+      const F = g.front.map(project)
+      const B = g.back.map(project)
+
+      const cx = W * 0.26, cy = H * 0.5
+      const entry = [cx - 92, cy - 8]
+      const exit = [cx + 74, cy + 26]
+
+      // one beam in
+      const ig = ctx.createLinearGradient(0, 0, entry[0], 0)
+      ig.addColorStop(0, 'rgba(255,248,232,0.1)')
+      ig.addColorStop(1, 'rgba(255,253,246,1)')
+      ctx.strokeStyle = ig
+      ctx.lineWidth = 16; ctx.globalAlpha = 0.16
+      ctx.beginPath(); ctx.moveTo(0, cy - 18); ctx.lineTo(entry[0], entry[1]); ctx.stroke()
+      ctx.globalAlpha = 1; ctx.lineWidth = 3.5
+      ctx.beginPath(); ctx.moveTo(0, cy - 18); ctx.lineTo(entry[0], entry[1]); ctx.stroke()
+
+      // the fan. its spread and tilt follow the rotation, so turning the prism
+      // sweeps the spectrum and changes which classes are lit.
+      // the sweep has to stay inside the frame at every angle, or the labels
+      // walk off the canvas as you turn it
+      const tilt = Math.sin(yaw) * 0.14
+      const spread = 0.30 + Math.abs(Math.cos(yaw)) * 0.26
+      const far = W - 250 - exit[0]
+
+      bands.forEach((b, i) => {
+        const u = i / (bands.length - 1)
+        const ang = tilt + (-spread / 2 + spread * u)
+        const x2 = exit[0] + far
+        const pad = 34
+        let y2 = exit[1] + Math.tan(ang) * far
+        y2 = Math.max(pad, Math.min(H - pad, y2))
+        // alignment with the current sweep decides how lit a band is
+        const lit = Math.max(0.12, 1 - Math.abs(u - (0.5 + Math.sin(yaw + t * 0.25) * 0.42)) * 2.1)
+
+        const lg = ctx.createLinearGradient(exit[0], exit[1], x2, y2)
+        lg.addColorStop(0, COL[i] + 'ff')
+        lg.addColorStop(0.55, COL[i] + 'cc')
+        lg.addColorStop(1, COL[i] + '66')
+        ctx.strokeStyle = lg
+        ctx.lineWidth = (2 + (b.count / bands[0].count) * 9) * (0.4 + lit * 0.6)
+        ctx.globalAlpha = 0.2 + lit * 0.75
+        ctx.beginPath(); ctx.moveTo(exit[0], exit[1]); ctx.lineTo(x2, y2); ctx.stroke()
+
+        // the labels are the payload. they never dim below readable.
+        ctx.globalAlpha = 1
+        ctx.beginPath(); ctx.arc(x2, y2, 3.2, 0, 6.2832)
+        ctx.fillStyle = COL[i]; ctx.fill()
+
+        ctx.fillStyle = 'rgba(250,246,238,' + (0.72 + lit * 0.28) + ')'
+        ctx.font = '600 ' + (13 * R + 3) + 'px "Instrument Sans Variable", system-ui, sans-serif'
+        ctx.textBaseline = 'middle'
+        ctx.fillText(b.label.toLowerCase(), x2 + 15, y2 - 7)
+        ctx.fillStyle = COL[i]
+        ctx.font = '600 ' + (11 * R + 2) + 'px "Instrument Sans Variable", system-ui, sans-serif'
+        ctx.fillText(String(b.count), x2 + 15, y2 + 11)
+      })
+
+      // the glass, drawn after the fan so it sits in front of it
+      const face = (p, fill, stroke) => {
+        ctx.beginPath()
+        ctx.moveTo(p[0][0], p[0][1])
+        for (let i = 1; i < p.length; i++) ctx.lineTo(p[i][0], p[i][1])
+        ctx.closePath()
+        ctx.fillStyle = fill; ctx.fill()
+        ctx.strokeStyle = stroke; ctx.lineWidth = 1.4; ctx.stroke()
+      }
+
+      for (let i = 0; i < 3; i++) {
+        const j = (i + 1) % 3
+        face([F[i], F[j], B[j], B[i]], 'rgba(250,244,230,0.07)', 'rgba(250,244,230,0.2)')
+      }
+      face(B, 'rgba(250,244,230,0.05)', 'rgba(250,244,230,0.22)')
+      face(F, 'rgba(250,244,230,0.11)', 'rgba(253,248,236,0.62)')
+
+      // refracted segment inside the glass
+      ctx.strokeStyle = 'rgba(255,253,246,0.95)'
+      ctx.lineWidth = 2.6
+      ctx.beginPath(); ctx.moveTo(entry[0], entry[1]); ctx.lineTo(exit[0], exit[1]); ctx.stroke()
+    }
+
+    const frame = () => {
+      if (!live) return
+      t += 0.016
+      if (!drag) yaw += spin * 0.016
+      draw()
+      raf = requestAnimationFrame(frame)
+    }
+
+    const start = (e) => {
+      drag = { x: (e.touches ? e.touches[0] : e).clientX, yaw }
+      root.querySelector('.frame').classList.add('grabbing')
+    }
+    const move = (e) => {
+      if (!drag) return
+      const x = (e.touches ? e.touches[0] : e).clientX
+      yaw = drag.yaw + (x - drag.x) * 0.009
+      if (e.cancelable) e.preventDefault()
+    }
+    const end = () => { drag = null; root.querySelector('.frame').classList.remove('grabbing') }
+
+    const f = root.querySelector('.frame')
+    f.addEventListener('pointerdown', start)
+    addEventListener('pointermove', move, { passive: false })
+    addEventListener('pointerup', end)
+    addEventListener('resize', () => { size(); draw() }, { passive: true })
+
+    size()
+    new IntersectionObserver((es) => {
+      live = es[0].isIntersecting && !document.hidden
+      if (live) { raf = requestAnimationFrame(frame) } else cancelAnimationFrame(raf)
+    }).observe(root)
+    document.addEventListener('visibilitychange', () => {
+      live = !document.hidden
+      if (live) raf = requestAnimationFrame(frame)
+    })
+    draw()
+  })()
+</script>
 
 <style>
   .prism {
     margin: 0;
-    width: 100%;
   }
 
-  svg {
+  .frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 7.4;
+    min-height: 340px;
+    cursor: grab;
+    touch-action: pan-y;
+  }
+
+  .frame.grabbing {
+    cursor: grabbing;
+  }
+
+  canvas {
     display: block;
     width: 100%;
-    height: auto;
-    overflow: visible;
+    height: 100%;
   }
 
-  .lbl {
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: -0.015em;
-    fill: rgba(245, 239, 226, 0.92);
+  .hint {
+    position: absolute;
+    left: 0;
+    bottom: 4%;
+    pointer-events: none;
   }
 
-  .cnt {
-    font-family: var(--sans);
-    font-size: 11px;
-    font-variant-numeric: tabular-nums;
-    fill: rgba(245, 239, 226, 0.4);
-  }
-
-  .inlbl {
-    font-family: var(--sans);
-    font-size: 11px;
+  .hint span {
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    fill: rgba(245, 239, 226, 0.38);
+    color: var(--ink);
+    border: 1px solid var(--stone-line);
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    background: rgba(26, 25, 21, 0.8);
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .fan {
-      opacity: 0;
-      animation: open 900ms cubic-bezier(0.2, 0.8, 0.3, 1) 420ms forwards;
-    }
-    .lb {
-      opacity: 0;
-      animation: arrive 500ms ease-out forwards;
-      animation-delay: calc(880ms + var(--i) * 70ms);
-    }
-  }
-
-  @keyframes open {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes arrive {
-    from { opacity: 0; transform: translateX(-10px); }
-    to { opacity: 1; transform: none; }
-  }
-
-  @media (max-width: 760px) {
-    .lbl { font-size: 19px; }
-    .cnt { font-size: 14px; }
-    .inlbl { font-size: 14px; }
+  figcaption {
+    margin-top: 1.1rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 56ch;
   }
 </style>
