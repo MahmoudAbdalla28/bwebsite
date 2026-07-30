@@ -1,0 +1,237 @@
+---
+import Base from '../layouts/Base.astro'
+import { facts, stated } from '../data/carriers'
+
+const supply = [
+  {
+    k: 'Whether it is correlated',
+    v: 'the same failure pattern, tested across many deployments, so you can see whether a hit here means a hit everywhere',
+  },
+  {
+    k: 'What actually failed',
+    v: 'which control gave way under attack, rather than which controls the insured reported having',
+  },
+  {
+    k: 'What got reached',
+    v: 'the boundary that was crossed and what sat behind it, including whether it was a boundary between customers',
+  },
+  {
+    k: 'Whether it moved',
+    v: 'the same system re-tested after each deployment, so posture is a series rather than a submission-day snapshot',
+  },
+]
+---
+
+<Base
+  title="For carriers and MGAs · Bastion"
+  description="Carriers are filing to exclude AI risk because they cannot tell whether one failure is one loss or ten thousand. We generate the evidence that answers that."
+>
+  <section class="top">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="page">
+      <p class="label">For carriers, MGAs and reinsurers</p>
+      <h1>The exclusions are already being filed</h1>
+      <p class="lede">
+        AIG, Great American and WR Berkley have all gone to regulators for AI
+        exclusions. The Berkley language reaches any actual or alleged use of
+        AI, including products that merely incorporate it.
+      </p>
+    </div>
+  </section>
+
+  <section class="section sourced">
+    <div class="page">
+      <p class="label">On the record</p>
+      <ul class="facts">
+        {
+          facts.map((f) => (
+            <li>
+              <p>{f.claim}</p>
+              <a href={f.href} target="_blank" rel="noopener noreferrer">
+                {f.source} ↗
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page">
+      <p class="label">The stated reason is not what you would expect</p>
+      <blockquote>{stated}</blockquote>
+      <p class="lede after">
+        The blocker carriers describe is correlation, not severity. A single bad
+        deployment is underwritable. What cannot be underwritten is not knowing
+        whether the failure inside one insured is sitting inside every other
+        insured running the same pattern.
+      </p>
+    </div>
+  </section>
+
+  <section class="section relief">
+    <div class="page">
+      <h2 class="big">
+        That is a question about failure patterns, which is the thing we collect
+      </h2>
+      <p class="lede">
+        We attack live AI systems on purpose and record what broke, across many
+        deployments, independent of the insured. It produces the evidence an
+        underwriter would need to tell a one-off from a systemic exposure.
+      </p>
+
+      <dl class="supply">
+        {
+          supply.map((s) => (
+            <div>
+              <dt>{s.k}</dt>
+              <dd>{s.v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page close">
+      <div>
+        <h2>Worth a conversation before the exclusion becomes the default</h2>
+        <p class="lede">
+          We are not underwriters and we do not price risk. We generate and
+          structure the failure evidence that pricing it would require.
+        </p>
+      </div>
+      <a class="btn btn-primary" href="/contact">Talk to us about the data</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .top {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3.5rem, 7vw, 6rem) clamp(2rem, 4vw, 3rem);
+  }
+
+  .glow {
+    position: absolute;
+    inset: -40% -20% auto -20%;
+    height: 190%;
+    z-index: -1;
+    background:
+      radial-gradient(42% 44% at 74% 0%, rgba(255, 240, 206, 0.32) 0%, rgba(16, 15, 13, 0) 68%),
+      radial-gradient(60% 50% at 84% 6%, rgba(214, 150, 66, 0.18) 0%, rgba(16, 15, 13, 0) 64%);
+    filter: blur(24px);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 1.25rem + 3vw, 3.5rem);
+    margin-block: 1.1rem 1.35rem;
+    max-width: 18ch;
+  }
+
+  .sourced {
+    background: var(--panel);
+    border-block: 1px solid var(--stone-line);
+  }
+
+  .facts {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.25rem, 2.5vw, 2.25rem);
+  }
+
+  .facts li {
+    border-top: 1px solid var(--stone-line);
+    padding-top: 1.1rem;
+  }
+
+  .facts p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+
+  .facts a {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.76rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .facts a:hover {
+    color: var(--gold-text);
+  }
+
+  blockquote {
+    margin: 1.4rem 0 0;
+    padding-left: 1.3rem;
+    border-left: 2px solid var(--gold);
+    font-size: clamp(1.2rem, 1rem + 1vw, 1.75rem);
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 34ch;
+  }
+
+  .after {
+    margin-top: 1.5rem;
+  }
+
+  .big {
+    font-size: clamp(1.6rem, 1.15rem + 1.9vw, 2.5rem);
+    max-width: 26ch;
+    margin-bottom: 1.3rem;
+  }
+
+  .supply {
+    margin: clamp(2rem, 4vw, 3rem) 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.4rem, 3vw, 2.4rem);
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--stone-line);
+  }
+
+  dt {
+    font-size: 0.98rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 0.93rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+
+  .close {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1.75rem 2.5rem;
+  }
+
+  .close h2 {
+    font-size: clamp(1.4rem, 1.1rem + 1.3vw, 2.1rem);
+    max-width: 22ch;
+    margin-bottom: 0.9rem;
+  }
+
+  @media (max-width: 860px) {
+    .facts,
+    .supply,
+    .close {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -3,8 +3,8 @@
 // (build sequence steps 2 and 3). No links to empty pages.
 const links = [
   { href: '/platform', label: 'Platform' },
-  { href: '/#how-agents-fail', label: 'How agents fail' },
-  { href: '/#evidence', label: 'The report' },
+  { href: '/articles', label: 'Failure patterns' },
+  { href: '/insurance', label: 'Insurance' },
 ]
 ---
 
@@ -21,7 +21,7 @@ const links = [
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
     </nav>
 
-    <a class="btn btn-ghost cta" href="https://app.trybastion.ai">Test your agent</a>
+    <a class="btn btn-ghost cta" href="https://app.trybastion.ai">See how it fails</a>
   </div>
   <hr class="hairline" />
 </header>

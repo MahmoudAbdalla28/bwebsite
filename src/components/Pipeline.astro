@@ -1,0 +1,175 @@
+---
+// Section B. Same product, different buyer: the engineering or security lead
+// who owns the agent, not the deal.
+const surfaces = [
+  { k: 'An endpoint', v: 'point us at the agent the way your users reach it' },
+  { k: 'An SDK call', v: 'wrap the agent and we work it from inside your stack' },
+  { k: 'A live channel', v: 'the chat widget, the phone line, the support inbox' },
+  { k: 'Your CI', v: 'a run on every deployment, so a regression surfaces as one' },
+]
+
+const start = [
+  'sign up and look around the corpus',
+  'read a full sample report end to end',
+  'run against a sandbox agent we host',
+]
+---
+
+<section class="section pipe" id="pipeline">
+  <div class="page">
+    <div class="head">
+      <div>
+        <p class="label">For teams building and deploying agents</p>
+        <h2>Know how your agents fail before you ship them</h2>
+      </div>
+      <p class="lede">
+        Drop us into the pipeline and the failure knowledge arrives as part of
+        the build, in the same place your tests already report.
+      </p>
+    </div>
+
+    <dl class="surfaces">
+      {
+        surfaces.map((s) => (
+          <div>
+            <dt>{s.k}</dt>
+            <dd>{s.v}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <!-- self-serve entry. frictionless to start, and only to start. -->
+    <div class="start">
+      <div class="start-copy">
+        <p class="label">Start without talking to anyone</p>
+        <ul>{start.map((s) => <li>{s}</li>)}</ul>
+        <p class="fine">
+          Running against your own production agent is scoped with us first.
+        </p>
+      </div>
+
+      <div class="start-do">
+        <a class="btn btn-primary" href="https://app.trybastion.ai">See how it fails</a>
+        <a class="btn btn-quiet" href="/platform">How a run works</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .head {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: end;
+  }
+
+  h2 {
+    font-size: clamp(1.7rem, 1.15rem + 2vw, 2.6rem);
+    margin-top: 1.1rem;
+    max-width: 20ch;
+  }
+
+  .surfaces {
+    margin: clamp(2.25rem, 4vw, 3.25rem) 0 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1.25rem, 2.5vw, 2.25rem);
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--stone-line);
+  }
+
+  dt {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 0.45rem;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+
+  .start {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1.75rem 2.5rem;
+    padding: clamp(1.4rem, 3vw, 2rem);
+    background: var(--panel);
+    border: 1px solid var(--stone-line);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .start::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      var(--sp-1),
+      var(--sp-2) 30%,
+      var(--sp-3) 56%,
+      var(--sp-5) 80%,
+      transparent
+    );
+  }
+
+  .start ul {
+    list-style: none;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.6rem;
+  }
+
+  .start li {
+    font-size: 0.94rem;
+    color: var(--ink-2);
+    padding-left: 1.1rem;
+    position: relative;
+  }
+
+  .start li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 6px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .fine {
+    margin-top: 0.9rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  .start-do {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  @media (max-width: 900px) {
+    .head,
+    .surfaces,
+    .start {
+      grid-template-columns: 1fr;
+    }
+    .surfaces {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
