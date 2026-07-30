@@ -23,14 +23,14 @@ export const failures = [
     detail: 'the allowlist was trusted, the environment it ran in was not',
   },
   {
-    who: 'nine mexican government agencies',
-    what: 'an operator drove coding agents through 305 internal servers',
+    who: 'mexican government agencies',
+    what: 'one operator used a consumer ai to find the holes and pull the data',
     klass: 'agent-driven intrusion',
     code: 'ASI01',
-    when: 'feb 2026',
-    href: 'https://research.checkpoint.com/',
-    source: 'check point research',
-    detail: 'the agent did the exploitation, the human just pointed it',
+    when: 'dec 2025',
+    href: 'https://www.upguard.com/news/sat-data-breach-2026-03-02',
+    source: 'upguard',
+    detail: '195 million identities out of tax, voter and civil registries',
   },
 ] as const
 
@@ -39,3 +39,10 @@ export const failures = [
 //   breach. The verifiable Meta AI incident is the prompt-id authorization
 //   bug above (Sandeep Hodkasia, $10k bounty, found Dec 2024, fixed Jan 2025).
 //   If the 20k figure is real, send the source and it goes in.
+//
+//   Check Point Research covered this same Mexican incident with bigger
+//   numbers (400M records, 305 servers, nine agencies). Their site 403s every
+//   automated request, so the URL could not be verified and the link was dead
+//   on the page. Cited UpGuard instead, and the copy was rewritten down to
+//   what UpGuard actually supports. Never cite a figure to a source that does
+//   not carry it.
