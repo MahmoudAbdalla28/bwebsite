@@ -8,13 +8,13 @@ import { mechanisms } from '../data/mechanisms'
   <div class="left">
     <div class="stage">
       <canvas></canvas>
-      <div class="pad">
-      <button data-slot="0" aria-label="Face above"></button>
-      <button data-slot="1" aria-label="Face upper right"></button>
-      <button data-slot="2" aria-label="Face lower right"></button>
-      <button data-slot="3" aria-label="Face lower left"></button>
-        <button data-slot="4" aria-label="Face upper left"></button>
-      </div>
+    </div>
+    <div class="pad">
+      <button data-slot="0" aria-label="Neighbouring mechanism"></button>
+      <button data-slot="1" aria-label="Neighbouring mechanism"></button>
+      <button data-slot="2" aria-label="Neighbouring mechanism"></button>
+      <button data-slot="3" aria-label="Neighbouring mechanism"></button>
+      <button data-slot="4" aria-label="Neighbouring mechanism"></button>
     </div>
   </div>
 
@@ -146,7 +146,8 @@ import { mechanisms } from '../data/mechanisms'
 
     const draw = () => {
       if (!W) return
-      const R = Math.min(W, H) * 0.33
+      // a narrower factor on a phone keeps the widest vertices off the edges
+      const R = Math.min(W, H) * (mq.matches ? 0.25 : 0.33)
       ctx.clearRect(0, 0, W, H)
       const cx = W / 2, cy = H / 2
       const pv = V.map((v) => {
@@ -260,6 +261,10 @@ import { mechanisms } from '../data/mechanisms'
     const SLOTS = [-90, -18, 54, 126, 198].map((d) => (d * Math.PI) / 180)
     let slotFace = [0, 0, 0, 0, 0]
 
+    // the ring of labels is wider than a phone, so below this width the buttons
+    // stop being placed on the ring and flow as chips under the solid instead
+    const mq = matchMedia('(max-width: 680px)')
+
     const assign = () => {
       const here = rot(FACES[sel].n)
       const cand = ADJ[sel].map((j) => {
@@ -275,10 +280,13 @@ import { mechanisms } from '../data/mechanisms'
         })
         return free.splice(best, 1)[0].j
       })
+      const mobile = mq.matches
       const rad = Math.min(W, H) * 0.33 * 1.52
       root.querySelectorAll('[data-slot]').forEach((btn, k) => {
         btn.textContent = mechanisms[slotFace[k]].face
         btn.title = mechanisms[slotFace[k]].title
+        // drop the absolute placement on mobile so the css chip flow takes over
+        if (mobile) { btn.style.left = ''; btn.style.top = ''; return }
         const n = rot(FACES[slotFace[k]].n)
         const a = Math.atan2(n[1] - here[1], n[0] - here[0])
         btn.style.left = (W / 2 + Math.cos(a) * rad) + 'px'
@@ -302,7 +310,8 @@ import { mechanisms } from '../data/mechanisms'
         if (proj[k].facing > 0 && inside(pt, proj[k].pts)) { goTo(proj[k].i); return }
       }
     })
-    addEventListener('resize', () => { size(); draw() }, { passive: true })
+    addEventListener('resize', () => { size(); assign(); draw() }, { passive: true })
+    mq.addEventListener('change', () => { size(); assign(); draw() })
 
     size(); show()
     q = orientTo(sel)
@@ -321,6 +330,7 @@ import { mechanisms } from '../data/mechanisms'
   .left {
     display: grid;
     gap: 0.25rem;
+    position: relative;
   }
 
   .stage {
@@ -413,6 +423,30 @@ import { mechanisms } from '../data/mechanisms'
       border-left: 0;
       border-top: 1px solid var(--stone-line);
       padding: 1.25rem 0 0;
+    }
+  }
+
+  /* on a phone the ring does not fit, so the neighbour buttons drop out of the
+     ring and flow as a wrapped row of chips directly under the solid */
+  @media (max-width: 680px) {
+    .stage {
+      min-height: 320px;
+      aspect-ratio: 1 / 0.82;
+    }
+    .pad {
+      position: static;
+      inset: auto;
+      pointer-events: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.9rem;
+    }
+    .pad button {
+      position: static;
+      transform: none;
+      font-size: 0.78rem;
     }
   }
 </style>
