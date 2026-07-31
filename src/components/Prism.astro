@@ -181,7 +181,10 @@ import { mechanisms } from '../data/mechanisms'
         ctx.lineWidth = on ? 1.9 : 1
         ctx.stroke()
 
-        if (lit > 0.4) {
+        // on a phone the solid nearly fills the width, so a side face's label
+        // clips at the edge. the chips already name the neighbours, so only the
+        // centred face keeps its on-solid label there.
+        if (lit > 0.4 && (!mq.matches || on)) {
           let mx = 0, my = 0
           for (const p of f.pts) { mx += p[0]; my += p[1] }
           mx /= f.pts.length; my /= f.pts.length
@@ -429,9 +432,17 @@ import { mechanisms } from '../data/mechanisms'
   /* on a phone the ring does not fit, so the neighbour buttons drop out of the
      ring and flow as a wrapped row of chips directly under the solid */
   @media (max-width: 680px) {
+    /* a fixed height, not an aspect-ratio: deriving width from height
+       (320 / 0.82 = 390) forced the grid track wider than the phone and cut
+       off the chips and the read-out on the right */
     .stage {
-      min-height: 320px;
-      aspect-ratio: 1 / 0.82;
+      aspect-ratio: auto;
+      min-height: 0;
+      height: 330px;
+    }
+    .left,
+    .read {
+      min-width: 0;
     }
     .pad {
       position: static;
