@@ -2,6 +2,19 @@
 import { families, familyMax } from '../data/taxonomy'
 
 const top = families.slice(0, 5)
+const total = top.reduce((n, f) => n + f.count, 0)
+const R = 108
+const CIRC = 2 * Math.PI * R
+let acc = 0
+const arcs = top.map((f, i) => {
+  const frac = f.count / total
+  const seg = { ...f, dash: frac * CIRC, offset: -acc * CIRC, i }
+  acc += frac
+  return seg
+})
+// five stops that actually separate. --sp-3/4/5 are all blues, which made
+// three of the five segments unreadable against each other.
+const SPECTRUM = ['#e0a941', '#c2ac57', '#6faf93', '#4f93c4', '#8fc8f5']
 
 const security = ['Data leaks', 'Prompt injection', 'Tool abuse', 'Cross-tenant access']
 
@@ -44,19 +57,38 @@ const properties = [
 
     <figure class="corpus">
       <figcaption class="label">Where the depth sits</figcaption>
-      <ul class="bars">
-        {
-          top.map((f) => (
-            <li>
-              <span class="bar-label">{f.label}</span>
-              <span class="track">
-                <span class="fill" style={`width:${Math.round((f.count / familyMax) * 100)}%`} />
-              </span>
-              <span class="bar-count tnum">{f.count}</span>
-            </li>
-          ))
-        }
-      </ul>
+
+      <div class="ring">
+        <svg viewBox="0 0 260 260" role="img" aria-label="Share of corpus depth by failure class">
+          {
+            arcs.map((a) => (
+              <circle
+                cx="130" cy="130" r={R}
+                fill="none"
+                stroke={SPECTRUM[a.i]}
+                stroke-width="30"
+                stroke-dasharray={`${a.dash} ${CIRC - a.dash}`}
+                stroke-dashoffset={a.offset}
+                transform="rotate(-90 130 130)"
+              />
+            ))
+          }
+          <text x="130" y="123" class="tot tnum">{total}</text>
+          <text x="130" y="145" class="totl">techniques</text>
+        </svg>
+
+        <ul class="key">
+          {
+            arcs.map((a) => (
+              <li>
+                <span class="swatch" style={`background:${SPECTRUM[a.i]}`} />
+                <span class="k-label">{a.label}</span>
+                <span class="k-count tnum">{a.count}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </figure>
 
     <dl class="properties">
@@ -149,47 +181,71 @@ const properties = [
     border-bottom: 1px solid var(--stone-line);
   }
 
-  .bars {
+  .ring {
     display: grid;
-    gap: 0.85rem;
-  }
-
-  .bars li {
-    display: grid;
-    grid-template-columns: minmax(9rem, 15rem) 1fr 2.4rem;
+    grid-template-columns: auto 1fr;
     align-items: center;
-    gap: 1rem;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin-top: 1.4rem;
   }
 
-  .bar-label {
+  .ring svg {
+    width: clamp(180px, 22vw, 250px);
+    height: auto;
+  }
+
+  .tot {
+    text-anchor: middle;
+    font-family: var(--sans);
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    fill: var(--ink);
+  }
+
+  .totl {
+    text-anchor: middle;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    fill: var(--muted);
+  }
+
+  .key {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .key li {
+    display: grid;
+    grid-template-columns: 0.6rem 1fr auto;
+    align-items: center;
+    gap: 0.85rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--stone-line);
+  }
+
+  .key li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .swatch {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+  }
+
+  .k-label {
     font-size: 0.95rem;
     color: var(--ink-2);
   }
 
-  .track {
-    height: 8px;
-    background: var(--parchment);
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* each class gets its own band of the split. the chart is the prism. */
-  .fill {
-    position: absolute;
-    inset: 0 auto 0 0;
-  }
-
-  li:nth-child(1) .fill { background: linear-gradient(to right, var(--sp-1), #c79542); }
-  li:nth-child(2) .fill { background: linear-gradient(to right, #a88a3c, var(--sp-2)); }
-  li:nth-child(3) .fill { background: linear-gradient(to right, var(--sp-2), #4c7f95); }
-  li:nth-child(4) .fill { background: linear-gradient(to right, #3f7aa8, var(--sp-4)); }
-  li:nth-child(5) .fill { background: linear-gradient(to right, var(--sp-4), var(--sp-5)); }
-
-  .bar-count {
+  .k-count {
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--ink-2);
-    text-align: right;
+    color: var(--ink);
   }
 
   .properties {
@@ -223,12 +279,9 @@ const properties = [
     .properties {
       grid-template-columns: 1fr;
     }
-    .bars li {
-      grid-template-columns: 1fr 2.4rem;
-    }
-    .track {
-      grid-column: 1 / -1;
-      order: 3;
+    .ring {
+      grid-template-columns: 1fr;
+      justify-items: center;
     }
   }
 </style>
