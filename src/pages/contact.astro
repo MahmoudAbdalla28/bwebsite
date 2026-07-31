@@ -17,6 +17,10 @@ import Base from '../layouts/Base.astro'
         </p>
       </div>
 
+      <p class="oops" id="oops" hidden>
+        That did not send. Email team@trybastion.ai directly and we will pick it up.
+      </p>
+
       <form
         class="form"
         action="https://formsubmit.co/a69dc6cf65c1d94c3a35fe6963f53371"
@@ -69,8 +73,10 @@ import Base from '../layouts/Base.astro'
 
   <script is:inline>
     // the hero asks for a domain and hands it over here, so carry it across
-    const d = new URLSearchParams(location.search).get('domain')
+    const q = new URLSearchParams(location.search)
+    const d = q.get('domain')
     if (d) document.getElementById('domain').value = d
+    if (q.get('error')) document.getElementById('oops').hidden = false
   </script>
 </Base>
 
@@ -130,6 +136,17 @@ import Base from '../layouts/Base.astro'
 
   textarea {
     resize: vertical;
+  }
+
+  .oops {
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    font-size: 0.92rem;
+    color: var(--ink);
+    border: 1px solid #b4632a;
+    border-left-width: 3px;
+    border-radius: 3px;
+    background: rgba(180, 99, 42, 0.12);
   }
 
   button {
