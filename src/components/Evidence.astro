@@ -21,7 +21,15 @@ const points = [
           already uses, so the deal stops waiting on it.
         </p>
         <ul class="points">{points.map((p) => <li>{p}</li>)}</ul>
-        <a class="btn btn-primary" href="/contact">See how it fails</a>
+        <div class="acts">
+          <a class="btn btn-primary" href="/contact">See how it fails</a>
+          <a
+            class="btn btn-quiet"
+            href="https://calendar.app.google/uUM1Mqos7uFRxfa67"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Book a call</a>
+        </div>
       </div>
     </div>
 
@@ -82,7 +90,11 @@ const points = [
     transform: rotate(45deg);
   }
 
-  .right .btn {
+  .acts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
     margin-top: 1.9rem;
   }
 

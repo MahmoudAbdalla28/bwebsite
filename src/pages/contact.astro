@@ -15,7 +15,26 @@ import Base from '../layouts/Base.astro'
           We will come back with what we would attack, how long it takes, and
           what the report will contain.
         </p>
+
+        <!-- same intent, less friction. a call and a form are a choice, not a
+             hierarchy, so they get equal billing rather than one buried. -->
+        <div class="book">
+          <p class="book-h">Talk through your agent's risks</p>
+          <p class="book-p">
+            Thirty minutes. Bring the agent you are least sure about and we will
+            tell you where we would start.
+          </p>
+          <a
+            class="btn btn-primary"
+            href="https://calendar.app.google/uUM1Mqos7uFRxfa67"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Book a call</a>
+        </div>
       </div>
+
+      <div class="right">
+      <p class="orline">Or send it in writing</p>
 
       <p class="oops" id="oops" hidden>
         That did not send. Email team@trybastion.ai directly and we will pick it up.
@@ -64,6 +83,7 @@ import Base from '../layouts/Base.astro'
 
         <button class="btn btn-primary" type="submit">Send</button>
       </form>
+      </div>
     </div>
   </section>
 
@@ -88,6 +108,61 @@ import Base from '../layouts/Base.astro'
     font-size: clamp(2rem, 1.3rem + 2.6vw, 3.1rem);
     margin-block: 1.1rem 1.4rem;
     max-width: 14ch;
+  }
+
+  .book {
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    background: var(--panel);
+    border: 1px solid var(--stone-line);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .book::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      var(--sp-1),
+      var(--sp-2) 30%,
+      var(--sp-3) 56%,
+      var(--sp-5) 80%,
+      transparent
+    );
+  }
+
+  .book-h {
+    font-family: var(--display);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+    color: var(--ink);
+  }
+
+  .book-p {
+    margin-top: 0.5rem;
+    font-size: 0.94rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 42ch;
+  }
+
+  .book .btn {
+    margin-top: 1.1rem;
+  }
+
+  /* heads the form so the two routes read as alternatives, not a sequence */
+  .orline {
+    margin-bottom: 0.9rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
   .form {
