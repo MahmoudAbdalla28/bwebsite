@@ -41,7 +41,8 @@ seen your own agents.
 
 ## Stack
 
-Astro 5, hand-written CSS, TypeScript. No UI framework, no CSS framework, no client JS.
+Astro 5, hand-written CSS, TypeScript. No UI framework, no CSS framework, no dependencies beyond
+Astro and one font.
 
 ```bash
 npm install
@@ -59,7 +60,9 @@ The previous site shipped three.js, a react-force-graph physics simulation, four
 lottie and three icon packs. It visibly janked on Macs. That is the thing this rebuild exists to not
 repeat.
 
-- **Ship zero client JS** unless a feature genuinely needs it, and then only as one island.
+- **Ship almost no client JS.** Two hand-written canvas scripts exist and nothing else: the ambient
+  swarm and the dodecahedron. No library, no bundle. Both pause offscreen and when the tab is
+  hidden, and the swarm does not start under `prefers-reduced-motion`.
 - **Banned:** three.js, react-force-graph, lottie, Aceternity canvas components, smooth-scroll
   libraries, more than one icon set.
 - **Animate only `transform` and `opacity`.** Never anything that triggers layout.
@@ -70,24 +73,38 @@ repeat.
 - One orchestrated page-load reveal in the hero. That is the whole motion budget.
 - Grain is a static SVG turbulence data URI, computed once. Never a filtered live element.
 
-Current build: 0 JS files, ~6KB gzipped HTML, 5 woff2.
+Two known traps, both hit here already:
+- Compute canvas scale factors **inside** the draw call. `const R = W / 900` at module scope runs
+  while `W` is still 0, which silently collapsed every font to 3px.
+- Interpolate orientation with quaternion slerp, never three Euler angles. Lerping angles
+  independently sent some rotations round an odd path while others looked fine.
 
 ## Design system
 
-Light. Bone, gold, slate. Every other vendor in this category is dark, which is the point.
-All tokens in `src/styles/global.css`.
+Dark throughout. Ink, bone text, gold accent, plus a spectrum (`--sp-1` to `--sp-5`) taken from the
+mark, which is a prism. All tokens in `src/styles/global.css`.
 
-Type is Instrument Sans Variable throughout, with Geist Mono for figures and refs, self-hosted
-through fontsource. To swap the display face, change --display in global.css and add the matching
-fontsource import. Do not apply `font-variant-numeric: tabular-nums` to body text, it widens the
-comma and period to a full numeral advance. Use the `.tnum` class on figures only.
+The light version was tried and abandoned: a dark hero over a light page read as two sites stapled
+together, and the light page could not carry the contrast the brand reference needs.
+
+Type is Instrument Sans Variable throughout, self-hosted through fontsource. One typeface, no mono.
+Do not apply `font-variant-numeric: tabular-nums` to body text, it widens the comma and period to a
+full numeral advance. Use the `.tnum` class on figures only.
+
+`--sp-3`, `--sp-4` and `--sp-5` are all blues. Do not use them as a categorical palette, they are a
+gradient. For charts, pick stops that separate.
 
 ## Structure
 
-Built (core): hero, proof band, how agents fail, the report (Section A), contact.
-Not built yet: Section B and self-serve entry, then the insurance page and articles.
+All of it is built. Home is hero, proof band, the twelve-mechanism solid, the failures feed, how
+agents fail, how a run works, the report (Section A) and the pipeline (Section B, with the
+self-serve entry). Pages: `/platform`, `/insurance`, `/articles`, `/contact`, `/thanks`.
 
 Nav only links to pages that exist. No links to empty pages.
+
+Every claim on `/insurance` is pinned to a source in `src/data/carriers.ts`. Every incident in the
+failures feed is pinned to a link in `src/data/failures.ts`, which also records what was left out
+and why. Do not add a row to either without a source that loads.
 
 ## Numbers on the page
 
