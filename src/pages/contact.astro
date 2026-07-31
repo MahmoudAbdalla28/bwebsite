@@ -50,6 +50,11 @@ import Base from '../layouts/Base.astro'
         </label>
 
         <label>
+          <span>Domain</span>
+          <input type="text" name="domain" id="domain" autocomplete="off" spellcheck="false" />
+        </label>
+
+        <label>
           <span>What are you shipping?</span>
           <textarea
             name="agent"
@@ -61,6 +66,12 @@ import Base from '../layouts/Base.astro'
       </form>
     </div>
   </section>
+
+  <script is:inline>
+    // the hero asks for a domain and hands it over here, so carry it across
+    const d = new URLSearchParams(location.search).get('domain')
+    if (d) document.getElementById('domain').value = d
+  </script>
 </Base>
 
 <style>
