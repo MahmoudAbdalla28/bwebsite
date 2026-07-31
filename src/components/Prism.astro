@@ -190,12 +190,16 @@ import { mechanisms } from '../data/mechanisms'
           mx /= f.pts.length; my /= f.pts.length
           ctx.globalAlpha = Math.min(1, (lit - 0.4) / 0.28)
           ctx.fillStyle = on ? '#f2d493' : 'rgba(240,235,222,0.82)'
-          ctx.font = '600 ' + Math.max(10, R * 0.052) + 'px "Instrument Sans Variable", system-ui, sans-serif'
+          // line spacing follows the font, not the radius. R * 0.052 clamps to a
+          // 10px floor while R keeps shrinking, so a radius-based gap collapses
+          // the two lines onto each other on a phone.
+          const fs = Math.max(10, R * 0.052)
+          ctx.font = '600 ' + fs + 'px "Instrument Sans Variable", system-ui, sans-serif'
           ctx.textAlign = 'center'
           ctx.textBaseline = 'middle'
           const words = mechanisms[f.i].face.split(' ')
           for (let k = 0; k < words.length; k++) {
-            ctx.fillText(words[k], mx, my + (k - (words.length - 1) / 2) * R * 0.066)
+            ctx.fillText(words[k], mx, my + (k - (words.length - 1) / 2) * fs * 1.25)
           }
           ctx.globalAlpha = 1
           ctx.textAlign = 'left'
