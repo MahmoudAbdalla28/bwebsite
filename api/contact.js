@@ -1,4 +1,8 @@
-// Contact form delivery we control.
+// NOT THE LIVE PATH. trybastion.ai deploys from a vercel account we do not
+// control, so RESEND_API_KEY cannot be set here. The live handler is the same
+// code in the standalone `bastion-contact` project, in our own vercel team,
+// which the form posts to cross-origin. Keep this in sync; if the env var ever
+// lands on this project, point the form back at /api/contact.
 //
 // FormSubmit returned HTTP 200 and "submitted successfully" while discarding
 // every message, and even once delivering, it sends from formsubmit.co with no
